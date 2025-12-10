@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Medicina Interna - Hospital Vithas Xanit Internacional</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/Images/Logos/Favicon-Vithas.png">
+
+  <!-- Fuentes e Iconos -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Hoja de Estilos -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- SIDEBAR (Menú Lateral) -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <!-- Logo Vithas Cuadrado/Vertical -->
+      <img src="assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+    </div>
+
+    <nav class="nav-links">
+      <ul>
+        <li><a href="index.html" class="active"><i class="fas fa-home"></i> Inicio</a></li>
+        
+        <li class="nav-category">Práctica Clínica</li>
+        <!-- Menú Calculadoras-->
+        <li class="has-submenu">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-calculator"></i> Calculadoras
+            </div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li>
+                <a href="calculadoras/index.html" class="submenu-main-link">
+                    <i class="fas fa-th-large"></i> <strong>Menú Calculadoras</strong>
+                </a>
+            </li>
+            <li><a href="calculadoras/Antropometricos/index.html"><i class="fas fa-ruler-combined"></i> Antropometría</a></li>
+            <li><a href="calculadoras/Cardiovascular/index.html"><i class="fas fa-heartbeat"></i> Cardiovascular</a></li>
+            <li><a href="calculadoras/Digestivo/index.html"><i class="fas fa-utensils"></i> Digestivo</a></li>
+            <li><a href="calculadoras/Infecciosas/index.html"><i class="fas fa-bacteria"></i> Infecciosas</a></li>
+            <li><a href="calculadoras/Nefrologia/index.html"><i class="fas fa-filter"></i> Nefrología</a></li>
+            <li><a href="calculadoras/Neurologia/index.html"><i class="fas fa-brain"></i> Neurología</a></li>
+            <li><a href="calculadoras/Respiratorio/index.html"><i class="fas fa-lungs"></i> Respiratorio</a></li>
+            <li><a href="calculadoras/UCI/index.html"><i class="fas fa-ambulance"></i> Urgencias/UCI</a></li>
+          </ul>
+        </li>
+        
+        <!-- Utilidades con Desplegable -->
+        <li class="has-submenu">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-toolbox"></i> Utilidades y Herramientas
+            </div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <!-- Submenú oculto por defecto -->
+          <ul class="submenu">
+            <li>
+                <a href="Utilidades/index.html" class="submenu-main-link">
+                    <i class="fas fa-th-large"></i> <strong>Menú Herramientas</strong>
+                </a>
+            </li>
+            <li>
+                <a href="Utilidades/Gold_EPOC/index.html">
+                    <i class="fas fa-lungs"></i> Guía EPOC
+                </a>
+            </li>
+            <li>
+                <a href="Utilidades/Analisis_Clinicos/index.html">
+                    <i class="fas fa-microscope"></i> Analíticas
+                </a>
+            </li>
+          </ul>
+        </li>
+
+      </ul>
+    </nav>
+
+    <!-- Footer del sidebar -->
+    <div class="sidebar-footer">
+      <p>Medicina Interna</p>
+      <small>Vithas Xanit Internacional</small>
+    </div>
+  </aside>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="main-content">
+    
+    <!-- TOP HEADER -->
+    <header class="top-header">
+      <div class="header-left">
+        <i class="fas fa-bars menu-toggle" id="menuToggle"></i>
+        <h2>Servicio de Medicina Interna</h2>
+      </div>
+      <div class="header-right">
+        <!-- Logo Vithas Xanit Horizontal -->
+        <img src="assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Vithas Xanit Internacional" class="top-logo">
+      </div>
+    </header>
+
+    <!-- HERO & SEARCH -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <h1>Portal del Clínico</h1>
+        <p>Herramientas de soporte a la decisión, calculadoras y utilidades médicas del servicio de Medicina Interna.</p>
+        
+        <!-- BUSCADOR -->
+        <div class="search-wrapper">
+          <div class="search-input-box">
+            <input type="text" id="searchInput" placeholder="Buscar calculadora, herramienta o utilidad..." autocomplete="off">
+            <i class="fas fa-search"></i>
+          </div>
+          <div id="searchResults" class="search-results"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INFORMACIÓN GENERAL (NUEVO CONTENIDO) -->
+    <div class="content-wrapper">
+      
+      <h3 class="section-title">Información General</h3>
+      
+      <div class="info-grid">
+        
+        <!-- Tarjeta Hospital -->
+        <div class="info-card">
+          <div class="img-container">
+            <img src="assets/images/Hospital_Benalmadena.webp" alt="Hospital Vithas Xanit Benalmádena">
+          </div>
+          <div class="info-body">
+            <h3>Hospital Vithas Xanit Internacional</h3>
+            <ul class="info-list">
+              <li>
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Av. de los Argonautas, s/n,<br>29630 Benalmádena, Málaga</span>
+              </li>
+              <li>
+                <i class="fas fa-location-arrow"></i>
+                <span>Provincia: Málaga</span>
+              </li>
+               
+              <li>
+                <i class="fas fa-phone"></i>
+                <span>952 36 71 90</span>
+              </li>
+              <li>
+                <i class="fas fa-clock"></i>
+                <span>Horario: Abierto 24 horas</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Tarjeta Jefe de Servicio -->
+        <div class="info-card">
+          <div class="img-container">
+            <img src="assets/images/PM-Vithas.png" alt="Dr. Francisco Miralles Linares">
+          </div>
+          <div class="info-body">
+            <h3>Francisco Miralles Linares</h3>
+            <p class="role-badge">Jefe de Servicio de Medicina Interna</p>
+            
+            <ul class="info-list">
+              <li>
+                <i class="fas fa-hospital-user"></i>
+                <span>Hospital Vithas Xanit Internacional</span>
+              </li>
+              
+              <li>
+                <i class="fas fa-mobile-alt"></i>
+                <span>+34 680 756 355</span>
+              </li>
+              <li>
+                <i class="fas fa-envelope"></i>
+                <a href="mailto:mirallesf@vithas.es" class="email-link">mirallesf@vithas.es</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <p>&copy; 2025 Servicio de Medicina Interna - Hospital Vithas Xanit Internacional.</p>
+    </footer>
+  </div>
+
+  <!-- Lógica Javascript -->
+  <script src="js/main.js"></script>
+</body>
+</html>
