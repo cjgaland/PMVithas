@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Guía GOLD 2025 - Vithas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Favicon y Estilos Globales -->
+  <link rel="icon" type="image/png" href="../../Favicon-Vithas.png">
+  <link rel="stylesheet" href="../../css/style.css" />
+  
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Estilos Específicos -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Librería PDF -->
+  <script src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header" style="justify-content:center; display:flex; padding:20px;">
+       <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" style="max-width:140px;">
+    </div>
+    <nav class="nav-links">
+      <ul style="padding-left:0;">
+        <li><a href="../../index.html" style="text-decoration:none;"><i class="fas fa-home"></i> Inicio</a></li>
+        <li style="padding:20px 25px 10px; font-size:0.75rem; color:#9ca3af; font-weight:700; text-transform:uppercase;">Navegación</li>
+        <li><a href="../index.html" style="text-decoration:none;"><i class="fas fa-arrow-left"></i> Volver a Utilidades</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="main-content">
+    
+    <header class="top-header">
+      <div class="header-left">
+        <i class="fas fa-bars menu-toggle" id="menuToggle"></i>
+        <h2>Clasificación EPOC</h2>
+      </div>
+      <div class="header-right">
+        <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Vithas Xanit" style="height:45px;">
+      </div>
+    </header>
+
+    <!-- WRAPPER DE LA HERRAMIENTA -->
+    <div class="tool-container">
+        
+        <div class="header-tool text-center mb-4">
+            <h1 class="tool-title">Guía GOLD 2025</h1>
+            <p class="text-muted">Calculadora de Clasificación, Tratamiento y Seguimiento</p>
+        </div>
+
+        <!-- SISTEMA DE PESTAÑAS (TABS) -->
+        <div id="inputTabsContainer">
+            <ul class="nav nav-pills nav-fill mb-4 custom-tabs" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="tab-1" onclick="switchTab(1)">
+                        <i class="fas fa-file-medical-alt"></i> Datos Clínicos
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="tab-2" onclick="switchTab(2)">
+                        <i class="fas fa-lungs-virus"></i> Escala mMRC
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="tab-3" onclick="switchTab(3)">
+                        <i class="fas fa-clipboard-list"></i> Cuestionario CAT
+                    </button>
+                </li>
+            </ul>
+        </div>
+
+        <!-- CONTENIDO DE LAS PESTAÑAS (Fase de Entrada) -->
+        <div class="step-card input-phase" id="inputCard">
+            
+            <!-- Pestaña 1: Datos Clínicos -->
+            <div id="step1" class="tab-content active">
+                <h4 class="tab-heading">Datos del Paciente</h4>
+                
+                <div class="row g-4">
+                    <!-- Fila 1: Binarios y Edad -->
+                    <div class="col-md-6">
+                        <div class="p-3 bg-light rounded h-100 border-left-vithas">
+                            <label class="form-label fw-bold">¿Fumador activo?</label>
+                            <div class="d-flex gap-3">
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" name="smoker" id="smokerYes" value="yes">
+                                    <label class="form-check-label" for="smokerYes">Sí</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" name="smoker" id="smokerNo" value="no" checked>
+                                    <label class="form-check-label" for="smokerNo">No</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="p-3 bg-light rounded h-100 border-left-vithas">
+                            <label class="form-label fw-bold">¿Cardiopatía crónica?</label>
+                            <div class="d-flex gap-3">
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" name="cardiac" id="cardiacYes" value="yes">
+                                    <label class="form-check-label" for="cardiacYes">Sí</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" name="cardiac" id="cardiacNo" value="no" checked>
+                                    <label class="form-check-label" for="cardiacNo">No</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fila 2: Numéricos -->
+                    <div class="col-md-4">
+                        <label class="form-label">Edad</label>
+                        <input type="number" class="form-control" id="edad" placeholder="Años">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">FEV<sub>1</sub> % (post-BD)</label>
+                        <input type="number" class="form-control" id="fev1" step="0.1" placeholder="%">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Eosinófilos (cél/µl)</label>
+                        <input type="number" class="form-control" id="eos" step="1" placeholder="cél/µl">
+                    </div>
+
+                    <!-- Fila 3: SLIDERS para Exacerbaciones -->
+                    <div class="col-12 mt-4">
+                        <h5 class="text-vithas border-bottom pb-2 mb-3"><i class="fas fa-history"></i> Historial Exacerbaciones (último año)</h5>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <label class="form-label d-flex justify-content-between">
+                            <span>Moderadas (ambulatorias)</span>
+                            <span class="badge bg-primary fs-6" id="exacerbVal">0</span>
+                        </label>
+                        <input type="range" class="form-range custom-range" id="exacerb" min="0" max="10" value="0" oninput="updateRangeVal('exacerb', 'exacerbVal')">
+                        <div class="d-flex justify-content-between text-muted small"><span>0</span><span>5</span><span>10</span></div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label d-flex justify-content-between">
+                            <span>Graves (con Hospitalización)</span>
+                            <span class="badge bg-danger fs-6" id="hospVal">0</span>
+                        </label>
+                        <input type="range" class="form-range custom-range danger-range" id="hosp" min="0" max="10" value="0" oninput="updateRangeVal('hosp', 'hospVal')">
+                        <div class="d-flex justify-content-between text-muted small"><span>0</span><span>5</span><span>10</span></div>
+                    </div>
+                </div>
+                
+                <div class="mt-4 text-end">
+                    <button class="btn btn-vithas" onclick="switchTab(2)">Siguiente: mMRC <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- Pestaña 2: mMRC -->
+            <div id="step2" class="tab-content">
+                <h4 class="tab-heading">Escala de Disnea mMRC</h4>
+                <!-- CORRECCIÓN: div dentro de label cambiado a span con d-block para validez HTML -->
+                <div class="list-group mb-4 shadow-sm">
+                    <label class="list-group-item list-group-item-action d-flex align-items-center">
+                        <input class="form-check-input me-3" type="radio" name="mmrc" value="0">
+                        <span class="w-100">
+                            <span class="fw-bold text-primary d-block">Grado 0</span>
+                            <span class="small text-muted d-block">Disnea solo con ejercicio intenso.</span>
+                        </span>
+                    </label>
+                    <label class="list-group-item list-group-item-action d-flex align-items-center">
+                        <input class="form-check-input me-3" type="radio" name="mmrc" value="1">
+                        <span class="w-100">
+                            <span class="fw-bold text-primary d-block">Grado 1</span>
+                            <span class="small text-muted d-block">Disnea al andar rápido en llano o subir pendiente.</span>
+                        </span>
+                    </label>
+                    <label class="list-group-item list-group-item-action d-flex align-items-center">
+                        <input class="form-check-input me-3" type="radio" name="mmrc" value="2">
+                        <span class="w-100">
+                            <span class="fw-bold text-primary d-block">Grado 2</span>
+                            <span class="small text-muted d-block">Camina más despacio que gente de su edad o se detiene.</span>
+                        </span>
+                    </label>
+                    <label class="list-group-item list-group-item-action d-flex align-items-center">
+                        <input class="form-check-input me-3" type="radio" name="mmrc" value="3">
+                        <span class="w-100">
+                            <span class="fw-bold text-primary d-block">Grado 3</span>
+                            <span class="small text-muted d-block">Se detiene a descansar a los 100m o pocos minutos.</span>
+                        </span>
+                    </label>
+                    <label class="list-group-item list-group-item-action d-flex align-items-center">
+                        <input class="form-check-input me-3" type="radio" name="mmrc" value="4">
+                        <span class="w-100">
+                            <span class="fw-bold text-primary d-block">Grado 4</span>
+                            <span class="small text-muted d-block">Demasiada disnea para salir de casa o al vestirse.</span>
+                        </span>
+                    </label>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <button class="btn btn-secondary" onclick="switchTab(1)">Anterior</button>
+                    <button class="btn btn-vithas" onclick="switchTab(3)">Siguiente: CAT <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- Pestaña 3: Cuestionario CAT -->
+            <div id="step3" class="tab-content">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="tab-heading m-0">Cuestionario CAT</h4>
+                    <span class="badge bg-vithas-light fs-6">Puntuación Total: <span id="catTotalDisplay">0</span></span>
+                </div>
+                <p class="text-muted small mb-4">Seleccione el valor del 0 (mejor) al 5 (peor) para cada síntoma.</p>
+                
+                <div class="cat-container">
+                    <!-- CORRECCIÓN: Eliminado autocomplete="off" de todos los inputs radio -->
+                    
+                    <!-- Fila 1: Tos -->
+                    <div class="cat-row">
+                        <div class="cat-label-left">Nunca toso</div>
+                        <div class="cat-options" id="cat1-group">
+                            <input type="radio" class="btn-check" name="cat1" id="cat1-0" value="0" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat1-0">0</label>
+                            <input type="radio" class="btn-check" name="cat1" id="cat1-1" value="1" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat1-1">1</label>
+                            <input type="radio" class="btn-check" name="cat1" id="cat1-2" value="2" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat1-2">2</label>
+                            <input type="radio" class="btn-check" name="cat1" id="cat1-3" value="3" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat1-3">3</label>
+                            <input type="radio" class="btn-check" name="cat1" id="cat1-4" value="4" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat1-4">4</label>
+                            <input type="radio" class="btn-check" name="cat1" id="cat1-5" value="5" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat1-5">5</label>
+                        </div>
+                        <div class="cat-label-right">Toso siempre</div>
+                    </div>
+
+                    <!-- Fila 2: Flemas -->
+                    <div class="cat-row">
+                        <div class="cat-label-left">Sin flemas</div>
+                        <div class="cat-options" id="cat2-group">
+                            <input type="radio" class="btn-check" name="cat2" id="cat2-0" value="0" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat2-0">0</label>
+                            <input type="radio" class="btn-check" name="cat2" id="cat2-1" value="1" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat2-1">1</label>
+                            <input type="radio" class="btn-check" name="cat2" id="cat2-2" value="2" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat2-2">2</label>
+                            <input type="radio" class="btn-check" name="cat2" id="cat2-3" value="3" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat2-3">3</label>
+                            <input type="radio" class="btn-check" name="cat2" id="cat2-4" value="4" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat2-4">4</label>
+                            <input type="radio" class="btn-check" name="cat2" id="cat2-5" value="5" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat2-5">5</label>
+                        </div>
+                        <div class="cat-label-right">Pecho lleno</div>
+                    </div>
+
+                    <!-- Fila 3: Opresión -->
+                    <div class="cat-row">
+                        <div class="cat-label-left">Sin opresión</div>
+                        <div class="cat-options">
+                            <input type="radio" class="btn-check" name="cat3" id="cat3-0" value="0" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat3-0">0</label>
+                            <input type="radio" class="btn-check" name="cat3" id="cat3-1" value="1" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat3-1">1</label>
+                            <input type="radio" class="btn-check" name="cat3" id="cat3-2" value="2" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat3-2">2</label>
+                            <input type="radio" class="btn-check" name="cat3" id="cat3-3" value="3" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat3-3">3</label>
+                            <input type="radio" class="btn-check" name="cat3" id="cat3-4" value="4" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat3-4">4</label>
+                            <input type="radio" class="btn-check" name="cat3" id="cat3-5" value="5" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat3-5">5</label>
+                        </div>
+                        <div class="cat-label-right">Mucha opresión</div>
+                    </div>
+
+                    <!-- Fila 4: Falta aire -->
+                    <div class="cat-row">
+                        <div class="cat-label-left">No falta aire</div>
+                        <div class="cat-options">
+                            <input type="radio" class="btn-check" name="cat4" id="cat4-0" value="0" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat4-0">0</label>
+                            <input type="radio" class="btn-check" name="cat4" id="cat4-1" value="1" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat4-1">1</label>
+                            <input type="radio" class="btn-check" name="cat4" id="cat4-2" value="2" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat4-2">2</label>
+                            <input type="radio" class="btn-check" name="cat4" id="cat4-3" value="3" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat4-3">3</label>
+                            <input type="radio" class="btn-check" name="cat4" id="cat4-4" value="4" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat4-4">4</label>
+                            <input type="radio" class="btn-check" name="cat4" id="cat4-5" value="5" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat4-5">5</label>
+                        </div>
+                        <div class="cat-label-right">Falta mucho</div>
+                    </div>
+
+                    <!-- Fila 5: Actividades -->
+                    <div class="cat-row">
+                        <div class="cat-label-left">Sin límites</div>
+                        <div class="cat-options">
+                            <input type="radio" class="btn-check" name="cat5" id="cat5-0" value="0" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat5-0">0</label>
+                            <input type="radio" class="btn-check" name="cat5" id="cat5-1" value="1" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat5-1">1</label>
+                            <input type="radio" class="btn-check" name="cat5" id="cat5-2" value="2" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat5-2">2</label>
+                            <input type="radio" class="btn-check" name="cat5" id="cat5-3" value="3" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat5-3">3</label>
+                            <input type="radio" class="btn-check" name="cat5" id="cat5-4" value="4" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat5-4">4</label>
+                            <input type="radio" class="btn-check" name="cat5" id="cat5-5" value="5" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat5-5">5</label>
+                        </div>
+                        <div class="cat-label-right">Muy limitado</div>
+                    </div>
+
+                    <!-- Fila 6: Salir -->
+                    <div class="cat-row">
+                        <div class="cat-label-left">Seguro fuera</div>
+                        <div class="cat-options">
+                            <input type="radio" class="btn-check" name="cat6" id="cat6-0" value="0" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat6-0">0</label>
+                            <input type="radio" class="btn-check" name="cat6" id="cat6-1" value="1" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat6-1">1</label>
+                            <input type="radio" class="btn-check" name="cat6" id="cat6-2" value="2" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat6-2">2</label>
+                            <input type="radio" class="btn-check" name="cat6" id="cat6-3" value="3" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat6-3">3</label>
+                            <input type="radio" class="btn-check" name="cat6" id="cat6-4" value="4" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat6-4">4</label>
+                            <input type="radio" class="btn-check" name="cat6" id="cat6-5" value="5" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat6-5">5</label>
+                        </div>
+                        <div class="cat-label-right">Nada seguro</div>
+                    </div>
+
+                    <!-- Fila 7: Sueño -->
+                    <div class="cat-row">
+                        <div class="cat-label-left">Duermo bien</div>
+                        <div class="cat-options">
+                            <input type="radio" class="btn-check" name="cat7" id="cat7-0" value="0" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat7-0">0</label>
+                            <input type="radio" class="btn-check" name="cat7" id="cat7-1" value="1" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat7-1">1</label>
+                            <input type="radio" class="btn-check" name="cat7" id="cat7-2" value="2" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat7-2">2</label>
+                            <input type="radio" class="btn-check" name="cat7" id="cat7-3" value="3" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat7-3">3</label>
+                            <input type="radio" class="btn-check" name="cat7" id="cat7-4" value="4" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat7-4">4</label>
+                            <input type="radio" class="btn-check" name="cat7" id="cat7-5" value="5" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat7-5">5</label>
+                        </div>
+                        <div class="cat-label-right">No duermo</div>
+                    </div>
+
+                    <!-- Fila 8: Energía -->
+                    <div class="cat-row border-0">
+                        <div class="cat-label-left">Mucha energía</div>
+                        <div class="cat-options">
+                            <input type="radio" class="btn-check" name="cat8" id="cat8-0" value="0" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat8-0">0</label>
+                            <input type="radio" class="btn-check" name="cat8" id="cat8-1" value="1" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat8-1">1</label>
+                            <input type="radio" class="btn-check" name="cat8" id="cat8-2" value="2" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat8-2">2</label>
+                            <input type="radio" class="btn-check" name="cat8" id="cat8-3" value="3" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat8-3">3</label>
+                            <input type="radio" class="btn-check" name="cat8" id="cat8-4" value="4" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat8-4">4</label>
+                            <input type="radio" class="btn-check" name="cat8" id="cat8-5" value="5" onchange="updateCatTotal()"><label class="btn btn-outline-secondary btn-sm" for="cat8-5">5</label>
+                        </div>
+                        <div class="cat-label-right">Sin energía</div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <button class="btn btn-secondary" onclick="switchTab(2)">Anterior</button>
+                    <!-- BOTÓN CALCULAR (Gatillo final) -->
+                    <button class="btn btn-lg btn-vithas" onclick="calculateClassification()"><i class="fas fa-calculator"></i> Calcular Resultados</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- FASE 2: RESULTADO INICIAL (Paso 4 original, ahora oculto por defecto) -->
+        <div id="resultPhase" class="step-card d-none">
+            <h3 class="step-title">Resultados de la Clasificación</h3>
+            <div id="classificationResult" class="result-box mb-4"></div>
+            
+            <div class="d-flex justify-content-between">
+                <button class="btn btn-secondary" onclick="resetToInputPhase()">Revisar Datos</button>
+                <button class="btn btn-vithas" onclick="showFollowUp()">Ir a Seguimiento</button>
+            </div>
+        </div>
+
+        <!-- FASE 3: SEGUIMIENTO (Paso 5 original) -->
+        <div id="followUpPhase" class="step-card d-none">
+            <h3 class="step-title"><i class="fas fa-chart-line me-2"></i>Seguimiento (Follow-up)</h3>
+            
+            <div class="alert alert-light border border-primary">
+                <strong>Problema Principal en la visita:</strong>
+                <div class="mt-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="mainProblem" id="problemDyspnea" value="dyspnea">
+                        <label class="form-check-label" for="problemDyspnea">Disnea</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="mainProblem" id="problemExacerbations" value="exacerbations">
+                        <label class="form-check-label" for="problemExacerbations">Exacerbaciones</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Tratamiento actual del paciente:</label>
+                <select id="currentTreatment" class="form-select">
+                    <option value="none" selected disabled>Seleccione...</option>
+                    <option value="laba">LABA o LAMA (Monoterapia)</option>
+                    <option value="laba-lama">LABA + LAMA</option>
+                    <option value="laba-lama-ics">LABA + LAMA + ICS</option>
+                </select>
+            </div>
+
+            <div class="row g-3 mb-4">
+                <div class="col-md-6">
+                    <label class="form-label">¿Bronquitis crónica + FEV1 &lt; 50%?</label>
+                    <div class="btn-group w-100" role="group">
+                        <input type="radio" class="btn-check" name="chronicBronchitis" id="cbYes" value="yes">
+                        <label class="btn btn-outline-secondary" for="cbYes">Sí</label>
+                        <input type="radio" class="btn-check" name="chronicBronchitis" id="cbNo" value="no" checked>
+                        <label class="btn btn-outline-secondary" for="cbNo">No</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">¿Es Ex-Fumador?</label>
+                    <div class="btn-group w-100" role="group">
+                        <input type="radio" class="btn-check" name="exSmoker" id="exSYes" value="yes">
+                        <label class="btn btn-outline-secondary" for="exSYes">Sí</label>
+                        <input type="radio" class="btn-check" name="exSmoker" id="exSNo" value="no" checked>
+                        <label class="btn btn-outline-secondary" for="exSNo">No</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <button class="btn btn-secondary" onclick="showResultPhase()">Anterior</button>
+                <button class="btn btn-vithas" onclick="calculateFollowUp()">Ver Recomendaciones</button>
+            </div>
+        </div>
+
+        <!-- FASE 4: INFORME FINAL (Paso 6 original) -->
+        <div id="finalReportPhase" class="step-card d-none">
+            <div id="printArea">
+                <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
+                    <h3 class="m-0 text-vithas">Informe Clínico EPOC</h3>
+                    <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" style="height:35px;">
+                </div>
+
+                <!-- Resultados inyectados -->
+                <div id="finalReportContainer">
+                    <div id="reportClassification" class="mb-4"></div>
+                    <div id="followUpResult" class="result-box-blue mb-4" style="display:none;"></div>
+                    <div id="tobaccoBox" class="extra-box warning mb-3" style="display:none;">
+                        <h4><i class="fas fa-smoking-ban"></i> Cese de Tabaquismo</h4>
+                        <ul>
+                            <li>Consejería breve en cada visita (5 As).</li>
+                            <li>Valorar tratamiento farmacológico.</li>
+                        </ul>
+                    </div>
+                    <div id="vaccineBox" class="extra-box info mb-3">
+                        <h4><i class="fas fa-syringe"></i> Recomendaciones de Vacunación</h4>
+                        <ul id="vaccineList"></ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between mt-4 no-print">
+                <button class="btn btn-secondary" onclick="showFollowUp()">Anterior</button>
+                <div>
+                    <button class="btn btn-outline-secondary me-2" onclick="location.reload()"><i class="fas fa-redo"></i> Nuevo</button>
+                    <button class="btn btn-success" onclick="exportPDF()"><i class="fas fa-file-pdf"></i> PDF</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+  </div>
+
+  <script src="../../js/main.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

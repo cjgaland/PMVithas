@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Procesador de Analíticas Avanzado - Vithas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Favicon y Estilos Globales -->
+  <link rel="icon" type="image/png" href="../../Favicon-Vithas.png">
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Estilos Específicos de la Herramienta -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Librería Chart.js para las gráficas -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+       <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+    </div>
+    <nav class="nav-links">
+      <ul>
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        <li class="nav-category">Navegación</li>
+        <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Volver a Utilidades</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="main-content">
+    
+    <header class="top-header">
+      <div class="header-left">
+        <i class="fas fa-bars menu-toggle" id="menuToggle"></i>
+        <h2>Procesador de Análisis Avanzado</h2>
+      </div>
+      <div class="header-right">
+         <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+      </div>
+    </header>
+
+    <!-- WRAPPER DE LA HERRAMIENTA -->
+    <div class="analysis-tool-wrapper">
+      
+      <div class="tool-header-controls">
+        <button id="darkModeToggle" class="btn-vithas-outline"><i class="fas fa-moon"></i> Modo Oscuro</button>
+      </div>
+
+      <!-- SECCIÓN 1: ENTRADA DE DATOS -->
+      <article id="inputSection" class="tool-box" aria-label="Entrada de datos">
+        <h3 class="box-title"><i class="fas fa-file-medical-alt"></i> Datos del Análisis</h3>
+        
+        <div class="form-group">
+            <label>Tipo de Análisis:</label>
+            <select id="analysisType">
+                <option value="clinicos">Análisis Clínicos (Hemograma/Bioquímica)</option>
+                <option value="orina">Análisis de Orina</option>
+                <option value="microbiologia">Microbiología</option>
+                <option value="autoinmunidad">Autoinmunidad</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Pegar datos originales (Raw Data):</label>
+            <textarea id="inputData" rows="10" placeholder="Pega aquí los resultados copiados del PDF..."></textarea>
+            <small class="text-muted">Consejo: Asegúrate de que cada parámetro y su valor estén en una línea clara.</small>
+        </div>
+
+        <div class="button-group">
+            <button id="processButton" class="btn-action primary"><i class="fas fa-cogs"></i> Procesar datos</button>
+            <button id="copyButton" class="btn-action secondary"><i class="fas fa-copy"></i> Copiar resultado</button>
+            <button id="exportButton" class="btn-action secondary"><i class="fas fa-file-csv"></i> Exportar CSV</button>
+            <button id="clearInputButton" class="btn-action secondary"><i class="fas fa-trash-alt"></i> Limpiar</button>
+            <button id="interpretAIButton" class="btn-action ai-btn"><i class="fas fa-robot"></i> Interpretar con IA</button>
+        </div>
+
+        <div class="search-group mt-3">
+            <input type="text" id="searchInput" placeholder="🔍 Buscar en el resultado...">
+        </div>
+      </article>
+
+      <!-- SECCIÓN 2: RESULTADOS -->
+      <article id="outputSection" class="tool-box" aria-label="Resultados">
+        <h3 class="box-title">Resultados Estructurados</h3>
+        
+        <div id="executiveSummaryOutput" class="summary-box hidden"></div>
+        
+        <div id="outputContainer" class="results-container"></div>
+        
+        <div class="results-actions button-group mt-3">
+            <button id="sendToHist1Button" class="btn-small">Enviar a Histórico 1</button>
+            <button id="sendToHist2Button" class="btn-small">Enviar a Histórico 2</button>
+            <button id="sendToHist3Button" class="btn-small">Enviar a Histórico 3</button>
+        </div>
+
+        <!-- Interpretación IA -->
+        <div id="aiInterpretationOutput" class="ai-box hidden">
+            <h4><i class="fas fa-magic"></i> Interpretación de IA:</h4>
+            <div id="criticalAlert" class="hidden"></div>
+            <p id="aiInterpretationText"></p>
+            <div id="aiSpinner" class="spinner hidden"></div>
+        </div>
+      </article>
+
+      <!-- SECCIÓN 3: COMPARADOR -->
+      <article id="comparisonSection" class="tool-box" aria-label="Comparador">
+        <h3 class="box-title"><i class="fas fa-chart-line"></i> Comparador de Análisis Históricos</h3>
+        
+        <div class="row-inputs">
+            <div class="col-input">
+                <label>Análisis Histórico 1:</label>
+                <textarea id="historicalInput1" rows="5" placeholder="Pega el análisis más antiguo..."></textarea>
+            </div>
+            <div class="col-input">
+                <label>Análisis Histórico 2:</label>
+                <textarea id="historicalInput2" rows="5" placeholder="Pega el análisis intermedio..."></textarea>
+            </div>
+            <div class="col-input">
+                <label>Análisis Histórico 3:</label>
+                <textarea id="historicalInput3" rows="5" placeholder="Pega el análisis más reciente..."></textarea>
+            </div>
+        </div>
+
+        <div class="button-group mt-3">
+            <button id="compareAnalysesButton" class="btn-action primary">Comparar Análisis</button>
+            <button id="copyComparisonButton" class="btn-action secondary">Copiar Resumen</button>
+            <button id="clearComparisonButton" class="btn-action secondary">Limpiar Comparador</button>
+        </div>
+
+        <div id="comparisonOutputContainer" class="comparison-results"></div>
+        <div id="chartsContainer"></div>
+      </article>
+
+    </div>
+  </div>
+
+  <!-- Elementos Flotantes (Spinner, Toast, Modals) -->
+  <div id="spinner" class="spinner-overlay hidden"><div class="spinner"></div></div>
+  <div id="toast" class="toast hidden"></div>
+
+  <!-- Modal Explicación -->
+  <div id="explanationModal" class="modal">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <h3 id="explanationTitle"></h3>
+      <p id="explanationText"></p>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../../js/main.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
