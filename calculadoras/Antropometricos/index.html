@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Antropometría - Vithas Xanit</title>
+  
+  <link rel="icon" type="image/png" href="../../assets/Images/Logos/Favicon-Vithas.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+    </div>
+    <nav class="nav-links">
+      <ul>
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        
+        <li class="nav-category">Práctica Clínica</li>
+        
+        <!-- Enlace para volver al menú general -->
+        <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Volver a Calculadoras</a></li>
+        
+        <!-- BLOQUE ACTUAL: Antropometría (ABIERTO) -->
+        <li class="has-submenu open">
+            <a href="#" class="submenu-toggle">
+              <div style="display:flex; align-items:center;"><i class="fas fa-ruler-combined"></i> Antropometría</div>
+              <i class="fas fa-chevron-right chevron"></i>
+            </a>
+            <ul class="submenu">
+              <li><a href="index.html" class="submenu-main-link active">Menú Antropometría</a></li>
+              <li><a href="imc.html"><i class="fas fa-weight"></i> IMC</a></li>
+              <li><a href="bsa-adultos.html"><i class="fas fa-male"></i> BSA (Adultos)</a></li>
+              <li><a href="bsa-ninos.html"><i class="fas fa-child"></i> BSA (Niños)</a></li>
+              <li><a href="agua-corporal.html"><i class="fas fa-water"></i> Agua Corporal Total</a></li>
+              <li><a href="ceb-basal.html"><i class="fas fa-fire"></i> Gasto Energético Basal</a></li>
+              <li><a href="requerimientos-caloricos.html"><i class="fas fa-calculator"></i> Requerimientos Calóricos</a></li>
+            </ul>
+        </li>
+        
+        <!-- OTROS BLOQUES (CERRADOS) -->
+        <li class="has-submenu">
+            <a href="#" class="submenu-toggle">
+              <div style="display:flex; align-items:center;"><i class="fas fa-heartbeat"></i> Cardiovascular</div>
+              <i class="fas fa-chevron-right chevron"></i>
+            </a>
+            <ul class="submenu">
+              <li><a href="../Cardiovascular/index.html">Menú Cardiovascular</a></li>
+            </ul>
+        </li>
+        <li class="has-submenu">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;"><i class="fas fa-utensils"></i> Digestivo</div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="../Digestivo/index.html">Menú Digestivo</a></li>
+          </ul>
+        </li>
+        <li class="has-submenu">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;"><i class="fas fa-bacteria"></i> Infecciosas</div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="../Infecciosas/index.html">Menú Infecciosas</a></li>
+          </ul>
+        </li>
+        <li class="has-submenu">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;"><i class="fas fa-filter"></i> Nefrología</div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="../Nefrologia/index.html">Menú Nefrología</a></li>
+          </ul>
+        </li>
+        <li class="has-submenu">
+            <a href="#" class="submenu-toggle">
+              <div style="display:flex; align-items:center;"><i class="fas fa-brain"></i> Neurología</div>
+              <i class="fas fa-chevron-right chevron"></i>
+            </a>
+            <ul class="submenu">
+              <li><a href="../Neurologia/index.html">Menú Neurología</a></li>
+            </ul>
+        </li>
+        <li class="has-submenu">
+            <a href="#" class="submenu-toggle">
+              <div style="display:flex; align-items:center;"><i class="fas fa-lungs"></i> Respiratorio</div>
+              <i class="fas fa-chevron-right chevron"></i>
+            </a>
+            <ul class="submenu">
+              <li><a href="../Respiratorio/index.html">Menú Respiratorio</a></li>
+            </ul>
+        </li>
+        <li class="has-submenu">
+            <a href="#" class="submenu-toggle">
+              <div style="display:flex; align-items:center;"><i class="fas fa-ambulance"></i> UCI / Emergencias</div>
+              <i class="fas fa-chevron-right chevron"></i>
+            </a>
+            <ul class="submenu">
+              <li><a href="../UCI/index.html">Menú UCI / Emergencias</a></li>
+            </ul>
+        </li>
+
+      </ul>
+    </nav>
+    <div class="sidebar-footer">
+      <p>Medicina Interna</p>
+      <small>Vithas Xanit Internacional</small>
+    </div>
+  </aside>
+
+  <!-- CONTENIDO -->
+  <div class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <i class="fas fa-bars menu-toggle" id="menuToggle"></i>
+        <h2><i class="fas fa-ruler-combined" style="margin-right: 10px;"></i>Antropometría y Nutrición</h2>
+      </div>
+      <div class="header-right">
+        <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+      </div>
+    </header>
+
+    <div class="content-wrapper">
+      <div class="cards-grid">
+        
+        <!-- IMC -->
+        <a href="imc.html" class="card">
+          <div class="card-icon" style="background:#e8f5e9; color:#4caf50;"><i class="fas fa-weight"></i></div>
+          <h3>IMC</h3>
+          <p>Índice de Masa Corporal y clasificación nutricional.</p>
+          <span class="card-link">Abrir <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+        <!-- BSA Adultos -->
+        <a href="bsa-adultos.html" class="card">
+          <div class="card-icon" style="background:#e8f5e9; color:#66bb6a;"><i class="fas fa-male"></i></div>
+          <h3>BSA (Adultos)</h3>
+          <p>Cálculo de la Superficie Corporal (Mosteller).</p>
+          <span class="card-link">Abrir <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+        <!-- BSA Niños -->
+        <a href="bsa-ninos.html" class="card">
+          <div class="card-icon" style="background:#e8f5e9; color:#81c784;"><i class="fas fa-child"></i></div>
+          <h3>BSA (Niños)</h3>
+          <p>Cálculo de la Superficie Corporal (DuBois).</p>
+          <span class="card-link">Abrir <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+        <!-- Agua Corporal Total -->
+        <a href="agua-corporal.html" class="card">
+          <div class="card-icon" style="background:#e8f5e9; color:#388e3c;"><i class="fas fa-water"></i></div>
+          <h3>Agua Corporal Total</h3>
+          <p>Estimación del volumen hídrico según peso, sexo y edad.</p>
+          <span class="card-link">Abrir <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+        <!-- Gasto Energético Basal -->
+        <a href="ceb-basal.html" class="card">
+          <div class="card-icon" style="background:#e8f5e9; color:#2e7d32;"><i class="fas fa-fire"></i></div>
+          <h3>Gasto Energético Basal</h3>
+          <p>Estimación con Harris-Benedict y Mifflin-St Jeor.</p>
+          <span class="card-link">Abrir <i class="fas fa-arrow-right"></i></span>
+        </a>
+        
+        <!-- Requerimientos Calóricos -->
+        <a href="requerimientos-caloricos.html" class="card">
+          <div class="card-icon" style="background:#e8f5e9; color:#1b5e20;"><i class="fas fa-calculator"></i></div>
+          <h3>Requerimientos Calóricos</h3>
+          <p>Cálculo de necesidades calóricas por kg y factor de estrés.</p>
+          <span class="card-link">Abrir <i class="fas fa-arrow-right"></i></span>
+        </a>
+      </div>
+    </div>
+    
+    <footer class="footer">
+      <p>&copy; 2025 Servicio de Medicina Interna - Hospital Vithas Xanit Internacional.</p>
+    </footer>
+  </div>
+  <script src="../../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UCI / Emergencias - Vithas Xanit</title>
+  
+  <link rel="icon" type="image/png" href="../../assets/Images/Logos/Favicon-Vithas.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <!-- Estilos específicos del bloque UCI -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+    </div>
+    <nav class="nav-links">
+      <ul>
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        
+        <li class="nav-category">Práctica Clínica</li>
+        
+        <!-- Enlace para volver al menú general -->
+        <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Volver a Calculadoras</a></li>
+        
+        <!-- OTROS BLOQUES (CERRADOS) -->
+        <li class="has-submenu">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;"><i class="fas fa-filter"></i> Nefrología</div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="../Nefrologia/index.html">Menú Nefrología</a></li>
+          </ul>
+        </li>
+        <li class="has-submenu">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;"><i class="fas fa-brain"></i> Neurología</div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="../Neurologia/index.html">Menú Neurología</a></li>
+          </ul>
+        </li>
+        <li class="has-submenu">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;"><i class="fas fa-lungs"></i> Respiratorio</div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="../Respiratorio/index.html">Menú Respiratorio</a></li>
+          </ul>
+        </li>
+
+        <!-- BLOQUE ACTUAL: UCI (ABIERTO) -->
+        <li class="has-submenu open">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-ambulance"></i> UCI / Emergencias
+            </div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="index.html" class="submenu-main-link active">Menú UCI / Emergencias</a></li>
+            <li><a href="apacheII.html"><i class="fas fa-heart-pulse"></i> APACHE II</a></li>
+            <li><a href="news2.html"><i class="fas fa-triangle-exclamation"></i> NEWS2</a></li>
+            <li><a href="soporte-nutricional.html"><i class="fas fa-bowl-food"></i> Soporte Nutricional</a></li>
+          </ul>
+        </li>
+
+      </ul>
+    </nav>
+    <div class="sidebar-footer">
+      <p>Medicina Interna</p>
+      <small>Vithas Xanit Internacional</small>
+    </div>
+  </aside>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <i class="fas fa-bars menu-toggle" id="menuToggle"></i>
+        <h2><i class="fas fa-ambulance" style="margin-right: 10px;"></i>UCI / Emergencias</h2>
+      </div>
+      <div class="header-right">
+        <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+      </div>
+    </header>
+
+    <div class="content-wrapper">
+      
+      <!-- GRID DE CALCULADORAS -->
+      <div class="cards-grid">
+        
+        <!-- APACHE II -->
+        <a href="apacheII.html" class="card">
+          <div class="card-icon" style="background:#fbe9e7; color:#bf360c;"><i class="fas fa-heart-pulse"></i></div>
+          <h3>APACHE II</h3>
+          <p>Evaluación de gravedad y predicción de mortalidad en UCI.</p>
+          <span class="card-link">Abrir <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+        <!-- NEWS2 -->
+        <a href="news2.html" class="card">
+          <div class="card-icon" style="background:#fbe9e7; color:#d84315;"><i class="fas fa-triangle-exclamation"></i></div>
+          <h3>NEWS2</h3>
+          <p>Detección temprana del deterioro clínico en planta y respuesta de alerta.</p>
+          <span class="card-link">Abrir <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+        <!-- Soporte Nutricional -->
+        <a href="soporte-nutricional.html" class="card">
+          <div class="card-icon" style="background:#ffccbc; color:#e64a19;"><i class="fas fa-bowl-food"></i></div>
+          <h3>Soporte Nutricional</h3>
+          <p>Cálculo de requerimientos calóricos, proteicos y velocidad de infusión.</p>
+          <span class="card-link">Abrir <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+      </div>
+    </div>
+    
+    <footer class="footer">
+      <p>&copy; 2025 Servicio de Medicina Interna - Hospital Vithas Xanit Internacional.</p>
+    </footer>
+  </div>
+  <script src="../../js/main.js"></script>
+</body>
+</html>
