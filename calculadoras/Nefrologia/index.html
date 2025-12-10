@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nefrología - Vithas Xanit</title>
+  
+  <link rel="icon" type="image/png" href="../../assets/Images/Logos/Favicon-Vithas.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <!-- Estilos específicos del bloque Nefrología -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+    </div>
+    <nav class="nav-links">
+      <ul>
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        
+        <li class="nav-category">Práctica Clínica</li>
+        
+        <!-- Enlace para volver al menú general de calculadoras -->
+        <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Volver a Calculadoras</a></li>
+        
+        <!-- BLOQUES DE CÁLCULO (CERRADOS) -->
+        <li class="has-submenu">
+            <a href="#" class="submenu-toggle">
+              <div style="display:flex; align-items:center;"><i class="fas fa-ruler-combined"></i> Antropometría</div>
+              <i class="fas fa-chevron-right chevron"></i>
+            </a>
+            <ul class="submenu">
+              <li><a href="../Antropometricos/index.html">Menú Antropometría</a></li>
+            </ul>
+        </li>
+        <li class="has-submenu">
+            <a href="#" class="submenu-toggle">
+              <div style="display:flex; align-items:center;"><i class="fas fa-heartbeat"></i> Cardiovascular</div>
+              <i class="fas fa-chevron-right chevron"></i>
+            </a>
+            <ul class="submenu">
+              <li><a href="../Cardiovascular/index.html">Menú Cardiovascular</a></li>
+            </ul>
+        </li>
+        <li class="has-submenu">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;"><i class="fas fa-utensils"></i> Digestivo</div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="../Digestivo/index.html">Menú Digestivo</a></li>
+          </ul>
+        </li>
+        <li class="has-submenu">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;"><i class="fas fa-bacteria"></i> Infecciosas</div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="../Infecciosas/index.html">Menú Infecciosas</a></li>
+          </ul>
+        </li>
+
+        <!-- BLOQUE ACTUAL: NEFROLOGÍA (ABIERTO) -->
+        <li class="has-submenu open">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-filter"></i> Nefrología
+            </div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="index.html" class="submenu-main-link active">Menú Nefrología</a></li>
+            <li><a href="fg.html"><i class="fas fa-calculator"></i> Filtrado Glomerular</a></li>
+            <li><a href="feNa.html"><i class="fas fa-percent"></i> FeNa</a></li>
+            <li><a href="feUrea.html"><i class="fas fa-percent"></i> FeUrea</a></li>
+            <li><a href="anion-gap.html"><i class="fas fa-flask"></i> Anión Gap</a></li>
+            <li><a href="osmolalidad.html"><i class="fas fa-tint"></i> Osmolalidad</a></li>
+            <li><a href="deficit-agua.html"><i class="fas fa-glass-whiskey"></i> Déficit de Agua</a></li>
+            <li><a href="reposicion-hidrica.html"><i class="fas fa-syringe"></i> Reposición Hídrica</a></li>
+            <li><a href="calcio-serico.html"><i class="fas fa-bone"></i> Calcio Corregido</a></li>
+          </ul>
+        </li>
+
+        <li class="has-submenu">
+            <a href="#" class="submenu-toggle">
+              <div style="display:flex; align-items:center;"><i class="fas fa-brain"></i> Neurología</div>
+              <i class="fas fa-chevron-right chevron"></i>
+            </a>
+            <ul class="submenu">
+              <li><a href="../Neurologia/index.html">Menú Neurología</a></li>
+            </ul>
+        </li>
+        <li class="has-submenu">
+            <a href="#" class="submenu-toggle">
+              <div style="display:flex; align-items:center;"><i class="fas fa-lungs"></i> Respiratorio</div>
+              <i class="fas fa-chevron-right chevron"></i>
+            </a>
+            <ul class="submenu">
+              <li><a href="../Respiratorio/index.html">Menú Respiratorio</a></li>
+            </ul>
+        </li>
+        <li class="has-submenu">
+            <a href="#" class="submenu-toggle">
+              <div style="display:flex; align-items:center;"><i class="fas fa-ambulance"></i> UCI / Emergencias</div>
+              <i class="fas fa-chevron-right chevron"></i>
+            </a>
+            <ul class="submenu">
+              <li><a href="../UCI/index.html">Menú UCI / Emergencias</a></li>
+            </ul>
+        </li>
+
+      </ul>
+    </nav>
+    <div class="sidebar-footer">
+      <p>Medicina Interna</p>
+      <small>Vithas Xanit Internacional</small>
+    </div>
+  </aside>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <i class="fas fa-bars menu-toggle" id="menuToggle"></i>
+        <h2><i class="fas fa-filter" style="margin-right: 10px;"></i>Nefrología y Medio Interno</h2>
+      </div>
+      <div class="header-right">
+        <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+      </div>
+    </header>
+
+    <div class="content-wrapper">
+      
+      <!-- GRID DE CALCULADORAS -->
+      <div class="cards-grid">
+        
+        <!-- Filtrado Glomerular -->
+        <a href="fg.html" class="card">
+          <div class="card-icon" style="background:#e0f2f1; color:#00695c;"><i class="fas fa-calculator"></i></div>
+          <h3>Filtrado Glomerular (FG)</h3>
+          <p>Estimación mediante CKD-EPI 2021, MDRD-4 y Cockcroft-Gault.</p>
+          <span class="card-link">Abrir <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+        <!-- FeNa -->
+        <a href="feNa.html" class="card">
+          <div class="card-icon" style="background:#e0f2f1; color:#00796b;"><i class="fas fa-percent"></i></div>
+          <h3>FeNa</h3>
+          <p>Fracción de excreción de Sodio. Diagnóstico diferencial IRA prerrenal vs NTA.</p>
+          <span class="card-link">Abrir <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+        <!-- FeUrea -->
+        <a href="feUrea.html" class="card">
+          <div class="card-icon" style="background:#e0f2f1; color:#00897b;"><i class="fas fa-percent"></i></div>
+          <h3>FeUrea</h3>
+          <p>Fracción de excreción de Urea. Útil en pacientes bajo tratamiento diurético.</p>
+          <span class="card-link">Abrir <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+        <!-- Anión Gap -->
+        <a href="anion-gap.html" class="card">
+          <div class="card-icon" style="background:#e0f2f1; color:#004d40;"><i class="fas fa-flask"></i></div>
+          <h3>Anión Gap</h3>
+          <p>Cálculo de la brecha aniónica y corrección por albúmina en acidosis metabólica.</p>
+          <span class="card-link">Abrir <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+        <!-- Osmolalidad -->
+        <a href="osmolalidad.html" class="card">
+          <div class="card-icon" style="background:#b2dfdb; color:#00695c;"><i class="fas fa-tint"></i></div>
+          <h3>Osmolalidad Plasmática</h3>
+          <p>Cálculo de la osmolalidad y gap osmolar (intoxicaciones, hiponatremia).</p>
+          <span class="card-link">Abrir <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+        <!-- Déficit de Agua -->
+        <a href="deficit-agua.html" class="card">
+          <div class="card-icon" style="background:#e0f2f1; color:#00796b;"><i class="fas fa-glass-whiskey"></i></div>
+          <h3>Déficit de Agua Libre</h3>
+          <p>Estimación del déficit de agua para la corrección de hipernatremia.</p>
+          <span class="card-link">Abrir <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+        <!-- Reposición Hídrica -->
+        <a href="reposicion-hidrica.html" class="card">
+          <div class="card-icon" style="background:#b2dfdb; color:#004d40;"><i class="fas fa-syringe"></i></div>
+          <h3>Reposición Hídrica</h3>
+          <p>Fórmula de Adrogué-Madias para corrección de trastornos del Sodio.</p>
+          <span class="card-link">Abrir <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+        <!-- Calcio Corregido -->
+        <a href="calcio-serico.html" class="card">
+          <div class="card-icon" style="background:#e0f2f1; color:#00695c;"><i class="fas fa-bone"></i></div>
+          <h3>Calcio Corregido</h3>
+          <p>Ajuste del calcio sérico según niveles de albúmina o proteínas totales.</p>
+          <span class="card-link">Abrir <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+      </div>
+    </div>
+    
+    <footer class="footer">
+      <p>&copy; 2025 Servicio de Medicina Interna - Hospital Vithas Xanit Internacional.</p>
+    </footer>
+  </div>
+  <script src="../../js/main.js"></script>
+</body>
+</html>

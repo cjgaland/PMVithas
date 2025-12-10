@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Status Epiléptico - Vithas Neurología</title>
+  
+  <link rel="icon" type="image/png" href="../../assets/Images/Logos/Favicon-Vithas.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Estilos Globales y Específicos -->
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+    </div>
+    <nav class="nav-links">
+      <ul>
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        
+        <li class="nav-category">Práctica Clínica</li>
+        <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Volver a Calculadoras</a></li>
+        
+        <!-- BLOQUE NEUROLOGÍA (ABIERTO) -->
+        <li class="has-submenu open">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-brain"></i> Neurología
+            </div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="index.html">Menú Neurología</a></li>
+            <li><a href="nihss.html"><i class="fas fa-user-injured"></i> NIHSS</a></li>
+            <li><a href="gcs-adulto.html"><i class="fas fa-star"></i> Glasgow (GCS)</a></li>
+            <li><a href="four-score.html"><i class="fas fa-procedures"></i> FOUR Score</a></li>
+            <li><a href="canadian-ct-head.html"><i class="fas fa-skull"></i> Canadian CT Head</a></li>
+            <li><a href="abcd2.html"><i class="fas fa-bolt"></i> ABCD² (AIT)</a></li>
+            <li><a href="ich-score.html"><i class="fas fa-brain"></i> ICH Score</a></li>
+            <li><a href="aspect.html"><i class="fas fa-layer-group"></i> ASPECTS</a></li>
+            <li><a href="mrs.html"><i class="fas fa-wheelchair"></i> Rankin (mRS)</a></li>
+            <li><a href="ottawa-sah.html"><i class="fas fa-head-side-virus"></i> Ottawa SAH</a></li>
+            <li><a href="status-epileptico-dosis.html" class="submenu-main-link active"><i class="fas fa-pills"></i> Status Epiléptico</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- CONTENIDO -->
+  <div class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <i class="fas fa-bars menu-toggle" id="menuToggle"></i>
+        <h2><i class="fas fa-brain" style="margin-right: 10px;"></i>Neurología</h2>
+      </div>
+      <div class="header-right">
+        <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+      </div>
+    </header>
+
+    <div class="calc-container">
+      <div class="calc-card">
+        <h1 class="calc-title">Status Epiléptico (Dosis)</h1>
+        <p class="calc-subtitle">Guía rápida de dosificación farmacológica basada en peso para el manejo secuencial del status convulsivo.</p>
+
+        <form id="formStatus">
+          
+          <div class="form-section">
+            <span class="section-label">Datos del Paciente</span>
+            
+            <div class="input-group">
+              <label for="peso">Peso (kg)</label>
+              <div class="input-wrapper">
+                <input id="peso" class="form-control" type="number" step="0.1" min="0" placeholder="Ej. 70" required>
+                <span class="input-suffix">kg</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- BOTONES -->
+          <div class="actions">
+            <a href="index.html" class="btn-secondary">Volver</a>
+            <button type="submit" class="btn-calc">Calcular Dosis</button>
+            <button type="button" class="btn-secondary" id="btnCopy"><i class="fas fa-copy"></i> Copiar</button>
+            <button type="reset" class="btn-secondary" onclick="document.getElementById('result').innerHTML='Introduce el peso y pulsa Calcular.'">Limpiar</button>
+          </div>
+
+          <!-- RESULTADO -->
+          <div id="result" class="result-box" style="background: none; border: none; padding: 0;">
+            <!-- El contenido se generará dinámicamente con estilos de tarjetas -->
+            <div class="result-box">Introduce el peso y pulsa Calcular.</div>
+          </div>
+
+          <!-- DETALLES -->
+          <details>
+            <summary>Ver Protocolo Secuencial</summary>
+            <div class="details-content">
+              <p><strong>Manejo Inicial (0-5 min):</strong></p>
+              <ul>
+                <li>ABCDE: Vía aérea, oxígeno, monitorización (ECG, TA, SatO2).</li>
+                <li>Glucemia capilar (tratar hipoglucemia con Tiamina + Glucosa).</li>
+                <li>Acceso venoso.</li>
+              </ul>
+              <p><strong>1ª Línea (5-10 min):</strong> Benzodiacepinas.</p>
+              <p><strong>2ª Línea (10-30 min):</strong> Fármacos antiepilépticos IV (Levetiracetam, Valproato, etc.).</p>
+              <p><strong>3ª Línea (30-60 min):</strong> Status Refractario. Requiere IOT, Ingreso en UCI y sedación continua (Propofol, Midazolam, Tiopental).</p>
+            </div>
+          </details>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast">Resultado copiado al portapapeles</div>
+
+  <!-- JAVASCRIPT -->
+  <script src="../../js/main.js"></script>
+  <script>
+    (function() {
+      const $ = (id) => document.getElementById(id);
+      const r = (value) => Math.round(value); // Redondeo simple para dosis
+
+      $('formStatus').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const peso = parseFloat($('peso').value);
+        
+        if (!(peso > 0)) {
+          $('result').innerHTML = '<div class="result-box">Por favor, introduce un peso válido.</div>';
+          return;
+        }
+        
+        // CÁLCULOS DE DOSIS
+        
+        // 1. Benzodiacepinas
+        const diazepamMin = r(0.15 * peso);
+        const diazepamMax = r(0.2 * peso); // Dosis habitual 0.15-0.2 mg/kg
+        // Límite habitual por bolo: 10mg
+        const diazepamTxt = (0.2 * peso > 10) ? "10 mg (Dosis máx por bolo)" : `${diazepamMin} - ${diazepamMax} mg`;
+
+        const lorazepam = r(0.1 * peso);
+        const lorazepamTxt = (0.1 * peso > 4) ? "4 mg (Dosis máx por bolo)" : `${lorazepam} mg`;
+
+        const midazolam = r(0.2 * peso); // IM
+        const midazolamTxt = (0.2 * peso > 10) ? "10 mg (Dosis máx)" : `${midazolam} mg`;
+
+        // 2. Fármacos Antiepilépticos (FAEs)
+        // Valproato 20-40 mg/kg
+        const vpaMin = r(20 * peso);
+        const vpaMax = r(40 * peso);
+        const vpaTxt = (vpaMax > 3000) ? "3000 mg (Dosis tope habitual)" : `${vpaMin} - ${vpaMax} mg`;
+
+        // Levetiracetam 40-60 mg/kg
+        const levMin = r(40 * peso);
+        const levMax = r(60 * peso);
+        const levTxt = (levMax > 4500) ? "4500 mg (Dosis tope habitual)" : `${levMin} - ${levMax} mg`;
+
+        // Fenitoína 15-20 mg/kg
+        const phtMin = r(15 * peso);
+        const phtMax = r(20 * peso);
+        const phtTxt = `${phtMin} - ${phtMax} mg`;
+
+        // Lacosamida (opcional según guías recientes) 200-400mg fijos suele ser, o 5-10mg/kg
+        const lacMin = r(5 * peso); // Dosis carga variable según guías, pongo genérico seguro o dosis fija
+        // Optamos por dejar los 3 clásicos para no saturar
+
+        // GENERAR HTML
+        const html = `
+          <div class="drug-block ok">
+            <h3><span class="badge ok">1ª LÍNEA</span> Benzodiacepinas (Elegir una)</h3>
+            <p><strong>Lorazepam IV:</strong> ${lorazepamTxt} en bolo lento (2 mg/min). Repetir una vez a los 5 min.</p>
+            <p><strong>Diazepam IV:</strong> ${diazepamTxt} en bolo (5 mg/min). Repetir una vez.</p>
+            <p><strong>Midazolam IM:</strong> ${midazolamTxt} (si no hay vía IV).</p>
+          </div>
+
+          <div class="drug-block warn">
+            <h3><span class="badge warn">2ª LÍNEA</span> Fármacos Antiepilépticos IV</h3>
+            <p><strong>Ácido Valproico:</strong> ${vpaTxt} IV en 15 min.</p>
+            <p><strong>Levetiracetam:</strong> ${levTxt} IV en 15 min.</p>
+            <p><strong>Fenitoína:</strong> ${phtTxt} IV. <br><small><em>¡Ojo! Monitorizar ECG/TA. Ritmo máx 50 mg/min. Evitar en suero glucosado.</em></small></p>
+          </div>
+
+          <div class="drug-block danger">
+            <h3><span class="badge danger">3ª LÍNEA</span> Status Refractario (UCI)</h3>
+            <p>Requiere Intubación Orotraqueal (IOT) y sedación continua.</p>
+            <p>• <strong>Propofol:</strong> Bolo 1-2 mg/kg + Perfusión.</p>
+            <p>• <strong>Midazolam:</strong> Bolo 0.2 mg/kg + Perfusión.</p>
+            <p>• <strong>Tiopental:</strong> Bolo 3-5 mg/kg + Perfusión.</p>
+          </div>
+        `;
+        
+        $('result').innerHTML = html;
+      });
+
+      // Copiar (Versión texto plano)
+      $('btnCopy').addEventListener('click', () => {
+          const resultDiv = $('result');
+          if (!resultDiv.innerHTML.includes('1ª LÍNEA')) return;
+          
+          // Extraemos el texto limpio para el portapapeles
+          const text = resultDiv.innerText
+                        .replace(/1ª LÍNEA/g, "\n--- 1ª LÍNEA (Benzodiacepinas) ---\n")
+                        .replace(/2ª LÍNEA/g, "\n\n--- 2ª LÍNEA (FAEs) ---\n")
+                        .replace(/3ª LÍNEA/g, "\n\n--- 3ª LÍNEA (UCI) ---\n");
+
+          if (navigator.clipboard && window.isSecureContext) {
+              navigator.clipboard.writeText(text).then(showToast);
+          } else {
+              const textArea = document.createElement("textarea");
+              textArea.value = text;
+              textArea.style.position = "fixed";
+              document.body.appendChild(textArea);
+              textArea.select();
+              try { document.execCommand('copy'); showToast(); } catch (err) {}
+              document.body.removeChild(textArea);
+          }
+      });
+
+      function showToast() {
+          const toast = $('toast');
+          toast.className = "toast show";
+          setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+      }
+    })();
+  </script>
+</body>
+</html>

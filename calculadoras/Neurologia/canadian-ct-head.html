@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Canadian CT Head Rule - Vithas Neurología</title>
+  
+  <link rel="icon" type="image/png" href="../../assets/Images/Logos/Favicon-Vithas.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Estilos Globales y Específicos -->
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+    </div>
+    <nav class="nav-links">
+      <ul>
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        
+        <li class="nav-category">Práctica Clínica</li>
+        <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Volver a Calculadoras</a></li>
+        
+        <!-- BLOQUE NEUROLOGÍA (ABIERTO) -->
+        <li class="has-submenu open">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-brain"></i> Neurología
+            </div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="index.html">Menú Neurología</a></li>
+            <li><a href="nihss.html"><i class="fas fa-user-injured"></i> NIHSS</a></li>
+            <li><a href="gcs-adulto.html"><i class="fas fa-star"></i> Glasgow (GCS)</a></li>
+            <li><a href="four-score.html"><i class="fas fa-procedures"></i> FOUR Score</a></li>
+            <li><a href="canadian-ct-head.html" class="submenu-main-link active"><i class="fas fa-skull"></i> Canadian CT Head</a></li>
+            <li><a href="abcd2.html"><i class="fas fa-bolt"></i> ABCD² (AIT)</a></li>
+            <li><a href="ich-score.html"><i class="fas fa-brain"></i> ICH Score</a></li>
+            <li><a href="aspect.html"><i class="fas fa-layer-group"></i> ASPECTS</a></li>
+            <li><a href="mrs.html"><i class="fas fa-wheelchair"></i> Rankin (mRS)</a></li>
+            <li><a href="ottawa-sah.html"><i class="fas fa-head-side-virus"></i> Ottawa SAH</a></li>
+            <li><a href="status-epileptico-dosis.html"><i class="fas fa-pills"></i> Status Epiléptico</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- CONTENIDO -->
+  <div class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <i class="fas fa-bars menu-toggle" id="menuToggle"></i>
+        <h2><i class="fas fa-brain" style="margin-right: 10px;"></i>Neurología</h2>
+      </div>
+      <div class="header-right">
+        <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+      </div>
+    </header>
+
+    <div class="calc-container">
+      <div class="calc-card">
+        <h1 class="calc-title">Canadian CT Head Rule (CCHR)</h1>
+        <p class="calc-subtitle">Criterios para indicar TC Craneal en pacientes con TCE Leve (GCS 13-15) y al menos un episodio de pérdida de conciencia, amnesia o desorientación.</p>
+
+        <form id="formCCHR">
+          
+          <!-- CRITERIOS DE EXCLUSIÓN -->
+          <div class="form-section" style="background-color: #fff8e1; padding: 15px; border-radius: 8px; border: 1px solid #ffecb3;">
+            <span class="section-label" style="color: #f57f17;">Criterios de Exclusión (No aplicable si...)</span>
+            <p class="text-muted small mb-3">Si respondes "SÍ" a alguna, la regla NO es aplicable.</p>
+            
+            <div class="switch-group">
+              <label for="exclusion" class="switch-label">¿Edad &lt; 16 años, anticoagulantes/coagulopatía o convulsión post-traumática?</label>
+              <label class="switch-toggle">
+                <input type="checkbox" id="exclusion">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- FACTORES DE ALTO RIESGO -->
+          <div class="form-section">
+            <span class="section-label">Factores de Alto Riesgo (Indican Neurocirugía)</span>
+            
+            <div class="input-group">
+              <label>1. GCS &lt; 15 a las 2 horas del trauma</label>
+              <div class="check-group">
+                <label class="form-check"><input type="radio" name="gcs2h" value="1"> Sí</label>
+                <label class="form-check"><input type="radio" name="gcs2h" value="0" checked> No</label>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label>2. Sospecha de fractura abierta o deprimida</label>
+              <div class="check-group">
+                <label class="form-check"><input type="radio" name="openFx" value="1"> Sí</label>
+                <label class="form-check"><input type="radio" name="openFx" value="0" checked> No</label>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label>3. Signos de fractura de base de cráneo</label>
+              <small class="text-muted d-block mb-2">(Hemotímpano, ojos de mapache, otorraquia/rinorraquia, signo de Battle)</small>
+              <div class="check-group">
+                <label class="form-check"><input type="radio" name="basal" value="1"> Sí</label>
+                <label class="form-check"><input type="radio" name="basal" value="0" checked> No</label>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label>4. Vómitos &ge; 2 episodios</label>
+              <div class="check-group">
+                <label class="form-check"><input type="radio" name="vomit" value="1"> Sí</label>
+                <label class="form-check"><input type="radio" name="vomit" value="0" checked> No</label>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label>5. Edad &ge; 65 años</label>
+              <div class="check-group">
+                <label class="form-check"><input type="radio" name="age65" value="1"> Sí</label>
+                <label class="form-check"><input type="radio" name="age65" value="0" checked> No</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- FACTORES DE RIESGO MODERADO -->
+          <div class="form-section">
+            <span class="section-label">Factores de Riesgo Moderado (Lesión en TC)</span>
+            
+            <div class="input-group">
+              <label>6. Amnesia retrógrada &ge; 30 minutos</label>
+              <div class="check-group">
+                <label class="form-check"><input type="radio" name="amnesia" value="1"> Sí</label>
+                <label class="form-check"><input type="radio" name="amnesia" value="0" checked> No</label>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label>7. Mecanismo peligroso</label>
+              <small class="text-muted d-block mb-2">(Peatón atropellado, eyectado del vehículo, caída &gt; 1m o 5 escalones)</small>
+              <div class="check-group">
+                <label class="form-check"><input type="radio" name="mech" value="1"> Sí</label>
+                <label class="form-check"><input type="radio" name="mech" value="0" checked> No</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- BOTONES -->
+          <div class="actions">
+            <a href="index.html" class="btn-secondary">Volver</a>
+            <button type="submit" class="btn-calc">Calcular</button>
+            <button type="button" class="btn-secondary" id="btnCopy"><i class="fas fa-copy"></i> Copiar</button>
+            <button type="reset" class="btn-secondary" onclick="document.getElementById('result').innerText='Selecciona los criterios y pulsa Calcular.'">Limpiar</button>
+          </div>
+
+          <!-- RESULTADO -->
+          <div id="result" class="result-box">Selecciona los criterios y pulsa Calcular.</div>
+
+          <!-- DETALLES -->
+          <details>
+            <summary>Ver Evidencia y Recomendación</summary>
+            <div class="details-content">
+              <p><strong>Interpretación:</strong></p>
+              <ul>
+                <li>Si cumple <strong>CUALQUIER criterio de Alto Riesgo</strong>: Indicación de TC Urgente (Riesgo alto de intervención neuroquirúrgica).</li>
+                <li>Si cumple <strong>CUALQUIER criterio de Riesgo Moderado</strong>: Indicación de TC (Riesgo de lesión intracraneal visible).</li>
+                <li>Si <strong>NO cumple ningún criterio</strong>: No es necesaria la TC craneal (VPN casi 100% para lesión neuroquirúrgica).</li>
+              </ul>
+            </div>
+          </details>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast">Resultado copiado al portapapeles</div>
+
+  <!-- JAVASCRIPT -->
+  <script src="../../js/main.js"></script>
+  <script>
+    (function() {
+      const $ = (id) => document.getElementById(id);
+      
+      $('formCCHR').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Verificar exclusión
+        if ($('exclusion').checked) {
+            $('result').innerHTML = "<span style='color:#d32f2f;'><strong>REGLA NO APLICABLE.</strong><br>El paciente cumple criterios de exclusión. Valorar TC según juicio clínico.</span>";
+            return;
+        }
+
+        // Obtener valores (1 = Sí, 0 = No)
+        const getVal = (name) => parseInt(document.querySelector(`input[name="${name}"]:checked`).value);
+
+        const highRisk = getVal('gcs2h') || getVal('openFx') || getVal('basal') || getVal('vomit') || getVal('age65');
+        const medRisk = getVal('amnesia') || getVal('mech');
+
+        let conclusion = "";
+        let accion = "";
+
+        if (highRisk) {
+            conclusion = "ALTO RIESGO";
+            accion = "INDICACIÓN DE TC CRANEAL URGENTE. (Riesgo elevado de lesión neuroquirúrgica).";
+        } else if (medRisk) {
+            conclusion = "RIESGO MODERADO";
+            accion = "INDICACIÓN DE TC CRANEAL. (Riesgo de lesión intracraneal traumática).";
+        } else {
+            conclusion = "BAJO RIESGO";
+            accion = "NO SE REQUIERE TC CRANEAL. (Probabilidad muy baja de lesión importante). Observación domiciliaria o en urgencias si procede.";
+        }
+
+        const resultado = `CANADIAN CT HEAD RULE\n\n` +
+                          `INTERPRETACIÓN: ${conclusion}\n` +
+                          `RECOMENDACIÓN: ${accion}`;
+        
+        $('result').innerText = resultado;
+      });
+
+      // Copiar
+      $('btnCopy').addEventListener('click', () => {
+          const resultText = $('result').innerText;
+          if (!resultText || resultText.includes('Selecciona los criterios')) return;
+          if (navigator.clipboard && window.isSecureContext) {
+              navigator.clipboard.writeText(resultText).then(showToast);
+          }
+      });
+      function showToast() {
+          const toast = $('toast');
+          toast.className = "toast show";
+          setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+      }
+    })();
+  </script>
+</body>
+</html>

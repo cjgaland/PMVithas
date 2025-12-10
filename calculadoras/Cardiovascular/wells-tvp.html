@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wells TVP - Vithas</title>
+  
+  <link rel="icon" type="image/png" href="../../Favicon-Vithas.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="style.css">
+  
+  <style>
+    .toast {
+      visibility: hidden; min-width: 250px; background-color: #333; color: #fff; text-align: center;
+      border-radius: 50px; padding: 16px; position: fixed; z-index: 1000; left: 50%; bottom: 30px;
+      transform: translateX(-50%); font-size: 0.9rem; opacity: 0; transition: opacity 0.3s, bottom 0.3s;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .toast.show { visibility: visible; opacity: 1; bottom: 50px; }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+    </div>
+    <nav class="nav-links">
+      <ul>
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        
+        <li class="nav-category">Práctica Clínica</li>
+        
+        <!-- Enlace para volver al menú general -->
+        <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Volver a Calculadoras</a></li>
+        
+        <!-- BLOQUE ACTUAL: Cardiovascular (ABIERTO) -->
+        <li class="has-submenu open">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-heartbeat"></i> Cardiovascular
+            </div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="index.html">Menú Cardiovascular</a></li>
+            <li><a href="cha2ds2-vasc.html"><i class="fas fa-heart"></i> CHA₂DS₂-VASc</a></li>
+            <li><a href="has-bled.html"><i class="fas fa-tint"></i> HAS-BLED</a></li>
+            <li><a href="grace.html"><i class="fas fa-chart-line"></i> Escala GRACE</a></li>
+            <li><a href="timi-risk-index.html"><i class="fas fa-notes-medical"></i> TIMI Risk Index</a></li>
+            <li><a href="qtc.html"><i class="fas fa-wave-square"></i> QT Corregido</a></li>
+            <li><a href="wells-tep.html"><i class="fas fa-lungs"></i> Wells TEP</a></li>
+            <!-- Elemento Activo -->
+            <li><a href="wells-tvp.html" class="submenu-main-link active"><i class="fas fa-walking"></i> Wells TVP</a></li>
+          </ul>
+        </li>
+
+        <!-- BLOQUE HERMANO: Antropometría -->
+        <li class="has-submenu">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;"><i class="fas fa-ruler-combined"></i> Antropometría</div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="../Antropometricos/index.html">Menú Antropometría</a></li>
+            <li><a href="../Antropometricos/imc.html"><i class="fas fa-weight"></i> IMC</a></li>
+            <li><a href="../Antropometricos/bsa-adultos.html"><i class="fas fa-male"></i> BSA Adultos</a></li>
+            <li><a href="../Antropometricos/bsa-ninos.html"><i class="fas fa-child"></i> BSA Niños</a></li>
+            <li><a href="../Antropometricos/agua-corporal.html"><i class="fas fa-tint"></i> Agua Corporal</a></li>
+            <li><a href="../Antropometricos/ceb-basal.html"><i class="fas fa-fire"></i> Gasto Basal (BMR)</a></li>
+            <li><a href="../Antropometricos/requerimientos-caloricos.html"><i class="fas fa-utensils"></i> Requerimientos</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- CONTENIDO -->
+  <div class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <h2><i class="fas fa-heartbeat" style="margin-right: 10px;"></i>Calculadoras Cardiovasculares</h2>
+      </div>
+      <div class="header-right">
+        <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+      </div>
+    </header>
+
+    <div class="calc-container">
+      <div class="calc-card">
+        <h1 class="calc-title">Escala de Wells (TVP)</h1>
+        <p class="calc-subtitle">Probabilidad clínica pre-test para Trombosis Venosa Profunda (TVP).</p>
+
+        <form id="formWellsTVP">
+          
+          <div class="form-section">
+            <span class="section-label">Criterios Clínicos (1 punto c/u)</span>
+            <div class="check-group">
+              
+              <div class="form-check">
+                <input type="checkbox" id="cancer">
+                <label for="cancer">Cáncer activo (tratamiento en curso, últimos 6 meses o paliativo)</label>
+              </div>
+
+              <div class="form-check">
+                <input type="checkbox" id="paralisis">
+                <label for="paralisis">Parálisis, paresia o inmovilización reciente con escayola de extremidades inferiores</label>
+              </div>
+
+              <div class="form-check">
+                <input type="checkbox" id="cama">
+                <label for="cama">Encamamiento reciente &gt; 3 días o cirugía mayor en último mes</label>
+              </div>
+
+              <div class="form-check">
+                <input type="checkbox" id="dolorVenas">
+                <label for="dolorVenas">Hipersensibilidad localizada a lo largo del sistema venoso profundo</label>
+              </div>
+
+              <div class="form-check">
+                <input type="checkbox" id="piernaHinchada">
+                <label for="piernaHinchada">Tumefacción de toda la pierna</label>
+              </div>
+
+              <div class="form-check">
+                <input type="checkbox" id="pantorrilla">
+                <label for="pantorrilla">Aumento del perímetro de la pantorrilla &gt; 3 cm (respecto a la asintomática)</label>
+              </div>
+
+              <div class="form-check">
+                <input type="checkbox" id="fovea">
+                <label for="fovea">Edema con fóvea (mayor en la pierna sintomática)</label>
+              </div>
+
+              <div class="form-check">
+                <input type="checkbox" id="venasColaterales">
+                <label for="venasColaterales">Venas superficiales colaterales (no varicosas)</label>
+              </div>
+
+              <div class="form-check">
+                <input type="checkbox" id="tvpPrev">
+                <label for="tvpPrev">Historia previa de TVP documentada</label>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="form-section">
+            <span class="section-label">Diagnóstico Diferencial (-2 puntos)</span>
+            <div class="check-group">
+              <div class="form-check">
+                <input type="checkbox" id="diagAlterna">
+                <label for="diagAlterna">Diagnóstico alternativo tan probable o más que la TVP</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- BOTONES DE ACCIÓN -->
+          <div class="actions">
+            <!-- Botón Volver solicitado -->
+            <a href="../Cardiovascular/Index.html" class="btn-secondary" style="text-decoration: none;">Volver</a>
+            <button type="submit" class="btn-calc">Calcular</button>
+            <button type="button" class="btn-secondary" id="btnCopy"><i class="fas fa-copy"></i> Copiar</button>
+            <button type="reset" class="btn-secondary" onclick="document.getElementById('result').innerText='Selecciona criterios y pulsa Calcular.'">Limpiar</button>
+          </div>
+
+          <!-- CAJA DE RESULTADOS -->
+          <div id="result" class="result-box">Selecciona criterios y pulsa Calcular.</div>
+
+          <!-- DETALLES ADICIONALES -->
+          <details>
+            <summary>Ver interpretación y manejo</summary>
+            <div class="details-content">
+              <p><strong>Clasificación tradicional (3 niveles):</strong></p>
+              <ul>
+                <li><strong>Alta (≥ 3 pts):</strong> Prevalencia TVP 75%.</li>
+                <li><strong>Moderada (1 - 2 pts):</strong> Prevalencia TVP 17%.</li>
+                <li><strong>Baja (≤ 0 pts):</strong> Prevalencia TVP 3%.</li>
+              </ul>
+              <p><strong>Clasificación simplificada (2 niveles - Recomendada):</strong></p>
+              <ul>
+                <li><strong>TVP Probable (≥ 2 pts):</strong> Solicitar Eco-Doppler de MMII.</li>
+                <li><strong>TVP Improbable (&lt; 2 pts):</strong> Solicitar Dímero-D. Si negativo, descarta TVP.</li>
+              </ul>
+            </div>
+          </details>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast">Resultado copiado al portapapeles</div>
+
+  <script src="../../js/main.js"></script>
+  <script>
+    (function() {
+        const $ = (id) => document.getElementById(id);
+
+        $('formWellsTVP').addEventListener('submit', (e) => {
+          e.preventDefault();
+          
+          let score = 0;
+          let components = [];
+
+          if ($('cancer').checked) { score += 1; components.push("Cáncer activo"); }
+          if ($('paralisis').checked) { score += 1; components.push("Parálisis/Inmovilización"); }
+          if ($('cama').checked) { score += 1; components.push("Encamamiento/Cirugía reciente"); }
+          if ($('dolorVenas').checked) { score += 1; components.push("Dolor trayecto venoso"); }
+          if ($('piernaHinchada').checked) { score += 1; components.push("Tumefacción pierna"); }
+          if ($('pantorrilla').checked) { score += 1; components.push("Aumento pantorrilla >3cm"); }
+          if ($('fovea').checked) { score += 1; components.push("Edema con fóvea"); }
+          if ($('venasColaterales').checked) { score += 1; components.push("Venas colaterales"); }
+          if ($('tvpPrev').checked) { score += 1; components.push("TVP previa"); }
+          
+          if ($('diagAlterna').checked) { score -= 2; components.push("Dx alternativo probable (-2)"); }
+
+          // Interpretación 3 niveles
+          let risk3 = "";
+          if (score >= 3) risk3 = "ALTA (75%)";
+          else if (score >= 1) risk3 = "MODERADA (17%)";
+          else risk3 = "BAJA (3%)";
+
+          // Interpretación 2 niveles
+          let risk2 = "";
+          let action = "";
+          if (score >= 2) {
+            risk2 = "TVP PROBABLE";
+            action = "Recomendado: Eco-Doppler venoso.";
+          } else {
+            risk2 = "TVP IMPROBABLE";
+            action = "Recomendado: Dímero-D. Si es negativo, excluye TVP.";
+          }
+
+          $('result').textContent = `PUNTUACIÓN WELLS (TVP): ${score} puntos\n\n` +
+                                    `PROBABILIDAD (3 niveles): ${risk3}\n` +
+                                    `CLASIFICACIÓN (2 niveles): ${risk2}\n\n` +
+                                    `Manejo sugerido: ${action}\n\n` +
+                                    `Criterios: ${components.length > 0 ? components.join(", ") : "Ninguno"}`;
+        });
+
+        // Copiar
+        $('btnCopy').addEventListener('click', () => {
+            const resultText = $('result').innerText;
+            if (!resultText || resultText.includes('Selecciona criterios')) return;
+            
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(resultText).then(showToast);
+            } else {
+                const textArea = document.createElement("textarea");
+                textArea.value = resultText;
+                textArea.style.position = "fixed";
+                document.body.appendChild(textArea);
+                textArea.select();
+                try { document.execCommand('copy'); showToast(); } catch (err) {}
+                document.body.removeChild(textArea);
+            }
+        });
+
+        function showToast() {
+            const toast = $('toast');
+            toast.className = "toast show";
+            setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+    })();
+  </script>
+</body>
+</html>

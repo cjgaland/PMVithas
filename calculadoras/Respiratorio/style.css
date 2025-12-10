@@ -1,0 +1,326 @@
+/* =========================================
+   ESTILOS ESPECÍFICOS - BLOQUE RESPIRATORIO
+   Color Temático: Verde Esmeralda / Bosque (#2e7d32)
+   ========================================= */
+
+/* Contenedor principal */
+.calc-container {
+    padding: 30px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.calc-card {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.calc-title {
+    color: var(--vithas-blue-dark);
+    font-weight: 700;
+    margin-bottom: 5px;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 15px;
+}
+
+.calc-subtitle {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 25px;
+}
+
+/* Formularios y Grupos */
+.form-section {
+    margin-bottom: 25px;
+    border-bottom: 1px dashed #eee;
+    padding-bottom: 15px;
+}
+
+.form-section:last-child {
+    border-bottom: none;
+}
+
+/* Etiquetas en COLOR TEMÁTICO */
+.section-label {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #2e7d32; /* Verde oscuro */
+    margin-bottom: 10px;
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Inputs y Selects */
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #333;
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #43a047; /* Foco temático (verde más claro) */
+    box-shadow: 0 0 0 3px rgba(67, 160, 71, 0.1);
+}
+
+.input-suffix {
+    margin-left: 10px;
+    color: #64748b;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+/* Radio Buttons y Checkboxes */
+.check-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-check {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.form-check:hover {
+    background-color: #e8f5e9; /* Fondo verde suave */
+    border-color: #a5d6a7;
+}
+
+.form-check input[type="radio"],
+.form-check input[type="checkbox"] {
+    margin-right: 12px;
+    accent-color: #2e7d32; /* Verde principal */
+    transform: scale(1.15);
+}
+
+/* Switches */
+.switch-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 15px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    background-color: #fff;
+    transition: background-color 0.2s;
+}
+
+.switch-group:hover {
+    background-color: #e8f5e9;
+    border-color: #a5d6a7;
+}
+
+.switch-label {
+    font-weight: 500;
+    color: #333;
+    flex: 1;
+    cursor: pointer;
+}
+
+.switch-toggle {
+    position: relative;
+    display: inline-block;
+    width: 46px;
+    height: 24px;
+}
+
+.switch-toggle input { opacity: 0; width: 0; height: 0; }
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #2e7d32;
+}
+
+input:checked + .slider:before {
+    transform: translateX(22px);
+}
+
+/* Botones de Acción */
+.actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.btn-calc {
+    background-color: var(--vithas-blue-dark);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+    flex: 1;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.btn-calc:hover {
+    background-color: var(--vithas-blue-light);
+}
+
+.btn-secondary {
+    background-color: #f1f5f9;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-secondary:hover {
+    background-color: #e2e8f0;
+    color: #334155;
+}
+
+/* Caja de Resultados */
+.result-box {
+    margin-top: 25px;
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); /* Gradiente verde */
+    border-left: 5px solid #2e7d32;
+    padding: 20px;
+    border-radius: 8px;
+    color: #1b5e20;
+    font-weight: 500;
+    white-space: pre-line;
+    line-height: 1.6;
+}
+
+/* Detalles */
+details {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    background: #fff;
+    border-radius: 8px;
+}
+
+details summary {
+    cursor: pointer;
+    color: #2e7d32;
+    font-weight: 600;
+    padding: 10px 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+details summary::before {
+    content: '+';
+    margin-right: 8px;
+    font-weight: bold;
+    display: inline-block;
+    width: 20px;
+    text-align: center;
+}
+
+details[open] summary::before {
+    content: '-';
+}
+
+.details-content {
+    background: #fafafa;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    color: #555;
+}
+
+.details-content ul {
+    padding-left: 20px;
+    margin: 10px 0;
+}
+
+/* TOAST (Notificación emergente) */
+.toast {
+    visibility: hidden;
+    min-width: 250px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 50px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1000;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    font-size: 0.9rem;
+    opacity: 0;
+    transition: opacity 0.3s, bottom 0.3s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.toast.show {
+    visibility: visible;
+    opacity: 1;
+    bottom: 50px;
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+    .calc-container { max-width: 1200px; }
+    .input-row { display: flex; gap: 20px; align-items: flex-end; }
+    .input-col { flex: 1; }
+    .check-group { flex-direction: row; flex-wrap: wrap; }
+    .form-check { flex: 1; min-width: 200px; justify-content: center; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+}

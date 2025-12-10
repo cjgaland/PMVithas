@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Glasgow-Blatchford - Vithas</title>
+  
+  <link rel="icon" type="image/png" href="../../Favicon-Vithas.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="style.css" />
+  
+  <style>
+    /* Toast */
+    .toast {
+      visibility: hidden; min-width: 250px; background-color: #333; color: #fff; text-align: center;
+      border-radius: 50px; padding: 16px; position: fixed; z-index: 1000; left: 50%; bottom: 30px;
+      transform: translateX(-50%); font-size: 0.9rem; opacity: 0; transition: opacity 0.3s, bottom 0.3s;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .toast.show { visibility: visible; opacity: 1; bottom: 50px; }
+
+    /* Ajustes responsivos para botones de opción */
+    @media (min-width: 768px) {
+      .calc-container { max-width: 1200px; }
+      .check-group {
+        flex-direction: row !important;
+        flex-wrap: wrap;
+      }
+      .form-check {
+        flex: 1;
+        justify-content: center;
+        text-align: center;
+        min-width: 150px; /* Ancho mínimo para que no se aplasten */
+      }
+    }
+
+    /* Estilo Interruptor (Switch) */
+    .switch-group {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 15px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      background-color: #fff;
+      transition: background-color 0.2s;
+    }
+    .switch-group:hover {
+      background-color: #fdfdfd;
+      border-color: var(--vithas-blue-light);
+    }
+    .switch-label {
+      font-weight: 500;
+      color: #333;
+      flex: 1;
+      cursor: pointer;
+    }
+    .switch-toggle {
+      position: relative;
+      display: inline-block;
+      width: 46px;
+      height: 24px;
+    }
+    .switch-toggle input { opacity: 0; width: 0; height: 0; }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 34px;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+    input:checked + .slider { background-color: #ff9800; }
+    input:checked + .slider:before { transform: translateX(22px); }
+
+    /* Toggle Sexo */
+    .toggle-container { display: flex; gap: 10px; margin-bottom: 15px; }
+    .toggle-btn {
+      flex: 1; padding: 10px; border: 1px solid #cbd5e1; background: #fff;
+      text-align: center; cursor: pointer; border-radius: 8px; font-weight: 500;
+      transition: all 0.2s;
+    }
+    .toggle-btn.active {
+      background: #e0f2fe; border-color: var(--vithas-blue-light);
+      color: var(--vithas-blue-dark); font-weight: 700;
+    }
+    .toggle-input { display: none; }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+    </div>
+    <nav class="nav-links">
+      <ul>
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        
+        <li class="nav-category">Práctica Clínica</li>
+        
+        <!-- Enlace para volver al menú general -->
+        <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Volver a Calculadoras</a></li>
+        
+        <!-- BLOQUE ACTUAL: Digestivo (ABIERTO) -->
+        <li class="has-submenu open">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-utensils"></i> Digestivo
+            </div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="index.html">Menú Digestivo</a></li>
+            <li><a href="child-pugh.html"><i class="fas fa-wine-glass"></i> Child-Pugh</a></li>
+            <li><a href="meld.html"><i class="fas fa-notes-medical"></i> MELD</a></li>
+            <!-- Elemento Activo -->
+            <li><a href="glasgow-blatchford.html" class="submenu-main-link active"><i class="fas fa-file-medical-alt"></i> Glasgow-Blatchford</a></li>
+            <li><a href="ranson.html"><i class="fas fa-list-ol"></i> Ranson</a></li>
+            <li><a href="bisap.html"><i class="fas fa-procedures"></i> BISAP</a></li>
+          </ul>
+        </li>
+
+        <!-- Otros Bloques (Cerrados) -->
+        <li class="has-submenu">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;"><i class="fas fa-heartbeat"></i> Cardiovascular</div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="../Cardiovascular/index.html">Menú Cardiovascular</a></li>
+          </ul>
+        </li>
+
+        <li class="has-submenu">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;"><i class="fas fa-ruler-combined"></i> Antropometría</div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="../Antropometricos/index.html">Menú Antropometría</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- CONTENIDO -->
+  <div class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <h2><i class="fas fa-utensils" id="menuToggle" style="margin-right: 10px;"></i>Calculadoras Digestivas</h2>
+      </div>
+      <div class="header-right">
+        <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+      </div>
+    </header>
+
+    <div class="calc-container">
+      <div class="calc-card">
+        <h1 class="calc-title">Glasgow-Blatchford Score (GBS)</h1>
+        <p class="calc-subtitle">Evaluación de riesgo en hemorragia digestiva alta (HDA) para considerar el alta precoz.</p>
+
+        <form id="formGBS">
+          
+          <!-- Urea -->
+          <div class="form-section">
+            <label class="mb-2 d-block fw-bold text-secondary"><strong>Urea (BUN) en sangre</strong></label>
+            <div class="check-group mb-4">
+              <div class="form-check">
+                <input type="radio" name="urea" id="urea0" value="0" required>
+                <label for="urea0">&lt; 18.2 mg/dL <br><small>(0 pts)</small></label>
+              </div>
+              <div class="form-check">
+                <input type="radio" name="urea" id="urea2" value="2">
+                <label for="urea2">18.2 - 22.3 mg/dL <br><small>(2 pts)</small></label>
+              </div>
+              <div class="form-check">
+                <input type="radio" name="urea" id="urea3" value="3">
+                <label for="urea3">22.4 - 27.9 mg/dL <br><small>(3 pts)</small></label>
+              </div>
+              <div class="form-check">
+                <input type="radio" name="urea" id="urea4" value="4">
+                <label for="urea4">28 - 69.9 mg/dL <br><small>(4 pts)</small></label>
+              </div>
+              <div class="form-check">
+                <input type="radio" name="urea" id="urea6" value="6">
+                <label for="urea6">≥ 70 mg/dL <br><small>(6 pts)</small></label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sexo y Hemoglobina -->
+          <div class="form-section">
+            <label class="mb-2 d-block fw-bold text-secondary"><strong>Sexo y Hemoglobina</strong></label>
+            
+            <!-- Selector Sexo -->
+            <div class="toggle-container">
+              <label class="toggle-btn active" id="btnMale">
+                <input type="radio" name="sexo" value="M" checked class="toggle-input"> Masculino
+              </label>
+              <label class="toggle-btn" id="btnFemale">
+                <input type="radio" name="sexo" value="F" class="toggle-input"> Femenino
+              </label>
+            </div>
+
+            <!-- Opciones Hemoglobina Hombre -->
+            <div id="hbMale" class="check-group mb-4">
+              <div class="form-check">
+                <input type="radio" name="hbM" id="hbM0" value="0">
+                <label for="hbM0">≥ 13.0 g/dL <br><small>(0 pts)</small></label>
+              </div>
+              <div class="form-check">
+                <input type="radio" name="hbM" id="hbM1" value="1">
+                <label for="hbM1">12.0 - 12.9 g/dL <br><small>(1 pt)</small></label>
+              </div>
+              <div class="form-check">
+                <input type="radio" name="hbM" id="hbM3" value="3">
+                <label for="hbM3">10.0 - 11.9 g/dL <br><small>(3 pts)</small></label>
+              </div>
+              <div class="form-check">
+                <input type="radio" name="hbM" id="hbM6" value="6">
+                <label for="hbM6">&lt; 10.0 g/dL <br><small>(6 pts)</small></label>
+              </div>
+            </div>
+
+            <!-- Opciones Hemoglobina Mujer -->
+            <div id="hbFemale" class="check-group mb-4" style="display:none;">
+              <div class="form-check">
+                <input type="radio" name="hbF" id="hbF0" value="0">
+                <label for="hbF0">≥ 12.0 g/dL <br><small>(0 pts)</small></label>
+              </div>
+              <div class="form-check">
+                <input type="radio" name="hbF" id="hbF1" value="1">
+                <label for="hbF1">10.0 - 11.9 g/dL <br><small>(1 pt)</small></label>
+              </div>
+              <div class="form-check">
+                <input type="radio" name="hbF" id="hbF6" value="6">
+                <label for="hbF6">&lt; 10.0 g/dL <br><small>(6 pts)</small></label>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAS -->
+          <div class="form-section">
+            <label class="mb-2 d-block fw-bold text-secondary"><strong>Presión Arterial Sistólica (TAS)</strong></label>
+            <div class="check-group mb-4">
+              <div class="form-check">
+                <input type="radio" name="tas" id="tas0" value="0" required>
+                <label for="tas0">≥ 110 mmHg <br><small>(0 pts)</small></label>
+              </div>
+              <div class="form-check">
+                <input type="radio" name="tas" id="tas1" value="1">
+                <label for="tas1">100 - 109 mmHg <br><small>(1 pt)</small></label>
+              </div>
+              <div class="form-check">
+                <input type="radio" name="tas" id="tas2" value="2">
+                <label for="tas2">90 - 99 mmHg <br><small>(2 pts)</small></label>
+              </div>
+              <div class="form-check">
+                <input type="radio" name="tas" id="tas3" value="3">
+                <label for="tas3">&lt; 90 mmHg <br><small>(3 pts)</small></label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Otros Marcadores -->
+          <div class="form-section">
+            <span class="section-label">Otros Marcadores de Riesgo</span>
+            
+            <div class="switch-group">
+              <label for="fc" class="switch-label">Frecuencia Cardíaca ≥ 100 lpm (1 pt)</label>
+              <label class="switch-toggle">
+                <input type="checkbox" id="fc">
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div class="switch-group">
+              <label for="melenas" class="switch-label">Presentación con Melenas (1 pt)</label>
+              <label class="switch-toggle">
+                <input type="checkbox" id="melenas">
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div class="switch-group">
+              <label for="sincope" class="switch-label">Presentación con Síncope (2 pts)</label>
+              <label class="switch-toggle">
+                <input type="checkbox" id="sincope">
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div class="switch-group">
+              <label for="hepatopatia" class="switch-label">Enfermedad Hepática (2 pts)</label>
+              <label class="switch-toggle">
+                <input type="checkbox" id="hepatopatia">
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div class="switch-group">
+              <label for="icc" class="switch-label">Insuficiencia Cardíaca (2 pts)</label>
+              <label class="switch-toggle">
+                <input type="checkbox" id="icc">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- BOTONES DE ACCIÓN -->
+          <div class="actions">
+            <a href="index.html" class="btn-secondary" style="text-decoration: none;">Volver</a>
+            <button type="submit" class="btn-calc">Calcular</button>
+            <button type="button" class="btn-secondary" id="btnCopy"><i class="fas fa-copy"></i> Copiar</button>
+            <button type="reset" class="btn-secondary" onclick="document.getElementById('result').innerText='Introduce todos los datos y pulsa Calcular.'">Limpiar</button>
+          </div>
+
+          <!-- CAJA DE RESULTADOS -->
+          <div id="result" class="result-box">Introduce todos los datos y pulsa Calcular.</div>
+
+          <!-- DETALLES ADICIONALES -->
+          <details>
+            <summary>Ver interpretación y manejo</summary>
+            <div class="details-content">
+              <p><strong>Interpretación del Score GBS:</strong></p>
+              <ul>
+                <li><strong>0 puntos:</strong> Riesgo Muy Bajo. Se puede considerar el alta precoz sin endoscopia hospitalaria inmediata (seguimiento ambulatorio).</li>
+                <li><strong>1 - 5 puntos:</strong> Riesgo Bajo - Intermedio.</li>
+                <li><strong>≥ 6 puntos:</strong> Riesgo Alto. Requiere ingreso y endoscopia urgente.</li>
+              </ul>
+              <p class="text-muted small mt-2">La escala predice la necesidad de intervención (transfusión, endoscopia, cirugía) o mortalidad.</p>
+            </div>
+          </details>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast">Resultado copiado al portapapeles</div>
+
+  <script src="../../js/main.js"></script>
+  <script>
+    (function() {
+        const $ = (id) => document.getElementById(id);
+
+        // --- GESTIÓN DINÁMICA DE HEMOGLOBINA SEGÚN SEXO ---
+        const updateHbOptions = () => {
+            const sexo = document.querySelector('input[name="sexo"]:checked').value;
+            if (sexo === 'M') {
+                $('hbMale').style.display = 'flex'; // 'flex' porque tiene clase check-group
+                $('hbFemale').style.display = 'none';
+                $('btnMale').classList.add('active');
+                $('btnFemale').classList.remove('active');
+                // Limpiar selección femenina
+                document.querySelectorAll('input[name="hbF"]').forEach(r => r.checked = false);
+            } else {
+                $('hbMale').style.display = 'none';
+                $('hbFemale').style.display = 'flex';
+                $('btnFemale').classList.add('active');
+                $('btnMale').classList.remove('active');
+                // Limpiar selección masculina
+                document.querySelectorAll('input[name="hbM"]').forEach(r => r.checked = false);
+            }
+        };
+
+        // Escuchar cambios en los botones de sexo
+        document.querySelectorAll('input[name="sexo"]').forEach(radio => {
+            radio.addEventListener('change', updateHbOptions);
+        });
+
+        // Inicializar estado (por si acaso el navegador recuerda el estado)
+        updateHbOptions();
+
+        // --- CÁLCULO ---
+        $('formGBS').addEventListener('submit', (e) => {
+          e.preventDefault();
+          
+          let puntos = 0;
+          
+          // 1. Urea
+          const ureaEl = document.querySelector('input[name="urea"]:checked');
+          if (!ureaEl) { alert("Selecciona nivel de Urea"); return; }
+          puntos += parseInt(ureaEl.value);
+
+          // 2. Hemoglobina
+          const sexo = document.querySelector('input[name="sexo"]:checked').value;
+          let hbPuntos = 0;
+          let hbSeleccionado = false;
+
+          if (sexo === 'M') {
+             const hbEl = document.querySelector('input[name="hbM"]:checked');
+             if (hbEl) { hbPuntos = parseInt(hbEl.value); hbSeleccionado = true; }
+          } else {
+             const hbEl = document.querySelector('input[name="hbF"]:checked');
+             if (hbEl) { hbPuntos = parseInt(hbEl.value); hbSeleccionado = true; }
+          }
+          
+          if (!hbSeleccionado) { alert("Selecciona nivel de Hemoglobina"); return; }
+          puntos += hbPuntos;
+
+          // 3. TAS
+          const tasEl = document.querySelector('input[name="tas"]:checked');
+          if (!tasEl) { alert("Selecciona nivel de TAS"); return; }
+          puntos += parseInt(tasEl.value);
+
+          // 4. Otros marcadores
+          if ($('fc').checked) puntos += 1;
+          if ($('melenas').checked) puntos += 1;
+          if ($('sincope').checked) puntos += 2;
+          if ($('hepatopatia').checked) puntos += 2;
+          if ($('icc').checked) puntos += 2;
+
+          // Interpretación
+          let riesgo = "";
+          let manejo = "";
+
+          if (puntos === 0) {
+              riesgo = "MUY BAJO";
+              manejo = "Bajo riesgo de necesidad de intervención o muerte. Considerar alta precoz.";
+          } else if (puntos <= 5) {
+              riesgo = "BAJO - INTERMEDIO";
+              manejo = "Ingreso hospitalario y valoración endoscópica.";
+          } else {
+              riesgo = "ALTO";
+              manejo = "Ingreso, estabilización y endoscopia urgente. Alto riesgo de intervención.";
+          }
+
+          // Mostrar resultado
+          $('result').textContent = `GLASGOW-BLATCHFORD SCORE: ${puntos} puntos\n\n` +
+                                    `RIESGO: ${riesgo}\n` +
+                                    `Recomendación: ${manejo}\n\n` +
+                                    `Desglose:\n` +
+                                    `• Urea: ${ureaEl.nextElementSibling.innerText.split('(')[0].trim()}\n` +
+                                    `• Hb: ${hbPuntos} pts\n` +
+                                    `• TAS: ${tasEl.nextElementSibling.innerText.split('(')[0].trim()}`;
+        });
+
+        // --- COPIAR ---
+        $('btnCopy').addEventListener('click', () => {
+            const resultText = $('result').innerText;
+            if (!resultText || resultText.includes('Introduce todos los datos')) return;
+            
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(resultText).then(showToast);
+            } else {
+                const textArea = document.createElement("textarea");
+                textArea.value = resultText;
+                textArea.style.position = "fixed";
+                document.body.appendChild(textArea);
+                textArea.select();
+                try { document.execCommand('copy'); showToast(); } catch (err) {}
+                document.body.removeChild(textArea);
+            }
+        });
+
+        function showToast() {
+            const toast = $('toast');
+            toast.className = "toast show";
+            setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+    })();
+  </script>
+</body>
+</html>

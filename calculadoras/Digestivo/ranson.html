@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Criterios de Ranson - Vithas</title>
+  
+  <link rel="icon" type="image/png" href="../../Favicon-Vithas.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="style.css" />
+  
+  <style>
+    /* Toast */
+    .toast {
+      visibility: hidden; min-width: 250px; background-color: #333; color: #fff; text-align: center;
+      border-radius: 50px; padding: 16px; position: fixed; z-index: 1000; left: 50%; bottom: 30px;
+      transform: translateX(-50%); font-size: 0.9rem; opacity: 0; transition: opacity 0.3s, bottom 0.3s;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .toast.show { visibility: visible; opacity: 1; bottom: 50px; }
+
+    /* Estilo Interruptor (Switch) Moderno */
+    .switch-group {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 15px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      background-color: #fff;
+      transition: background-color 0.2s;
+    }
+    .switch-group:hover {
+      background-color: #fdfdfd;
+      border-color: var(--vithas-blue-light);
+    }
+    .switch-label {
+      font-weight: 500;
+      color: #333;
+      flex: 1;
+      cursor: pointer;
+    }
+    .switch-toggle {
+      position: relative;
+      display: inline-block;
+      width: 46px;
+      height: 24px;
+    }
+    .switch-toggle input { opacity: 0; width: 0; height: 0; }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 34px;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+    input:checked + .slider { background-color: #ff9800; }
+    input:checked + .slider:before { transform: translateX(22px); }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+    </div>
+    <nav class="nav-links">
+      <ul>
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        
+        <li class="nav-category">Práctica Clínica</li>
+        
+        <!-- Enlace para volver al menú general -->
+        <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Volver a Calculadoras</a></li>
+        
+        <!-- BLOQUE ACTUAL: Digestivo (ABIERTO) -->
+        <li class="has-submenu open">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-utensils"></i> Digestivo
+            </div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="index.html">Menú Digestivo</a></li>
+            <li><a href="child-pugh.html"><i class="fas fa-wine-glass"></i> Child-Pugh</a></li>
+            <li><a href="meld.html"><i class="fas fa-notes-medical"></i> MELD</a></li>
+            <li><a href="glasgow-blatchford.html"><i class="fas fa-file-medical-alt"></i> Glasgow-Blatchford</a></li>
+            <!-- Elemento Activo -->
+            <li><a href="ranson.html" class="submenu-main-link active"><i class="fas fa-list-ol"></i> Ranson</a></li>
+            <li><a href="bisap.html"><i class="fas fa-procedures"></i> BISAP</a></li>
+          </ul>
+        </li>
+
+        <!-- Otros Bloques (Cerrados) -->
+        <li class="has-submenu">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;"><i class="fas fa-heartbeat"></i> Cardiovascular</div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="../Cardiovascular/index.html">Menú Cardiovascular</a></li>
+          </ul>
+        </li>
+
+        <li class="has-submenu">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;"><i class="fas fa-ruler-combined"></i> Antropometría</div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="../Antropometricos/index.html">Menú Antropometría</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- CONTENIDO -->
+  <div class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <h2><i class="fas fa-utensils" id="menuToggle" style="margin-right: 10px;"></i>Calculadoras Digestivas</h2>
+      </div>
+      <div class="header-right">
+        <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+      </div>
+    </header>
+
+    <div class="calc-container">
+      <div class="calc-card">
+        <h1 class="calc-title">Criterios de Ranson</h1>
+        <p class="calc-subtitle">Evaluación pronóstica de mortalidad en pancreatitis aguda al ingreso y a las 48 horas.</p>
+
+        <form id="formRanson">
+          
+          <!-- Criterios al Ingreso -->
+          <div class="form-section">
+            <span class="section-label">Al Ingreso (0 horas)</span>
+            
+            <div class="switch-group">
+              <!-- CORREGIDO: > por &gt; -->
+              <label for="edad" class="switch-label">Edad &gt; 55 años</label>
+              <label class="switch-toggle">
+                <input type="checkbox" id="edad">
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div class="switch-group">
+              <label for="leucocitos" class="switch-label">Leucocitos &gt; 16,000/mm³</label>
+              <label class="switch-toggle">
+                <input type="checkbox" id="leucocitos">
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div class="switch-group">
+              <label for="glucosa" class="switch-label">Glucosa &gt; 200 mg/dL</label>
+              <label class="switch-toggle">
+                <input type="checkbox" id="glucosa">
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div class="switch-group">
+              <label for="ldh" class="switch-label">LDH &gt; 350 UI/L</label>
+              <label class="switch-toggle">
+                <input type="checkbox" id="ldh">
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div class="switch-group">
+              <label for="ast" class="switch-label">AST (GOT) &gt; 250 UI/L</label>
+              <label class="switch-toggle">
+                <input type="checkbox" id="ast">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Criterios a las 48 horas -->
+          <div class="form-section">
+            <span class="section-label">A las 48 horas</span>
+            
+            <div class="switch-group">
+              <label for="hto" class="switch-label">Caída de hematocrito &gt; 10%</label>
+              <label class="switch-toggle">
+                <input type="checkbox" id="hto">
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div class="switch-group">
+              <label for="bun" class="switch-label">Aumento de BUN &gt; 5 mg/dL</label>
+              <label class="switch-toggle">
+                <input type="checkbox" id="bun">
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div class="switch-group">
+              <!-- CORREGIDO: < por &lt; -->
+              <label for="calcio" class="switch-label">Calcio sérico &lt; 8 mg/dL</label>
+              <label class="switch-toggle">
+                <input type="checkbox" id="calcio">
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div class="switch-group">
+              <label for="pao2" class="switch-label">PaO₂ &lt; 60 mmHg</label>
+              <label class="switch-toggle">
+                <input type="checkbox" id="pao2">
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div class="switch-group">
+              <label for="base" class="switch-label">Déficit de bases &gt; 4 mEq/L</label>
+              <label class="switch-toggle">
+                <input type="checkbox" id="base">
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div class="switch-group">
+              <label for="fluidos" class="switch-label">Secuestro de fluidos &gt; 6 L</label>
+              <label class="switch-toggle">
+                <input type="checkbox" id="fluidos">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- BOTONES DE ACCIÓN -->
+          <div class="actions">
+            <a href="index.html" class="btn-secondary" style="text-decoration: none;">Volver</a>
+            <button type="submit" class="btn-calc">Calcular</button>
+            <button type="button" class="btn-secondary" id="btnCopy"><i class="fas fa-copy"></i> Copiar</button>
+            <button type="reset" class="btn-secondary" onclick="document.getElementById('result').innerText='Marca los criterios presentes y pulsa Calcular.'">Limpiar</button>
+          </div>
+
+          <!-- CAJA DE RESULTADOS -->
+          <div id="result" class="result-box">Marca los criterios presentes y pulsa Calcular.</div>
+
+          <!-- DETALLES ADICIONALES -->
+          <details>
+            <summary>Ver interpretación y mortalidad</summary>
+            <div class="details-content">
+              <table class="table-scale">
+                <thead>
+                  <tr><th>Puntuación</th><th>Gravedad</th><th>Mortalidad</th></tr>
+                </thead>
+                <tbody>
+                  <!-- CORREGIDO: < y > por &lt; y &gt; -->
+                  <tr><td>0 - 2</td><td>Leve</td><td>&lt; 1%</td></tr>
+                  <tr><td>3 - 4</td><td>Moderada</td><td>~15%</td></tr>
+                  <tr><td>5 - 6</td><td>Grave</td><td>~40%</td></tr>
+                  <tr><td>&gt; 6</td><td>Muy Grave</td><td>~100%</td></tr>
+                </tbody>
+              </table>
+              <p class="text-muted small mt-2">Score ≥ 3 indica pancreatitis grave y suele requerir ingreso en UCI.</p>
+            </div>
+          </details>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast">Resultado copiado al portapapeles</div>
+
+  <script src="../../js/main.js"></script>
+  <script>
+    (function() {
+        const $ = (id) => document.getElementById(id);
+
+        $('formRanson').addEventListener('submit', (e) => {
+          e.preventDefault();
+          
+          let score = 0;
+          let ingreso = 0;
+          let horas48 = 0;
+          let components = [];
+
+          // Al Ingreso
+          if ($('edad').checked) { score++; ingreso++; components.push("Edad > 55"); }
+          if ($('leucocitos').checked) { score++; ingreso++; components.push("Leucocitos > 16k"); }
+          if ($('glucosa').checked) { score++; ingreso++; components.push("Glucosa > 200"); }
+          if ($('ldh').checked) { score++; ingreso++; components.push("LDH > 350"); }
+          if ($('ast').checked) { score++; ingreso++; components.push("AST > 250"); }
+
+          // A las 48h
+          if ($('hto').checked) { score++; horas48++; components.push("Hto caída > 10%"); }
+          if ($('bun').checked) { score++; horas48++; components.push("BUN aumento > 5"); }
+          if ($('calcio').checked) { score++; horas48++; components.push("Calcio < 8"); }
+          if ($('pao2').checked) { score++; horas48++; components.push("PaO2 < 60"); }
+          if ($('base').checked) { score++; horas48++; components.push("Déficit bases > 4"); }
+          if ($('fluidos').checked) { score++; horas48++; components.push("Fluidos > 6L"); }
+
+          // Interpretación
+          let gravedad = "";
+          let mort = "";
+
+          if (score <= 2) {
+              gravedad = "LEVE";
+              mort = "< 1%";
+          } else if (score <= 4) {
+              gravedad = "MODERADA";
+              mort = "~15%";
+          } else if (score <= 6) {
+              gravedad = "GRAVE";
+              mort = "~40%";
+          } else {
+              gravedad = "MUY GRAVE";
+              mort = "~100%";
+          }
+
+          $('result').textContent = `CRITERIOS DE RANSON: ${score} puntos\n\n` +
+                                    `GRAVEDAD: ${gravedad}\n` +
+                                    `Mortalidad estimada: ${mort}\n\n` +
+                                    `Desglose:\n` +
+                                    `• Al Ingreso: ${ingreso}/5\n` +
+                                    `• A las 48h: ${horas48}/6\n\n` +
+                                    `Criterios presentes: ${components.length > 0 ? components.join(", ") : "Ninguno"}`;
+        });
+
+        // Copiar
+        $('btnCopy').addEventListener('click', () => {
+            const resultText = $('result').innerText;
+            if (!resultText || resultText.includes('Marca los criterios')) return;
+            
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(resultText).then(showToast);
+            } else {
+                const textArea = document.createElement("textarea");
+                textArea.value = resultText;
+                textArea.style.position = "fixed";
+                document.body.appendChild(textArea);
+                textArea.select();
+                try { document.execCommand('copy'); showToast(); } catch (err) {}
+                document.body.removeChild(textArea);
+            }
+        });
+
+        function showToast() {
+            const toast = $('toast');
+            toast.className = "toast show";
+            setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+    })();
+  </script>
+</body>
+</html>

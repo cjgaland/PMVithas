@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>IMC - Vithas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="../../Favicon-Vithas.png">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .toast {
+      visibility: hidden; min-width: 250px; background-color: #333; color: #fff; text-align: center;
+      border-radius: 50px; padding: 16px; position: fixed; z-index: 1000; left: 50%; bottom: 30px;
+      transform: translateX(-50%); font-size: 0.9rem; opacity: 0; transition: opacity 0.3s, bottom 0.3s;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .toast.show { visibility: visible; opacity: 1; bottom: 50px; }
+  </style>
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header"><img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo"></div>
+    <nav class="nav-links">
+      <ul>
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        <li class="nav-category">Práctica Clínica</li>
+        <li><a href="../index.html" class="active"><i class="fas fa-calculator"></i> Calculadoras</a></li>
+        <li><a href="index.html" style="padding-left: 40px; font-size: 0.9em;">Antropometría</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <div class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <h2><i class="fas fa-ruler-combined"></i>
+        Calculadoras Antropométricas</h2>
+      </div>
+      <div class="header-right">
+        <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+      </div>
+    </header>
+
+    <div class="calc-container">
+      <div class="calc-card">
+        <h1 class="calc-title">Índice de Masa Corporal (IMC)</h1>
+        <p class="calc-subtitle">Evaluación del estado nutricional (OMS). IMC = peso (kg) ÷ [altura (m)]²</p>
+
+        <form id="formIMC">
+          <div class="input-group">
+            <label for="peso">Peso</label>
+            <div class="input-wrapper">
+              <input id="peso" class="form-control" type="number" step="0.1" min="0" placeholder="Ej. 70.5" required>
+              <select id="pesoUnit" class="form-control unit-select"><option value="kg">kg</option><option value="lb">lb</option></select>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="altura">Altura</label>
+            <div class="input-wrapper">
+              <input id="altura" class="form-control" type="number" step="0.01" min="0" placeholder="Ej. 1.75" required>
+              <select id="alturaUnit" class="form-control unit-select"><option value="m">m</option><option value="cm">cm</option><option value="in">in</option></select>
+            </div>
+          </div>
+
+          <details>
+            <summary>Ver clasificación OMS</summary>
+            <div class="details-content">
+              <ul>
+                <li><strong>&lt; 18.5:</strong> Bajo peso</li>
+                <li><strong>18.5 - 24.9:</strong> Normopeso</li>
+                <li><strong>25 - 29.9:</strong> Sobrepeso</li>
+                <li><strong>30 - 34.9:</strong> Obesidad grado I</li>
+                <li><strong>35 - 39.9:</strong> Obesidad grado II</li>
+                <li><strong>≥ 40:</strong> Obesidad grado III</li>
+              </ul>
+            </div>
+          </details>
+
+          <div class="actions">
+            <button type="button" class="btn-secondary" onclick="window.location.href='index.html'">Volver</button>
+            <button type="submit" class="btn-calc">Calcular</button>
+            <button type="button" class="btn-secondary" id="btnCopy"><i class="fas fa-copy"></i> Copiar</button>
+            <button type="reset" class="btn-secondary" onclick="document.getElementById('result').innerText='Introduce datos y pulsa calcular.'">Limpiar</button>
+          </div>
+
+          <div id="result" class="result-box">Introduce datos y pulsa calcular.</div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast">Resultado copiado al portapapeles</div>
+
+  <script src="../../js/main.js"></script>
+  <script>
+    (function() {
+        const $ = (id) => document.getElementById(id);
+        const roundVal = (value, decimals = 2) => Math.round((value + Number.EPSILON) * (10 ** decimals)) / (10 ** decimals);
+        const toKg = (value, unit) => unit === 'lb' ? value * 0.45359237 : value;
+        const toM = (value, unit) => unit === 'cm' ? value / 100 : (unit === 'in' ? value * 0.0254 : value);
+
+        function clasificacionOMS(imc) {
+          if (imc < 18.5) return 'Bajo peso';
+          if (imc < 25) return 'Normopeso';
+          if (imc < 30) return 'Sobrepeso';
+          if (imc < 35) return 'Obesidad grado I';
+          if (imc < 40) return 'Obesidad grado II';
+          return 'Obesidad grado III (mórbida)';
+        }
+
+        $('formIMC').addEventListener('submit', (e) => {
+          e.preventDefault();
+          const peso = toKg(parseFloat($('peso').value), $('pesoUnit').value);
+          const altura = toM(parseFloat($('altura').value), $('alturaUnit').value);
+
+          if (!(peso > 0) || !(altura > 0)) {
+            $('result').textContent = 'Por favor, revisa los valores.';
+            return;
+          }
+
+          const imc = peso / (altura * altura);
+          $('result').textContent = `IMC = ${roundVal(imc, 2)} kg/m²\nClasificación: ${clasificacionOMS(imc)}`;
+        });
+
+        $('btnCopy').addEventListener('click', () => {
+            const resultText = $('result').innerText;
+            if (!resultText || resultText.includes('Introduce datos')) return;
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(resultText).then(showToast);
+            } else {
+                const textArea = document.createElement("textarea");
+                textArea.value = resultText;
+                textArea.style.position = "fixed";
+                document.body.appendChild(textArea);
+                textArea.select();
+                try { document.execCommand('copy'); showToast(); } catch (err) {}
+                document.body.removeChild(textArea);
+            }
+        });
+
+        function showToast() {
+            const toast = $('toast');
+            toast.className = "toast show";
+            setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+    })();
+  </script>
+</body>
+</html>

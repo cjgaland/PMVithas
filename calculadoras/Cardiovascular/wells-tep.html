@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wells TEP - Vithas</title>
+  
+  <link rel="icon" type="image/png" href="../../Favicon-Vithas.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="style.css">
+  
+  <style>
+    .toast {
+      visibility: hidden; min-width: 250px; background-color: #333; color: #fff; text-align: center;
+      border-radius: 50px; padding: 16px; position: fixed; z-index: 1000; left: 50%; bottom: 30px;
+      transform: translateX(-50%); font-size: 0.9rem; opacity: 0; transition: opacity 0.3s, bottom 0.3s;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .toast.show { visibility: visible; opacity: 1; bottom: 50px; }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+    </div>
+    <nav class="nav-links">
+      <ul>
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        
+        <li class="nav-category">Práctica Clínica</li>
+        
+        <!-- Enlace para volver al menú general -->
+        <li><a href="../Cardiovascular/Index.html"><i class="fas fa-arrow-left"></i> Volver a Calculadoras</a></li>
+        
+        <!-- BLOQUE ACTUAL: Cardiovascular (ABIERTO) -->
+        <li class="has-submenu open">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-heartbeat"></i> Cardiovascular
+            </div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="index.html">Menú Cardiovascular</a></li>
+            <li><a href="cha2ds2-vasc.html"><i class="fas fa-heart"></i> CHA₂DS₂-VASc</a></li>
+            <li><a href="has-bled.html"><i class="fas fa-tint"></i> HAS-BLED</a></li>
+            <li><a href="grace.html"><i class="fas fa-chart-line"></i> Escala GRACE</a></li>
+            <li><a href="timi-risk-index.html"><i class="fas fa-notes-medical"></i> TIMI Risk Index</a></li>
+            <li><a href="qtc.html"><i class="fas fa-wave-square"></i> QT Corregido</a></li>
+            <!-- Elemento Activo -->
+            <li><a href="wells-tep.html" class="submenu-main-link active"><i class="fas fa-lungs"></i> Wells TEP</a></li>
+            <li><a href="wells-tvp.html"><i class="fas fa-walking"></i> Wells TVP</a></li>
+          </ul>
+        </li>
+
+        <!-- BLOQUE HERMANO: Antropometría -->
+        <li class="has-submenu">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;"><i class="fas fa-ruler-combined"></i> Antropometría</div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="../Antropometricos/index.html">Menú Antropometría</a></li>
+            <li><a href="../Antropometricos/imc.html"><i class="fas fa-weight"></i> IMC</a></li>
+            <li><a href="../Antropometricos/bsa-adultos.html"><i class="fas fa-male"></i> BSA Adultos</a></li>
+            <li><a href="../Antropometricos/bsa-ninos.html"><i class="fas fa-child"></i> BSA Niños</a></li>
+            <li><a href="../Antropometricos/agua-corporal.html"><i class="fas fa-tint"></i> Agua Corporal</a></li>
+            <li><a href="../Antropometricos/ceb-basal.html"><i class="fas fa-fire"></i> Gasto Basal (BMR)</a></li>
+            <li><a href="../Antropometricos/requerimientos-caloricos.html"><i class="fas fa-utensils"></i> Requerimientos</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- CONTENIDO -->
+  <div class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <h2><i class="fas fa-heartbeat" style="margin-right: 10px;"></i>Calculadoras Cardiovasculares</h2>
+      </div>
+      <div class="header-right">
+        <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+      </div>
+    </header>
+
+    <div class="calc-container">
+      <div class="calc-card">
+        <h1 class="calc-title">Escala de Wells (TEP)</h1>
+        <p class="calc-subtitle">Probabilidad clínica pre-test para Tromboembolismo Pulmonar (TEP).</p>
+
+        <form id="formWellsTEP">
+          
+          <div class="form-section">
+            <span class="section-label">Criterios Clínicos</span>
+            <div class="check-group">
+              
+              <div class="form-check">
+                <input type="checkbox" id="signosTVP">
+                <label for="signosTVP">Signos clínicos y síntomas de TVP (3 puntos)</label>
+              </div>
+
+              <div class="form-check">
+                <input type="checkbox" id="dxMenosProb">
+                <label for="dxMenosProb">Diagnóstico alternativo menos probable que TEP (3 puntos)</label>
+              </div>
+
+              <div class="form-check">
+                <input type="checkbox" id="fc">
+                <label for="fc">Frecuencia Cardiaca &gt; 100 lpm (1.5 puntos)</label>
+              </div>
+
+              <div class="form-check">
+                <input type="checkbox" id="inmovCir">
+                <label for="inmovCir">Inmovilización &gt; 3 días o cirugía en las últimas 4 semanas (1.5 puntos)</label>
+              </div>
+
+              <div class="form-check">
+                <input type="checkbox" id="prevTEV">
+                <label for="prevTEV">TEP o TVP previa (1.5 puntos)</label>
+              </div>
+
+              <div class="form-check">
+                <input type="checkbox" id="hemoptisis">
+                <label for="hemoptisis">Hemoptisis (1 punto)</label>
+              </div>
+
+              <div class="form-check">
+                <input type="checkbox" id="cancer">
+                <label for="cancer">Cáncer activo (tratamiento en últimos 6 meses o paliativo) (1 punto)</label>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- BOTONES DE ACCIÓN -->
+          <div class="actions">
+            <!-- Botón Volver -->
+            <a href="../Cardiovascular/Index.html" class="btn-secondary" style="text-decoration: none;">Volver</a>
+            <button type="submit" class="btn-calc">Calcular</button>
+            <button type="button" class="btn-secondary" id="btnCopy"><i class="fas fa-copy"></i> Copiar</button>
+            <button type="reset" class="btn-secondary" onclick="document.getElementById('result').innerText='Selecciona criterios y pulsa Calcular.'">Limpiar</button>
+          </div>
+
+          <!-- CAJA DE RESULTADOS -->
+          <div id="result" class="result-box">Selecciona criterios y pulsa Calcular.</div>
+
+          <!-- DETALLES ADICIONALES -->
+          <details>
+            <summary>Ver interpretación y manejo</summary>
+            <div class="details-content">
+              <p><strong>Clasificación tradicional (3 niveles):</strong></p>
+              <ul>
+                <li><strong>Baja (&lt; 2 pts):</strong> Riesgo bajo.</li>
+                <li><strong>Moderada (2 - 6 pts):</strong> Riesgo intermedio.</li>
+                <li><strong>Alta (&gt; 6 pts):</strong> Riesgo alto.</li>
+              </ul>
+              <p><strong>Clasificación simplificada (2 niveles - Wells probable/improbable):</strong></p>
+              <ul>
+                <li><strong>TEP Improbable (≤ 4 pts):</strong> Indicar Dímero-D. Si es negativo, se descarta TEP.</li>
+                <li><strong>TEP Probable (&gt; 4 pts):</strong> Indicar Angio-TAC directamente.</li>
+              </ul>
+            </div>
+          </details>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast">Resultado copiado al portapapeles</div>
+
+  <script src="../../js/main.js"></script>
+  <script>
+    (function() {
+        const $ = (id) => document.getElementById(id);
+
+        $('formWellsTEP').addEventListener('submit', (e) => {
+          e.preventDefault();
+          
+          let score = 0;
+          let components = [];
+
+          if ($('signosTVP').checked) { score += 3; components.push("Signos de TVP"); }
+          if ($('dxMenosProb').checked) { score += 3; components.push("TEP es dx más probable"); }
+          if ($('fc').checked) { score += 1.5; components.push("FC > 100"); }
+          if ($('inmovCir').checked) { score += 1.5; components.push("Inmovilización/Cirugía"); }
+          if ($('prevTEV').checked) { score += 1.5; components.push("TEP/TVP previa"); }
+          if ($('hemoptisis').checked) { score += 1; components.push("Hemoptisis"); }
+          if ($('cancer').checked) { score += 1; components.push("Cáncer activo"); }
+
+          // Interpretación 3 niveles
+          let risk3 = "";
+          if (score > 6) risk3 = "ALTA";
+          else if (score >= 2) risk3 = "MODERADA";
+          else risk3 = "BAJA";
+
+          // Interpretación 2 niveles (Dicótoma)
+          let risk2 = "";
+          let action = "";
+          if (score > 4) {
+            risk2 = "TEP PROBABLE";
+            action = "Recomendado: Angio-TAC torácico.";
+          } else {
+            risk2 = "TEP IMPROBABLE";
+            action = "Recomendado: Solicitar Dímero-D de alta sensibilidad.";
+          }
+
+          $('result').textContent = `PUNTUACIÓN WELLS (TEP): ${score} puntos\n\n` +
+                                    `PROBABILIDAD (3 niveles): ${risk3}\n` +
+                                    `CLASIFICACIÓN (2 niveles): ${risk2}\n\n` +
+                                    `Manejo sugerido: ${action}\n\n` +
+                                    `Criterios: ${components.length > 0 ? components.join(", ") : "Ninguno"}`;
+        });
+
+        // Copiar
+        $('btnCopy').addEventListener('click', () => {
+            const resultText = $('result').innerText;
+            if (!resultText || resultText.includes('Selecciona criterios')) return;
+            
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(resultText).then(showToast);
+            } else {
+                const textArea = document.createElement("textarea");
+                textArea.value = resultText;
+                textArea.style.position = "fixed";
+                document.body.appendChild(textArea);
+                textArea.select();
+                try { document.execCommand('copy'); showToast(); } catch (err) {}
+                document.body.removeChild(textArea);
+            }
+        });
+
+        function showToast() {
+            const toast = $('toast');
+            toast.className = "toast show";
+            setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+    })();
+  </script>
+</body>
+</html>

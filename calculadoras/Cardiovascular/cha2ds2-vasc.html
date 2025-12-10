@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CHA₂DS₂-VASc - Vithas</title>
+  
+  <link rel="icon" type="image/png" href="../../assets/Images/Logos/Favicon-Vithas.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="style.css">
+  
+  <style>
+    /* Estilos específicos para el Toast en este archivo (si no están en global) */
+    .toast {
+      visibility: hidden; min-width: 250px; background-color: #333; color: #fff; text-align: center;
+      border-radius: 50px; padding: 16px; position: fixed; z-index: 1000; left: 50%; bottom: 30px;
+      transform: translateX(-50%); font-size: 0.9rem; opacity: 0; transition: opacity 0.3s, bottom 0.3s;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .toast.show { visibility: visible; opacity: 1; bottom: 50px; }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+    </div>
+    <nav class="nav-links">
+      <ul>
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        
+        <li class="nav-category">Práctica Clínica</li>
+        
+        <!-- Enlace para volver al menú general -->
+        <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Volver a Calculadoras</a></li>
+        
+        <!-- BLOQUE ACTUAL: Cardiovascular (ABIERTO) -->
+        <li class="has-submenu open">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-heartbeat"></i> Cardiovascular
+            </div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="index.html">Menú Cardiovascular</a></li>
+            <!-- Elemento Activo -->
+            <li><a href="cha2ds2-vasc.html" class="submenu-main-link active"><i class="fas fa-heart"></i> CHA₂DS₂-VASc</a></li>
+            <li><a href="has-bled.html"><i class="fas fa-tint"></i> HAS-BLED</a></li>
+            <li><a href="grace.html"><i class="fas fa-chart-line"></i> Escala GRACE</a></li>
+            <li><a href="timi-risk-index.html"><i class="fas fa-notes-medical"></i> TIMI Risk Index</a></li>
+            <li><a href="qtc.html"><i class="fas fa-wave-square"></i> QT Corregido</a></li>
+            <li><a href="wells-tep.html"><i class="fas fa-lungs"></i> Wells TEP</a></li>
+            <li><a href="wells-tvp.html"><i class="fas fa-walking"></i> Wells TVP</a></li>
+          </ul>
+        </li>
+
+        <!-- BLOQUE HERMANO: Antropometría -->
+        <li class="has-submenu">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;"><i class="fas fa-ruler-combined"></i> Antropometría</div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="../Antropometricos/index.html">Menú Antropometría</a></li>
+            <li><a href="../Antropometricos/imc.html"><i class="fas fa-weight"></i> IMC</a></li>
+            <li><a href="../Antropometricos/bsa-adultos.html"><i class="fas fa-male"></i> BSA Adultos</a></li>
+            <li><a href="../Antropometricos/bsa-ninos.html"><i class="fas fa-child"></i> BSA Niños</a></li>
+            <li><a href="../Antropometricos/agua-corporal.html"><i class="fas fa-tint"></i> Agua Corporal</a></li>
+            <li><a href="../Antropometricos/ceb-basal.html"><i class="fas fa-fire"></i> Gasto Basal (BMR)</a></li>
+            <li><a href="../Antropometricos/requerimientos-caloricos.html"><i class="fas fa-utensils"></i> Requerimientos</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- CONTENIDO -->
+  <div class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <h2><i class="fas fa-heartbeat" style="margin-right: 10px;"></i>Calculadoras Cardiovasculares</h2>
+      </div>
+      <div class="header-right">
+        <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+      </div>
+    </header>
+
+    <div class="calc-container">
+      <div class="calc-card">
+        <h1 class="calc-title">CHA₂DS₂-VASc (Fibrilación Auricular)</h1>
+        <p class="calc-subtitle">Evaluación de riesgo de ictus en fibrilación auricular para guiar la anticoagulación.</p>
+
+        <form id="formCHA2">
+          
+          <div class="form-section">
+            <span class="section-label">Criterios Clínicos</span>
+            <div class="check-group">
+              
+              <div class="form-check">
+                <input type="checkbox" id="c">
+                <label for="c">Insuficiencia cardiaca congestiva / Disfunción VI (1 punto)</label>
+              </div>
+
+              <div class="form-check">
+                <input type="checkbox" id="h">
+                <label for="h">Hipertensión arterial (1 punto)</label>
+              </div>
+
+              <div class="form-check">
+                <input type="checkbox" id="d">
+                <label for="d">Diabetes mellitus (1 punto)</label>
+              </div>
+
+              <div class="form-check">
+                <input type="checkbox" id="s2">
+                <label for="s2">Ictus / AIT / Tromboembolismo previo (2 puntos)</label>
+              </div>
+
+              <div class="form-check">
+                <input type="checkbox" id="v">
+                <label for="v">Enfermedad vascular (IAM previo, EAP, placa aórtica) (1 punto)</label>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="form-section">
+            <span class="section-label">Edad y Sexo</span>
+            <div class="check-group">
+              
+              <div class="form-check">
+                <input type="checkbox" id="age75">
+                <label for="age75">Edad ≥ 75 años (2 puntos)</label>
+              </div>
+
+              <div class="form-check">
+                <input type="checkbox" id="age6574">
+                <label for="age6574">Edad 65 – 74 años (1 punto)</label>
+              </div>
+
+              <div class="form-check">
+                <input type="checkbox" id="f">
+                <label for="f">Sexo femenino (1 punto)</label>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- BOTONES DE ACCIÓN -->
+          <div class="actions">
+            <a href="../Cardiovascular/Index.html" class="btn-secondary" style="text-decoration: none;">Volver</a>
+            <button type="submit" class="btn-calc">Calcular</button>
+            <button type="button" class="btn-secondary" id="btnCopy"><i class="fas fa-copy"></i> Copiar</button>
+            <button type="reset" class="btn-secondary" onclick="document.getElementById('result').innerText='Selecciona criterios y pulsa Calcular.'">Limpiar</button>
+          </div>
+
+          <!-- CAJA DE RESULTADOS -->
+          <div id="result" class="result-box">Selecciona criterios y pulsa Calcular.</div>
+
+          <!-- DETALLES ADICIONALES -->
+          <details>
+            <summary>Ver interpretación y riesgo anual</summary>
+            <div class="details-content">
+              <p><strong>Riesgo anual de ictus (ajustado):</strong></p>
+              <ul>
+                <li><strong>0 puntos:</strong> 0.2% (Bajo)</li>
+                <li><strong>1 punto:</strong> 0.6% (Intermedio-Bajo)</li>
+                <li><strong>2 puntos:</strong> 2.2% (Moderado)</li>
+                <li><strong>3 puntos:</strong> 3.2% (Alto)</li>
+                <li><strong>4 puntos:</strong> 4.0% (Alto)</li>
+                <li><strong>5 puntos:</strong> 6.7% (Alto)</li>
+                <li><strong>≥6 puntos:</strong> "&gt;9.8% (Muy alto)</li>
+              </ul>
+              <p><strong>Recomendaciones generales (Guías ESC):</strong></p>
+              <ul>
+                <li><strong>0 (Hombres) / 1 (Mujeres):</strong> No se recomienda anticoagulación.</li>
+                <li><strong>1 (Hombres) / 2 (Mujeres):</strong> Considerar anticoagulación oral (Clase IIa).</li>
+                <li><strong>≥2 (Hombres) / ≥3 (Mujeres):</strong> Se recomienda anticoagulación oral (Clase I).</li>
+              </ul>
+            </div>
+          </details>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast">Resultado copiado al portapapeles</div>
+
+  <script src="../../js/main.js"></script>
+  <script>
+    (function() {
+        const $ = (id) => document.getElementById(id);
+
+        // Lógica de exclusión de edades
+        const age75 = $('age75');
+        const age6574 = $('age6574');
+        
+        age75.addEventListener('change', function() {
+          if (this.checked) age6574.checked = false;
+        });
+        
+        age6574.addEventListener('change', function() {
+          if (this.checked) age75.checked = false;
+        });
+
+        // Lógica de cálculo
+        $('formCHA2').addEventListener('submit', (e) => {
+          e.preventDefault();
+          
+          let score = 0;
+          let components = [];
+
+          if ($('c').checked) { score += 1; components.push("Insuficiencia Cardiaca"); }
+          if ($('h').checked) { score += 1; components.push("Hipertensión"); }
+          if ($('d').checked) { score += 1; components.push("Diabetes"); }
+          if ($('s2').checked) { score += 2; components.push("Ictus/AIT previo"); }
+          if ($('v').checked) { score += 1; components.push("Enfermedad Vascular"); }
+          if ($('age75').checked) { score += 2; components.push("Edad ≥ 75"); }
+          if ($('age6574').checked) { score += 1; components.push("Edad 65-74"); }
+          if ($('f').checked) { score += 1; components.push("Sexo Femenino"); }
+
+          // Interpretación
+          const esMujer = $('f').checked;
+          let recomendacion = "";
+          
+          if (score === 0) {
+            recomendacion = "Riesgo Bajo. No se recomienda anticoagulación.";
+          } else if ((!esMujer && score === 1) || (esMujer && score === 2)) {
+            recomendacion = "Riesgo Intermedio. Considerar anticoagulación oral (IIa).";
+          } else {
+            recomendacion = "Riesgo Alto. Se recomienda anticoagulación oral (I).";
+          }
+
+          // Riesgo Anual aproximado (Friberg et al.)
+          const risks = {0: "0.2%", 1: "0.6%", 2: "2.2%", 3: "3.2%", 4: "4.0%", 5: "6.7%", 6: "9.8%", 7: "9.6%", 8: "6.7%", 9: "15.2%"};
+          const riesgoAnual = risks[score] || ">15%";
+
+          $('result').textContent = `PUNTUACIÓN CHA₂DS₂-VASc: ${score} puntos\n\n` +
+                                    `Riesgo Anual de Ictus: ${riesgoAnual}\n` +
+                                    `Recomendación: ${recomendacion}\n\n` +
+                                    `Factores: ${components.length > 0 ? components.join(", ") : "Ninguno"}`;
+        });
+
+        // Copiar al portapapeles
+        $('btnCopy').addEventListener('click', () => {
+            const resultText = $('result').innerText;
+            if (!resultText || resultText.includes('Selecciona criterios')) return;
+            
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(resultText).then(showToast);
+            } else {
+                const textArea = document.createElement("textarea");
+                textArea.value = resultText;
+                textArea.style.position = "fixed";
+                document.body.appendChild(textArea);
+                textArea.select();
+                try { document.execCommand('copy'); showToast(); } catch (err) {}
+                document.body.removeChild(textArea);
+            }
+        });
+
+        function showToast() {
+            const toast = $('toast');
+            toast.className = "toast show";
+            setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Child-Pugh - Vithas</title>
+  
+  <link rel="icon" type="image/png" href="../../Favicon-Vithas.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="style.css" />
+  
+  <style>
+    /* Estilo específico para Toast */
+    .toast {
+      visibility: hidden; min-width: 250px; background-color: #333; color: #fff; text-align: center;
+      border-radius: 50px; padding: 16px; position: fixed; z-index: 1000; left: 50%; bottom: 30px;
+      transform: translateX(-50%); font-size: 0.9rem; opacity: 0; transition: opacity 0.3s, bottom 0.3s;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .toast.show { visibility: visible; opacity: 1; bottom: 50px; }
+
+    /* Ajuste para el selector de modo coagulación */
+    .toggle-container {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    .toggle-btn {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #cbd5e1;
+      background: #fff;
+      text-align: center;
+      cursor: pointer;
+      border-radius: 8px;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .toggle-btn.active {
+      background: #e0f2fe;
+      border-color: var(--vithas-blue-light);
+      color: var(--vithas-blue-dark);
+      font-weight: 700;
+    }
+    .toggle-input { display: none; }
+
+    /* --- AJUSTES RESPONSIVOS PARA ESCRITORIO --- */
+    /* Estas reglas se aplican solo si la pantalla es ancha (tablets y ordenadores) */
+    @media (min-width: 768px) {
+      .calc-container {
+        max-width: 1200px; /* Ancho máximo aumentado para aprovechar la pantalla */
+      }
+      
+      /* Disposición horizontal de las opciones */
+      .check-group {
+        flex-direction: row !important; /* Forzar fila horizontal */
+        flex-wrap: wrap; /* Permitir que bajen si no caben, por seguridad */
+      }
+      
+      /* Ajuste de cada opción individual */
+      .form-check {
+        flex: 1; /* Que ocupen el mismo ancho cada una */
+        justify-content: center; /* Centrar el contenido */
+        text-align: center;
+      }
+      
+      .form-check label {
+        white-space: nowrap; /* Evitar que el texto se rompa innecesariamente */
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+    </div>
+    <nav class="nav-links">
+      <ul>
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        
+        <li class="nav-category">Práctica Clínica</li>
+        
+        <!-- Enlace para volver al menú general -->
+        <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Volver a Calculadoras</a></li>
+        
+        <!-- BLOQUE ACTUAL: Digestivo (ABIERTO) -->
+        <li class="has-submenu open">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-utensils"></i> Digestivo
+            </div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="index.html">Menú Digestivo</a></li>
+            <!-- Elemento Activo -->
+            <li><a href="child-pugh.html" class="submenu-main-link active"><i class="fas fa-wine-glass"></i> Child-Pugh</a></li>
+            <li><a href="meld.html"><i class="fas fa-notes-medical"></i> MELD</a></li>
+            <li><a href="glasgow-blatchford.html"><i class="fas fa-file-medical-alt"></i> Glasgow-Blatchford</a></li>
+            <li><a href="ranson.html"><i class="fas fa-list-ol"></i> Ranson</a></li>
+            <li><a href="bisap.html"><i class="fas fa-procedures"></i> BISAP</a></li>
+          </ul>
+        </li>
+
+        <!-- Otros Bloques (Cerrados) -->
+        <li class="has-submenu">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;"><i class="fas fa-heartbeat"></i> Cardiovascular</div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="../Cardiovascular/index.html">Menú Cardiovascular</a></li>
+          </ul>
+        </li>
+
+        <li class="has-submenu">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;"><i class="fas fa-ruler-combined"></i> Antropometría</div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="../Antropometricos/index.html">Menú Antropometría</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- CONTENIDO -->
+  <div class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <h2><i class="fas fa-utensils" id="menuToggle"></i>
+        Calculadoras Digestivas</h2>
+      </div>
+      <div class="header-right">
+        <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+      </div>
+    </header>
+
+    <div class="calc-container">
+      <div class="calc-card">
+        <h1 class="calc-title">Clasificación Child-Pugh</h1>
+        <p class="calc-subtitle">Evaluación del pronóstico de la enfermedad hepática crónica y cirrosis.</p>
+
+        <form id="formChild">
+          
+          <div class="form-section">
+            <span class="section-label">Parámetros Bioquímicos</span>
+            
+            <!-- Bilirrubina -->
+            <label class="mb-2 d-block fw-bold text-secondary"><strong>Bilirrubina sérica</strong></label>
+            <div class="check-group mb-4">
+              <div class="form-check">
+                <input type="radio" name="bilirr" id="bil1" value="1" required>
+                <label for="bil1">&lt; 2 mg/dL (1 punto)</label>
+              </div>
+              <div class="form-check">
+                <input type="radio" name="bilirr" id="bil2" value="2">
+                <label for="bil2">2 - 3 mg/dL (2 puntos)</label>
+              </div>
+              <div class="form-check">
+                <input type="radio" name="bilirr" id="bil3" value="3">
+                <label for="bil3">&gt; 3 mg/dL (3 puntos)</label>
+              </div>
+            </div>
+
+            <!-- Albúmina -->
+            <label class="mb-2 d-block fw-bold text-secondary"><strong>Albúmina sérica</strong></label>
+            <div class="check-group mb-4">
+              <div class="form-check">
+                <input type="radio" name="albumina" id="alb1" value="1" required>
+                <label for="alb1">&gt; 3.5 g/dL (1 punto)</label>
+              </div>
+              <div class="form-check">
+                <input type="radio" name="albumina" id="alb2" value="2">
+                <label for="alb2">2.8 - 3.5 g/dL (2 puntos)</label>
+              </div>
+              <div class="form-check">
+                <input type="radio" name="albumina" id="alb3" value="3">
+                <label for="alb3">&lt; 2.8 g/dL (3 puntos)</label>
+              </div>
+            </div>
+
+            <!-- Selector de Modo Coagulación -->
+            <label class="mb-2 d-block fw-bold text-secondary"><strong>Parámetro de Coagulación</strong></label>
+            <div class="toggle-container">
+              <label class="toggle-btn active" id="btnModeINR">
+                <input type="radio" name="coagModo" value="inr" checked class="toggle-input"> INR
+              </label>
+              <label class="toggle-btn" id="btnModeTP">
+                <input type="radio" name="coagModo" value="tp" class="toggle-input"> Tiempo Protrombina
+              </label>
+            </div>
+
+            <!-- INR -->
+            <div id="filaINR" class="check-group mb-4">
+              <div class="form-check">
+                <input type="radio" name="inr" id="inr1" value="1">
+                <label for="inr1">&lt; 1.7 (1 punto)</label>
+              </div>
+              <div class="form-check">
+                <input type="radio" name="inr" id="inr2" value="2">
+                <label for="inr2">1.7 - 2.3 (2 puntos)</label>
+              </div>
+              <div class="form-check">
+                <input type="radio" name="inr" id="inr3" value="3">
+                <label for="inr3">&gt; 2.3 (3 puntos)</label>
+              </div>
+            </div>
+
+            <!-- TP -->
+            <div id="filaTP" class="check-group mb-4" style="display:none;">
+              <div class="form-check">
+                <input type="radio" name="tp" id="tp1" value="1">
+                <label for="tp1">&lt; 4 s prolongación (1 punto)</label>
+              </div>
+              <div class="form-check">
+                <input type="radio" name="tp" id="tp2" value="2">
+                <label for="tp2">4 - 6 s prolongación (2 puntos)</label>
+              </div>
+              <div class="form-check">
+                <input type="radio" name="tp" id="tp3" value="3">
+                <label for="tp3">&gt; 6 s prolongación (3 puntos)</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <span class="section-label">Parámetros Clínicos</span>
+            
+            <!-- Ascitis -->
+            <label class="mb-2 d-block fw-bold text-secondary"><strong>Ascitis</strong></label>
+            <div class="check-group mb-4">
+              <div class="form-check">
+                <input type="radio" name="ascitis" id="asc1" value="1" required>
+                <label for="asc1">Ausente (1 punto)</label>
+              </div>
+              <div class="form-check">
+                <input type="radio" name="ascitis" id="asc2" value="2">
+                <label for="asc2">Leve / Controlada (2 puntos)</label>
+              </div>
+              <div class="form-check">
+                <input type="radio" name="ascitis" id="asc3" value="3">
+                <label for="asc3">Moderada / Refractaria (3 puntos)</label>
+              </div>
+            </div>
+
+            <!-- Encefalopatía -->
+            <label class="mb-2 d-block fw-bold text-secondary"><strong>Encefalopatía Hepática</strong></label>
+            <div class="check-group">
+              <div class="form-check">
+                <input type="radio" name="encef" id="enc1" value="1" required>
+                <label for="enc1">Ausente (1 punto)</label>
+              </div>
+              <div class="form-check">
+                <input type="radio" name="encef" id="enc2" value="2">
+                <label for="enc2">Grado I-II (2 puntos)</label>
+              </div>
+              <div class="form-check">
+                <input type="radio" name="encef" id="enc3" value="3">
+                <label for="enc3">Grado III-IV (3 puntos)</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- BOTONES DE ACCIÓN -->
+          <div class="actions">
+            <a href="index.html" class="btn-secondary" style="text-decoration: none;">Volver</a>
+            <button type="submit" class="btn-calc">Calcular</button>
+            <button type="button" class="btn-secondary" id="btnCopy"><i class="fas fa-copy"></i> Copiar</button>
+            <button type="reset" class="btn-secondary" onclick="document.getElementById('result').innerText='Selecciona los parámetros y pulsa Calcular.'">Limpiar</button>
+          </div>
+
+          <!-- CAJA DE RESULTADOS -->
+          <div id="result" class="result-box">Selecciona los parámetros y pulsa Calcular.</div>
+
+          <!-- DETALLES ADICIONALES -->
+          <details>
+            <summary>Ver interpretación y supervivencia</summary>
+            <div class="details-content">
+              <table class="table-scale">
+                <thead>
+                  <tr>
+                    <th>Clase</th>
+                    <th>Puntos</th>
+                    <th>Supervivencia 1 año</th>
+                    <th>Supervivencia 2 años</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>A</strong></td>
+                    <td>5 - 6</td>
+                    <td>100%</td>
+                    <td>85%</td>
+                  </tr>
+                  <tr>
+                    <td><strong>B</strong></td>
+                    <td>7 - 9</td>
+                    <td>80%</td>
+                    <td>60%</td>
+                  </tr>
+                  <tr>
+                    <td><strong>C</strong></td>
+                    <td>10 - 15</td>
+                    <td>45%</td>
+                    <td>35%</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p class="text-muted small mt-2">La clasificación Child-Pugh se utiliza para evaluar el pronóstico de la enfermedad hepática crónica, principalmente cirrosis.</p>
+            </div>
+          </details>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast">Resultado copiado al portapapeles</div>
+
+  <script src="../../js/main.js"></script>
+  <script>
+    (function() {
+        const $ = (id) => document.getElementById(id);
+        const getRadioVal = (name) => {
+          const el = document.querySelector(`input[name="${name}"]:checked`);
+          return el ? parseInt(el.value) : 0;
+        };
+        const getRadioLabel = (name) => {
+          const el = document.querySelector(`input[name="${name}"]:checked`);
+          return el ? document.querySelector(`label[for="${el.id}"]`).innerText : '';
+        };
+
+        // Lógica de alternancia visual para los botones INR/TP
+        const updateCoagMode = () => {
+            const mode = document.querySelector('input[name="coagModo"]:checked').value;
+            if (mode === 'inr') {
+                $('filaINR').style.display = 'block'; // Block en móvil
+                // En escritorio, necesitamos flex-direction: row; Esto se maneja por la clase check-group
+                // Si la pantalla es grande, el CSS media query se encarga.
+                $('filaTP').style.display = 'none';
+                $('btnModeINR').classList.add('active');
+                $('btnModeTP').classList.remove('active');
+                // Limpiar selección TP
+                document.querySelectorAll('input[name="tp"]').forEach(r => r.checked = false);
+            } else {
+                $('filaINR').style.display = 'none';
+                $('filaTP').style.display = 'block'; // Se activará el estilo flex si aplica por CSS
+                $('btnModeTP').classList.add('active');
+                $('btnModeINR').classList.remove('active');
+                // Limpiar selección INR
+                document.querySelectorAll('input[name="inr"]').forEach(r => r.checked = false);
+            }
+        };
+
+        document.querySelectorAll('input[name="coagModo"]').forEach(radio => {
+            radio.addEventListener('change', updateCoagMode);
+        });
+
+        // Lógica de cálculo
+        $('formChild').addEventListener('submit', (e) => {
+          e.preventDefault();
+          
+          const bilirr = getRadioVal('bilirr');
+          const albumina = getRadioVal('albumina');
+          const ascitis = getRadioVal('ascitis');
+          const encef = getRadioVal('encef');
+          
+          const modo = document.querySelector('input[name="coagModo"]:checked').value;
+          const coag = modo === 'inr' ? getRadioVal('inr') : getRadioVal('tp');
+
+          if (!bilirr || !albumina || !ascitis || !encef || !coag) {
+            $('result').textContent = 'Por favor, selecciona una opción para cada parámetro.';
+            return;
+          }
+
+          const puntos = bilirr + albumina + coag + ascitis + encef;
+
+          // Determinar Clase
+          let clase = "";
+          let interp = "";
+
+          if (puntos <= 6) {
+            clase = "A";
+            interp = "Enfermedad compensada.\nSupervivencia al año: ~100%";
+          } else if (puntos <= 9) {
+            clase = "B";
+            interp = "Compromiso funcional significativo.\nSupervivencia al año: ~80%";
+          } else {
+            clase = "C";
+            interp = "Enfermedad descompensada.\nSupervivencia al año: ~45%\nConsiderar evaluación para trasplante.";
+          }
+
+          const etiquetaCoag = modo === 'inr' ? 'INR' : 'TP';
+          const textoCoag = modo === 'inr' ? getRadioLabel('inr') : getRadioLabel('tp');
+
+          $('result').textContent = `PUNTUACIÓN CHILD-PUGH: ${puntos} puntos\n` +
+                                    `CLASE: ${clase}\n\n` +
+                                    `${interp}\n\n` +
+                                    `Detalle:\n` + 
+                                    `• Bilirrubina: ${getRadioLabel('bilirr')}\n` +
+                                    `• Albúmina: ${getRadioLabel('albumina')}\n` +
+                                    `• ${etiquetaCoag}: ${textoCoag}\n` +
+                                    `• Ascitis: ${getRadioLabel('ascitis')}\n` +
+                                    `• Encefalopatía: ${getRadioLabel('encef')}`;
+        });
+
+        // Copiar
+        $('btnCopy').addEventListener('click', () => {
+            const resultText = $('result').innerText;
+            if (!resultText || resultText.includes('Selecciona los parámetros')) return;
+            
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(resultText).then(showToast);
+            } else {
+                const textArea = document.createElement("textarea");
+                textArea.value = resultText;
+                textArea.style.position = "fixed";
+                document.body.appendChild(textArea);
+                textArea.select();
+                try { document.execCommand('copy'); showToast(); } catch (err) {}
+                document.body.removeChild(textArea);
+            }
+        });
+
+        function showToast() {
+            const toast = $('toast');
+            toast.className = "toast show";
+            setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+    })();
+  </script>
+</body>
+</html>

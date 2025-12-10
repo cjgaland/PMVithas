@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>qSOFA - Vithas</title>
+  
+  <link rel="icon" type="image/png" href="../../Favicon-Vithas.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="style.css" />
+  
+  <style>
+    /* Toast */
+    .toast {
+      visibility: hidden; min-width: 250px; background-color: #333; color: #fff; text-align: center;
+      border-radius: 50px; padding: 16px; position: fixed; z-index: 1000; left: 50%; bottom: 30px;
+      transform: translateX(-50%); font-size: 0.9rem; opacity: 0; transition: opacity 0.3s, bottom 0.3s;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .toast.show { visibility: visible; opacity: 1; bottom: 50px; }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+    </div>
+    <nav class="nav-links">
+      <ul>
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        
+        <li class="nav-category">Práctica Clínica</li>
+        
+        <!-- Enlace para volver al menú general -->
+        <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Volver a Calculadoras</a></li>
+        
+        <!-- BLOQUE ACTUAL: Infecciosas (ABIERTO) -->
+        <li class="has-submenu open">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-bacteria"></i> Infecciosas
+            </div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="index.html">Menú Infecciosas</a></li>
+            <!-- Elemento Activo -->
+            <li><a href="qsofa.html" class="submenu-main-link active"><i class="fas fa-stopwatch"></i> qSOFA</a></li>
+            <li><a href="sofa.html"><i class="fas fa-procedures"></i> SOFA</a></li>
+            <li><a href="centor-mcisaac.html"><i class="fas fa-user-md"></i> Centor / McIsaac</a></li>
+            <li><a href="mulbsta.html"><i class="fas fa-lungs-virus"></i> MuLBSTA</a></li>
+          </ul>
+        </li>
+
+        <!-- Otros Bloques (Cerrados) -->
+        <li class="has-submenu">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;"><i class="fas fa-utensils"></i> Digestivo</div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="../Digestivo/index.html">Menú Digestivo</a></li>
+          </ul>
+        </li>
+
+        <li class="has-submenu">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;"><i class="fas fa-heartbeat"></i> Cardiovascular</div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="../Cardiovascular/index.html">Menú Cardiovascular</a></li>
+          </ul>
+        </li>
+
+        <li class="has-submenu">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;"><i class="fas fa-ruler-combined"></i> Antropometría</div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="../Antropometricos/index.html">Menú Antropometría</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- CONTENIDO -->
+  <div class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <h2><i class="fas fa-bacteria" id="menuToggle" style="margin-right: 10px;"></i>Calculadoras Infecciosas</h2>
+      </div>
+      <div class="header-right">
+        <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+      </div>
+    </header>
+
+    <div class="calc-container">
+      <div class="calc-card">
+        <h1 class="calc-title">qSOFA (Quick SOFA)</h1>
+        <p class="calc-subtitle">Cribado rápido de sepsis en pacientes fuera de la UCI. Identifica riesgo de deterioro clínico.</p>
+
+        <form id="formQSOFA">
+          
+          <div class="form-section">
+            <span class="section-label">Criterios Clínicos (1 punto cada uno)</span>
+            
+            <!-- Frecuencia Respiratoria -->
+            <div class="switch-group">
+              <!-- CORREGIDO: >= por &ge; -->
+              <label for="rr" class="switch-label"><strong>Frecuencia Respiratoria</strong> &ge; 22 rpm</label>
+              <label class="switch-toggle">
+                <input type="checkbox" id="rr">
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <!-- Estado Mental -->
+            <div class="switch-group">
+              <!-- CORREGIDO: < por &lt; -->
+              <label for="glasgow" class="switch-label"><strong>Alteración del Estado Mental</strong> (GCS &lt; 15)</label>
+              <label class="switch-toggle">
+                <input type="checkbox" id="glasgow">
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <!-- Presión Arterial -->
+            <div class="switch-group">
+              <!-- CORREGIDO: <= por &le; -->
+              <label for="pas" class="switch-label"><strong>Presión Arterial Sistólica</strong> &le; 100 mmHg</label>
+              <label class="switch-toggle">
+                <input type="checkbox" id="pas">
+                <span class="slider"></span>
+              </label>
+            </div>
+
+          </div>
+
+          <!-- BOTONES DE ACCIÓN -->
+          <div class="actions">
+            <a href="index.html" class="btn-secondary" style="text-decoration: none;">Volver</a>
+            <button type="submit" class="btn-calc">Calcular</button>
+            <button type="button" class="btn-secondary" id="btnCopy"><i class="fas fa-copy"></i> Copiar</button>
+            <button type="reset" class="btn-secondary" onclick="document.getElementById('result').innerText='Marca los criterios y pulsa Calcular.'">Limpiar</button>
+          </div>
+
+          <!-- CAJA DE RESULTADOS -->
+          <div id="result" class="result-box">Marca los criterios y pulsa Calcular.</div>
+
+          <!-- DETALLES ADICIONALES -->
+          <details>
+            <summary>Ver interpretación y manejo</summary>
+            <div class="details-content">
+              <p><strong>Interpretación:</strong></p>
+              <ul>
+                <li><strong>0 - 1 punto:</strong> Riesgo bajo de mortalidad intrahospitalaria. Continuar monitorización según criterio clínico.</li>
+                <li><strong>2 - 3 puntos:</strong> Alto riesgo de deterioro clínico (mortalidad &gt;10%). Se sospecha sepsis.</li>
+              </ul>
+              <p><strong>Recomendación si qSOFA ≥ 2:</strong></p>
+              <ul>
+                <li>Evaluar evidencia de disfunción orgánica (Lactato, Escala SOFA completa).</li>
+                <li>Iniciar paquete de medidas de sepsis ("Sepsis Bundle") si se confirma infección.</li>
+                <li>Considerar ingreso en UCI o vigilancia intensiva.</li>
+              </ul>
+            </div>
+          </details>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast">Resultado copiado al portapapeles</div>
+
+  <script src="../../js/main.js"></script>
+  <script>
+    (function() {
+        const $ = (id) => document.getElementById(id);
+
+        $('formQSOFA').addEventListener('submit', (e) => {
+          e.preventDefault();
+          
+          let score = 0;
+          let components = [];
+
+          if ($('rr').checked) { score += 1; components.push("FR ≥ 22"); }
+          if ($('glasgow').checked) { score += 1; components.push("Alteración Mental"); }
+          if ($('pas').checked) { score += 1; components.push("PAS ≤ 100"); }
+
+          let riesgo = "";
+          let manejo = "";
+
+          if (score >= 2) {
+            riesgo = "ALTO RIESGO (Sepsis Probable)";
+            manejo = "Mortalidad elevada. Evaluar disfunción orgánica (SOFA), lactato y foco infeccioso. Considerar UCI.";
+          } else {
+            riesgo = "BAJO RIESGO";
+            manejo = "Si la sospecha de infección es alta pero qSOFA es negativo, continuar monitorización y usar juicio clínico.";
+          }
+
+          $('result').textContent = `PUNTUACIÓN qSOFA: ${score} / 3\n\n` +
+                                    `INTERPRETACIÓN: ${riesgo}\n\n` +
+                                    `Recomendación: ${manejo}\n\n` +
+                                    `Criterios presentes: ${components.length > 0 ? components.join(", ") : "Ninguno"}`;
+        });
+
+        // Copiar
+        $('btnCopy').addEventListener('click', () => {
+            const resultText = $('result').innerText;
+            if (!resultText || resultText.includes('Marca los criterios')) return;
+            
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(resultText).then(showToast);
+            } else {
+                const textArea = document.createElement("textarea");
+                textArea.value = resultText;
+                textArea.style.position = "fixed";
+                document.body.appendChild(textArea);
+                textArea.select();
+                try { document.execCommand('copy'); showToast(); } catch (err) {}
+                document.body.removeChild(textArea);
+            }
+        });
+
+        function showToast() {
+            const toast = $('toast');
+            toast.className = "toast show";
+            setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+    })();
+  </script>
+</body>
+</html>

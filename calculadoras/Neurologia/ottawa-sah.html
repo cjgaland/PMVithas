@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ottawa SAH Rule - Vithas Neurología</title>
+  
+  <link rel="icon" type="image/png" href="../../assets/Images/Logos/Favicon-Vithas.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Estilos Globales y Específicos -->
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="style.css" />
+  
+  <style>
+    /* Estilo de alerta para la sección de exclusión */
+    .exclusion-box {
+      background-color: #fff8e1;
+      border: 1px solid #ffecb3;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .exclusion-title {
+      color: #f57f17;
+      font-weight: 700;
+      display: block;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+    </div>
+    <nav class="nav-links">
+      <ul>
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        
+        <li class="nav-category">Práctica Clínica</li>
+        <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Volver a Calculadoras</a></li>
+        
+        <!-- BLOQUE NEUROLOGÍA (ABIERTO) -->
+        <li class="has-submenu open">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-brain"></i> Neurología
+            </div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="index.html">Menú Neurología</a></li>
+            <li><a href="nihss.html"><i class="fas fa-user-injured"></i> NIHSS</a></li>
+            <li><a href="gcs-adulto.html"><i class="fas fa-star"></i> Glasgow (GCS)</a></li>
+            <li><a href="four-score.html"><i class="fas fa-procedures"></i> FOUR Score</a></li>
+            <li><a href="canadian-ct-head.html"><i class="fas fa-skull"></i> Canadian CT Head</a></li>
+            <li><a href="abcd2.html"><i class="fas fa-bolt"></i> ABCD² (AIT)</a></li>
+            <li><a href="ich-score.html"><i class="fas fa-brain"></i> ICH Score</a></li>
+            <li><a href="aspect.html"><i class="fas fa-layer-group"></i> ASPECTS</a></li>
+            <li><a href="mrs.html"><i class="fas fa-wheelchair"></i> Rankin (mRS)</a></li>
+            <li><a href="ottawa-sah.html" class="submenu-main-link active"><i class="fas fa-head-side-virus"></i> Ottawa SAH</a></li>
+            <li><a href="status-epileptico-dosis.html"><i class="fas fa-pills"></i> Status Epiléptico</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- CONTENIDO -->
+  <div class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <i class="fas fa-bars menu-toggle" id="menuToggle"></i>
+        <h2><i class="fas fa-brain" style="margin-right: 10px;"></i>Neurología</h2>
+      </div>
+      <div class="header-right">
+        <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+      </div>
+    </header>
+
+    <div class="calc-container">
+      <div class="calc-card">
+        <h1 class="calc-title">Ottawa SAH Rule (Cefalea)</h1>
+        <p class="calc-subtitle">Regla de alta sensibilidad (100%) para descartar Hemorragia Subaracnoidea (HSA) en pacientes con cefalea aguda no traumática.</p>
+
+        <form id="formOttawa">
+          
+          <!-- CRITERIOS DE EXCLUSIÓN -->
+          <div class="exclusion-box">
+            <span class="exclusion-title"><i class="fas fa-exclamation-triangle"></i> Criterios de Exclusión (No aplicable si...)</span>
+            <div class="switch-group">
+              <label for="exclusion" class="switch-label">
+                ¿Existe déficit neurológico nuevo, antecedentes de aneurisma/HSA, TCE reciente, o el dolor tardó &gt;1h en llegar al pico?
+              </label>
+              <label class="switch-toggle">
+                <input type="checkbox" id="exclusion">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- CRITERIOS DE LA REGLA -->
+          <div class="form-section">
+            <span class="section-label">Criterios Clínicos</span>
+            <p class="text-muted small mb-3">Marque si está presente alguno de los siguientes hallazgos:</p>
+            
+            <div class="check-group">
+              <label class="form-check">
+                <input type="checkbox" id="age40">
+                <span>Edad &ge; 40 años</span>
+              </label>
+              
+              <label class="form-check">
+                <input type="checkbox" id="neckPain">
+                <span>Dolor o rigidez cervical</span>
+              </label>
+              
+              <label class="form-check">
+                <input type="checkbox" id="loc">
+                <span>Pérdida de conciencia presenciada</span>
+              </label>
+              
+              <label class="form-check">
+                <input type="checkbox" id="exertion">
+                <span>Inicio durante el esfuerzo físico</span>
+              </label>
+              
+              <label class="form-check">
+                <input type="checkbox" id="thunderclap">
+                <span>Cefalea en trueno ("Thunderclap", instantánea)</span>
+              </label>
+              
+              <label class="form-check">
+                <input type="checkbox" id="limitedFlex">
+                <span>Flexión cervical limitada en la exploración</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- BOTONES -->
+          <div class="actions">
+            <a href="index.html" class="btn-secondary">Volver</a>
+            <button type="submit" class="btn-calc">Calcular</button>
+            <button type="button" class="btn-secondary" id="btnCopy"><i class="fas fa-copy"></i> Copiar</button>
+            <button type="reset" class="btn-secondary" onclick="document.getElementById('result').innerText='Marca los criterios y pulsa Calcular.'">Limpiar</button>
+          </div>
+
+          <!-- RESULTADO -->
+          <div id="result" class="result-box">Marca los criterios y pulsa Calcular.</div>
+
+          <!-- DETALLES -->
+          <details>
+            <summary>Ver Evidencia y Recomendación</summary>
+            <div class="details-content">
+              <p><strong>Sensibilidad 100% / Especificidad ~15%</strong></p>
+              <ul>
+                <li><strong>Regla Negativa (0 criterios):</strong> La probabilidad de HSA es extremadamente baja. Se puede descartar HSA sin necesidad de más pruebas (TC/PL).</li>
+                <li><strong>Regla Positiva (≥1 criterio):</strong> Requiere estudio. Realizar TC craneal sin contraste. Si TC es normal y &lt; 6h, HSA prácticamente descartada. Si &gt; 6h o alta sospecha, valorar Punción Lumbar.</li>
+              </ul>
+            </div>
+          </details>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast">Resultado copiado al portapapeles</div>
+
+  <!-- JAVASCRIPT -->
+  <script src="../../js/main.js"></script>
+  <script>
+    (function() {
+      const $ = (id) => document.getElementById(id);
+      
+      $('formOttawa').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Verificar exclusión
+        if ($('exclusion').checked) {
+            $('result').innerHTML = "<span style='color:#d32f2f;'><strong>REGLA NO APLICABLE.</strong><br>El paciente cumple criterios de exclusión. Valorar estudio según juicio clínico estándar.</span>";
+            return;
+        }
+
+        // Verificar criterios
+        const criteriaIds = ['age40', 'neckPain', 'loc', 'exertion', 'thunderclap', 'limitedFlex'];
+        const positives = criteriaIds.filter(id => $(id).checked);
+        
+        let resultado = "";
+        
+        if (positives.length > 0) {
+            // Regla Positiva
+            const criteriosTexto = positives.map(id => {
+                switch(id) {
+                    case 'age40': return 'Edad >= 40';
+                    case 'neckPain': return 'Dolor cervical';
+                    case 'loc': return 'Pérdida conciencia';
+                    case 'exertion': return 'Inicio esfuerzo';
+                    case 'thunderclap': return 'Cefalea trueno';
+                    case 'limitedFlex': return 'Flexión limitada';
+                    return '';
+                }
+            }).join(', ');
+
+            resultado = `OTTAWA SAH RULE: POSITIVA\n` +
+                        `Criterios presentes: ${criteriosTexto}\n\n` +
+                        `RECOMENDACIÓN: INDICACIÓN DE TC CRANEAL.\n` +
+                        `(No se puede descartar HSA solo por clínica).`;
+        } else {
+            // Regla Negativa
+            resultado = `OTTAWA SAH RULE: NEGATIVA\n` +
+                        `Ningún criterio de alto riesgo presente.\n\n` +
+                        `RECOMENDACIÓN: ALTA PROBABILIDAD DE AUSENCIA DE HSA.\n` +
+                        `Se puede considerar el alta sin realizar TC/PL (Sensibilidad 100%).`;
+        }
+        
+        $('result').innerText = resultado;
+      });
+
+      // Copiar
+      $('btnCopy').addEventListener('click', () => {
+          const resultText = $('result').innerText;
+          if (!resultText || resultText.includes('Marca los criterios')) return;
+          if (navigator.clipboard && window.isSecureContext) {
+              navigator.clipboard.writeText(resultText).then(showToast);
+          } else {
+              const textArea = document.createElement("textarea");
+              textArea.value = resultText;
+              textArea.style.position = "fixed";
+              document.body.appendChild(textArea);
+              textArea.select();
+              try { document.execCommand('copy'); showToast(); } catch (err) {}
+              document.body.removeChild(textArea);
+          }
+      });
+
+      function showToast() {
+          const toast = $('toast');
+          toast.className = "toast show";
+          setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+      }
+    })();
+  </script>
+</body>
+</html>

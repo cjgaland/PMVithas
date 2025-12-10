@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CURB-65 - Vithas Respiratorio</title>
+  
+  <link rel="icon" type="image/png" href="../../assets/Images/Logos/Favicon-Vithas.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Estilos Globales y Específicos -->
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+    </div>
+    <nav class="nav-links">
+      <ul>
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        
+        <li class="nav-category">Práctica Clínica</li>
+        <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Volver a Calculadoras</a></li>
+        
+        <!-- BLOQUE RESPIRATORIO (ABIERTO) -->
+        <li class="has-submenu open">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-lungs"></i> Respiratorio
+            </div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="index.html">Menú Respiratorio</a></li>
+            <li><a href="curb65.html" class="submenu-main-link active"><i class="fas fa-notes-medical"></i> CURB-65</a></li>
+            <li><a href="psi-fine.html"><i class="fas fa-clipboard-list"></i> PSI / FINE</a></li>
+            <li><a href="pesi.html"><i class="fas fa-lungs-virus"></i> PESI / sPESI</a></li>
+            <li><a href="aa-gradient.html"><i class="fas fa-percent"></i> Gradiente A-a</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- CONTENIDO -->
+  <div class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <i class="fas fa-bars menu-toggle" id="menuToggle"></i>
+        <h2><i class="fas fa-lungs" style="margin-right: 10px;"></i>Respiratorio</h2>
+      </div>
+      <div class="header-right">
+        <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+      </div>
+    </header>
+
+    <div class="calc-container">
+      <div class="calc-card">
+        <h1 class="calc-title">Escala CURB-65</h1>
+        <p class="calc-subtitle">Estratificación del riesgo de mortalidad en pacientes con Neumonía Adquirida en la Comunidad (NAC).</p>
+
+        <form id="formCURB">
+          
+          <div class="form-section">
+            <span class="section-label">Criterios Clínicos</span>
+            
+            <!-- C: Confusión -->
+            <div class="switch-group">
+              <label for="c" class="switch-label">
+                <strong>C</strong> - Confusión Mental
+                <small class="d-block text-muted" style="font-weight:400;">Desorientación o alteración del nivel de conciencia</small>
+              </label>
+              <label class="switch-toggle">
+                <input type="checkbox" id="c">
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <!-- U: Urea -->
+            <div class="switch-group">
+              <label for="u" class="switch-label">
+                <strong>U</strong> - Urea &gt; 7 mmol/L
+                <small class="d-block text-muted" style="font-weight:400;">O BUN &gt; 19 mg/dL (Urea &gt; 40 mg/dL)</small>
+              </label>
+              <label class="switch-toggle">
+                <input type="checkbox" id="u">
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <!-- R: Respiración -->
+            <div class="switch-group">
+              <label for="r" class="switch-label">
+                <strong>R</strong> - Frecuencia Respiratoria &ge; 30 rpm
+              </label>
+              <label class="switch-toggle">
+                <input type="checkbox" id="r">
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <!-- B: Blood Pressure -->
+            <div class="switch-group">
+              <label for="b" class="switch-label">
+                <strong>B</strong> - Presión Arterial Baja
+                <small class="d-block text-muted" style="font-weight:400;">PAS &lt; 90 mmHg o PAD &le; 60 mmHg</small>
+              </label>
+              <label class="switch-toggle">
+                <input type="checkbox" id="b">
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <!-- 65: Edad -->
+            <div class="switch-group">
+              <label for="age" class="switch-label">
+                <strong>65</strong> - Edad &ge; 65 años
+              </label>
+              <label class="switch-toggle">
+                <input type="checkbox" id="age">
+                <span class="slider"></span>
+              </label>
+            </div>
+
+          </div>
+
+          <!-- BOTONES -->
+          <div class="actions">
+            <a href="index.html" class="btn-secondary">Volver</a>
+            <button type="submit" class="btn-calc">Calcular</button>
+            <button type="button" class="btn-secondary" id="btnCopy"><i class="fas fa-copy"></i> Copiar</button>
+            <button type="reset" class="btn-secondary" onclick="document.getElementById('result').innerText='Marca los criterios y pulsa Calcular.'">Limpiar</button>
+          </div>
+
+          <!-- RESULTADO -->
+          <div id="result" class="result-box">Marca los criterios y pulsa Calcular.</div>
+
+          <!-- DETALLES -->
+          <details>
+            <summary>Ver Recomendaciones de Manejo</summary>
+            <div class="details-content">
+              <p><strong>Estratificación de Riesgo:</strong></p>
+              <ul>
+                <li><strong>0 - 1 Punto (Bajo Riesgo):</strong> Mortalidad &lt; 3%. Considerar tratamiento ambulatorio.</li>
+                <li><strong>2 Puntos (Riesgo Intermedio):</strong> Mortalidad ~9%. Considerar ingreso hospitalario breve u observación.</li>
+                <li><strong>3 - 5 Puntos (Alto Riesgo):</strong> Mortalidad 15 - 40%. Ingreso hospitalario. Valorar UCI si score &ge; 4 o inestabilidad.</li>
+              </ul>
+              <p class="mt-2 text-muted"><strong>Nota:</strong> Si no se dispone de Urea (CRB-65), los puntos de corte pueden variar ligeramente. Siempre prevalece el juicio clínico y la valoración de factores sociales/comorbilidad.</p>
+            </div>
+          </details>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast">Resultado copiado al portapapeles</div>
+
+  <!-- JAVASCRIPT -->
+  <script src="../../js/main.js"></script>
+  <script>
+    (function() {
+      const $ = (id) => document.getElementById(id);
+      
+      $('formCURB').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        let score = 0;
+        let criterios = [];
+
+        // Sumar puntos
+        if ($('c').checked) { score++; criterios.push("Confusión"); }
+        if ($('u').checked) { score++; criterios.push("Urea elevada"); }
+        if ($('r').checked) { score++; criterios.push("FR >= 30"); }
+        if ($('b').checked) { score++; criterios.push("Hipotensión"); }
+        if ($('age').checked) { score++; criterios.push("Edad >= 65"); }
+
+        let riesgo = "";
+        let manejo = "";
+        let mortalidad = "";
+
+        if (score <= 1) {
+            riesgo = "BAJO RIESGO";
+            mortalidad = "Baja (< 3%)";
+            manejo = "Considerar tratamiento domiciliario (ambulatorio).";
+        } else if (score === 2) {
+            riesgo = "RIESGO INTERMEDIO";
+            mortalidad = "Moderada (~9%)";
+            manejo = "Considerar ingreso hospitalario o vigilancia estrecha.";
+        } else {
+            riesgo = "ALTO RIESGO";
+            mortalidad = "Elevada (15-40%)";
+            manejo = "Ingreso hospitalario urgente. Valorar UCI (especialmente si score 4-5).";
+        }
+
+        const resultado = `CURB-65: ${score} puntos\n` +
+                          `RIESGO: ${riesgo}\n` +
+                          `Mortalidad estimada: ${mortalidad}\n\n` +
+                          `RECOMENDACIÓN: ${manejo}`;
+        
+        $('result').innerText = resultado;
+      });
+
+      // Copiar
+      $('btnCopy').addEventListener('click', () => {
+          const resultText = $('result').innerText;
+          if (!resultText || resultText.includes('Marca los criterios')) return;
+          if (navigator.clipboard && window.isSecureContext) {
+              navigator.clipboard.writeText(resultText).then(showToast);
+          } else {
+              const textArea = document.createElement("textarea");
+              textArea.value = resultText;
+              textArea.style.position = "fixed";
+              document.body.appendChild(textArea);
+              textArea.select();
+              try { document.execCommand('copy'); showToast(); } catch (err) {}
+              document.body.removeChild(textArea);
+          }
+      });
+
+      function showToast() {
+          const toast = $('toast');
+          toast.className = "toast show";
+          setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Escala SOFA - Vithas</title>
+  
+  <link rel="icon" type="image/png" href="../../Favicon-Vithas.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="style.css" />
+  
+  <style>
+    /* Toast */
+    .toast {
+      visibility: hidden; min-width: 250px; background-color: #333; color: #fff; text-align: center;
+      border-radius: 50px; padding: 16px; position: fixed; z-index: 1000; left: 50%; bottom: 30px;
+      transform: translateX(-50%); font-size: 0.9rem; opacity: 0; transition: opacity 0.3s, bottom 0.3s;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .toast.show { visibility: visible; opacity: 1; bottom: 50px; }
+
+    /* Estilo para el display de PAM */
+    .pam-display {
+      background-color: #f3e5f5; /* Fondo violeta muy suave */
+      border: 1px solid #ce93d8;
+      color: #4a148c;
+      font-weight: 700;
+      padding: 10px 15px;
+      border-radius: 8px;
+      text-align: center;
+      min-width: 80px;
+    }
+    
+    /* Ajuste para los radios de vasopresores en lista vertical */
+    .vertical-check-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .vertical-check-group .form-check {
+      justify-content: flex-start;
+      text-align: left;
+    }
+    
+    /* Ajustes responsivos */
+    @media (min-width: 768px) {
+      .input-row { display: flex; gap: 20px; align-items: flex-end; }
+      .input-col { flex: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+    </div>
+    <nav class="nav-links">
+      <ul>
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        
+        <li class="nav-category">Práctica Clínica</li>
+        
+        <!-- Enlace para volver al menú general -->
+        <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Volver a Calculadoras</a></li>
+        
+        <!-- BLOQUE ACTUAL: Infecciosas (ABIERTO) -->
+        <li class="has-submenu open">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-bacteria"></i> Infecciosas
+            </div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="index.html">Menú Infecciosas</a></li>
+            <li><a href="qsofa.html"><i class="fas fa-stopwatch"></i> qSOFA</a></li>
+            <!-- Elemento Activo -->
+            <li><a href="sofa.html" class="submenu-main-link active"><i class="fas fa-procedures"></i> SOFA</a></li>
+            <li><a href="centor-mcisaac.html"><i class="fas fa-user-md"></i> Centor / McIsaac</a></li>
+            <li><a href="mulbsta.html"><i class="fas fa-lungs-virus"></i> MuLBSTA</a></li>
+          </ul>
+        </li>
+
+        <!-- Otros Bloques (Cerrados) -->
+        <li class="has-submenu">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;"><i class="fas fa-utensils"></i> Digestivo</div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="../Digestivo/index.html">Menú Digestivo</a></li>
+          </ul>
+        </li>
+
+        <li class="has-submenu">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;"><i class="fas fa-heartbeat"></i> Cardiovascular</div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="../Cardiovascular/index.html">Menú Cardiovascular</a></li>
+          </ul>
+        </li>
+
+        <li class="has-submenu">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;"><i class="fas fa-ruler-combined"></i> Antropometría</div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="../Antropometricos/index.html">Menú Antropometría</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- CONTENIDO -->
+  <div class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <h2><i class="fas fa-bacteria" id="menuToggle" style="margin-right: 10px;"></i>Calculadoras Infecciosas</h2>
+      </div>
+      <div class="header-right">
+        <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+      </div>
+    </header>
+
+    <div class="calc-container">
+      <div class="calc-card">
+        <h1 class="calc-title">Escala SOFA (Sepsis-related Organ Failure Assessment)</h1>
+        <p class="calc-subtitle">Evaluación secuencial de fallo orgánico. Utilizar el peor valor de las últimas 24 horas.</p>
+
+        <form id="formSOFA">
+          
+          <!-- Respiratorio -->
+          <div class="form-section">
+            <span class="section-label">Respiratorio</span>
+            <div class="input-group">
+              <label for="pafi" class="fw-bold">PaO₂/FiO₂ (mmHg)</label>
+              <div class="input-wrapper">
+                <input id="pafi" class="form-control" type="number" step="1" min="0" placeholder="Ej. 250">
+                <span class="input-suffix">mmHg</span>
+              </div>
+              <small class="text-muted">Si no dispone de gasometría, estime usando SaO₂/FiO₂.</small>
+            </div>
+          </div>
+
+          <!-- Coagulación -->
+          <div class="form-section">
+            <span class="section-label">Coagulación</span>
+            <div class="input-group">
+              <label for="plt" class="fw-bold">Plaquetas</label>
+              <div class="input-wrapper">
+                <input id="plt" class="form-control" type="number" step="1" min="0" placeholder="Ej. 150">
+                <span class="input-suffix">×10³/µL</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hepático -->
+          <div class="form-section">
+            <span class="section-label">Hepático</span>
+            <div class="input-group">
+              <label for="bili" class="fw-bold">Bilirrubina Total</label>
+              <div class="input-wrapper">
+                <input id="bili" class="form-control" type="number" step="0.1" min="0" placeholder="Ej. 1.2">
+                <span class="input-suffix">mg/dL</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cardiovascular -->
+          <div class="form-section">
+            <span class="section-label">Cardiovascular</span>
+            
+            <!-- Calculadora de PAM integrada -->
+            <div class="input-row mb-3">
+              <div class="input-col">
+                <label for="pas">Tensión Arterial Sistólica</label>
+                <div class="input-wrapper">
+                  <input id="pas" class="form-control" type="number" step="1" min="0" placeholder="Ej. 100">
+                  <span class="input-suffix">mmHg</span>
+                </div>
+              </div>
+              <div class="input-col">
+                <label for="pad">Tensión Arterial Diastólica</label>
+                <div class="input-wrapper">
+                  <input id="pad" class="form-control" type="number" step="1" min="0" placeholder="Ej. 60">
+                  <span class="input-suffix">mmHg</span>
+                </div>
+              </div>
+              <div class="input-col">
+                 <label>PAM Calculada</label>
+                 <div id="pamDisplay" class="pam-display">--</div>
+              </div>
+            </div>
+
+            <!-- Selección de Vasopresores (Radio Buttons en lugar de Select) -->
+            <label class="fw-bold mb-2 d-block">Soporte Vasoactivo</label>
+            <div class="vertical-check-group">
+              <div class="form-check">
+                <input type="radio" name="vaso" id="vasoNone" value="none" checked>
+                <label for="vasoNone">Ninguno</label>
+              </div>
+              <div class="form-check">
+                <input type="radio" name="vaso" id="vasoDopLow" value="dopLow">
+                <label for="vasoDopLow">Dopamina &le; 5 µg/kg/min o Dobutamina (cualquier dosis)</label>
+              </div>
+              <div class="form-check">
+                <input type="radio" name="vaso" id="vasoDopMed" value="dopMed">
+                <label for="vasoDopMed">Dopamina &gt; 5 a 15 µg/kg/min</label>
+              </div>
+              <div class="form-check">
+                <input type="radio" name="vaso" id="vasoDopHigh" value="dopHigh">
+                <label for="vasoDopHigh">Dopamina &gt; 15 o Noradrenalina/Adrenalina &le; 0.1 µg/kg/min</label>
+              </div>
+              <div class="form-check">
+                <input type="radio" name="vaso" id="vasoNoraHigh" value="noraHigh">
+                <label for="vasoNoraHigh">Noradrenalina/Adrenalina &gt; 0.1 µg/kg/min</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Neurológico -->
+          <div class="form-section">
+            <span class="section-label">Neurológico</span>
+            <div class="input-group">
+              <label for="gcs" class="fw-bold">Escala de Coma de Glasgow (GCS)</label>
+              <div class="input-wrapper">
+                <input id="gcs" class="form-control" type="number" step="1" min="3" max="15" placeholder="Ej. 15">
+                <span class="input-suffix">puntos</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Renal -->
+          <div class="form-section">
+            <span class="section-label">Renal</span>
+            <div class="input-row">
+              <div class="input-col">
+                <label for="crea">Creatinina</label>
+                <div class="input-wrapper">
+                  <input id="crea" class="form-control" type="number" step="0.1" min="0" placeholder="Ej. 1.0">
+                  <span class="input-suffix">mg/dL</span>
+                </div>
+              </div>
+              <div class="input-col">
+                <label for="urine">Diuresis (24h)</label>
+                <div class="input-wrapper">
+                  <input id="urine" class="form-control" type="number" step="1" min="0" placeholder="Ej. 1200">
+                  <span class="input-suffix">mL/día</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- BOTONES DE ACCIÓN -->
+          <div class="actions">
+            <a href="index.html" class="btn-secondary" style="text-decoration: none;">Volver</a>
+            <button type="submit" class="btn-calc">Calcular</button>
+            <button type="button" class="btn-secondary" id="btnCopy"><i class="fas fa-copy"></i> Copiar</button>
+            <button type="reset" class="btn-secondary" onclick="resetForm()">Limpiar</button>
+          </div>
+
+          <!-- CAJA DE RESULTADOS -->
+          <div id="result" class="result-box">Introduce los datos y pulsa Calcular.</div>
+
+          <!-- DETALLES ADICIONALES -->
+          <details>
+            <summary>Ver criterios de puntuación detallados</summary>
+            <div class="details-content">
+              <ul>
+                <li><strong>Respiración (PaO₂/FiO₂):</strong> &ge;400 (0), &lt;400 (1), &lt;300 (2), &lt;200 (3), &lt;100 (4).</li>
+                <li><strong>Coagulación (Plaquetas):</strong> &ge;150 (0), &lt;150 (1), &lt;100 (2), &lt;50 (3), &lt;20 (4).</li>
+                <li><strong>Hígado (Bilirrubina):</strong> &lt;1.2 (0), 1.2-1.9 (1), 2.0-5.9 (2), 6.0-11.9 (3), &ge;12 (4).</li>
+                <li><strong>Cardiovascular:</strong> PAM&ge;70 (0), PAM&lt;70 (1), Vasoactivos (2-4).</li>
+                <li><strong>SNC (Glasgow):</strong> 15 (0), 13-14 (1), 10-12 (2), 6-9 (3), &lt;6 (4).</li>
+                <li><strong>Renal:</strong> Creat &lt;1.2 (0), 1.2-1.9 (1), 2.0-3.4 (2), 3.5-4.9 (3), &ge;5 (4). O Diuresis &lt;500mL (3), &lt;200mL (4).</li>
+              </ul>
+              <p class="text-muted small mt-2">Un cambio agudo de ≥ 2 puntos en la puntuación total sugiere disfunción orgánica secundaria a infección.</p>
+            </div>
+          </details>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast">Resultado copiado al portapapeles</div>
+
+  <script src="../../js/main.js"></script>
+  <script>
+    (function() {
+        const $ = (id) => document.getElementById(id);
+
+        // --- CÁLCULO AUTOMÁTICO DE PAM ---
+        function actualizarPAM() {
+            const pas = parseFloat($('pas').value);
+            const pad = parseFloat($('pad').value);
+            const display = $('pamDisplay');
+            
+            if (pas > 0 && pad > 0) {
+                const pam = Math.round((pas + 2 * pad) / 3);
+                display.textContent = pam;
+                if (pam < 70) {
+                    display.style.color = '#d32f2f'; // Rojo alerta
+                    display.style.backgroundColor = '#ffebee';
+                    display.style.borderColor = '#ffcdd2';
+                } else {
+                    display.style.color = '#4a148c'; // Violeta normal
+                    display.style.backgroundColor = '#f3e5f5';
+                    display.style.borderColor = '#ce93d8';
+                }
+            } else {
+                display.textContent = '--';
+                display.style.color = '#4a148c';
+                display.style.backgroundColor = '#f3e5f5';
+            }
+        }
+
+        $('pas').addEventListener('input', actualizarPAM);
+        $('pad').addEventListener('input', actualizarPAM);
+
+        // --- CÁLCULO SOFA ---
+        $('formSOFA').addEventListener('submit', (e) => {
+          e.preventDefault();
+          
+          const pafi = parseFloat($('pafi').value);
+          const plt = parseFloat($('plt').value);
+          const bili = parseFloat($('bili').value);
+          const pas = parseFloat($('pas').value);
+          const pad = parseFloat($('pad').value);
+          const vaso = document.querySelector('input[name="vaso"]:checked').value;
+          const gcs = parseFloat($('gcs').value);
+          const crea = parseFloat($('crea').value);
+          const urine = parseFloat($('urine').value);
+
+          // Puntuaciones Parciales
+          let p_resp = 0;
+          if (pafi > 0) {
+             if (pafi < 100) p_resp = 4;
+             else if (pafi < 200) p_resp = 3;
+             else if (pafi < 300) p_resp = 2;
+             else if (pafi < 400) p_resp = 1;
+          }
+
+          let p_coag = 0;
+          if (plt > 0) {
+             if (plt < 20) p_coag = 4;
+             else if (plt < 50) p_coag = 3;
+             else if (plt < 100) p_coag = 2;
+             else if (plt < 150) p_coag = 1;
+          }
+
+          let p_liver = 0;
+          if (bili > 0) {
+             if (bili >= 12) p_liver = 4;
+             else if (bili >= 6) p_liver = 3;
+             else if (bili >= 2) p_liver = 2;
+             else if (bili >= 1.2) p_liver = 1;
+          }
+
+          let p_cardio = 0;
+          if (vaso === 'noraHigh') p_cardio = 4;
+          else if (vaso === 'dopHigh') p_cardio = 3;
+          else if (vaso === 'dopMed' || vaso === 'dopLow') p_cardio = 2;
+          else {
+             const pam = (pas > 0 && pad > 0) ? (pas + 2*pad)/3 : 100;
+             if (pam < 70) p_cardio = 1;
+          }
+
+          let p_neuro = 0;
+          if (gcs > 0) {
+             if (gcs < 6) p_neuro = 4;
+             else if (gcs <= 9) p_neuro = 3;
+             else if (gcs <= 12) p_neuro = 2;
+             else if (gcs <= 14) p_neuro = 1;
+          }
+
+          let p_renal = 0;
+          // Por Creatinina
+          let scoreCr = 0;
+          if (crea >= 5) scoreCr = 4;
+          else if (crea >= 3.5) scoreCr = 3;
+          else if (crea >= 2.0) scoreCr = 2;
+          else if (crea >= 1.2) scoreCr = 1;
+          
+          // Por Diuresis (prioridad si es peor)
+          let scoreU = 0;
+          if (urine > 0 && urine < 200) scoreU = 4;
+          else if (urine > 0 && urine < 500) scoreU = 3;
+          
+          p_renal = Math.max(scoreCr, scoreU);
+
+          const total = p_resp + p_coag + p_liver + p_cardio + p_neuro + p_renal;
+
+          // Interpretación
+          let interp = "";
+          if (total >= 11) interp = "RIESGO MUY ALTO (>95% mortalidad). Fallo multiorgánico grave.";
+          else if (total >= 6) interp = "RIESGO ALTO. Considerar ingreso en UCI.";
+          else if (total >= 2) interp = "Disfunción Orgánica. Aumento de mortalidad.";
+          else interp = "Bajo riesgo de disfunción orgánica actual.";
+
+          $('result').textContent = `SOFA TOTAL: ${total} puntos\n\n` +
+                                    `INTERPRETACIÓN: ${interp}\n\n` +
+                                    `Desglose:\n` +
+                                    `• Respiratorio: ${p_resp}\n` +
+                                    `• Coagulación: ${p_coag}\n` +
+                                    `• Hepático: ${p_liver}\n` +
+                                    `• Cardiovascular: ${p_cardio}\n` +
+                                    `• Neurológico: ${p_neuro}\n` +
+                                    `• Renal: ${p_renal}`;
+        });
+
+        // Función global de reset
+        window.resetForm = function() {
+            document.getElementById('result').innerText = 'Introduce los datos y pulsa Calcular.';
+            document.getElementById('pamDisplay').innerText = '--';
+            document.getElementById('pamDisplay').style.backgroundColor = '#f3e5f5';
+            document.getElementById('pamDisplay').style.color = '#4a148c';
+        };
+
+        // Copiar
+        $('btnCopy').addEventListener('click', () => {
+            const resultText = $('result').innerText;
+            if (!resultText || resultText.includes('Introduce los datos')) return;
+            
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(resultText).then(showToast);
+            } else {
+                const textArea = document.createElement("textarea");
+                textArea.value = resultText;
+                textArea.style.position = "fixed";
+                document.body.appendChild(textArea);
+                textArea.select();
+                try { document.execCommand('copy'); showToast(); } catch (err) {}
+                document.body.removeChild(textArea);
+            }
+        });
+
+        function showToast() {
+            const toast = $('toast');
+            toast.className = "toast show";
+            setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+    })();
+  </script>
+</body>
+</html>

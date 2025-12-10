@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FeUrea - Vithas Nefrología</title>
+  
+  <link rel="icon" type="image/png" href="../../assets/Images/Logos/Favicon-Vithas.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Estilos Globales y Específicos -->
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+    </div>
+    <nav class="nav-links">
+      <ul>
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        
+        <li class="nav-category">Práctica Clínica</li>
+        <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Volver a Calculadoras</a></li>
+        
+        <!-- BLOQUE NEFROLOGÍA (ABIERTO) -->
+        <li class="has-submenu open">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-filter"></i> Nefrología
+            </div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="index.html">Menú Nefrología</a></li>
+            <li><a href="fg.html"><i class="fas fa-calculator"></i> Filtrado Glomerular</a></li>
+            <li><a href="feNa.html"><i class="fas fa-percent"></i> FeNa</a></li>
+            <li><a href="feUrea.html" class="submenu-main-link active"><i class="fas fa-percent"></i> FeUrea</a></li>
+            <li><a href="anion-gap.html"><i class="fas fa-flask"></i> Anión Gap</a></li>
+            <li><a href="osmolalidad.html"><i class="fas fa-tint"></i> Osmolalidad</a></li>
+            <li><a href="deficit-agua.html"><i class="fas fa-glass-whiskey"></i> Déficit de Agua</a></li>
+            <li><a href="reposicion-hidrica.html"><i class="fas fa-syringe"></i> Reposición Hídrica</a></li>
+            <li><a href="calcio-serico.html"><i class="fas fa-bone"></i> Calcio Corregido</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- CONTENIDO -->
+  <div class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <i class="fas fa-bars menu-toggle" id="menuToggle"></i>
+        <h2><i class="fas fa-filter" style="margin-right: 10px;"></i>Nefrología</h2>
+      </div>
+      <div class="header-right">
+        <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+      </div>
+    </header>
+
+    <div class="calc-container">
+      <div class="calc-card">
+        <h1 class="calc-title">Fracción de Excreción de Urea (FeUrea)</h1>
+        <p class="calc-subtitle">Alternativa superior a la FeNa en pacientes bajo tratamiento con diuréticos.</p>
+
+        <form id="formFeUrea">
+          
+          <div class="input-row">
+            <!-- COLUMNA ORINA -->
+            <div class="input-col">
+              <div class="form-section">
+                <span class="section-label">Muestra de Orina</span>
+                
+                <div class="input-group">
+                  <label for="ureaOrina">Urea Urinaria</label>
+                  <div class="input-wrapper">
+                    <input id="ureaOrina" class="form-control" type="number" step="0.1" min="0" placeholder="Ej. 250" required>
+                    <span class="input-suffix">mg/dL</span>
+                  </div>
+                </div>
+
+                <div class="input-group">
+                  <label for="creatOrina">Creatinina Urinaria</label>
+                  <div class="input-wrapper">
+                    <input id="creatOrina" class="form-control" type="number" step="0.1" min="0" placeholder="Ej. 50" required>
+                    <span class="input-suffix">mg/dL</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- COLUMNA PLASMA -->
+            <div class="input-col">
+              <div class="form-section">
+                <span class="section-label">Muestra de Plasma</span>
+                
+                <div class="input-group">
+                  <label for="ureaPlasma">Urea Plasmática</label>
+                  <div class="input-wrapper">
+                    <input id="ureaPlasma" class="form-control" type="number" step="0.1" min="0" placeholder="Ej. 40" required>
+                    <span class="input-suffix">mg/dL</span>
+                  </div>
+                </div>
+
+                <div class="input-group">
+                  <label for="creatPlasma">Creatinina Plasmática</label>
+                  <div class="input-wrapper">
+                    <input id="creatPlasma" class="form-control" type="number" step="0.01" min="0" placeholder="Ej. 1.2" required>
+                    <span class="input-suffix">mg/dL</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- BOTONES -->
+          <div class="actions">
+            <a href="index.html" class="btn-secondary">Volver</a>
+            <button type="submit" class="btn-calc">Calcular</button>
+            <button type="button" class="btn-secondary" id="btnCopy"><i class="fas fa-copy"></i> Copiar</button>
+            <button type="reset" class="btn-secondary" onclick="document.getElementById('result').innerText='Introduce los datos y pulsa Calcular.'">Limpiar</button>
+          </div>
+
+          <!-- RESULTADO -->
+          <div id="result" class="result-box">Introduce los datos y pulsa Calcular.</div>
+
+          <!-- DETALLES -->
+          <details>
+            <summary>Ver Fórmula e Interpretación</summary>
+            <div class="details-content">
+              <p><strong>Fórmula:</strong></p>
+              <div style="background:#fff; padding:10px; border-radius:6px; text-align:center; margin:10px 0; border:1px solid #eee;">
+                FeUrea (%) = (U<sub>Urea</sub> × P<sub>Cr</sub>) / (P<sub>Urea</sub> × U<sub>Cr</sub>) × 100
+              </div>
+              <p><strong>Interpretación:</strong></p>
+              <ul>
+                <li><strong>&lt; 35%:</strong> Sugiere hipoperfusión renal (Prerrenal).</li>
+                <li><strong>&gt; 50%:</strong> Sugiere necrosis tubular aguda (NTA).</li>
+                <li><strong>35% - 50%:</strong> Zona gris o intermedia. Valorar contexto.</li>
+              </ul>
+              <p class="text-muted mt-2 small"><i class="fas fa-info-circle"></i> <strong>Ventaja clínica:</strong> La urea se reabsorbe principalmente en el túbulo proximal, proceso menos afectado por los diuréticos que la reabsorción de sodio. Por ello, la FeUrea es más fiable que la FeNa en pacientes tratados con furosemida u otros diuréticos.</p>
+            </div>
+          </details>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast">Resultado copiado al portapapeles</div>
+
+  <!-- JAVASCRIPT GLOBAL Y LOCAL -->
+  <script src="../../js/main.js"></script>
+  <script>
+    (function() {
+      const $ = (id) => document.getElementById(id);
+      const r = (value, decimals = 2) => Math.round((value + Number.EPSILON) * (10 ** decimals)) / (10 ** decimals);
+
+      $('formFeUrea').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const ureaOrina = parseFloat($('ureaOrina').value);
+        const ureaPlasma = parseFloat($('ureaPlasma').value);
+        const creatOrina = parseFloat($('creatOrina').value);
+        const creatPlasma = parseFloat($('creatPlasma').value);
+        
+        if (!(ureaOrina > 0) || !(ureaPlasma > 0) || !(creatOrina > 0) || !(creatPlasma > 0)) {
+          $('result').textContent = 'Por favor, asegúrate de rellenar todos los campos con valores positivos.';
+          return;
+        }
+        
+        // Cálculo FeUrea
+        const feurea = (ureaOrina * creatPlasma) / (ureaPlasma * creatOrina) * 100;
+        
+        let interpretacion = "";
+        let consideraciones = "";
+
+        if (feurea < 35) {
+          interpretacion = "SUGIERE ORIGEN PRERRENAL (< 35%)";
+          consideraciones = "Alta probabilidad de hipoperfusión renal reversible.";
+        } else if (feurea > 50) {
+          interpretacion = "SUGIERE ORIGEN PARENQUIMATOSO / NTA (> 50%)";
+          consideraciones = "Alta probabilidad de Necrosis Tubular Aguda o daño intrínseco.";
+        } else {
+          interpretacion = "ZONA GRIS / INDETERMINADO (35% - 50%)";
+          consideraciones = "Resultado no concluyente. Correlacionar con clínica y respuesta a volumen.";
+        }
+        
+        const resultadoTexto = `FeUrea: ${r(feurea)} %\n\n` +
+                               `INTERPRETACIÓN: ${interpretacion}\n` +
+                               `${consideraciones}`;
+        
+        $('result').innerText = resultadoTexto;
+      });
+
+      // Copiar al portapapeles
+      $('btnCopy').addEventListener('click', () => {
+          const resultText = $('result').innerText;
+          if (!resultText || resultText.includes('Introduce los datos')) return;
+          
+          if (navigator.clipboard && window.isSecureContext) {
+              navigator.clipboard.writeText(resultText).then(showToast);
+          } else {
+              const textArea = document.createElement("textarea");
+              textArea.value = resultText;
+              textArea.style.position = "fixed";
+              document.body.appendChild(textArea);
+              textArea.select();
+              try { document.execCommand('copy'); showToast(); } catch (err) {}
+              document.body.removeChild(textArea);
+          }
+      });
+
+      function showToast() {
+          const toast = $('toast');
+          toast.className = "toast show";
+          setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ASPECTS - Vithas Neurología</title>
+  
+  <link rel="icon" type="image/png" href="../../assets/Images/Logos/Favicon-Vithas.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Estilos Globales y Específicos -->
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="style.css" />
+  
+  <style>
+    /* Estilo para simular un mapa de regiones */
+    .aspects-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    @media (min-width: 768px) {
+      .aspects-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    .region-group {
+      background: #f8fafc;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+    }
+    .region-title {
+      font-weight: 700;
+      color: #3949ab;
+      margin-bottom: 10px;
+      border-bottom: 2px solid #e0e7ff;
+      padding-bottom: 5px;
+      display: block;
+    }
+    
+    /* FORZAR ALINEACIÓN A LA IZQUIERDA en los items de ASPECTS */
+    .aspects-grid .form-check {
+      justify-content: flex-start !important; /* Sobrescribe el center del layout general */
+      text-align: left;
+      padding-left: 15px;
+    }
+    
+    /* Ajuste para el selector de lado (radio buttons) */
+    .side-selector .form-check {
+       justify-content: flex-start;
+       min-width: 120px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+    </div>
+    <nav class="nav-links">
+      <ul>
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        
+        <li class="nav-category">Práctica Clínica</li>
+        <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Volver a Calculadoras</a></li>
+        
+        <!-- BLOQUE NEUROLOGÍA (ABIERTO) -->
+        <li class="has-submenu open">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-brain"></i> Neurología
+            </div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="index.html">Menú Neurología</a></li>
+            <li><a href="nihss.html"><i class="fas fa-user-injured"></i> NIHSS</a></li>
+            <li><a href="gcs-adulto.html"><i class="fas fa-star"></i> Glasgow (GCS)</a></li>
+            <li><a href="four-score.html"><i class="fas fa-procedures"></i> FOUR Score</a></li>
+            <li><a href="canadian-ct-head.html"><i class="fas fa-skull"></i> Canadian CT Head</a></li>
+            <li><a href="abcd2.html"><i class="fas fa-bolt"></i> ABCD² (AIT)</a></li>
+            <li><a href="ich-score.html"><i class="fas fa-brain"></i> ICH Score</a></li>
+            <li><a href="aspect.html" class="submenu-main-link active"><i class="fas fa-layer-group"></i> ASPECTS</a></li>
+            <li><a href="mrs.html"><i class="fas fa-wheelchair"></i> Rankin (mRS)</a></li>
+            <li><a href="ottawa-sah.html"><i class="fas fa-head-side-virus"></i> Ottawa SAH</a></li>
+            <li><a href="status-epileptico-dosis.html"><i class="fas fa-pills"></i> Status Epiléptico</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- CONTENIDO -->
+  <div class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <i class="fas fa-bars menu-toggle" id="menuToggle"></i>
+        <h2><i class="fas fa-brain" style="margin-right: 10px;"></i>Neurología</h2>
+      </div>
+      <div class="header-right">
+        <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+      </div>
+    </header>
+
+    <div class="calc-container">
+      <div class="calc-card">
+        <h1 class="calc-title">ASPECTS (Alberta Stroke Program Early CT Score)</h1>
+        <p class="calc-subtitle">Valoración topográfica de signos isquémicos tempranos en el territorio de la arteria cerebral media (ACM).</p>
+
+        <form id="formASPECTS">
+          
+          <div class="form-section">
+            <span class="section-label">Contexto</span>
+            
+            <!-- Selector de Lado con Radio Buttons -->
+            <label class="fw-bold mb-2 d-block">Lado Afectado (Hemisferio)</label>
+            <div class="check-group side-selector mb-3">
+              <label class="form-check">
+                <input type="radio" name="side" value="Izquierdo" checked> Izquierdo
+              </label>
+              <label class="form-check">
+                <input type="radio" name="side" value="Derecho"> Derecho
+              </label>
+            </div>
+            
+            <p class="text-muted small mb-3">Marca las regiones donde observes <strong>hipodensidad o borramiento</strong> (signos isquémicos agudos).</p>
+          </div>
+
+          <div class="aspects-grid">
+            
+            <!-- ESTRUCTURAS PROFUNDAS -->
+            <div class="region-group">
+              <span class="region-title">Estructuras Profundas</span>
+              <div class="check-group" style="flex-direction: column;">
+                <label class="form-check">
+                  <input type="checkbox" id="c">
+                  <span><strong>C</strong> - Caudado (Cabeza)</span>
+                </label>
+                <label class="form-check">
+                  <input type="checkbox" id="l">
+                  <span><strong>L</strong> - Lenticular</span>
+                </label>
+                <label class="form-check">
+                  <input type="checkbox" id="ic">
+                  <span><strong>IC</strong> - Cápsula Interna</span>
+                </label>
+                <label class="form-check">
+                  <input type="checkbox" id="i">
+                  <span><strong>I</strong> - Ínsula (Cinta insular)</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- CORTEZA ACM -->
+            <div class="region-group">
+              <span class="region-title">Territorio ACM</span>
+              <div class="check-group" style="flex-direction: column;">
+                <label class="form-check">
+                  <input type="checkbox" id="m1">
+                  <span><strong>M1</strong> - Corteza frontal anterio (Nivel Ganglionar)</span>
+                </label>
+                <label class="form-check">
+                  <input type="checkbox" id="m2">
+                  <span><strong>M2</strong> - Corteza temporal lateral (Nivel Ganglionar)</span>
+                </label>
+                <label class="form-check">
+                  <input type="checkbox" id="m3">
+                  <span><strong>M3</strong> - Corteza temporal posterior (Nivel Ganglionar)</span>
+                </label>
+                <label class="form-check">
+                  <input type="checkbox" id="m4">
+                  <span><strong>M4</strong> - Territorio ACM anterior (Supraganglionar)</span>
+                </label>
+                <label class="form-check">
+                  <input type="checkbox" id="m5">
+                  <span><strong>M5</strong> - Territorio ACM lateral (Supraganglionar)</span>
+                </label>
+                <label class="form-check">
+                  <input type="checkbox" id="m6">
+                  <span><strong>M6</strong> - Territorio ACM posterior (Supraganglionar)</span>
+                </label>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- BOTONES -->
+          <div class="actions">
+            <a href="index.html" class="btn-secondary">Volver</a>
+            <button type="submit" class="btn-calc">Calcular</button>
+            <button type="button" class="btn-secondary" id="btnCopy"><i class="fas fa-copy"></i> Copiar</button>
+            <button type="reset" class="btn-secondary" onclick="document.getElementById('result').innerText='Marca las zonas afectadas y pulsa Calcular.'">Limpiar</button>
+          </div>
+
+          <!-- RESULTADO -->
+          <div id="result" class="result-box">Marca las zonas afectadas y pulsa Calcular.</div>
+
+          <!-- DETALLES -->
+          <details>
+            <summary>Ver Interpretación Pronóstica</summary>
+            <div class="details-content">
+              <p><strong>Puntuación (10 - 0):</strong></p>
+              <ul>
+                <li>Se parte de 10 puntos (TC Normal).</li>
+                <li>Se resta 1 punto por cada región con signos de isquemia.</li>
+              </ul>
+              <p class="mt-2"><strong>Interpretación:</strong></p>
+              <ul>
+                <li><strong>10 - 8:</strong> Buen pronóstico funcional / Infarto pequeño.</li>
+                <li><strong>7 - 5:</strong> Pronóstico intermedio / Infarto moderado.</li>
+                <li><strong>&le; 4:</strong> Mal pronóstico funcional / Infarto extenso (Alto riesgo de transformación hemorrágica con trombólisis).</li>
+              </ul>
+              <p class="mt-2 small text-muted">Nota: Un ASPECTS &le; 6-7 suele ser el punto de corte tradicional para considerar un infarto "extenso" (&gt;1/3 territorio ACM), aunque las guías actuales de trombectomía mecánica han ampliado indicaciones a ASPECTS bajos en ciertos casos (SELECT-2, ANGEL-ASPECT, etc.).</p>
+            </div>
+          </details>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast">Resultado copiado al portapapeles</div>
+
+  <!-- JAVASCRIPT -->
+  <script src="../../js/main.js"></script>
+  <script>
+    (function() {
+      const $ = (id) => document.getElementById(id);
+      
+      $('formASPECTS').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const regions = [
+            {id: 'c', label: 'Caudado'},
+            {id: 'l', label: 'Lenticular'},
+            {id: 'ic', label: 'Cápsula Interna'},
+            {id: 'i', label: 'Ínsula'},
+            {id: 'm1', label: 'M1'},
+            {id: 'm2', label: 'M2'},
+            {id: 'm3', label: 'M3'},
+            {id: 'm4', label: 'M4'},
+            {id: 'm5', label: 'M5'},
+            {id: 'm6', label: 'M6'}
+        ];
+
+        let affectedCount = 0;
+        let affectedList = [];
+
+        regions.forEach(r => {
+            if ($(r.id).checked) {
+                affectedCount++;
+                affectedList.push(r.label);
+            }
+        });
+
+        const score = 10 - affectedCount;
+        const side = document.querySelector('input[name="side"]:checked').value;
+
+        let interpretacion = "";
+        if (score >= 8) interpretacion = "BUEN PRONÓSTICO (Infarto pequeño/ausente)";
+        else if (score >= 5) interpretacion = "PRONÓSTICO INTERMEDIO (Infarto moderado)";
+        else interpretacion = "MAL PRONÓSTICO (Infarto extenso > 1/3 ACM)";
+
+        const resultado = `ASPECTS (${side}): ${score} / 10\n` +
+                          `INTERPRETACIÓN: ${interpretacion}\n\n` +
+                          `Zonas afectadas (${affectedCount}): ${affectedList.length > 0 ? affectedList.join(', ') : 'Ninguna visible'}.`;
+        
+        $('result').innerText = resultado;
+      });
+
+      // Copiar
+      $('btnCopy').addEventListener('click', () => {
+          const resultText = $('result').innerText;
+          if (!resultText || resultText.includes('Marca las zonas')) return;
+          if (navigator.clipboard && window.isSecureContext) {
+              navigator.clipboard.writeText(resultText).then(showToast);
+          } else {
+              const textArea = document.createElement("textarea");
+              textArea.value = resultText;
+              textArea.style.position = "fixed";
+              document.body.appendChild(textArea);
+              textArea.select();
+              try { document.execCommand('copy'); showToast(); } catch (err) {}
+              document.body.removeChild(textArea);
+          }
+      });
+
+      function showToast() {
+          const toast = $('toast');
+          toast.className = "toast show";
+          setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+      }
+    })();
+  </script>
+</body>
+</html>

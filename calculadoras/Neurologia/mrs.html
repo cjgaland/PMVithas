@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Escala mRS - Vithas Neurología</title>
+  
+  <link rel="icon" type="image/png" href="../../assets/Images/Logos/Favicon-Vithas.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Estilos Globales y Específicos -->
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="style.css" />
+  
+  <style>
+    /* Estilos específicos para la lista mRS para mejorar legibilidad */
+    .mrs-option {
+      align-items: flex-start; /* Alinear radio arriba si el texto es largo */
+      padding: 12px 15px;
+    }
+    /* Usamos span en lugar de div para validación HTML dentro de label */
+    .mrs-text {
+      display: block; 
+    }
+    .mrs-text strong {
+      display: block;
+      color: #333;
+      margin-bottom: 2px;
+    }
+    .mrs-text small {
+      color: #666;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      display: block; /* Asegura que el small ocupe su propia línea */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+    </div>
+    <nav class="nav-links">
+      <ul>
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        
+        <li class="nav-category">Práctica Clínica</li>
+        <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Volver a Calculadoras</a></li>
+        
+        <!-- BLOQUE NEUROLOGÍA (ABIERTO) -->
+        <li class="has-submenu open">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-brain"></i> Neurología
+            </div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="index.html">Menú Neurología</a></li>
+            <li><a href="nihss.html"><i class="fas fa-user-injured"></i> NIHSS</a></li>
+            <li><a href="gcs-adulto.html"><i class="fas fa-star"></i> Glasgow (GCS)</a></li>
+            <li><a href="four-score.html"><i class="fas fa-procedures"></i> FOUR Score</a></li>
+            <li><a href="canadian-ct-head.html"><i class="fas fa-skull"></i> Canadian CT Head</a></li>
+            <li><a href="abcd2.html"><i class="fas fa-bolt"></i> ABCD² (AIT)</a></li>
+            <li><a href="ich-score.html"><i class="fas fa-brain"></i> ICH Score</a></li>
+            <li><a href="aspect.html"><i class="fas fa-layer-group"></i> ASPECTS</a></li>
+            <li><a href="mrs.html" class="submenu-main-link active"><i class="fas fa-wheelchair"></i> Rankin (mRS)</a></li>
+            <li><a href="ottawa-sah.html"><i class="fas fa-head-side-virus"></i> Ottawa SAH</a></li>
+            <li><a href="status-epileptico-dosis.html"><i class="fas fa-pills"></i> Status Epiléptico</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- CONTENIDO -->
+  <div class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <i class="fas fa-bars menu-toggle" id="menuToggle"></i>
+        <h2><i class="fas fa-brain" style="margin-right: 10px;"></i>Neurología</h2>
+      </div>
+      <div class="header-right">
+        <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+      </div>
+    </header>
+
+    <div class="calc-container">
+      <div class="calc-card">
+        <h1 class="calc-title">Escala de Rankin Modificada (mRS)</h1>
+        <p class="calc-subtitle">Evaluación de la discapacidad funcional global en pacientes que han sufrido un ictus.</p>
+
+        <form id="formMRS">
+          
+          <div class="form-section">
+            <span class="section-label">Grado de Discapacidad</span>
+            <p class="text-muted small mb-3">Selecciona la descripción que mejor se ajuste a la situación actual del paciente.</p>
+            
+            <div class="check-group" style="gap: 10px;">
+              
+              <label class="form-check mrs-option">
+                <input type="radio" name="mrs" value="0" checked>
+                <span class="mrs-text">
+                  <strong>0 - Sin síntomas</strong>
+                  <small>Paciente sin síntomas en absoluto, aunque pueda tener alguna queja subjetiva menor.</small>
+                </span>
+              </label>
+
+              <label class="form-check mrs-option">
+                <input type="radio" name="mrs" value="1">
+                <span class="mrs-text">
+                  <strong>1 - Sin discapacidad significativa</strong>
+                  <small>Capaz de realizar todas las actividades habituales y deberes, a pesar de tener síntomas.</small>
+                </span>
+              </label>
+
+              <label class="form-check mrs-option">
+                <input type="radio" name="mrs" value="2">
+                <span class="mrs-text">
+                  <strong>2 - Discapacidad leve</strong>
+                  <small>Incapaz de realizar todas las actividades previas, pero capaz de cuidar de sus propios asuntos sin asistencia.</small>
+                </span>
+              </label>
+
+              <label class="form-check mrs-option">
+                <input type="radio" name="mrs" value="3">
+                <span class="mrs-text">
+                  <strong>3 - Discapacidad moderada</strong>
+                  <small>Requiere alguna ayuda, pero es capaz de caminar sin asistencia de otra persona.</small>
+                </span>
+              </label>
+
+              <label class="form-check mrs-option">
+                <input type="radio" name="mrs" value="4">
+                <span class="mrs-text">
+                  <strong>4 - Discapacidad moderadamente severa</strong>
+                  <small>Incapaz de caminar sin asistencia y de atender sus necesidades corporales sin ayuda.</small>
+                </span>
+              </label>
+
+              <label class="form-check mrs-option">
+                <input type="radio" name="mrs" value="5">
+                <span class="mrs-text">
+                  <strong>5 - Discapacidad severa</strong>
+                  <small>Confinado a cama, incontinente y requiere cuidado de enfermería y atención constantes.</small>
+                </span>
+              </label>
+
+              <label class="form-check mrs-option">
+                <input type="radio" name="mrs" value="6">
+                <span class="mrs-text">
+                  <strong>6 - Fallecido</strong>
+                </span>
+              </label>
+
+            </div>
+          </div>
+
+          <!-- BOTONES -->
+          <div class="actions">
+            <a href="index.html" class="btn-secondary">Volver</a>
+            <button type="submit" class="btn-calc">Calcular</button>
+            <button type="button" class="btn-secondary" id="btnCopy"><i class="fas fa-copy"></i> Copiar</button>
+            <button type="reset" class="btn-secondary" onclick="document.getElementById('result').innerText='Selecciona un grado y pulsa Calcular.'">Limpiar</button>
+          </div>
+
+          <!-- RESULTADO -->
+          <div id="result" class="result-box">Selecciona un grado y pulsa Calcular.</div>
+
+          <!-- DETALLES -->
+          <details>
+            <summary>Ver Interpretación Pronóstica</summary>
+            <div class="details-content">
+              <p><strong>Clasificación Simplificada:</strong></p>
+              <ul>
+                <li><strong>0 - 2:</strong> Buen resultado funcional (Independencia).</li>
+                <li><strong>3 - 5:</strong> Mal resultado funcional (Dependencia / Discapacidad).</li>
+                <li><strong>6:</strong> Mortalidad.</li>
+              </ul>
+              <p class="mt-2 text-muted">La escala mRS es el estándar para medir el resultado funcional en ensayos clínicos de ictus y para monitorizar la recuperación a largo plazo (habitualmente a los 90 días).</p>
+            </div>
+          </details>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast">Resultado copiado al portapapeles</div>
+
+  <!-- JAVASCRIPT -->
+  <script src="../../js/main.js"></script>
+  <script>
+    (function() {
+      const $ = (id) => document.getElementById(id);
+      
+      $('formMRS').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const selected = document.querySelector('input[name="mrs"]:checked');
+        if (!selected) return;
+
+        const val = parseInt(selected.value);
+        let descripcion = "";
+        let categoria = "";
+
+        switch(val) {
+            case 0: descripcion = "Sin síntomas"; categoria = "BUEN RESULTADO FUNCIONAL"; break;
+            case 1: descripcion = "Sin discapacidad significativa"; categoria = "BUEN RESULTADO FUNCIONAL"; break;
+            case 2: descripcion = "Discapacidad leve"; categoria = "INDEPENDENCIA (Aceptable)"; break;
+            case 3: descripcion = "Discapacidad moderada"; categoria = "DEPENDIENTE"; break;
+            case 4: descripcion = "Discapacidad moderadamente severa"; categoria = "GRAN DEPENDENCIA"; break;
+            case 5: descripcion = "Discapacidad severa"; categoria = "DEPENDENCIA TOTAL"; break;
+            case 6: descripcion = "Fallecido"; categoria = "EXITUS"; break;
+        }
+
+        const resultado = `ESCALA RANKIN (mRS): ${val} puntos\n` +
+                          `${descripcion}\n\n` +
+                          `INTERPRETACIÓN: ${categoria}`;
+        
+        $('result').innerText = resultado;
+      });
+
+      // Copiar
+      $('btnCopy').addEventListener('click', () => {
+          const resultText = $('result').innerText;
+          if (!resultText || resultText.includes('Selecciona un grado')) return;
+          if (navigator.clipboard && window.isSecureContext) {
+              navigator.clipboard.writeText(resultText).then(showToast);
+          } else {
+              const textArea = document.createElement("textarea");
+              textArea.value = resultText;
+              textArea.style.position = "fixed";
+              document.body.appendChild(textArea);
+              textArea.select();
+              try { document.execCommand('copy'); showToast(); } catch (err) {}
+              document.body.removeChild(textArea);
+          }
+      });
+
+      function showToast() {
+          const toast = $('toast');
+          toast.className = "toast show";
+          setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+      }
+    })();
+  </script>
+</body>
+</html>

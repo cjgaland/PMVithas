@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Escala Glasgow (GCS) - Vithas Neurología</title>
+  
+  <link rel="icon" type="image/png" href="../../assets/Images/Logos/Favicon-Vithas.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Estilos Globales y Específicos -->
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="style.css" />
+  
+  <style>
+    /* Ajuste para listas verticales de radios */
+    .vertical-check-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .vertical-check-group .form-check {
+      justify-content: flex-start; /* Alinear a la izquierda */
+      text-align: left;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+    </div>
+    <nav class="nav-links">
+      <ul>
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        
+        <li class="nav-category">Práctica Clínica</li>
+        <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Volver a Calculadoras</a></li>
+        
+        <!-- BLOQUE NEUROLOGÍA (ABIERTO) -->
+        <li class="has-submenu open">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-brain"></i> Neurología
+            </div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="index.html">Menú Neurología</a></li>
+            <li><a href="nihss.html"><i class="fas fa-user-injured"></i> NIHSS</a></li>
+            <li><a href="gcs-adulto.html" class="submenu-main-link active"><i class="fas fa-star"></i> Glasgow (GCS)</a></li>
+            <li><a href="four-score.html"><i class="fas fa-procedures"></i> FOUR Score</a></li>
+            <li><a href="canadian-ct-head.html"><i class="fas fa-skull"></i> Canadian CT Head</a></li>
+            <li><a href="abcd2.html"><i class="fas fa-bolt"></i> ABCD² (AIT)</a></li>
+            <li><a href="ich-score.html"><i class="fas fa-brain"></i> ICH Score</a></li>
+            <li><a href="aspect.html"><i class="fas fa-layer-group"></i> ASPECTS</a></li>
+            <li><a href="mrs.html"><i class="fas fa-wheelchair"></i> Rankin (mRS)</a></li>
+            <li><a href="ottawa-sah.html"><i class="fas fa-head-side-virus"></i> Ottawa SAH</a></li>
+            <li><a href="status-epileptico-dosis.html"><i class="fas fa-pills"></i> Status Epiléptico</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- CONTENIDO -->
+  <div class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <i class="fas fa-bars menu-toggle" id="menuToggle"></i>
+        <h2><i class="fas fa-brain" style="margin-right: 10px;"></i>Neurología</h2>
+      </div>
+      <div class="header-right">
+        <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+      </div>
+    </header>
+
+    <div class="calc-container">
+      <div class="calc-card">
+        <h1 class="calc-title">Escala de Coma de Glasgow (GCS)</h1>
+        <p class="calc-subtitle">Valoración rápida y objetiva del nivel de conciencia (3-15 puntos). Se debe registrar la mejor respuesta obtenida.</p>
+
+        <form id="formGCS">
+          
+          <!-- APERTURA OCULAR -->
+          <div class="form-section">
+            <span class="section-label">Apertura Ocular (E)</span>
+            <div class="vertical-check-group">
+              <label class="form-check">
+                <input type="radio" name="eye" value="4">
+                <span><strong>4</strong> - Espontánea</span>
+              </label>
+              <label class="form-check">
+                <input type="radio" name="eye" value="3">
+                <span><strong>3</strong> - A la orden verbal</span>
+              </label>
+              <label class="form-check">
+                <input type="radio" name="eye" value="2">
+                <span><strong>2</strong> - Al estímulo doloroso</span>
+              </label>
+              <label class="form-check">
+                <input type="radio" name="eye" value="1">
+                <span><strong>1</strong> - Ninguna respuesta</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- RESPUESTA VERBAL -->
+          <div class="form-section">
+            <span class="section-label">Respuesta Verbal (V)</span>
+            <div class="vertical-check-group">
+              <label class="form-check">
+                <input type="radio" name="verbal" value="5">
+                <span><strong>5</strong> - Orientado y conversando</span>
+              </label>
+              <label class="form-check">
+                <input type="radio" name="verbal" value="4">
+                <span><strong>4</strong> - Desorientado y hablando</span>
+              </label>
+              <label class="form-check">
+                <input type="radio" name="verbal" value="3">
+                <span><strong>3</strong> - Palabras inapropiadas</span>
+              </label>
+              <label class="form-check">
+                <input type="radio" name="verbal" value="2">
+                <span><strong>2</strong> - Sonidos incomprensibles</span>
+              </label>
+              <label class="form-check">
+                <input type="radio" name="verbal" value="1">
+                <span><strong>1</strong> - Ninguna respuesta</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- RESPUESTA MOTORA -->
+          <div class="form-section">
+            <span class="section-label">Respuesta Motora (M)</span>
+            <div class="vertical-check-group">
+              <label class="form-check">
+                <input type="radio" name="motor" value="6">
+                <span><strong>6</strong> - Obedece órdenes</span>
+              </label>
+              <label class="form-check">
+                <input type="radio" name="motor" value="5">
+                <span><strong>5</strong> - Localiza el dolor</span>
+              </label>
+              <label class="form-check">
+                <input type="radio" name="motor" value="4">
+                <span><strong>4</strong> - Retirada / Flexión normal</span>
+              </label>
+              <label class="form-check">
+                <input type="radio" name="motor" value="3">
+                <span><strong>3</strong> - Flexión anormal (Decorticación)</span>
+              </label>
+              <label class="form-check">
+                <input type="radio" name="motor" value="2">
+                <span><strong>2</strong> - Extensión (Descerebración)</span>
+              </label>
+              <label class="form-check">
+                <input type="radio" name="motor" value="1">
+                <span><strong>1</strong> - Ninguna respuesta</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- BOTONES -->
+          <div class="actions">
+            <a href="index.html" class="btn-secondary">Volver</a>
+            <button type="submit" class="btn-calc">Calcular</button>
+            <button type="button" class="btn-secondary" id="btnCopy"><i class="fas fa-copy"></i> Copiar</button>
+            <button type="reset" class="btn-secondary" onclick="document.getElementById('result').innerText='Selecciona los valores y pulsa Calcular.'">Limpiar</button>
+          </div>
+
+          <!-- RESULTADO -->
+          <div id="result" class="result-box">Selecciona los valores y pulsa Calcular.</div>
+
+          <!-- DETALLES -->
+          <details>
+            <summary>Ver Interpretación Clínica</summary>
+            <div class="details-content">
+              <p><strong>Gravedad del Traumatismo Craneoencefálico (TCE):</strong></p>
+              <ul>
+                <li><strong>13 - 15:</strong> Leve.</li>
+                <li><strong>9 - 12:</strong> Moderado.</li>
+                <li><strong>&le; 8:</strong> Grave (Coma). Generalmente requiere intubación y protección de vía aérea.</li>
+              </ul>
+              <p class="mt-2"><strong>Nota Importante:</strong> Desglosar siempre la puntuación (E-V-M) al registrarla (ej: GCS 9 = E2V3M4) para facilitar el seguimiento evolutivo.</p>
+            </div>
+          </details>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast">Resultado copiado al portapapeles</div>
+
+  <!-- JAVASCRIPT -->
+  <script src="../../js/main.js"></script>
+  <script>
+    (function() {
+      const $ = (id) => document.getElementById(id);
+      
+      $('formGCS').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Obtener valores de los radio buttons
+        const eyeEl = document.querySelector('input[name="eye"]:checked');
+        const verbalEl = document.querySelector('input[name="verbal"]:checked');
+        const motorEl = document.querySelector('input[name="motor"]:checked');
+
+        if (!eyeEl || !verbalEl || !motorEl) {
+            $('result').textContent = 'Por favor, selecciona una opción para cada categoría (Ocular, Verbal, Motora).';
+            return;
+        }
+
+        const eye = parseInt(eyeEl.value);
+        const verbal = parseInt(verbalEl.value);
+        const motor = parseInt(motorEl.value);
+        
+        const total = eye + verbal + motor;
+        
+        let gravedad = "";
+        let manejo = "";
+
+        if (total <= 8) {
+            gravedad = "GRAVE (Coma)";
+            manejo = "Considerar intubación y protección de vía aérea. Valoración urgente por UCI/Neurocirugía.";
+        } else if (total <= 12) {
+            gravedad = "MODERADO";
+            manejo = "Observación estrecha y TC craneal urgente.";
+        } else {
+            gravedad = "LEVE";
+            manejo = "Observación. Valorar TC según factores de riesgo (ej: Canadian CT Head Rule).";
+        }
+
+        const resultado = `ESCALA GLASGOW (GCS): ${total} puntos\n` +
+                          `Desglose: Ocular ${eye} + Verbal ${verbal} + Motora ${motor}\n\n` +
+                          `INTERPRETACIÓN: ${gravedad}\n` +
+                          `${manejo}`;
+        
+        $('result').innerText = resultado;
+      });
+
+      // Copiar al portapapeles
+      $('btnCopy').addEventListener('click', () => {
+          const resultText = $('result').innerText;
+          if (!resultText || resultText.includes('Selecciona los valores')) return;
+          
+          if (navigator.clipboard && window.isSecureContext) {
+              navigator.clipboard.writeText(resultText).then(showToast);
+          } else {
+              const textArea = document.createElement("textarea");
+              textArea.value = resultText;
+              textArea.style.position = "fixed";
+              document.body.appendChild(textArea);
+              textArea.select();
+              try { document.execCommand('copy'); showToast(); } catch (err) {}
+              document.body.removeChild(textArea);
+          }
+      });
+
+      function showToast() {
+          const toast = $('toast');
+          toast.className = "toast show";
+          setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+      }
+    })();
+  </script>
+</body>
+</html>

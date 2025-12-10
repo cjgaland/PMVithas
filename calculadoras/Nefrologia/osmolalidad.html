@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Osmolalidad - Vithas Nefrología</title>
+  
+  <link rel="icon" type="image/png" href="../../assets/Images/Logos/Favicon-Vithas.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Estilos Globales y Específicos -->
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+    </div>
+    <nav class="nav-links">
+      <ul>
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        
+        <li class="nav-category">Práctica Clínica</li>
+        <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Volver a Calculadoras</a></li>
+        
+        <li class="has-submenu open">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-filter"></i> Nefrología
+            </div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="index.html">Menú Nefrología</a></li>
+            <li><a href="fg.html"><i class="fas fa-calculator"></i> Filtrado Glomerular</a></li>
+            <li><a href="feNa.html"><i class="fas fa-percent"></i> FeNa</a></li>
+            <li><a href="feUrea.html"><i class="fas fa-percent"></i> FeUrea</a></li>
+            <li><a href="anion-gap.html"><i class="fas fa-flask"></i> Anión Gap</a></li>
+            <li><a href="osmolalidad.html" class="submenu-main-link active"><i class="fas fa-tint"></i> Osmolalidad</a></li>
+            <li><a href="deficit-agua.html"><i class="fas fa-glass-whiskey"></i> Déficit de Agua</a></li>
+            <li><a href="reposicion-hidrica.html"><i class="fas fa-syringe"></i> Reposición Hídrica</a></li>
+            <li><a href="calcio-serico.html"><i class="fas fa-bone"></i> Calcio Corregido</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- CONTENIDO -->
+  <div class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <i class="fas fa-bars menu-toggle" id="menuToggle"></i>
+        <h2><i class="fas fa-filter" style="margin-right: 10px;"></i>Nefrología</h2>
+      </div>
+      <div class="header-right">
+        <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+      </div>
+    </header>
+
+    <div class="calc-container">
+      <div class="calc-card">
+        <h1 class="calc-title">Osmolalidad Plasmática Calculada</h1>
+        <p class="calc-subtitle">Cálculo de la osmolaridad efectiva y gap osmolar (intoxicaciones, hiponatremia).</p>
+
+        <form id="formOsmolalidad">
+          
+          <!-- PARÁMETROS BÁSICOS -->
+          <div class="form-section">
+            <span class="section-label">Parámetros Básicos</span>
+            
+            <div class="input-group">
+              <label for="na">Sodio (Na⁺)</label>
+              <div class="input-wrapper">
+                <input id="na" class="form-control" type="number" step="0.1" min="0" placeholder="Ej. 140" required>
+                <span class="input-suffix">mEq/L</span>
+              </div>
+            </div>
+
+            <div class="input-row">
+              <div class="input-col">
+                <div class="input-group">
+                  <label for="glu">Glucosa</label>
+                  <div class="input-wrapper">
+                    <input id="glu" class="form-control" type="number" step="1" min="0" placeholder="Ej. 100" required>
+                    <span class="input-suffix">mg/dL</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="input-col">
+                <div class="input-group">
+                  <label for="urea">Urea</label>
+                  <div class="input-wrapper">
+                    <input id="urea" class="form-control" type="number" step="1" min="0" placeholder="Ej. 40" required>
+                    <span class="input-suffix">mg/dL</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- OPCIONALES / GAP -->
+          <div class="form-section">
+            <span class="section-label">Opcionales (Intoxicaciones / Gap)</span>
+            
+            <div class="input-group">
+              <label for="ethanol">Etanol (Alcohol en sangre)</label>
+              <div class="input-wrapper">
+                <input id="ethanol" class="form-control" type="number" step="1" min="0" placeholder="Opcional">
+                <span class="input-suffix">mg/dL</span>
+              </div>
+              <small class="text-muted">Contribuye a la osmolalidad pero no es un electrolito.</small>
+            </div>
+
+            <div class="input-group">
+              <label for="measured">Osmolalidad MEDIDA (Laboratorio)</label>
+              <div class="input-wrapper">
+                <input id="measured" class="form-control" type="number" step="1" min="0" placeholder="Opcional para Gap">
+                <span class="input-suffix">mOsm/kg</span>
+              </div>
+              <small class="text-muted">Necesario para calcular el Gap Osmolar.</small>
+            </div>
+          </div>
+
+          <!-- BOTONES -->
+          <div class="actions">
+            <a href="index.html" class="btn-secondary">Volver</a>
+            <button type="submit" class="btn-calc">Calcular</button>
+            <button type="button" class="btn-secondary" id="btnCopy"><i class="fas fa-copy"></i> Copiar</button>
+            <button type="reset" class="btn-secondary" onclick="document.getElementById('result').innerText='Introduce los datos y pulsa Calcular.'">Limpiar</button>
+          </div>
+
+          <!-- RESULTADO -->
+          <div id="result" class="result-box">Introduce los datos y pulsa Calcular.</div>
+
+          <!-- DETALLES -->
+          <details>
+            <summary>Ver Fórmulas</summary>
+            <div class="details-content">
+              <p><strong>Osmolalidad Calculada:</strong></p>
+              <p>2 × Na⁺ + (Glucosa / 18) + (Urea / 2.8)</p>
+              <p><em>Si hay etanol:</em> + (Etanol / 3.7)</p>
+              <br>
+              <p><strong>Gap Osmolar:</strong></p>
+              <p>Osmolalidad Medida - Osmolalidad Calculada</p>
+              <p class="text-muted small mt-2">Un Gap Osmolar &gt; 10 sugiere la presencia de osmoles no medidos (Metanol, Etilenglicol, Propilenglicol, Manitol, Cetoacidosis).</p>
+            </div>
+          </details>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST (Notificación) -->
+  <div id="toast" class="toast">Resultado copiado al portapapeles</div>
+
+  <!-- JAVASCRIPT -->
+  <script src="../../js/main.js"></script>
+  <script>
+    (function() {
+      const $ = (id) => document.getElementById(id);
+      const r = (value, decimals = 1) => Math.round((value + Number.EPSILON) * (10 ** decimals)) / (10 ** decimals);
+
+      $('formOsmolalidad').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const na = parseFloat($('na').value);
+        const glu = parseFloat($('glu').value);
+        const urea = parseFloat($('urea').value);
+        let etoh = parseFloat($('ethanol').value);
+        if (isNaN(etoh)) etoh = 0;
+        let measured = parseFloat($('measured').value);
+        
+        if (!(na > 0) || !(glu >= 0) || !(urea >= 0)) {
+          $('result').textContent = 'Por favor, revisa Na, Glucosa y Urea (deben ser positivos).';
+          return;
+        }
+        
+        // Cálculo Osmolalidad Calculada
+        // 2*Na + Glu/18 + Urea/2.8 + Etoh/3.7
+        let osmol = (2 * na) + (glu / 18) + (urea / 2.8);
+        
+        if (etoh > 0) {
+           osmol += (etoh / 3.7);
+        }
+
+        let resultado = `Osmolalidad Calculada: ${r(osmol)} mOsm/kg\n`;
+        
+        // Cálculo Gap
+        if (!isNaN(measured) && measured > 0) {
+            const gap = measured - osmol;
+            resultado += `Osmolalidad Medida: ${measured} mOsm/kg\n`;
+            resultado += `Gap Osmolar: ${r(gap)} mOsm/kg\n`;
+            
+            if (gap > 10) {
+                resultado += `\nINTERPRETACIÓN: Gap Osmolar ELEVADO (&gt; 10).\nSugiere presencia de osmoles no medidos (Intoxicación por alcoholes, manitol, etc).`;
+            } else {
+                resultado += `\nINTERPRETACIÓN: Gap Osmolar NORMAL.`;
+            }
+        } else {
+            resultado += `(Introduce la Osmolalidad Medida para calcular el Gap)`;
+        }
+        
+        $('result').innerText = resultado;
+      });
+
+      // Copiar
+      $('btnCopy').addEventListener('click', () => {
+          const resultText = $('result').innerText;
+          if (!resultText || resultText.includes('Introduce los datos')) return;
+          if (navigator.clipboard && window.isSecureContext) {
+              navigator.clipboard.writeText(resultText).then(showToast);
+          }
+      });
+      function showToast() {
+          const toast = $('toast');
+          toast.className = "toast show";
+          setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+      }
+    })();
+  </script>
+</body>
+</html>

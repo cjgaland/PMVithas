@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PSI / FINE - Vithas Respiratorio</title>
+  
+  <link rel="icon" type="image/png" href="../../assets/Images/Logos/Favicon-Vithas.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Estilos Globales y Específicos -->
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="style.css" />
+  
+  <style>
+    /* Estilo para la cuadrícula de 3 columnas de criterios */
+    .criteria-grid {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 10px;
+    }
+    @media (min-width: 600px) {
+      .criteria-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (min-width: 900px) {
+      .criteria-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    .criteria-grid .form-check {
+        justify-content: flex-start;
+        text-align: left;
+        min-width: unset;
+    }
+    .point-value {
+        font-weight: 700;
+        color: #2e7d32;
+        margin-left: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+    </div>
+    <nav class="nav-links">
+      <ul>
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        
+        <li class="nav-category">Práctica Clínica</li>
+        <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Volver a Calculadoras</a></li>
+        
+        <!-- BLOQUE RESPIRATORIO (ABIERTO) -->
+        <li class="has-submenu open">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-lungs"></i> Respiratorio
+            </div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="index.html">Menú Respiratorio</a></li>
+            <li><a href="curb65.html"><i class="fas fa-notes-medical"></i> CURB-65</a></li>
+            <li><a href="psi-fine.html" class="submenu-main-link active"><i class="fas fa-clipboard-list"></i> PSI / FINE</a></li>
+            <li><a href="pesi.html"><i class="fas fa-lungs-virus"></i> PESI / sPESI</a></li>
+            <li><a href="aa-gradient.html"><i class="fas fa-percent"></i> Gradiente A-a</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- CONTENIDO -->
+  <div class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <i class="fas fa-bars menu-toggle" id="menuToggle"></i>
+        <h2><i class="fas fa-lungs" style="margin-right: 10px;"></i>Respiratorio</h2>
+      </div>
+      <div class="header-right">
+        <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+      </div>
+    </header>
+
+    <div class="calc-container">
+      <div class="calc-card">
+        <h1 class="calc-title">PSI (Pneumonia Severity Index) / FINE</h1>
+        <p class="calc-subtitle">Evaluación detallada de 20 criterios para predecir la mortalidad en neumonía adquirida en la comunidad (NAC).</p>
+
+        <form id="formPSI">
+          
+          <!-- SECCIÓN 1: PUNTOS BASE -->
+          <div class="form-section">
+            <span class="section-label">Puntos Base (Edad y Sexo)</span>
+            
+            <div class="input-row">
+                <div class="input-col">
+                    <label for="age">Edad (años)</label>
+                    <div class="input-wrapper">
+                      <input id="age" class="form-control" type="number" min="0" step="1" placeholder="Ej. 72" required>
+                      <span class="input-suffix">años</span>
+                    </div>
+                </div>
+                <div class="input-col">
+                    <label for="sex">Sexo</label>
+                    <div class="check-group">
+                        <label class="form-check">
+                            <input type="radio" name="sex" value="M" checked> Varón (+Edad)
+                        </label>
+                        <label class="form-check">
+                            <input type="radio" name="sex" value="F"> Mujer (+Edad -10)
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="switch-group mt-3">
+              <label for="nursing" class="switch-label">Residencia sociosanitaria</label>
+              <label class="switch-toggle">
+                <input type="checkbox" id="nursing">
+                <span class="slider"></span>
+              </label>
+            </div>
+            <small class="text-muted d-block mt-1">Suma 10 puntos si el paciente está institucionalizado.</small>
+          </div>
+          
+          <!-- SECCIÓN 2: COMORBILIDADES -->
+          <div class="form-section">
+            <span class="section-label">Comorbilidades</span>
+            <div class="criteria-grid">
+                
+                <label class="form-check">
+                  <input type="checkbox" id="neoplastic">
+                  <span>Neoplasia activa<span class="point-value">(+30)</span></span>
+                </label>
+                
+                <label class="form-check">
+                  <input type="checkbox" id="liver">
+                  <span>Enfermedad hepática<span class="point-value">(+20)</span></span>
+                </label>
+                
+                <label class="form-check">
+                  <input type="checkbox" id="chf">
+                  <span>Insuficiencia cardiaca<span class="point-value">(+10)</span></span>
+                </label>
+                
+                <label class="form-check">
+                  <input type="checkbox" id="cva">
+                  <span>Enf. cerebrovascular<span class="point-value">(+10)</span></span>
+                </label>
+                
+                <label class="form-check">
+                  <input type="checkbox" id="renal">
+                  <span>Enfermedad renal<span class="point-value">(+10)</span></span>
+                </label>
+                
+            </div>
+          </div>
+          
+          <!-- SECCIÓN 3: EXPLORACIÓN Y CONSTANTES -->
+          <div class="form-section">
+            <span class="section-label">Exploración y Constantes</span>
+            <div class="criteria-grid">
+                
+                <label class="form-check">
+                  <input type="checkbox" id="confusion">
+                  <span>Alteración mental<span class="point-value">(+20)</span></span>
+                </label>
+                
+                <label class="form-check">
+                  <input type="checkbox" id="rr30">
+                  <span>FR &ge; 30/min<span class="point-value">(+20)</span></span>
+                </label>
+                
+                <label class="form-check">
+                  <input type="checkbox" id="sbp90">
+                  <span>PAS &lt; 90 mmHg<span class="point-value">(+20)</span></span>
+                </label>
+                
+                <label class="form-check">
+                  <input type="checkbox" id="tempFlag">
+                  <span>Temp &lt; 35°C o &ge; 40°C<span class="point-value">(+15)</span></span>
+                </label>
+                
+                <label class="form-check">
+                  <input type="checkbox" id="hr125">
+                  <span>FC &ge; 125 lpm<span class="point-value">(+10)</span></span>
+                </label>
+                
+            </div>
+          </div>
+          
+          <!-- SECCIÓN 4: ANALÍTICA Y RX -->
+          <div class="form-section">
+            <span class="section-label">Analítica, Gasometría y Radiología</span>
+            <div class="criteria-grid">
+                
+                <label class="form-check">
+                  <input type="checkbox" id="phLow">
+                  <span>pH &lt; 7.35<span class="point-value">(+30)</span></span>
+                </label>
+                
+                <label class="form-check">
+                  <input type="checkbox" id="bun30">
+                  <span>BUN &ge; 30 mg/dL<span class="point-value">(+20)</span></span>
+                </label>
+                
+                <label class="form-check">
+                  <input type="checkbox" id="naLow">
+                  <span>Na⁺ &lt; 130 mEq/L<span class="point-value">(+20)</span></span>
+                </label>
+                
+                <label class="form-check">
+                  <input type="checkbox" id="glu250">
+                  <span>Glucosa &ge; 250 mg/dL<span class="point-value">(+10)</span></span>
+                </label>
+                
+                <label class="form-check">
+                  <input type="checkbox" id="hctLow">
+                  <span>Hematocrito &lt; 30%<span class="point-value">(+10)</span></span>
+                </label>
+                
+                <label class="form-check">
+                  <input type="checkbox" id="o2Low">
+                  <span>PaO₂ &lt; 60 o SatO₂ &lt; 90%<span class="point-value">(+10)</span></span>
+                </label>
+                
+                <label class="form-check">
+                  <input type="checkbox" id="effusion">
+                  <span>Derrame pleural<span class="point-value">(+10)</span></span>
+                </label>
+                
+            </div>
+          </div>
+
+          <!-- BOTONES -->
+          <div class="actions">
+            <a href="index.html" class="btn-secondary">Volver</a>
+            <button type="submit" class="btn-calc">Calcular</button>
+            <button type="button" class="btn-secondary" id="btnCopy"><i class="fas fa-copy"></i> Copiar</button>
+            <button type="reset" class="btn-secondary" onclick="document.getElementById('result').innerText='Rellena los campos y pulsa Calcular.'">Limpiar</button>
+          </div>
+
+          <!-- RESULTADO -->
+          <div id="result" class="result-box">Rellena los campos y pulsa Calcular.</div>
+
+          <!-- DETALLES -->
+          <details>
+            <summary>Ver Clases de Riesgo y Manejo</summary>
+            <div class="details-content">
+              <p><strong>Clasificación PSI / FINE (Mortalidad a 30 días):</strong></p>
+              <ul>
+                <li><strong>Clase I (0 - 50 pts):</strong> Mortalidad &lt; 1%. Manejo ambulatorio.</li>
+                <li><strong>Clase II (51 - 70 pts):</strong> Mortalidad ~1-2%. Manejo ambulatorio/observación.</li>
+                <li><strong>Clase III (71 - 90 pts):</strong> Mortalidad ~3-4%. Ingreso hospitalario o Unidad de Observación.</li>
+                <li><strong>Clase IV (91 - 130 pts):</strong> Mortalidad ~8-10%. Ingreso hospitalario obligatorio.</li>
+                <li><strong>Clase V (&gt; 130 pts):</strong> Mortalidad ~25-30%. Ingreso hospitalario, valoración de UCI.</li>
+              </ul>
+              <p class="mt-2 text-muted">La Clase I se aplica a pacientes de bajo riesgo que NO cumplen ningún criterio de PSI.</p>
+            </div>
+          </details>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast">Resultado copiado al portapapeles</div>
+
+  <!-- JAVASCRIPT -->
+  <script src="../../js/main.js"></script>
+  <script>
+    (function() {
+      const $ = (id) => document.getElementById(id);
+      
+      const add = (cond, pts) => cond ? pts : 0; // Helper para sumar puntos
+
+      function computePSI() {
+        const age = parseInt($('age').value || '0', 10);
+        const sex = document.querySelector('input[name="sex"]:checked').value;
+        let score = 0;
+        
+        // Puntos base por edad
+        if (sex === 'M') {
+            score = age; // Varón: edad en puntos
+        } else {
+            score = Math.max(0, age - 10); // Mujer: edad - 10 en puntos (mínimo 0)
+        }
+        
+        // Criterios
+        score += add($('nursing').checked, 10);
+        
+        // Comorbilidades
+        score += add($('neoplastic').checked, 30);
+        score += add($('liver').checked, 20);
+        score += add($('chf').checked, 10);
+        score += add($('cva').checked, 10);
+        score += add($('renal').checked, 10);
+        
+        // Exploración y constantes
+        score += add($('confusion').checked, 20);
+        score += add($('rr30').checked, 20);
+        score += add($('sbp90').checked, 20);
+        score += add($('tempFlag').checked, 15);
+        score += add($('hr125').checked, 10);
+        
+        // Analítica/Rx
+        score += add($('phLow').checked, 30);
+        score += add($('bun30').checked, 20);
+        score += add($('naLow').checked, 20);
+        score += add($('glu250').checked, 10);
+        score += add($('hctLow').checked, 10);
+        score += add($('o2Low').checked, 10);
+        score += add($('effusion').checked, 10);
+        
+        return score;
+      }
+
+      function getPSIClass(score) {
+        let clase, mortalidad, recomendacion;
+        
+        if (score <= 50) {
+            clase = 'I';
+            mortalidad = '< 1%';
+            recomendacion = 'Bajo riesgo. Considerar manejo ambulatorio o alta.';
+        } else if (score <= 70) {
+            clase = 'II';
+            mortalidad = '1-2%';
+            recomendacion = 'Bajo riesgo. Manejo ambulatorio/observación según comorbilidades.';
+        } else if (score <= 90) {
+            clase = 'III';
+            mortalidad = '3-4%';
+            recomendacion = 'Riesgo bajo-intermedio. Considerar ingreso hospitalario o Unidad de Observación.';
+        } else if (score <= 130) {
+            clase = 'IV';
+            mortalidad = '8-10%';
+            recomendacion = 'Riesgo intermedio-alto. Ingreso hospitalario obligatorio.';
+        } else {
+            clase = 'V';
+            mortalidad = '25-30%';
+            recomendacion = 'Alto riesgo. Ingreso hospitalario obligatorio, valoración de UCI.';
+        }
+        return {clase, mortalidad, recomendacion};
+      }
+
+      $('formPSI').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const score = computePSI();
+        const psiClass = getPSIClass(score);
+        
+        const resultado = `PSI / FINE: ${score} puntos\n` +
+                          `CLASE: ${psiClass.clase}\n` +
+                          `Mortalidad estimada (30 días): ${psiClass.mortalidad}\n\n` +
+                          `RECOMENDACIÓN: ${psiClass.recomendacion}`;
+        
+        $('result').innerText = resultado;
+      });
+
+      // Copiar
+      $('btnCopy').addEventListener('click', () => {
+          const resultText = $('result').innerText;
+          if (!resultText || resultText.includes('Rellena los campos')) return;
+          if (navigator.clipboard && window.isSecureContext) {
+              navigator.clipboard.writeText(resultText).then(showToast);
+          } else {
+              const textArea = document.createElement("textarea");
+              textArea.value = resultText;
+              textArea.style.position = "fixed";
+              document.body.appendChild(textArea);
+              textArea.select();
+              try { document.execCommand('copy'); showToast(); } catch (err) {}
+              document.body.removeChild(textArea);
+          }
+      });
+
+      function showToast() {
+          const toast = $('toast');
+          toast.className = "toast show";
+          setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+      }
+    })();
+  </script>
+</body>
+</html>

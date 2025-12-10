@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Infecciosas - Vithas Xanit</title>
+  
+  <link rel="icon" type="image/png" href="../../assets/Images/Logos/Favicon-Vithas.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+    </div>
+    <nav class="nav-links">
+      <ul>
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        
+        <li class="nav-category">Práctica Clínica</li>
+        
+        <!-- Enlace para volver al menú general -->
+        <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Volver a Calculadoras</a></li>
+        
+        <!-- BLOQUES DE CÁLCULO (CERRADOS) -->
+        <li class="has-submenu">
+            <a href="#" class="submenu-toggle">
+              <div style="display:flex; align-items:center;"><i class="fas fa-ruler-combined"></i> Antropometría</div>
+              <i class="fas fa-chevron-right chevron"></i>
+            </a>
+            <ul class="submenu">
+              <li><a href="../Antropometricos/index.html">Menú Antropometría</a></li>
+            </ul>
+        </li>
+        <li class="has-submenu">
+            <a href="#" class="submenu-toggle">
+              <div style="display:flex; align-items:center;"><i class="fas fa-heartbeat"></i> Cardiovascular</div>
+              <i class="fas fa-chevron-right chevron"></i>
+            </a>
+            <ul class="submenu">
+              <li><a href="../Cardiovascular/index.html">Menú Cardiovascular</a></li>
+            </ul>
+        </li>
+        <li class="has-submenu">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;"><i class="fas fa-utensils"></i> Digestivo</div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="../Digestivo/index.html">Menú Digestivo</a></li>
+          </ul>
+        </li>
+        
+        <!-- BLOQUE ACTUAL: Infecciosas (ABIERTO) -->
+        <li class="has-submenu open">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-bacteria"></i> Infecciosas
+            </div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="index.html" class="submenu-main-link active">Menú Infecciosas</a></li>
+            <li><a href="qsofa.html"><i class="fas fa-stopwatch"></i> qSOFA</a></li>
+            <li><a href="sofa.html"><i class="fas fa-procedures"></i> SOFA</a></li>
+            <li><a href="centor-mcisaac.html"><i class="fas fa-user-md"></i> Centor / McIsaac</a></li>
+            <li><a href="mulbsta.html"><i class="fas fa-lungs-virus"></i> MuLBSTA</a></li>
+          </ul>
+        </li>
+        
+        <li class="has-submenu">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;"><i class="fas fa-filter"></i> Nefrología</div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="../Nefrologia/index.html">Menú Nefrología</a></li>
+          </ul>
+        </li>
+        <li class="has-submenu">
+            <a href="#" class="submenu-toggle">
+              <div style="display:flex; align-items:center;"><i class="fas fa-brain"></i> Neurología</div>
+              <i class="fas fa-chevron-right chevron"></i>
+            </a>
+            <ul class="submenu">
+              <li><a href="../Neurologia/index.html">Menú Neurología</a></li>
+            </ul>
+        </li>
+        <li class="has-submenu">
+            <a href="#" class="submenu-toggle">
+              <div style="display:flex; align-items:center;"><i class="fas fa-lungs"></i> Respiratorio</div>
+              <i class="fas fa-chevron-right chevron"></i>
+            </a>
+            <ul class="submenu">
+              <li><a href="../Respiratorio/index.html">Menú Respiratorio</a></li>
+            </ul>
+        </li>
+        <li class="has-submenu">
+            <a href="#" class="submenu-toggle">
+              <div style="display:flex; align-items:center;"><i class="fas fa-ambulance"></i> UCI / Emergencias</div>
+              <i class="fas fa-chevron-right chevron"></i>
+            </a>
+            <ul class="submenu">
+              <li><a href="../UCI/index.html">Menú UCI / Emergencias</a></li>
+            </ul>
+        </li>
+
+      </ul>
+    </nav>
+    <div class="sidebar-footer">
+      <p>Medicina Interna</p>
+      <small>Vithas Xanit Internacional</small>
+    </div>
+  </aside>
+
+  <!-- CONTENIDO -->
+  <div class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <i class="fas fa-bars menu-toggle" id="menuToggle"></i>
+        <h2><i class="fas fa-bacteria" style="margin-right: 10px;"></i>Calculadoras Infecciosas</h2>
+      </div>
+      <div class="header-right">
+        <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+      </div>
+    </header>
+
+    <div class="content-wrapper">
+      <div class="cards-grid">
+        
+        <!-- qSOFA -->
+        <a href="qsofa.html" class="card">
+          <div class="card-icon" style="background:#f3e5f5; color:#4a148c;"><i class="fas fa-stopwatch"></i></div>
+          <h3>qSOFA</h3>
+          <p>Cribado rápido de sepsis fuera de la UCI.</p>
+          <span class="card-link">Abrir <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+        <!-- SOFA -->
+        <a href="sofa.html" class="card">
+          <div class="card-icon" style="background:#f3e5f5; color:#6a1b9a;"><i class="fas fa-procedures"></i></div>
+          <h3>Escala SOFA</h3>
+          <p>Evaluación de fallo orgánico secuencial en sepsis.</p>
+          <span class="card-link">Abrir <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+        <!-- Centor / McIsaac -->
+        <a href="centor-mcisaac.html" class="card">
+          <div class="card-icon" style="background:#ede7f6; color:#7b1fa2;"><i class="fas fa-user-md"></i></div>
+          <h3>Centor / McIsaac</h3>
+          <p>Probabilidad de faringitis estreptocócica.</p>
+          <span class="card-link">Abrir <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+        <!-- MuLBSTA -->
+        <a href="mulbsta.html" class="card">
+          <div class="card-icon" style="background:#f3e5f5; color:#8e24aa;"><i class="fas fa-lungs-virus"></i></div>
+          <h3>Score MuLBSTA</h3>
+          <p>Pronóstico de mortalidad en neumonía viral.</p>
+          <span class="card-link">Abrir <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+      </div>
+    </div>
+    
+    <footer class="footer">
+      <p>&copy; 2025 Servicio de Medicina Interna - Hospital Vithas Xanit Internacional.</p>
+    </footer>
+  </div>
+  <script src="../../js/main.js"></script>
+</body>
+</html>

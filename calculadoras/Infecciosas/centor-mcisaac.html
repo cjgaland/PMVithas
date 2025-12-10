@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Centor / McIsaac - Vithas</title>
+  
+  <link rel="icon" type="image/png" href="../../Favicon-Vithas.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="style.css" />
+  
+  <style>
+    /* Toast */
+    .toast {
+      visibility: hidden; min-width: 250px; background-color: #333; color: #fff; text-align: center;
+      border-radius: 50px; padding: 16px; position: fixed; z-index: 1000; left: 50%; bottom: 30px;
+      transform: translateX(-50%); font-size: 0.9rem; opacity: 0; transition: opacity 0.3s, bottom 0.3s;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .toast.show { visibility: visible; opacity: 1; bottom: 50px; }
+
+    /* Ajustes específicos para botones de opción de edad */
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    
+    .radio-option {
+      display: flex;
+      align-items: center;
+      padding: 12px 15px;
+      background-color: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .radio-option:hover {
+      background-color: #f3e5f5;
+      border-color: #ba68c8;
+    }
+
+    .radio-option input[type="radio"] {
+      margin-right: 15px;
+      transform: scale(1.2);
+      accent-color: #7b1fa2;
+    }
+
+    .radio-label {
+      flex: 1;
+      font-weight: 500;
+      color: #333;
+    }
+
+    /* AJUSTES PARA PANTALLAS GRANDES */
+    @media (min-width: 768px) {
+      /* Ensanchar el contenedor principal para que quepan las opciones en línea */
+      .calc-container {
+        max-width: 1200px;
+      }
+
+      .radio-group {
+        flex-direction: row;
+      }
+
+      .radio-option {
+        flex: 1;
+        justify-content: center;
+        text-align: center;
+      }
+      
+      /* Evitar que el texto se parta en dos líneas */
+      .radio-label {
+        white-space: nowrap;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+    </div>
+    <nav class="nav-links">
+      <ul>
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        
+        <li class="nav-category">Práctica Clínica</li>
+        
+        <!-- Enlace para volver al menú general -->
+        <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Volver a Calculadoras</a></li>
+        
+        <!-- BLOQUE ACTUAL: Infecciosas (ABIERTO) -->
+        <li class="has-submenu open">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-bacteria"></i> Infecciosas
+            </div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="index.html">Menú Infecciosas</a></li>
+            <li><a href="qsofa.html"><i class="fas fa-stopwatch"></i> qSOFA</a></li>
+            <li><a href="sofa.html"><i class="fas fa-procedures"></i> SOFA</a></li>
+            <!-- Elemento Activo -->
+            <li><a href="centor-mcisaac.html" class="submenu-main-link active"><i class="fas fa-user-md"></i> Centor / McIsaac</a></li>
+            <li><a href="mulbsta.html"><i class="fas fa-lungs-virus"></i> MuLBSTA</a></li>
+          </ul>
+        </li>
+
+        <!-- Otros Bloques (Cerrados) -->
+        <li class="has-submenu">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;"><i class="fas fa-utensils"></i> Digestivo</div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="../Digestivo/index.html">Menú Digestivo</a></li>
+          </ul>
+        </li>
+
+        <li class="has-submenu">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;"><i class="fas fa-heartbeat"></i> Cardiovascular</div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="../Cardiovascular/index.html">Menú Cardiovascular</a></li>
+          </ul>
+        </li>
+
+        <li class="has-submenu">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;"><i class="fas fa-ruler-combined"></i> Antropometría</div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="../Antropometricos/index.html">Menú Antropometría</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- CONTENIDO -->
+  <div class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <h2><i class="fas fa-bacteria" id="menuToggle" style="margin-right: 10px;"></i>Calculadoras Infecciosas</h2>
+      </div>
+      <div class="header-right">
+        <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+      </div>
+    </header>
+
+    <div class="calc-container">
+      <div class="calc-card">
+        <h1 class="calc-title">Criterios de Centor / McIsaac</h1>
+        <p class="calc-subtitle">Probabilidad de faringitis estreptocócica para orientar el uso de antibióticos o test rápido.</p>
+
+        <form id="formCentor">
+          
+          <div class="form-section">
+            <span class="section-label">Signos y Síntomas (Criterios Centor)</span>
+            
+            <!-- Fiebre -->
+            <div class="switch-group">
+              <label for="fiebre" class="switch-label"><strong>Fiebre</strong> &gt; 38°C (1 punto)</label>
+              <label class="switch-toggle">
+                <input type="checkbox" id="fiebre">
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <!-- Exudado -->
+            <div class="switch-group">
+              <label for="exudado" class="switch-label"><strong>Exudado</strong> o hipertrofia amigdalar (1 punto)</label>
+              <label class="switch-toggle">
+                <input type="checkbox" id="exudado">
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <!-- Adenopatías -->
+            <div class="switch-group">
+              <label for="adenopatias" class="switch-label"><strong>Adenopatías</strong> cervicales anteriores dolorosas (1 punto)</label>
+              <label class="switch-toggle">
+                <input type="checkbox" id="adenopatias">
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <!-- Ausencia de Tos -->
+            <div class="switch-group">
+              <label for="tosAusente" class="switch-label"><strong>Ausencia</strong> de tos (1 punto)</label>
+              <label class="switch-toggle">
+                <input type="checkbox" id="tosAusente">
+                <span class="slider"></span>
+              </label>
+            </div>
+
+          </div>
+
+          <div class="form-section">
+            <span class="section-label">Edad (Modificación McIsaac)</span>
+            
+            <div class="radio-group">
+              <label class="radio-option">
+                <input type="radio" name="edad" value="1">
+                <span class="radio-label">3 - 14 años (+1 punto)</span>
+              </label>
+              
+              <label class="radio-option">
+                <input type="radio" name="edad" value="0" checked>
+                <span class="radio-label">15 - 44 años (0 puntos)</span>
+              </label>
+
+              <label class="radio-option">
+                <input type="radio" name="edad" value="-1">
+                <span class="radio-label">≥ 45 años (-1 punto)</span>
+              </label>
+            </div>
+
+          </div>
+
+          <!-- BOTONES DE ACCIÓN -->
+          <div class="actions">
+            <a href="index.html" class="btn-secondary" style="text-decoration: none;">Volver</a>
+            <button type="submit" class="btn-calc">Calcular</button>
+            <button type="button" class="btn-secondary" id="btnCopy"><i class="fas fa-copy"></i> Copiar</button>
+            <button type="reset" class="btn-secondary" onclick="document.getElementById('result').innerText='Marca los criterios y pulsa Calcular.'">Limpiar</button>
+          </div>
+
+          <!-- CAJA DE RESULTADOS -->
+          <div id="result" class="result-box">Marca los criterios y pulsa Calcular.</div>
+
+          <!-- DETALLES ADICIONALES -->
+          <details>
+            <summary>Ver interpretación y manejo</summary>
+            <div class="details-content">
+              <p><strong>Probabilidad de infección por Estreptococo del grupo A:</strong></p>
+              <ul>
+                <li><strong>-1 a 1 puntos:</strong> Baja probabilidad (&lt; 10%). No se recomienda antibiótico ni cultivo.</li>
+                <li><strong>2 a 3 puntos:</strong> Probabilidad intermedia (15 - 32%). Se recomienda realizar test rápido de antígeno o cultivo. Tratar si es positivo.</li>
+                <li><strong>4 a 5 puntos:</strong> Alta probabilidad (&gt; 50%). Considerar tratamiento antibiótico empírico o confirmar con test.</li>
+              </ul>
+              <p class="text-muted small mt-2">Estos criterios ayudan a reducir el uso innecesario de antibióticos en faringitis virales.</p>
+            </div>
+          </details>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast">Resultado copiado al portapapeles</div>
+
+  <script src="../../js/main.js"></script>
+  <script>
+    (function() {
+        const $ = (id) => document.getElementById(id);
+
+        $('formCentor').addEventListener('submit', (e) => {
+          e.preventDefault();
+          
+          let centor = 0;
+          let components = [];
+
+          if ($('fiebre').checked) { centor += 1; components.push("Fiebre > 38°C"); }
+          if ($('exudado').checked) { centor += 1; components.push("Exudado amigdalar"); }
+          if ($('adenopatias').checked) { centor += 1; components.push("Adenopatías dolorosas"); }
+          if ($('tosAusente').checked) { centor += 1; components.push("Ausencia de tos"); }
+          
+          const edadVal = parseInt(document.querySelector('input[name="edad"]:checked').value);
+          if (edadVal === 1) components.push("Edad 3-14 (+1)");
+          if (edadVal === -1) components.push("Edad ≥ 45 (-1)");
+
+          const totalScore = centor + edadVal;
+
+          let probabilidad = "";
+          let manejo = "";
+
+          if (totalScore <= 1) {
+              probabilidad = "BAJA (< 10%)";
+              manejo = "No se recomienda antibiótico ni cultivo. Tratamiento sintomático.";
+          } else if (totalScore <= 3) {
+              probabilidad = "INTERMEDIA (15 - 32%)";
+              manejo = "Realizar Test Rápido de Antígeno (o cultivo). Tratar si es positivo.";
+          } else {
+              probabilidad = "ALTA (> 50%)";
+              manejo = "Considerar tratamiento antibiótico empírico o confirmar con test.";
+          }
+
+          $('result').textContent = `PUNTUACIÓN CENTOR/McISAAC: ${totalScore} puntos\n\n` +
+                                    `PROBABILIDAD: ${probabilidad}\n` +
+                                    `Manejo sugerido: ${manejo}\n\n` +
+                                    `Criterios presentes: ${components.length > 0 ? components.join(", ") : "Ninguno"}`;
+        });
+
+        // Copiar
+        $('btnCopy').addEventListener('click', () => {
+            const resultText = $('result').innerText;
+            if (!resultText || resultText.includes('Marca los criterios')) return;
+            
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(resultText).then(showToast);
+            } else {
+                const textArea = document.createElement("textarea");
+                textArea.value = resultText;
+                textArea.style.position = "fixed";
+                document.body.appendChild(textArea);
+                textArea.select();
+                try { document.execCommand('copy'); showToast(); } catch (err) {}
+                document.body.removeChild(textArea);
+            }
+        });
+
+        function showToast() {
+            const toast = $('toast');
+            toast.className = "toast show";
+            setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+    })();
+  </script>
+</body>
+</html>

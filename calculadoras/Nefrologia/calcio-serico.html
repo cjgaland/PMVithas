@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calcio Corregido - Vithas Nefrología</title>
+  
+  <link rel="icon" type="image/png" href="../../assets/Images/Logos/Favicon-Vithas.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+    </div>
+    <nav class="nav-links">
+      <ul>
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        <li class="nav-category">Práctica Clínica</li>
+        <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Volver a Calculadoras</a></li>
+        <li class="has-submenu open">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-filter"></i> Nefrología
+            </div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="index.html">Menú Nefrología</a></li>
+            <li><a href="fg.html"><i class="fas fa-calculator"></i> Filtrado Glomerular</a></li>
+            <li><a href="feNa.html"><i class="fas fa-percent"></i> FeNa</a></li>
+            <li><a href="feUrea.html"><i class="fas fa-percent"></i> FeUrea</a></li>
+            <li><a href="anion-gap.html"><i class="fas fa-flask"></i> Anión Gap</a></li>
+            <li><a href="osmolalidad.html"><i class="fas fa-tint"></i> Osmolalidad</a></li>
+            <li><a href="deficit-agua.html"><i class="fas fa-glass-whiskey"></i> Déficit de Agua</a></li>
+            <li><a href="reposicion-hidrica.html"><i class="fas fa-syringe"></i> Reposición Hídrica</a></li>
+            <li><a href="calcio-serico.html" class="submenu-main-link active"><i class="fas fa-bone"></i> Calcio Corregido</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <div class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <i class="fas fa-bars menu-toggle" id="menuToggle"></i>
+        <h2><i class="fas fa-filter" style="margin-right: 10px;"></i>Nefrología</h2>
+      </div>
+      <div class="header-right">
+        <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+      </div>
+    </header>
+
+    <div class="calc-container">
+      <div class="calc-card">
+        <h1 class="calc-title">Calcio Sérico Corregido</h1>
+        <p class="calc-subtitle">Corrección de niveles de calcio en hipoalbuminemia o alteraciones proteicas.</p>
+
+        <form id="formCalcio">
+          
+          <div class="form-section">
+            <span class="section-label">Datos Analíticos</span>
+            
+            <div class="input-group">
+              <label for="ca">Calcio Total (Medido)</label>
+              <div class="input-wrapper">
+                <input id="ca" class="form-control" type="number" step="0.01" min="0" placeholder="Ej. 8.5" required>
+                <span class="input-suffix">mg/dL</span>
+              </div>
+            </div>
+
+            <label class="fw-bold mb-2 mt-3 d-block">Método de Corrección</label>
+            <div class="check-group mb-3">
+               <label class="form-check">
+                 <input type="radio" name="metodo" value="alb" checked> Por Albúmina
+               </label>
+               <label class="form-check">
+                 <input type="radio" name="metodo" value="tp"> Por Proteínas Totales
+               </label>
+            </div>
+
+            <!-- Fila Albúmina (Visible por defecto) -->
+            <div class="input-group" id="albRow">
+              <label for="alb">Albúmina Sérica</label>
+              <div class="input-wrapper">
+                <input id="alb" class="form-control" type="number" step="0.1" min="0" placeholder="Ej. 3.5">
+                <span class="input-suffix">g/dL</span>
+              </div>
+            </div>
+
+            <!-- Fila Proteínas (Oculta por defecto) -->
+            <div class="input-group" id="tpRow" style="display: none;">
+              <label for="tp">Proteínas Totales</label>
+              <div class="input-wrapper">
+                <input id="tp" class="form-control" type="number" step="0.1" min="0" placeholder="Ej. 6.0">
+                <span class="input-suffix">g/dL</span>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="actions">
+            <a href="index.html" class="btn-secondary">Volver</a>
+            <button type="submit" class="btn-calc">Calcular</button>
+            <button type="button" class="btn-secondary" id="btnCopy"><i class="fas fa-copy"></i> Copiar</button>
+            <button type="reset" class="btn-secondary" id="btnReset">Limpiar</button>
+          </div>
+
+          <div id="result" class="result-box">Introduce los datos y pulsa Calcular.</div>
+
+          <details>
+            <summary>Ver Fórmulas y Valores Normales</summary>
+            <div class="details-content">
+              <p><strong>Fórmulas:</strong></p>
+              <ul>
+                <li>Por Albúmina: Ca Correct = Ca Total + 0.8 × (4 - Albúmina)</li>
+                <li>Por Proteínas: Ca Correct = Ca Total + 0.8 × (7.5 - Proteínas Totales)</li>
+              </ul>
+              <p class="mt-2"><strong>Valores de Referencia:</strong></p>
+              <ul>
+                <li>Calcio Total: 8.5 - 10.5 mg/dL</li>
+                <li>Hipoalbuminemia falsa el calcio total a la baja.</li>
+              </ul>
+            </div>
+          </details>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast">Resultado copiado al portapapeles</div>
+
+  <script src="../../js/main.js"></script>
+  <script>
+    (function() {
+      const $ = (id) => document.getElementById(id);
+      const r = (value, decimals = 2) => Math.round((value + Number.EPSILON) * (10 ** decimals)) / (10 ** decimals);
+
+      // Toggle entre Albúmina y Proteínas
+      const radios = document.getElementsByName('metodo');
+      radios.forEach(radio => {
+        radio.addEventListener('change', (e) => {
+           if(e.target.value === 'alb') {
+               $('albRow').style.display = 'block';
+               $('tpRow').style.display = 'none';
+               $('alb').required = true;
+               $('tp').required = false;
+               $('tp').value = '';
+           } else {
+               $('albRow').style.display = 'none';
+               $('tpRow').style.display = 'block';
+               $('alb').required = false;
+               $('tp').required = true;
+               $('alb').value = '';
+           }
+        });
+      });
+
+      $('formCalcio').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const ca = parseFloat($('ca').value);
+        const metodo = document.querySelector('input[name="metodo"]:checked').value;
+        
+        if (!(ca > 0)) {
+          $('result').textContent = 'Por favor, introduce el Calcio Total.';
+          return;
+        }
+        
+        let resultado = '';
+        let cac = 0;
+
+        if (metodo === 'alb') {
+           const alb = parseFloat($('alb').value);
+           if (!(alb > 0)) {
+               $('result').textContent = 'Introduce la Albúmina.'; return;
+           }
+           cac = ca + 0.8 * (4 - alb);
+           resultado = `CALCIO CORREGIDO (por Albúmina): ${r(cac)} mg/dL\n`;
+        } else {
+           const tp = parseFloat($('tp').value);
+           if (!(tp > 0)) {
+               $('result').textContent = 'Introduce las Proteínas Totales.'; return;
+           }
+           cac = ca + 0.8 * (7.5 - tp);
+           resultado = `CALCIO CORREGIDO (por Proteínas): ${r(cac)} mg/dL\n`;
+        }
+
+        // Interpretación
+        if (cac < 8.5) {
+            resultado += `INTERPRETACIÓN: Hipocalcemia (&lt; 8.5 mg/dL)`;
+        } else if (cac > 10.5) {
+            resultado += `INTERPRETACIÓN: Hipercalcemia (&gt; 10.5 mg/dL)`;
+        } else {
+            resultado += `INTERPRETACIÓN: Normocalcemia (8.5 - 10.5 mg/dL)`;
+        }
+
+        $('result').innerText = resultado;
+      });
+
+      $('btnReset').addEventListener('click', () => {
+         $('result').innerText = 'Introduce los datos y pulsa Calcular.';
+         // Resetear visibilidad por defecto
+         document.querySelector('input[value="alb"]').checked = true;
+         $('albRow').style.display = 'block';
+         $('tpRow').style.display = 'none';
+      });
+
+      $('btnCopy').addEventListener('click', () => {
+          const resultText = $('result').innerText;
+          if (!resultText) return;
+          if (navigator.clipboard && window.isSecureContext) {
+              navigator.clipboard.writeText(resultText).then(showToast);
+          }
+      });
+      function showToast() {
+          const toast = $('toast');
+          toast.className = "toast show";
+          setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+      }
+    })();
+  </script>
+</body>
+</html>

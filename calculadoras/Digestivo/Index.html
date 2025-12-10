@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digestivo - Vithas Xanit</title>
+  
+  <link rel="icon" type="image/png" href="../../assets/Images/Logos/Favicon-Vithas.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+    </div>
+    <nav class="nav-links">
+      <ul>
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        
+        <li class="nav-category">Práctica Clínica</li>
+        
+        <!-- Enlace para volver al menú general -->
+        <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Volver a Calculadoras</a></li>
+        
+        <!-- BLOQUES DE CÁLCULO (CERRADOS) -->
+        <li class="has-submenu">
+            <a href="#" class="submenu-toggle">
+              <div style="display:flex; align-items:center;"><i class="fas fa-ruler-combined"></i> Antropometría</div>
+              <i class="fas fa-chevron-right chevron"></i>
+            </a>
+            <ul class="submenu">
+              <li><a href="../Antropometricos/index.html">Menú Antropometría</a></li>
+            </ul>
+        </li>
+        <li class="has-submenu">
+            <a href="#" class="submenu-toggle">
+              <div style="display:flex; align-items:center;"><i class="fas fa-heartbeat"></i> Cardiovascular</div>
+              <i class="fas fa-chevron-right chevron"></i>
+            </a>
+            <ul class="submenu">
+              <li><a href="../Cardiovascular/index.html">Menú Cardiovascular</a></li>
+            </ul>
+        </li>
+        
+        <!-- BLOQUE ACTUAL: Digestivo (ABIERTO) -->
+        <li class="has-submenu open">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;"><i class="fas fa-utensils"></i> Digestivo</div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="index.html" class="submenu-main-link active">Menú Digestivo</a></li>
+            <li><a href="meld.html"><i class="fas fa-heart-pulse"></i> MELD Score</a></li>
+            <li><a href="child-pugh.html"><i class="fas fa-star"></i> Child-Pugh Score</a></li>
+            <li><a href="glasgow-blatchford.html"><i class="fas fa-droplet"></i> Glasgow-Blatchford</a></li>
+            <li><a href="bisap.html"><i class="fas fa-notes-medical"></i> BISAP Score</a></li>
+            <li><a href="ranson.html"><i class="fas fa-percent"></i> Ranson Criterios</a></li>
+          </ul>
+        </li>
+
+        <li class="has-submenu">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;"><i class="fas fa-bacteria"></i> Infecciosas</div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="../Infecciosas/index.html">Menú Infecciosas</a></li>
+          </ul>
+        </li>
+        <li class="has-submenu">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;"><i class="fas fa-filter"></i> Nefrología</div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="../Nefrologia/index.html">Menú Nefrología</a></li>
+          </ul>
+        </li>
+        <li class="has-submenu">
+            <a href="#" class="submenu-toggle">
+              <div style="display:flex; align-items:center;"><i class="fas fa-brain"></i> Neurología</div>
+              <i class="fas fa-chevron-right chevron"></i>
+            </a>
+            <ul class="submenu">
+              <li><a href="../Neurologia/index.html">Menú Neurología</a></li>
+            </ul>
+        </li>
+        <li class="has-submenu">
+            <a href="#" class="submenu-toggle">
+              <div style="display:flex; align-items:center;"><i class="fas fa-lungs"></i> Respiratorio</div>
+              <i class="fas fa-chevron-right chevron"></i>
+            </a>
+            <ul class="submenu">
+              <li><a href="../Respiratorio/index.html">Menú Respiratorio</a></li>
+            </ul>
+        </li>
+        <li class="has-submenu">
+            <a href="#" class="submenu-toggle">
+              <div style="display:flex; align-items:center;"><i class="fas fa-ambulance"></i> UCI / Emergencias</div>
+              <i class="fas fa-chevron-right chevron"></i>
+            </a>
+            <ul class="submenu">
+              <li><a href="../UCI/index.html">Menú UCI / Emergencias</a></li>
+            </ul>
+        </li>
+
+      </ul>
+    </nav>
+    <div class="sidebar-footer">
+      <p>Medicina Interna</p>
+      <small>Vithas Xanit Internacional</small>
+    </div>
+  </aside>
+
+  <!-- CONTENIDO -->
+  <div class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <i class="fas fa-bars menu-toggle" id="menuToggle"></i>
+        <h2><i class="fas fa-utensils" style="margin-right: 10px;"></i>Digestivo y Hepatología</h2>
+      </div>
+      <div class="header-right">
+        <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+      </div>
+    </header>
+
+    <div class="content-wrapper">
+      <div class="cards-grid">
+        
+        <!-- MELD -->
+        <a href="meld.html" class="card">
+          <div class="card-icon" style="background:#e0f2f1; color:#1a237e;"><i class="fas fa-heart-pulse"></i></div>
+          <h3>MELD Score</h3>
+          <p>Modelo para Enfermedad Hepática Terminal (Mortalidad a 3 meses).</p>
+          <span class="card-link">Abrir <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+        <!-- Child-Pugh -->
+        <a href="child-pugh.html" class="card">
+          <div class="card-icon" style="background:#e0f2f1; color:#0d47a1;"><i class="fas fa-star"></i></div>
+          <h3>Child-Pugh Score</h3>
+          <p>Clasificación clásica de la severidad de la cirrosis hepática.</p>
+          <span class="card-link">Abrir <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+        <!-- Glasgow-Blatchford -->
+        <a href="glasgow-blatchford.html" class="card">
+          <div class="card-icon" style="background:#e0f2f1; color:#1565c0;"><i class="fas fa-droplet"></i></div>
+          <h3>Glasgow-Blatchford</h3>
+          <p>Riesgo de intervención o muerte en Hemorragia Digestiva Alta.</p>
+          <span class="card-link">Abrir <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+        <!-- BISAP -->
+        <a href="bisap.html" class="card">
+          <div class="card-icon" style="background:#e0f2f1; color:#1a237e;"><i class="fas fa-notes-medical"></i></div>
+          <h3>BISAP Score</h3>
+          <p>Pronóstico de mortalidad en las primeras 24h de pancreatitis aguda.</p>
+          <span class="card-link">Abrir <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+        <!-- Ranson -->
+        <a href="ranson.html" class="card">
+          <div class="card-icon" style="background:#e0f2f1; color:#0d47a1;"><i class="fas fa-percent"></i></div>
+          <h3>Ranson Criterios</h3>
+          <p>Evaluación de severidad de pancreatitis aguda (basada en 48h).</p>
+          <span class="card-link">Abrir <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+      </div>
+    </div>
+    
+    <footer class="footer">
+      <p>&copy; 2025 Servicio de Medicina Interna - Hospital Vithas Xanit Internacional.</p>
+    </footer>
+  </div>
+  <script src="../../js/main.js"></script>
+</body>
+</html>

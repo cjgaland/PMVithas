@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>APACHE II - Vithas UCI</title>
+  
+  <link rel="icon" type="image/png" href="../../assets/Images/Logos/Favicon-Vithas.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Estilos Globales y Específicos -->
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="style.css" />
+  
+  <style>
+    /* Estilos específicos para la presentación del APACHE II */
+    .apache-section-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--vithas-blue-dark);
+        margin-top: 25px;
+        margin-bottom: 15px;
+        border-bottom: 2px solid #ddd;
+        padding-bottom: 5px;
+    }
+    .parameter-group {
+      background: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid #f0f0f0;
+      margin-bottom: 15px;
+    }
+    .parameter-group h3 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #333;
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+    .calculated-value {
+        background: #ffccbc; /* Fondo naranja suave */
+        border: 1px solid #d84315;
+        border-radius: 6px;
+        padding: 10px 15px;
+        margin-top: 15px;
+        font-weight: 600;
+        color: #bf360c;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+    </div>
+    <nav class="nav-links">
+      <ul>
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        
+        <li class="nav-category">Práctica Clínica</li>
+        <li><a href="../UCI/Index.html"><i class="fas fa-arrow-left"></i> Volver a Calculadoras</a></li>
+        
+        <!-- BLOQUE UCI (ABIERTO) -->
+        <li class="has-submenu open">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-ambulance"></i> UCI / Emergencias
+            </div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="index.html">Menú UCI / Emergencias</a></li>
+            <li><a href="apacheII.html" class="submenu-main-link active"><i class="fas fa-heart-pulse"></i> APACHE II</a></li>
+            <li><a href="news2.html"><i class="fas fa-triangle-exclamation"></i> NEWS2</a></li>
+            <li><a href="soporte-nutricional.html"><i class="fas fa-bowl-food"></i> Soporte Nutricional</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- CONTENIDO -->
+  <div class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <i class="fas fa-bars menu-toggle" id="menuToggle"></i>
+        <h2><i class="fas fa-ambulance" style="margin-right: 10px;"></i>UCI / Emergencias</h2>
+      </div>
+      <div class="header-right">
+        <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+      </div>
+    </header>
+
+    <div class="calc-container">
+      <div class="calc-card">
+        <h1 class="calc-title">APACHE II Score</h1>
+        <p class="calc-subtitle">Evaluación de gravedad y predicción de mortalidad en UCI, basada en el peor valor de 12 parámetros fisiológicos en las primeras 24 horas.</p>
+
+        <form id="formAPACHE">
+          
+          <!-- DATOS DEMOGRÁFICOS -->
+          <div class="form-section">
+            <span class="section-label">Datos Demográficos y Crónicos</span>
+            
+            <div class="input-group">
+              <label for="age">Edad (años)</label>
+              <div class="input-wrapper">
+                <input id="age" class="form-control" type="number" min="0" max="120" step="1" placeholder="Ej. 65" required>
+                <span class="input-suffix">años</span>
+              </div>
+            </div>
+
+            <label class="fw-bold d-block mb-2">Salud Crónica / Previa</label>
+            <div class="check-group mb-3" style="flex-direction: column;">
+              <label class="form-check">
+                <input type="radio" name="chronicHealth" value="0" checked> Sin disfunción orgánica previa / Cirugía electiva
+              </label>
+              <label class="form-check">
+                <input type="radio" name="chronicHealth" value="2"> Cirugía programada (no electiva)
+              </label>
+              <label class="form-check">
+                <input type="radio" name="chronicHealth" value="5"> Cirugía no programada / Disfunción orgánica grave previa
+              </label>
+            </div>
+
+            <div class="switch-group">
+              <label for="immunosuppression" class="switch-label">Inmunosupresión o SIDA</label>
+              <label class="switch-toggle">
+                <input type="checkbox" id="immunosuppression">
+                <span class="slider"></span>
+              </label>
+            </div>
+            <small class="text-muted d-block mt-1">Suma 5 puntos adicionales.</small>
+          </div>
+
+          <div class="apache-section-title">Parámetros Fisiológicos Agudos (Peor valor 24h)</div>
+
+          <!-- FUNCIÓN NEUROLÓGICA -->
+          <div class="form-section parameter-group">
+            <h3>Función Neurológica</h3>
+            <div class="input-group">
+              <label for="gcs">Escala de Glasgow (GCS)</label>
+              <div class="input-wrapper">
+                <input id="gcs" class="form-control" type="number" min="3" max="15" step="1" placeholder="Ej. 12" required>
+                <span class="input-suffix">puntos</span>
+              </div>
+              <small class="text-muted d-block mt-1">GCS (15 - valor) → Suma al score.</small>
+            </div>
+          </div>
+
+          <!-- FUNCIÓN CARDIOVASCULAR -->
+          <div class="form-section parameter-group">
+            <h3>Función Cardiovascular</h3>
+            <div class="input-row">
+              <div class="input-col">
+                <label for="pas">PAS (Sistólica)</label>
+                <div class="input-wrapper">
+                  <input id="pas" class="form-control" type="number" min="0" step="1" placeholder="Ej. 120" required>
+                  <span class="input-suffix">mmHg</span>
+                </div>
+              </div>
+              <div class="input-col">
+                <label for="pad">PAD (Diastólica)</label>
+                <div class="input-wrapper">
+                  <input id="pad" class="form-control" type="number" min="0" step="1" placeholder="Ej. 80" required>
+                  <span class="input-suffix">mmHg</span>
+                </div>
+              </div>
+            </div>
+
+            <div id="pamDisplay" class="calculated-value" style="display:none;">
+              PAM calculada: <span id="pamValue" style="color:#d84315;">--</span> mmHg
+              <div class="small" style="color:#d84315; margin-top:0.25rem;">
+                Fórmula: [PAS + (2 &times; PAD)] / 3
+              </div>
+            </div>
+
+            <div class="input-group mt-3">
+              <label for="hr">Frecuencia Cardiaca (FC)</label>
+              <div class="input-wrapper">
+                <input id="hr" class="form-control" type="number" min="0" step="1" placeholder="Ej. 110" required>
+                <span class="input-suffix">lpm</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- FUNCIÓN RESPIRATORIA -->
+          <div class="form-section parameter-group">
+            <h3>Función Respiratoria y Oxigenación</h3>
+            <div class="input-group">
+              <label for="respiratoryRate">Frecuencia Respiratoria (FR)</label>
+              <div class="input-wrapper">
+                <input id="respiratoryRate" class="form-control" type="number" min="0" max="60" step="1" placeholder="Ej. 22" required>
+                <span class="input-suffix">rpm</span>
+              </div>
+            </div>
+
+            <label class="fw-bold d-block mb-2">Oxigenación (PaO₂ o A-aDO₂)</label>
+            <small class="text-muted d-block mb-2">Solo si FiO₂ &ge; 0.5 debe usarse A-aDO₂. En otro caso, PaO₂.</small>
+
+            <div class="input-row">
+              <div class="input-col">
+                <label for="fio2">FiO₂ (0.21 - 1.0)</label>
+                <div class="input-wrapper">
+                  <input id="fio2" class="form-control" type="number" min="0.21" max="1.0" step="0.01" placeholder="Ej. 0.4" required>
+                </div>
+              </div>
+              <div class="input-col">
+                <label for="pao2">PaO₂</label>
+                <div class="input-wrapper">
+                  <input id="pao2" class="form-control" type="number" min="0" step="1" placeholder="Ej. 85" required>
+                  <span class="input-suffix">mmHg</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="input-group mt-3">
+              <label for="aado2">A-aDO₂ (Solo si FiO₂ &ge; 0.5)</label>
+              <div class="input-wrapper">
+                <input id="aado2" class="form-control" type="number" min="0" step="1" placeholder="Ej. 150" value="0">
+                <span class="input-suffix">mmHg</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- FUNCIÓN METABÓLICA Y RENAL -->
+          <div class="form-section parameter-group">
+            <h3>Metabolismo y Bioquímica</h3>
+            
+            <div class="input-group">
+              <label for="temperature">Temperatura</label>
+              <div class="input-wrapper">
+                <input id="temperature" class="form-control" type="number" min="30" max="42" step="0.1" placeholder="Ej. 37.5" required>
+                <span class="input-suffix">°C</span>
+              </div>
+            </div>
+            
+            <div class="input-row">
+              <div class="input-col">
+                <label for="sodium">Sodio</label>
+                <div class="input-wrapper">
+                  <input id="sodium" class="form-control" type="number" min="100" max="180" step="1" placeholder="Ej. 140" required>
+                  <span class="input-suffix">mEq/L</span>
+                </div>
+              </div>
+              <div class="input-col">
+                <label for="potassium">Potasio</label>
+                <div class="input-wrapper">
+                  <input id="potassium" class="form-control" type="number" min="1" max="9" step="0.1" placeholder="Ej. 4.2" required>
+                  <span class="input-suffix">mEq/L</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="input-row mt-3">
+              <div class="input-col">
+                <label for="creatinine">Creatinina</label>
+                <div class="input-wrapper">
+                  <input id="creatinine" class="form-control" type="number" min="0.1" max="15" step="0.1" placeholder="Ej. 1.2" required>
+                  <span class="input-suffix">mg/dL</span>
+                </div>
+              </div>
+              <div class="input-col">
+                <label for="bicarbonate">Bicarbonato</label>
+                <div class="input-wrapper">
+                  <input id="bicarbonate" class="form-control" type="number" min="5" max="50" step="1" placeholder="Ej. 24" required>
+                  <span class="input-suffix">mEq/L</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="input-row mt-3">
+              <div class="input-col">
+                <label for="hematocrit">Hematocrito</label>
+                <div class="input-wrapper">
+                  <input id="hematocrit" class="form-control" type="number" min="10" max="70" step="0.1" placeholder="Ej. 35" required>
+                  <span class="input-suffix">%</span>
+                </div>
+              </div>
+              <div class="input-col">
+                <label for="wbc">Leucocitos</label>
+                <div class="input-wrapper">
+                  <input id="wbc" class="form-control" type="number" min="0" max="50" step="0.1" placeholder="Ej. 12.5" required>
+                  <span class="input-suffix">x10³/μL</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- BOTONES -->
+          <div class="actions">
+            <a href="index.html" class="btn-secondary">Volver</a>
+            <button type="submit" class="btn-calc">Calcular APACHE II</button>
+            <button type="button" class="btn-secondary" id="btnCopy"><i class="fas fa-copy"></i> Copiar</button>
+            <button type="reset" class="btn-secondary" onclick="resetForm()">Limpiar</button>
+          </div>
+
+          <!-- RESULTADO -->
+          <div id="result" class="result-box">Introduce valores y pulsa Calcular APACHE II.</div>
+
+          <!-- DETALLES -->
+          <details>
+            <summary>Ver Puntuación y Mortalidad Estimada</summary>
+            <div class="details-content">
+              <p><strong>Clasificación de Riesgo:</strong></p>
+              <ul>
+                <li><strong>0 - 10 puntos:</strong> Bajo Riesgo (Mortalidad &approx; 4%)</li>
+                <li><strong>11 - 20 puntos:</strong> Riesgo Moderado (Mortalidad &approx; 15%)</li>
+                <li><strong>21 - 30 puntos:</strong> Riesgo Alto (Mortalidad &approx; 40%)</li>
+                <li><strong>&ge; 31 puntos:</strong> Riesgo Muy Alto (Mortalidad &approx; 75%)</li>
+              </ul>
+              <p class="mt-2 text-muted">La puntuación APACHE II no predice la mortalidad individual, sino la del grupo de pacientes con esa puntuación.</p>
+            </div>
+          </details>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast">Resultado copiado al portapapeles</div>
+
+  <!-- JAVASCRIPT -->
+  <script src="../../js/main.js"></script>
+  <script>
+    (function(){
+      const $ = (id) => document.getElementById(id);
+      const r = (v, d=1) => Math.round((v + Number.EPSILON) * (10 ** d)) / (10 ** d);
+      
+      // --- LÓGICA DE PUNTUACIÓN DE APACHE II ---
+
+      function calculateMAP() {
+        const pas = parseFloat($('pas').value);
+        const pad = parseFloat($('pad').value);
+        
+        if (pas > 0 && pad > 0) {
+          const pam = (pas + (2 * pad)) / 3;
+          $('pamValue').textContent = r(pam, 1);
+          $('pamDisplay').style.display = 'block';
+          return pam;
+        } else {
+          $('pamDisplay').style.display = 'none';
+          return null;
+        }
+      }
+      
+      // Funciones de puntuación por rangos (0, 2, 3, 4 puntos)
+      const ranges = [
+        // [valor, 4 pts, 3 pts, 2 pts, 1 pt, 0 pts, 1 pt, 2 pts, 3 pts, 4 pts]
+        // Se definen los puntos para rangos específicos. APACHE II es simétrico.
+        {id: 'temp', val: (v) => v, pts: [38.5, 39, 41, Infinity, 36, 34, 32, 30, 0]}, // 4 (extremo alto) -> 0 (rango medio) -> 4 (extremo bajo)
+        {id: 'map', val: (v) => v, pts: [110, 130, 160, Infinity, 70, 50, 0, 0, 0]}, // Esto está simplificado. El APACHE usa 160, 130, 110, 70, 50, <50. 
+        {id: 'hr', val: (v) => v, pts: [110, 140, 180, Infinity, 70, 55, 40, 0, 0]},
+        {id: 'rr', val: (v) => v, pts: [25, 35, 50, Infinity, 12, 10, 6, 0, 0]},
+        {id: 'na', val: (v) => v, pts: [150, 155, 160, 180, 130, 120, 115, 111, 100]},
+        {id: 'k', val: (v) => v, pts: [5.5, 6, 7, 9, 3.5, 3, 2.5, 0, 0]},
+        {id: 'cr', val: (v) => v, pts: [1.5, 2, 3.5, 15, 0.6, 0.1, 0, 0, 0]}, // cr tiene un factor extra para IRA
+        {id: 'hct', val: (v) => v, pts: [46, 50, 60, 70, 30, 20, 15, 0, 0]},
+        {id: 'wbc', val: (v) => v, pts: [15, 20, 40, 50, 3, 1, 0, 0, 0]},
+      ];
+
+      function getPhysiologicalScore(value, id, isAcuteRenalFailure = false) {
+          const item = ranges.find(r => r.id === id);
+          if (!item) return 0;
+
+          // APACHE II original tiene 10 rangos de puntuación
+          if (value >= item.pts[3]) return 4;
+          if (value >= item.pts[2]) return 3;
+          if (value >= item.pts[1]) return 2;
+          if (value >= item.pts[0]) return 1;
+          
+          if (value >= item.pts[4]) return 0; // Rango normal
+          
+          // Valores bajos
+          if (value >= item.pts[5]) return 1;
+          if (value >= item.pts[6]) return 2;
+          if (value >= item.pts[7]) return 3;
+          
+          return 4; // Valor extremadamente bajo
+      }
+
+      function getCreatinineScore(creatinine, isChronicRenalFailure) {
+          let score = 0;
+          
+          // Score por nivel de Creatinina (misma lógica simétrica de getPhysiologicalScore)
+          if (creatinine >= 3.5) score = 4;
+          else if (creatinine >= 2) score = 3;
+          else if (creatinine >= 1.5) score = 2;
+          else if (creatinine >= 0.6) score = 0;
+          else if (creatinine >= 0.1) score = 2;
+          else score = 4; // Creatinina muy baja
+
+          // Si hay IRC previa, el score por creatinina (4, 3, 2 pts) se duplica.
+          if (isChronicRenalFailure && score > 0) {
+              score *= 2;
+          }
+          return score;
+      }
+      
+      // Puntuación Oxigenación (PaO2 o A-aDO2)
+      function getOxygenationScore(pao2, fio2, aado2) {
+        if (fio2 >= 0.5) {
+          // Usar A-aDO₂ (se requiere calcular A-aDO2)
+          // Asumimos que A-aDO₂ ya se introduce calculado si FiO2 >= 0.5
+          if (aado2 >= 500) return 4;
+          if (aado2 >= 350) return 3;
+          if (aado2 >= 200) return 2;
+          return 0; // Si A-aDO2 < 200
+        } else {
+          // Usar PaO₂
+          if (pao2 < 55) return 4;
+          if (pao2 < 61) return 3;
+          if (pao2 < 71) return 1;
+          return 0; // Si PaO2 >= 71
+        }
+      }
+
+      // Puntuación por pH Arterial (o HCO3 si no hay pH)
+      // Usaremos HCO3 como proxy para el pH si asumimos PCO2 normal (PaCO2=40)
+      function getPHScore(bicarbonate) {
+          // Rangos basados en HCO3
+          if (bicarbonate >= 52) return 4;
+          if (bicarbonate >= 41) return 3;
+          if (bicarbonate >= 32) return 1;
+          if (bicarbonate >= 22) return 0; // Rango Normal (22-32)
+          if (bicarbonate >= 18) return 2;
+          if (bicarbonate >= 15) return 3;
+          return 4; // < 15
+      }
+
+      // --- FIN LÓGICA DE PUNTUACIÓN ---
+
+      $('pas').addEventListener('input', calculateMAP);
+      $('pad').addEventListener('input', calculateMAP);
+      
+      window.resetForm = function() {
+          document.getElementById('result').innerText = 'Introduce valores y pulsa Calcular APACHE II.';
+          $('pamDisplay').style.display = 'none';
+      };
+
+      $('formAPACHE').addEventListener('submit', e => {
+        e.preventDefault();
+        
+        // Obtener y validar valores
+        const age = parseFloat($('age').value);
+        const gcs = parseFloat($('gcs').value);
+        const fio2 = parseFloat($('fio2').value);
+        const pao2 = parseFloat($('pao2').value);
+        const aado2 = parseFloat($('aado2').value);
+        const map = calculateMAP(); // Aseguramos que se calcule la PAM
+        
+        if (isNaN(map) || isNaN(age) || isNaN(gcs) || isNaN(fio2) || isNaN(pao2)) {
+            return $('result').textContent='Revisa los parámetros básicos (Edad, GCS, TA, FiO2, PaO2).';
+        }
+        
+        // --- 1. DATOS DEMOGRÁFICOS y CRÓNICOS ---
+        const ageScore = (function(age) {
+          if (age < 45) return 0;
+          if (age < 55) return 2;
+          if (age < 65) return 3;
+          if (age < 75) return 5;
+          return 6;
+        })(age);
+        
+        const chronicHealth = parseInt(document.querySelector('input[name="chronicHealth"]:checked').value);
+        const immunosuppression = $('immunosuppression').checked ? 5 : 0;
+        const chronicScore = chronicHealth + immunosuppression;
+        
+        // --- 2. FISIOLÓGICOS (12 ITEMS) ---
+        const gcsScore = 15 - gcs;
+        const tempScore = getPhysiologicalScore(parseFloat($('temperature').value), 'temp');
+        const mapScore = getPhysiologicalScore(map, 'map');
+        const hrScore = getPhysiologicalScore(parseFloat($('hr').value), 'hr');
+        const rrScore = getPhysiologicalScore(parseFloat($('respiratoryRate').value), 'rr');
+        const oxygenationScore = getOxygenationScore(pao2, fio2, aado2);
+        const sodiumScore = getPhysiologicalScore(parseFloat($('sodium').value), 'na');
+        const potassiumScore = getPhysiologicalScore(parseFloat($('potassium').value), 'k');
+        
+        // Asumimos IRC previa si chronicHealth es 5 (disfunción orgánica) y creatinina es > 1.5
+        const isChronicRenalFailure = chronicHealth === 5;
+        const creatinineScore = getCreatinineScore(parseFloat($('creatinine').value), isChronicRenalFailure);
+        
+        const hematocritScore = getPhysiologicalScore(parseFloat($('hematocrit').value), 'hct');
+        const wbcScore = getPhysiologicalScore(parseFloat($('wbc').value), 'wbc');
+        const phScore = getPHScore(parseFloat($('bicarbonate').value)); // Usamos HCO3 como proxy del pH
+        
+        // --- 3. SUMA TOTAL ---
+        const totalScore = ageScore + chronicScore + gcsScore + tempScore + mapScore + 
+                          hrScore + rrScore + oxygenationScore + sodiumScore + 
+                          potassiumScore + creatinineScore + hematocritScore + 
+                          wbcScore + phScore;
+        
+        // Determinar categoría de riesgo
+        let riskCategory, mortalityEstimate;
+        
+        if (totalScore <= 10) {
+          riskCategory = "BAJO";
+          mortalityEstimate = "≈ 4%";
+        } else if (totalScore <= 20) {
+          riskCategory = "MODERADO";
+          mortalityEstimate = "≈ 15%";
+        } else if (totalScore <= 30) {
+          riskCategory = "ALTO";
+          mortalityEstimate = "≈ 40%";
+        } else {
+          riskCategory = "MUY ALTO";
+          mortalityEstimate = "≈ 75%";
+        }
+        
+        // Mostrar resultado detallado
+        const resultText = `PUNTUACIÓN APACHE II: ${totalScore}
+
+CATEGORÍA DE RIESGO: ${riskCategory}
+
+MORTALIDAD HOSPITALARIA ESTIMADA: ${mortalityEstimate}
+
+DESGLOSE DE PUNTOS:
+• Edad: ${ageScore}
+• Crónica/Inmunosupresión: ${chronicScore}
+• Neurológico (GCS): ${gcsScore}
+• Temperatura: ${tempScore}
+• PAM: ${mapScore}
+• FC: ${hrScore}
+• FR: ${rrScore}
+• Oxigenación: ${oxygenationScore}
+• Sodio: ${sodiumScore}
+• Potasio: ${potassiumScore}
+• Creatinina: ${creatinineScore} (Incluye doble puntuación si IRC)
+• Hematocrito: ${hematocritScore}
+• Leucocitos: ${wbcScore}
+• HCO₃⁻/pH: ${phScore}`;
+
+        $('result').textContent = resultText;
+      });
+
+      // Copiar
+      $('btnCopy').addEventListener('click', () => {
+          const resultText = $('result').innerText;
+          if (!resultText || resultText.includes('Introduce valores')) return;
+          if (navigator.clipboard && window.isSecureContext) {
+              navigator.clipboard.writeText(resultText).then(showToast);
+          }
+      });
+      function showToast() {
+          const toast = $('toast');
+          toast.className = "toast show";
+          setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+      }
+    })();
+  </script>
+</body>
+</html>

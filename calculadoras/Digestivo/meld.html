@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MELD Score - Vithas</title>
+  
+  <link rel="icon" type="image/png" href="../../Favicon-Vithas.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="style.css" />
+  
+  <style>
+    /* Estilo específico para Toast */
+    .toast {
+      visibility: hidden; min-width: 250px; background-color: #333; color: #fff; text-align: center;
+      border-radius: 50px; padding: 16px; position: fixed; z-index: 1000; left: 50%; bottom: 30px;
+      transform: translateX(-50%); font-size: 0.9rem; opacity: 0; transition: opacity 0.3s, bottom 0.3s;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .toast.show { visibility: visible; opacity: 1; bottom: 50px; }
+
+    /* Ajustes responsivos */
+    @media (min-width: 768px) {
+      .calc-container { max-width: 1200px; }
+      .input-row { display: flex; gap: 20px; }
+      .input-col { flex: 1; }
+    }
+    
+    /* Estilo para el switch de diálisis */
+    .dialysis-check {
+      background-color: #fff3cd;
+      border: 1px solid #ffeeba;
+      color: #856404;
+      padding: 15px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    .dialysis-check:hover { background-color: #ffe8a1; }
+    .dialysis-check input { transform: scale(1.5); margin-right: 15px; accent-color: #e65100; }
+    
+    /* Clases de utilidad para layout dentro de label */
+    .d-block { display: block; }
+    .fw-normal { font-weight: normal; }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+    </div>
+    <nav class="nav-links">
+      <ul>
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        
+        <li class="nav-category">Práctica Clínica</li>
+        
+        <!-- Enlace para volver al menú general -->
+        <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Volver a Calculadoras</a></li>
+        
+        <!-- BLOQUE ACTUAL: Digestivo (ABIERTO) -->
+        <li class="has-submenu open">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-utensils"></i> Digestivo
+            </div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="index.html">Menú Digestivo</a></li>
+            <!-- CORRECCIÓN ICONO CHILD-PUGH: fa-wine-glass -->
+            <li><a href="child-pugh.html"><i class="fas fa-wine-glass"></i> Child-Pugh</a></li>
+            <!-- Elemento Activo -->
+            <li><a href="meld.html" class="submenu-main-link active"><i class="fas fa-notes-medical"></i> MELD</a></li>
+            <li><a href="glasgow-blatchford.html"><i class="fas fa-file-medical-alt"></i> Glasgow-Blatchford</a></li>
+            <li><a href="ranson.html"><i class="fas fa-list-ol"></i> Ranson</a></li>
+            <li><a href="bisap.html"><i class="fas fa-procedures"></i> BISAP</a></li>
+          </ul>
+        </li>
+
+        <!-- Otros Bloques (Cerrados) -->
+        <li class="has-submenu">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;"><i class="fas fa-heartbeat"></i> Cardiovascular</div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="../Cardiovascular/index.html">Menú Cardiovascular</a></li>
+          </ul>
+        </li>
+
+        <li class="has-submenu">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;"><i class="fas fa-ruler-combined"></i> Antropometría</div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="../Antropometricos/index.html">Menú Antropometría</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- CONTENIDO -->
+  <div class="main-content">
+    <header class="top-header">
+      <!-- CORRECCIÓN ICONO CABECERA: fa-utensils -->
+      <div class="header-left">
+        <h2><i class="fas fa-utensils" id="menuToggle" style="margin-right: 10px;"></i>Calculadoras Digestivas</h2>
+      </div>
+      <div class="header-right">
+        <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+      </div>
+    </header>
+
+    <div class="calc-container">
+      <div class="calc-card">
+        <h1 class="calc-title">Calculadora MELD (Original)</h1>
+        <p class="calc-subtitle">Model for End-Stage Liver Disease. Estima la gravedad de la enfermedad hepática crónica y la mortalidad a 3 meses.</p>
+
+        <form id="formMELD">
+          
+          <div class="form-section">
+            <span class="section-label">Parámetros Analíticos</span>
+            
+            <div class="input-row">
+              <!-- Bilirrubina -->
+              <div class="input-col">
+                <div class="input-group">
+                  <label for="bilir" class="fw-bold text-secondary">Bilirrubina Total</label>
+                  <div class="input-wrapper">
+                    <input type="number" id="bilir" class="form-control" step="0.01" min="0.1" placeholder="Ej. 3.2" required>
+                    <span class="input-suffix">mg/dL</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- INR -->
+              <div class="input-col">
+                <div class="input-group">
+                  <label for="inr" class="fw-bold text-secondary">INR</label>
+                  <div class="input-wrapper">
+                    <input type="number" id="inr" class="form-control" step="0.01" min="0.1" placeholder="Ej. 1.8" required>
+                    <span class="input-suffix"></span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Creatinina -->
+              <div class="input-col">
+                <div class="input-group">
+                  <label for="creat" class="fw-bold text-secondary">Creatinina Sérica</label>
+                  <div class="input-wrapper">
+                    <input type="number" id="creat" class="form-control" step="0.01" min="0.1" placeholder="Ej. 1.4" required>
+                    <span class="input-suffix">mg/dL</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Diálisis Checkbox -->
+            <label class="dialysis-check mt-3">
+              <input type="checkbox" id="dialisis">
+              <!-- CORRECCIÓN VALIDACIÓN HTML: span d-block en lugar de div -->
+              <span class="d-block">
+                <strong>Paciente en diálisis</strong> (≥2 veces en la última semana)
+                <span class="small text-muted d-block fw-normal">Si se marca, la creatinina se ajusta automáticamente a 4.0 mg/dL.</span>
+              </span>
+            </label>
+
+          </div>
+
+          <!-- BOTONES DE ACCIÓN -->
+          <div class="actions">
+            <a href="index.html" class="btn-secondary" style="text-decoration: none;">Volver</a>
+            <button type="submit" class="btn-calc">Calcular</button>
+            <button type="button" class="btn-secondary" id="btnCopy"><i class="fas fa-copy"></i> Copiar</button>
+            <button type="reset" class="btn-secondary" onclick="document.getElementById('result').innerText='Introduce los valores y pulsa Calcular.'">Limpiar</button>
+          </div>
+
+          <!-- CAJA DE RESULTADOS -->
+          <div id="result" class="result-box">Introduce los valores y pulsa Calcular.</div>
+
+          <!-- DETALLES ADICIONALES -->
+          <details>
+            <summary>Ver fórmula e interpretación</summary>
+            <div class="details-content">
+              <p><strong>Fórmula MELD (UNOS):</strong></p>
+              <p style="font-family: monospace; background: #eee; padding: 10px; border-radius: 4px;">
+                MELD = 3.78×ln(Bilirrubina) + 11.2×ln(INR) + 9.57×ln(Creatinina) + 6.43
+              </p>
+              <ul class="small text-muted">
+                <!-- CORRECCIÓN VALIDACIÓN HTML: entidades &lt; y &gt; -->
+                <li>Si cualquier valor es &lt; 1, se ajusta a 1 para evitar logaritmos negativos.</li>
+                <li>Si creatinina &gt; 4, se ajusta a 4.</li>
+                <li>Puntuación máxima estándar: 40.</li>
+              </ul>
+              
+              <p class="mt-3"><strong>Mortalidad estimada a 3 meses:</strong></p>
+              <table class="table-scale">
+                <thead>
+                  <tr><th>Puntuación</th><th>Mortalidad</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>≥ 40</td><td>71.3%</td></tr>
+                  <tr><td>30 – 39</td><td>52.6%</td></tr>
+                  <tr><td>20 – 29</td><td>19.6%</td></tr>
+                  <tr><td>10 – 19</td><td>6.0%</td></tr>
+                  <tr><td>≤ 9</td><td>1.9%</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </details>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast">Resultado copiado al portapapeles</div>
+
+  <script src="../../js/main.js"></script>
+  <script>
+    (function() {
+        const $ = (id) => document.getElementById(id);
+
+        $('formMELD').addEventListener('submit', (e) => {
+          e.preventDefault();
+          
+          let bil = parseFloat($('bilir').value);
+          let inr = parseFloat($('inr').value);
+          let crea = parseFloat($('creat').value);
+          const enDialisis = $('dialisis').checked;
+          
+          if (!bil || !inr || !crea) {
+            $('result').textContent = 'Por favor, completa todos los campos numéricos.';
+            return;
+          }
+          
+          // Reglas de ajuste MELD (UNOS)
+          // 1. Si diálisis => Creatinina = 4.0
+          if (enDialisis) {
+            crea = 4.0;
+          }
+          
+          // 2. Valores mínimos de 1.0
+          const bilAdj = Math.max(1.0, bil);
+          const inrAdj = Math.max(1.0, inr);
+          const creaAdj = Math.min(Math.max(1.0, crea), 4.0); // Tope 4.0 para creatinina
+
+          // Cálculo
+          let meld = 3.78 * Math.log(bilAdj) + 11.2 * Math.log(inrAdj) + 9.57 * Math.log(creaAdj) + 6.43;
+          
+          // Redondeo al entero más cercano
+          meld = Math.round(meld);
+          
+          // Límites clínicos
+          if (meld > 40) meld = 40; 
+          if (meld < 6) meld = 6;
+
+          // Interpretación Mortalidad 3 meses (Wiesner et al.)
+          let mort = "";
+          let riesgo = "";
+
+          if (meld >= 40) { mort = "71.3%"; riesgo = "MUY ALTO"; }
+          else if (meld >= 30) { mort = "52.6%"; riesgo = "ALTO"; }
+          else if (meld >= 20) { mort = "19.6%"; riesgo = "MODERADO-ALTO"; }
+          else if (meld >= 10) { mort = "6.0%"; riesgo = "MODERADO"; }
+          else { mort = "1.9%"; riesgo = "BAJO"; }
+
+          $('result').textContent = `MELD SCORE: ${meld} puntos\n` +
+                                    `Riesgo: ${riesgo}\n` +
+                                    `Mortalidad est. (3 meses): ${mort}\n\n` +
+                                    `Detalle cálculo:\n` +
+                                    `• Bilirrubina: ${bilAdj} mg/dL\n` +
+                                    `• INR: ${inrAdj}\n` +
+                                    `• Creatinina: ${creaAdj} mg/dL ${enDialisis ? '(Diálisis)' : ''}`;
+        });
+
+        // Copiar
+        $('btnCopy').addEventListener('click', () => {
+            const resultText = $('result').innerText;
+            if (!resultText || resultText.includes('Introduce los valores')) return;
+            
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(resultText).then(showToast);
+            } else {
+                const textArea = document.createElement("textarea");
+                textArea.value = resultText;
+                textArea.style.position = "fixed";
+                document.body.appendChild(textArea);
+                textArea.select();
+                try { document.execCommand('copy'); showToast(); } catch (err) {}
+                document.body.removeChild(textArea);
+            }
+        });
+
+        function showToast() {
+            const toast = $('toast');
+            toast.className = "toast show";
+            setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+    })();
+  </script>
+</body>
+</html>

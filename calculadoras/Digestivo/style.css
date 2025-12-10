@@ -1,0 +1,253 @@
+/* =========================================
+   ESTILOS ESPECÍFICOS - BLOQUE DIGESTIVO
+   ========================================= */
+
+/* Contenedor principal */
+.calc-container {
+    padding: 30px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.calc-card {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.calc-title {
+    color: var(--vithas-blue-dark);
+    font-weight: 700;
+    margin-bottom: 5px;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 15px;
+}
+
+.calc-subtitle {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 25px;
+}
+
+/* Formularios y Grupos */
+.form-section {
+    margin-bottom: 25px;
+    border-bottom: 1px dashed #eee; /* Separador sutil */
+    padding-bottom: 15px;
+}
+
+.form-section:last-child {
+    border-bottom: none;
+}
+
+.section-label {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--vithas-blue-light);
+    margin-bottom: 10px;
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.check-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-check {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.form-check:hover {
+    background-color: #f0f9ff;
+    border-color: var(--vithas-blue-light);
+}
+
+.form-check input[type="checkbox"],
+.form-check input[type="radio"] {
+    margin-right: 12px;
+    transform: scale(1.2);
+    accent-color: var(--vithas-blue-dark);
+}
+
+.form-check label {
+    cursor: pointer;
+    flex: 1;
+    font-weight: 500;
+    color: #333;
+    margin: 0;
+}
+
+/* Inputs numéricos y selects */
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #333;
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+    background-color: #fff;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--vithas-blue-light);
+    box-shadow: 0 0 0 3px rgba(0, 159, 227, 0.1);
+}
+
+.input-suffix {
+    margin-left: 10px;
+    color: #64748b;
+    font-weight: 500;
+}
+
+/* Botones */
+.actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.btn-calc {
+    background-color: var(--vithas-blue-dark);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+    flex: 1;
+    text-align: center;
+}
+
+.btn-calc:hover {
+    background-color: var(--vithas-blue-light);
+}
+
+.btn-secondary {
+    background-color: #f1f5f9;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-secondary:hover {
+    background-color: #e2e8f0;
+    color: #334155;
+}
+
+/* Caja de Resultados */
+.result-box {
+    margin-top: 25px;
+    background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%); /* Tono naranja suave para digestivo */
+    border-left: 5px solid #ff9800;
+    padding: 20px;
+    border-radius: 8px;
+    color: #e65100;
+    font-weight: 500;
+    white-space: pre-line;
+    line-height: 1.6;
+}
+
+/* Detalles / Acordeón */
+details {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    background: #fff;
+    border-radius: 8px;
+}
+
+details summary {
+    cursor: pointer;
+    color: var(--vithas-blue-light);
+    font-weight: 600;
+    padding: 10px 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+details summary::before {
+    content: '+';
+    margin-right: 8px;
+    font-weight: bold;
+    display: inline-block;
+    width: 20px;
+    text-align: center;
+}
+
+details[open] summary::before {
+    content: '-';
+}
+
+.details-content {
+    background: #fafafa;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    color: #555;
+}
+
+.details-content ul {
+    padding-left: 20px;
+    margin: 10px 0;
+}
+
+.details-content li {
+    margin-bottom: 5px;
+}
+
+/* Tablas dentro de detalles (común en escalas de puntos) */
+.table-scale {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.table-scale th, .table-scale td {
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+
+.table-scale th {
+    color: var(--vithas-blue-dark);
+    font-weight: 600;
+}

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculadoras Médicas - Vithas Xanit</title>
+  
+  <!-- Rutas corregidas: ../ para subir un nivel a la raíz -->
+  <link rel="icon" type="image/png" href="../assets/Images/Logos/Favicon-Vithas.png">
+
+  <!-- Fuentes e Iconos -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Estilos Globales -->
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+    </div>
+    <nav class="nav-links">
+      <ul>
+        <li><a href="../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        
+        <li class="nav-category">Práctica Clínica</li>
+        
+        <!-- Menú Calculadoras-->
+        <li class="has-submenu open">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-calculator"></i> Calculadoras
+            </div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="Antropometricos/Index.html"><i class="fas fa-ruler-combined"></i> Antropometría</a></li>
+            <li><a href="Cardiovascular/Index.html"><i class="fas fa-heartbeat"></i> Cardiovascular</a></li>
+            <li><a href="Digestivo/index.html"><i class="fas fa-utensils"></i> Digestivo</a></li>
+            <li><a href="Infecciosas/index.html"><i class="fas fa-bacteria"></i> Infecciosas</a></li>
+            <li><a href="Nefrologia/index.html"><i class="fas fa-filter"></i> Nefrología</a></li>
+            <li><a href="Neurologia/index.html"><i class="fas fa-brain"></i> Neurología</a></li>
+            <li><a href="Respiratorio/index.html"><i class="fas fa-lungs"></i> Respiratorio</a></li>
+            <li><a href="UCI/Index.html"><i class="fas fa-ambulance"></i> Urgencias/UCI</a></li>
+          </ul>
+        </li>
+        
+        <!-- Utilidades con Desplegable -->
+        <li class="has-submenu">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-toolbox"></i> Utilidades y Herramientas
+            </div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="../Utilidades/Gold_EPOC/index.html"><i class="fas fa-lungs"></i> Guía EPOC</a></li>
+            <li><a href="../Utilidades/Analisis_Clinicos/index.html"><i class="fas fa-microscope"></i> Analíticas</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <div class="sidebar-footer">
+      <p>Medicina Interna</p>
+      <small>Vithas Xanit Internacional</small>
+    </div>
+  </aside>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="main-content">
+    
+    <header class="top-header">
+      <div class="header-left">
+                  <h2><i class="fas fa-calculator" id="menuToggle"></i>
+        Calculadoras Médicas</h2>
+      </div>
+      <div class="header-right">
+        <img src="../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Vithas Xanit" class="top-logo">
+      </div>
+    </header>
+
+    <section class="hero-section" style="padding: 40px 30px;">
+      <div class="hero-content">
+        <h1>Herramientas de Cálculo</h1>
+        <p>Seleccione la especialidad o bloque clínico para acceder a las escalas y calculadoras disponibles.</p>
+      </div>
+    </section>
+
+    <div class="content-wrapper">
+      
+      <!-- GRID DE BLOQUES -->
+      <div class="cards-grid">
+        
+        <!-- 1. Antropométricos -->
+        <a href="Antropometricos/index.html" class="card">
+          <div class="card-icon" style="background:#e0f7fa; color:#006064;">
+            <i class="fas fa-ruler-combined"></i>
+          </div>
+          <h3>Antropometría</h3>
+          <p>IMC, Superficie Corporal (Dubois, Mosteller), Peso Ideal, Ajuste renal.</p>
+          <span class="card-link">Acceder <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+        <!-- 2. Cardiovascular -->
+        <a href="Cardiovascular/Index.html" class="card">
+          <div class="card-icon" style="background:#ffebee; color:#c62828;">
+            <i class="fas fa-heart-pulse"></i>
+          </div>
+          <h3>Cardiovascular</h3>
+          <p>CHA2DS2-VASc, HAS-BLED, TIMI, GRACE, Riesgo CV (SCORE).</p>
+          <span class="card-link">Acceder <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+        <!-- 3. Digestivo -->
+        <a href="Digestivo/index.html" class="card">
+          <div class="card-icon" style="background:#fff3e0; color:#e65100;">
+            <i class="fas fa-utensils"></i> <!-- o fa-stomach si usas FA6 Pro -->
+          </div>
+          <h3>Digestivo / Hepático</h3>
+          <p>Child-Pugh, MELD, Maddrey, Glasgow-Blatchford, Rockall.</p>
+          <span class="card-link">Acceder <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+        <!-- 4. Infecciosas -->
+        <a href="Infecciosas/index.html" class="card">
+          <div class="card-icon" style="background:#f3e5f5; color:#4a148c;">
+            <i class="fas fa-bacteria"></i>
+          </div>
+          <h3>Infecciosas</h3>
+          <p>qSOFA, SOFA, CURB-65, PSI/PORT, MASCC (Neutropenia febril).</p>
+          <span class="card-link">Acceder <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+        <!-- 5. Nefrología -->
+        <a href="Nefrologia/index.html" class="card">
+          <div class="card-icon" style="background:#e8f5e9; color:#1b5e20;">
+            <i class="fas fa-filter"></i>
+          </div>
+          <h3>Nefrología</h3>
+          <p>Filtrado Glomerular (CKD-EPI, MDRD), Excreción fraccional de Sodio/Urea.</p>
+          <span class="card-link">Acceder <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+        <!-- 6. Neurología -->
+        <a href="Neurologia/index.html" class="card">
+          <div class="card-icon" style="background:#fce4ec; color:#880e4f;">
+            <i class="fas fa-brain"></i>
+          </div>
+          <h3>Neurología</h3>
+          <p>NIHSS, Glasgow, ABCD2 (ICTUS), ASPECTS, Hunt & Hess.</p>
+          <span class="card-link">Acceder <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+        <!-- 7. Respiratorio -->
+        <a href="Respiratorio/index.html" class="card">
+          <div class="card-icon" style="background:#e3f2fd; color:#0d47a1;">
+            <i class="fas fa-lungs"></i>
+          </div>
+          <h3>Respiratorio</h3>
+          <p>Wells (TEP), Ginebra, PESI, BODE, Gradiente Alvéolo-Arterial.</p>
+          <span class="card-link">Acceder <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+        <!-- 8. Urgencias / UCI -->
+        <a href="Urgencias/index.html" class="card">
+          <div class="card-icon" style="background:#ffebee; color:#b71c1c;">
+            <i class="fas fa-ambulance"></i>
+          </div>
+          <h3>Urgencias y UCI</h3>
+          <p>APACHE II, SAPS 3, Wells (TVP), Escala de Glasgow, Shock Index.</p>
+          <span class="card-link">Acceder <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p>&copy; 2025 Servicio de Medicina Interna - Hospital Vithas Xanit Internacional.</p>
+    </footer>
+  </div>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Déficit de Agua - Vithas Nefrología</title>
+  
+  <link rel="icon" type="image/png" href="../../assets/Images/Logos/Favicon-Vithas.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+    </div>
+    <nav class="nav-links">
+      <ul>
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        
+        <li class="nav-category">Práctica Clínica</li>
+        <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Volver a Calculadoras</a></li>
+        
+        <li class="has-submenu open">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-filter"></i> Nefrología
+            </div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="index.html">Menú Nefrología</a></li>
+            <li><a href="fg.html"><i class="fas fa-calculator"></i> Filtrado Glomerular</a></li>
+            <li><a href="feNa.html"><i class="fas fa-percent"></i> FeNa</a></li>
+            <li><a href="feUrea.html"><i class="fas fa-percent"></i> FeUrea</a></li>
+            <li><a href="anion-gap.html"><i class="fas fa-flask"></i> Anión Gap</a></li>
+            <li><a href="osmolalidad.html"><i class="fas fa-tint"></i> Osmolalidad</a></li>
+            <li><a href="deficit-agua.html" class="submenu-main-link active"><i class="fas fa-glass-whiskey"></i> Déficit de Agua</a></li>
+            <li><a href="reposicion-hidrica.html"><i class="fas fa-syringe"></i> Reposición Hídrica</a></li>
+            <li><a href="calcio-serico.html"><i class="fas fa-bone"></i> Calcio Corregido</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- CONTENIDO -->
+  <div class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <i class="fas fa-bars menu-toggle" id="menuToggle"></i>
+        <h2><i class="fas fa-filter" style="margin-right: 10px;"></i>Nefrología</h2>
+      </div>
+      <div class="header-right">
+        <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+      </div>
+    </header>
+
+    <div class="calc-container">
+      <div class="calc-card">
+        <h1 class="calc-title">Déficit de Agua Libre</h1>
+        <p class="calc-subtitle">Estimación del déficit de agua en estados de hipernatremia para guiar la reposición.</p>
+
+        <form id="formDeficitAgua">
+          
+          <div class="form-section">
+            <span class="section-label">Características del Paciente</span>
+            
+            <div class="input-row">
+              <div class="input-col">
+                 <label class="fw-bold mb-2">Sexo</label>
+                 <div class="check-group mb-3">
+                   <label class="form-check">
+                     <input type="radio" name="sexo" value="M" checked> Varón
+                   </label>
+                   <label class="form-check">
+                     <input type="radio" name="sexo" value="F"> Mujer
+                   </label>
+                 </div>
+              </div>
+
+              <div class="input-col">
+                 <label class="fw-bold mb-2">Grupo de Edad</label>
+                 <div class="check-group mb-3">
+                   <label class="form-check">
+                     <input type="radio" name="edad" value="adulto" checked> Adulto
+                   </label>
+                   <label class="form-check">
+                     <input type="radio" name="edad" value="anciano"> Anciano (&gt;65)
+                   </label>
+                 </div>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label for="peso">Peso Actual</label>
+              <div class="input-wrapper">
+                <input id="peso" class="form-control" type="number" step="0.1" min="0" placeholder="Ej. 70" required>
+                <span class="input-suffix">kg</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <span class="section-label">Datos Analíticos</span>
+            <div class="input-group">
+              <label for="na">Sodio (Na⁺) Sérico Actual</label>
+              <div class="input-wrapper">
+                <input id="na" class="form-control" type="number" step="0.1" min="0" placeholder="Ej. 155" required>
+                <span class="input-suffix">mEq/L</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- BOTONES -->
+          <div class="actions">
+            <a href="index.html" class="btn-secondary">Volver</a>
+            <button type="submit" class="btn-calc">Calcular</button>
+            <button type="button" class="btn-secondary" id="btnCopy"><i class="fas fa-copy"></i> Copiar</button>
+            <button type="reset" class="btn-secondary" onclick="document.getElementById('result').innerText='Introduce los datos y pulsa Calcular.'">Limpiar</button>
+          </div>
+
+          <!-- RESULTADO -->
+          <div id="result" class="result-box">Introduce los datos y pulsa Calcular.</div>
+
+          <!-- DETALLES -->
+          <details>
+            <summary>Ver Fórmulas y Recomendaciones</summary>
+            <div class="details-content">
+              <p><strong>Cálculo de TBW (Agua Corporal Total):</strong></p>
+              <ul>
+                <li>Varón Adulto: 0.6 × Peso</li>
+                <li>Mujer Adulta: 0.5 × Peso</li>
+                <li>Varón Anciano: 0.5 × Peso</li>
+                <li>Mujer Anciana: 0.45 × Peso</li>
+              </ul>
+              <p><strong>Fórmula de Déficit:</strong></p>
+              <p>Déficit = TBW × ((Na Actual / 140) - 1)</p>
+              <br>
+              <p><strong>Seguridad del Paciente:</strong></p>
+              <ul>
+                <li>Corregir lentamente: máximo 10-12 mEq/L por día para evitar edema cerebral.</li>
+                <li>Monitorizar Na⁺ seriado cada 4-6 horas.</li>
+                <li>Si hay inestabilidad hemodinámica, priorizar salino isotónico antes que agua libre.</li>
+              </ul>
+            </div>
+          </details>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast">Resultado copiado al portapapeles</div>
+
+  <script src="../../js/main.js"></script>
+  <script>
+    (function() {
+      const $ = (id) => document.getElementById(id);
+      const r = (value, decimals = 2) => Math.round((value + Number.EPSILON) * (10 ** decimals)) / (10 ** decimals);
+
+      function calcularTBW(sexo, edad, peso) {
+        if (edad === 'anciano') {
+          return (sexo === 'M' ? 0.50 : 0.45) * peso;
+        }
+        return (sexo === 'M' ? 0.60 : 0.50) * peso;
+      }
+
+      $('formDeficitAgua').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const sexo = document.querySelector('input[name="sexo"]:checked').value;
+        const edad = document.querySelector('input[name="edad"]:checked').value;
+        const peso = parseFloat($('peso').value);
+        const na = parseFloat($('na').value);
+        
+        if (!(peso > 0) || !(na > 0)) {
+          $('result').textContent = 'Por favor, revisa el peso y el nivel de Sodio.';
+          return;
+        }
+        
+        // LÓGICA ESPECÍFICA: DÉFICIT DE AGUA
+        const tbw = calcularTBW(sexo, edad, peso);
+        const deficit = tbw * (na / 140 - 1);
+        
+        let resultado = `Agua Corporal Total (TBW) ≈ ${r(tbw)} L\n`;
+        
+        if (deficit > 0) {
+          resultado += `DÉFICIT ESTIMADO DE AGUA LIBRE ≈ ${r(deficit)} LITROS\n\n`;
+          resultado += `--- Planificación (Sugerida) ---\n`;
+          resultado += `• Reposición total: ${r(deficit)} L de agua libre.\n`;
+          resultado += `• Velocidad media (en 24h): ${r(deficit / 24 * 1000, 0)} ml/hora.\n`;
+          resultado += `• Ritmo máx. corrección Na: ${r((na - 140) / 24, 2)} mEq/L/hora (para normalizar en 24h).\n\n`;
+          resultado += `Nota: Ajustar según pérdidas concurrentes y tolerancia oral.`;
+        } else {
+          resultado += `No existe déficit de agua libre calculado (Na <= 140).`;
+        }
+        
+        $('result').innerText = resultado;
+      });
+
+      $('btnCopy').addEventListener('click', () => {
+          const resultText = $('result').innerText;
+          if (!resultText || resultText.includes('Introduce los datos')) return;
+          if (navigator.clipboard && window.isSecureContext) {
+              navigator.clipboard.writeText(resultText).then(showToast);
+          }
+      });
+      function showToast() {
+          const toast = $('toast');
+          toast.className = "toast show";
+          setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+      }
+    })();
+  </script>
+</body>
+</html>

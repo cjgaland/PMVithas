@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neurología - Vithas Xanit</title>
+  
+  <link rel="icon" type="image/png" href="../../assets/Images/Logos/Favicon-Vithas.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <!-- Estilos específicos del bloque Neurología -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+    </div>
+    <nav class="nav-links">
+      <ul>
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        
+        <li class="nav-category">Práctica Clínica</li>
+        
+        <!-- Enlace para volver al menú general -->
+        <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Volver a Calculadoras</a></li>
+        
+        <!-- BLOQUES DE CÁLCULO (CERRADOS) -->
+        <li class="has-submenu">
+            <a href="#" class="submenu-toggle">
+              <div style="display:flex; align-items:center;"><i class="fas fa-ruler-combined"></i> Antropometría</div>
+              <i class="fas fa-chevron-right chevron"></i>
+            </a>
+            <ul class="submenu">
+              <li><a href="../Antropometricos/index.html">Menú Antropometría</a></li>
+            </ul>
+        </li>
+        <li class="has-submenu">
+            <a href="#" class="submenu-toggle">
+              <div style="display:flex; align-items:center;"><i class="fas fa-heartbeat"></i> Cardiovascular</div>
+              <i class="fas fa-chevron-right chevron"></i>
+            </a>
+            <ul class="submenu">
+              <li><a href="../Cardiovascular/index.html">Menú Cardiovascular</a></li>
+            </ul>
+        </li>
+        <li class="has-submenu">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;"><i class="fas fa-utensils"></i> Digestivo</div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="../Digestivo/index.html">Menú Digestivo</a></li>
+          </ul>
+        </li>
+        <li class="has-submenu">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;"><i class="fas fa-bacteria"></i> Infecciosas</div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="../Infecciosas/index.html">Menú Infecciosas</a></li>
+          </ul>
+        </li>
+        <li class="has-submenu">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;"><i class="fas fa-filter"></i> Nefrología</div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="../Nefrologia/index.html">Menú Nefrología</a></li>
+          </ul>
+        </li>
+        
+        <!-- BLOQUE ACTUAL: NEUROLOGÍA (ABIERTO) -->
+        <li class="has-submenu open">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-brain"></i> Neurología
+            </div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="index.html" class="submenu-main-link active">Menú Neurología</a></li>
+            <li><a href="nihss.html"><i class="fas fa-user-injured"></i> NIHSS</a></li>
+            <li><a href="gcs-adulto.html"><i class="fas fa-star"></i> Glasgow (GCS)</a></li>
+            <li><a href="four-score.html"><i class="fas fa-procedures"></i> FOUR Score</a></li>
+            <li><a href="canadian-ct-head.html"><i class="fas fa-skull"></i> Canadian CT Head</a></li>
+            <li><a href="abcd2.html"><i class="fas fa-bolt"></i> ABCD² (AIT)</a></li>
+            <li><a href="ich-score.html"><i class="fas fa-brain"></i> ICH Score</a></li>
+            <li><a href="aspect.html"><i class="fas fa-layer-group"></i> ASPECTS</a></li>
+            <li><a href="mrs.html"><i class="fas fa-wheelchair"></i> Rankin (mRS)</a></li>
+            <li><a href="ottawa-sah.html"><i class="fas fa-head-side-virus"></i> Ottawa SAH</a></li>
+            <li><a href="status-epileptico-dosis.html"><i class="fas fa-pills"></i> Status Epiléptico</a></li>
+          </ul>
+        </li>
+
+        <li class="has-submenu">
+            <a href="#" class="submenu-toggle">
+              <div style="display:flex; align-items:center;"><i class="fas fa-lungs"></i> Respiratorio</div>
+              <i class="fas fa-chevron-right chevron"></i>
+            </a>
+            <ul class="submenu">
+              <li><a href="../Respiratorio/index.html">Menú Respiratorio</a></li>
+            </ul>
+        </li>
+        <li class="has-submenu">
+            <a href="#" class="submenu-toggle">
+              <div style="display:flex; align-items:center;"><i class="fas fa-ambulance"></i> UCI / Emergencias</div>
+              <i class="fas fa-chevron-right chevron"></i>
+            </a>
+            <ul class="submenu">
+              <li><a href="../UCI/index.html">Menú UCI / Emergencias</a></li>
+            </ul>
+        </li>
+
+      </ul>
+    </nav>
+    <div class="sidebar-footer">
+      <p>Medicina Interna</p>
+      <small>Vithas Xanit Internacional</small>
+    </div>
+  </aside>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <i class="fas fa-bars menu-toggle" id="menuToggle"></i>
+        <h2><i class="fas fa-brain" style="margin-right: 10px;"></i>Neurología y Neurocríticos</h2>
+      </div>
+      <div class="header-right">
+        <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+      </div>
+    </header>
+
+    <div class="content-wrapper">
+      
+      <!-- GRID DE CALCULADORAS -->
+      <div class="cards-grid">
+        
+        <!-- NIHSS -->
+        <a href="nihss.html" class="card">
+          <div class="card-icon" style="background:#e8eaf6; color:#1a237e;"><i class="fas fa-user-injured"></i></div>
+          <h3>NIHSS</h3>
+          <p>Escala estándar para cuantificar la gravedad del ictus isquémico.</p>
+          <span class="card-link">Abrir <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+        <!-- Glasgow -->
+        <a href="gcs-adulto.html" class="card">
+          <div class="card-icon" style="background:#e8eaf6; color:#283593;"><i class="fas fa-star"></i></div>
+          <h3>Glasgow (GCS)</h3>
+          <p>Valoración rápida del nivel de conciencia en traumatismo y coma.</p>
+          <span class="card-link">Abrir <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+        <!-- Canadian CT -->
+        <a href="canadian-ct-head.html" class="card">
+          <div class="card-icon" style="background:#e8eaf6; color:#303f9f;"><i class="fas fa-skull"></i></div>
+          <h3>Canadian CT Head</h3>
+          <p>Criterios para solicitar TC craneal en TCE leve (GCS 13-15).</p>
+          <span class="card-link">Abrir <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+        <!-- ABCD2 -->
+        <a href="abcd2.html" class="card">
+          <div class="card-icon" style="background:#c5cae9; color:#1a237e;"><i class="fas fa-bolt"></i></div>
+          <h3>ABCD²</h3>
+          <p>Estimación del riesgo de ictus en los días posteriores a un AIT.</p>
+          <span class="card-link">Abrir <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+        <!-- ICH Score -->
+        <a href="ich-score.html" class="card">
+          <div class="card-icon" style="background:#e8eaf6; color:#283593;"><i class="fas fa-brain"></i></div>
+          <h3>ICH Score</h3>
+          <p>Pronóstico de mortalidad en hemorragia intracerebral espontánea.</p>
+          <span class="card-link">Abrir <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+        <!-- ASPECTS -->
+        <a href="aspect.html" class="card">
+          <div class="card-icon" style="background:#c5cae9; color:#3949ab;"><i class="fas fa-layer-group"></i></div>
+          <h3>ASPECTS</h3>
+          <p>Evaluación sistemática de TC en ictus isquémico de la ACM.</p>
+          <span class="card-link">Abrir <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+        <!-- Rankin -->
+        <a href="mrs.html" class="card">
+          <div class="card-icon" style="background:#e8eaf6; color:#303f9f;"><i class="fas fa-wheelchair"></i></div>
+          <h3>Escala Rankin (mRS)</h3>
+          <p>Medición de la discapacidad funcional global tras un ictus.</p>
+          <span class="card-link">Abrir <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+        <!-- Ottawa SAH -->
+        <a href="ottawa-sah.html" class="card">
+          <div class="card-icon" style="background:#e8eaf6; color:#1a237e;"><i class="fas fa-head-side-virus"></i></div>
+          <h3>Ottawa SAH</h3>
+          <p>Regla para descartar hemorragia subaracnoidea en cefalea aguda.</p>
+          <span class="card-link">Abrir <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+        <!-- FOUR Score -->
+        <a href="four-score.html" class="card">
+          <div class="card-icon" style="background:#c5cae9; color:#283593;"><i class="fas fa-procedures"></i></div>
+          <h3>FOUR Score</h3>
+          <p>Escala de coma detallada (incluye reflejos de tronco y respiración).</p>
+          <span class="card-link">Abrir <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+        <!-- Status Epiléptico -->
+        <a href="status-epileptico-dosis.html" class="card">
+          <div class="card-icon" style="background:#e8eaf6; color:#b71c1c;"><i class="fas fa-pills"></i></div>
+          <h3>Status Epiléptico</h3>
+          <p>Calculadora de dosis y fármacos para el manejo secuencial.</p>
+          <span class="card-link">Abrir <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+      </div>
+    </div>
+    
+    <footer class="footer">
+      <p>&copy; 2025 Servicio de Medicina Interna - Hospital Vithas Xanit Internacional.</p>
+    </footer>
+  </div>
+  <script src="../../js/main.js"></script>
+</body>
+</html>

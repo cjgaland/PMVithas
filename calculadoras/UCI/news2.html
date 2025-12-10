@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEWS2 - Vithas UCI</title>
+  
+  <link rel="icon" type="image/png" href="../../assets/Images/Logos/Favicon-Vithas.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Estilos Globales y Específicos -->
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="style.css" />
+  
+  <style>
+    /* Alineación de opciones dentro de la cuadrícula */
+    .news-grid {
+        display: grid;
+        gap: 15px;
+    }
+    .news-grid .form-section {
+        border-bottom: none;
+        padding-bottom: 0;
+        margin-bottom: 0;
+    }
+    
+    /* Cuadrícula de rangos de puntos (2 columnas) */
+    .range-group {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 5px;
+    }
+    @media (min-width: 600px) {
+      .range-group {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    /* Etiqueta de la constante */
+    .constant-label {
+      font-weight: 700;
+      color: var(--vithas-blue-dark);
+      margin-bottom: 8px;
+      display: block;
+    }
+    
+    /* Destacar puntos por rango */
+    .score-badge {
+      display: inline-block;
+      min-width: 25px;
+      padding: 2px 5px;
+      border-radius: 4px;
+      background: #fbe9e7; /* Fondo suave del bloque UCI */
+      color: #d84315; /* Color temático UCI */
+      font-weight: 700;
+      margin-right: 10px;
+      text-align: center;
+      border: 1px solid #ffab91;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+    </div>
+    <nav class="nav-links">
+      <ul>
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        
+        <li class="nav-category">Práctica Clínica</li>
+        <li><a href="../UCI/Index.html"><i class="fas fa-arrow-left"></i> Volver a Calculadoras</a></li>
+        
+        <!-- BLOQUE UCI (ABIERTO) -->
+        <li class="has-submenu open">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-ambulance"></i> UCI / Emergencias
+            </div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="index.html">Menú UCI / Emergencias</a></li>
+            <li><a href="apacheII.html"><i class="fas fa-heart-pulse"></i> APACHE II</a></li>
+            <li><a href="news2.html" class="submenu-main-link active"><i class="fas fa-triangle-exclamation"></i> NEWS2</a></li>
+            <li><a href="soporte-nutricional.html"><i class="fas fa-bowl-food"></i> Soporte Nutricional</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- CONTENIDO -->
+  <div class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <i class="fas fa-bars menu-toggle" id="menuToggle"></i>
+        <h2><i class="fas fa-ambulance" style="margin-right: 10px;"></i>UCI / Emergencias</h2>
+      </div>
+      <div class="header-right">
+        <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+      </div>
+    </header>
+
+    <div class="calc-container">
+      <div class="calc-card">
+        <h1 class="calc-title">NEWS2 (National Early Warning Score 2)</h1>
+        <p class="calc-subtitle">Detección de pacientes en riesgo de deterioro clínico, traslado a UCI o parada cardiorrespiratoria.</p>
+
+        <form id="formNEWS2">
+          
+          <div class="form-section">
+            <span class="section-label">Constantes Vitales (Selecciona un rango por constante)</span>
+            
+            <div class="news-grid">
+              
+              <!-- 1. Frecuencia Respiratoria (FR) -->
+              <div class="parameter-group">
+                <span class="constant-label">FR (respiraciones/min)</span>
+                <div class="range-group">
+                  <label class="form-check">
+                    <input type="radio" name="fr" value="3"> <span class="score-badge">3</span> &le; 8
+                  </label>
+                  <label class="form-check">
+                    <input type="radio" name="fr" value="2"> <span class="score-badge">2</span> 21 - 24
+                  </label>
+                  <label class="form-check">
+                    <input type="radio" name="fr" value="1"> <span class="score-badge">1</span> 9 - 11
+                  </label>
+                  <label class="form-check">
+                    <input type="radio" name="fr" value="0" checked> <span class="score-badge">0</span> 12 - 20
+                  </label>
+                  <label class="form-check">
+                    <input type="radio" name="fr" value="3b"> <span class="score-badge">3</span> &ge; 25
+                  </label>
+                </div>
+              </div>
+              
+              <!-- 2. Saturación O2 -->
+              <div class="parameter-group">
+                <span class="constant-label">Saturación O₂ (%)</span>
+                <div class="range-group">
+                  <label class="form-check">
+                    <input type="radio" name="sat" value="3"> <span class="score-badge">3</span> &le; 91
+                  </label>
+                  <label class="form-check">
+                    <input type="radio" name="sat" value="2"> <span class="score-badge">2</span> 92 - 93
+                  </label>
+                  <label class="form-check">
+                    <input type="radio" name="sat" value="1"> <span class="score-badge">1</span> 94 - 95
+                  </label>
+                  <label class="form-check">
+                    <input type="radio" name="sat" value="0" checked> <span class="score-badge">0</span> &ge; 96
+                  </label>
+                </div>
+              </div>
+
+              <!-- 3. Oxígeno Suplementario -->
+              <div class="parameter-group">
+                <span class="constant-label">O₂ Suplementario</span>
+                <div class="range-group" style="grid-template-columns: 1fr;">
+                  <label class="form-check">
+                    <input type="radio" name="o2" value="2"> <span class="score-badge">2</span> Sí (Bajo flujo, mascarilla, VM, etc.)
+                  </label>
+                  <label class="form-check">
+                    <input type="radio" name="o2" value="0" checked> <span class="score-badge">0</span> No (Respira aire ambiente)
+                  </label>
+                </div>
+              </div>
+
+              <!-- 4. Tensión Arterial Sistólica (PAS) -->
+              <div class="parameter-group">
+                <span class="constant-label">PAS (mmHg)</span>
+                <div class="range-group">
+                  <label class="form-check">
+                    <input type="radio" name="pas" value="3"> <span class="score-badge">3</span> &le; 90
+                  </label>
+                  <label class="form-check">
+                    <input type="radio" name="pas" value="2"> <span class="score-badge">2</span> 91 - 100
+                  </label>
+                  <label class="form-check">
+                    <input type="radio" name="pas" value="1"> <span class="score-badge">1</span> 141 - 219
+                  </label>
+                  <label class="form-check">
+                    <input type="radio" name="pas" value="0" checked> <span class="score-badge">0</span> 101 - 140
+                  </label>
+                  <label class="form-check">
+                    <input type="radio" name="pas" value="3b"> <span class="score-badge">3</span> &ge; 220
+                  </label>
+                </div>
+              </div>
+
+              <!-- 5. Frecuencia Cardiaca (FC) -->
+              <div class="parameter-group">
+                <span class="constant-label">FC (latidos/min)</span>
+                <div class="range-group">
+                  <label class="form-check">
+                    <input type="radio" name="fc" value="3"> <span class="score-badge">3</span> &le; 40
+                  </label>
+                  <label class="form-check">
+                    <input type="radio" name="fc" value="2"> <span class="score-badge">2</span> 41 - 50
+                  </label>
+                  <label class="form-check">
+                    <input type="radio" name="fc" value="1"> <span class="score-badge">1</span> 91 - 110
+                  </label>
+                  <label class="form-check">
+                    <input type="radio" name="fc" value="0" checked> <span class="score-badge">0</span> 51 - 90
+                  </label>
+                  <label class="form-check">
+                    <input type="radio" name="fc" value="3b"> <span class="score-badge">3</span> &ge; 131
+                  </label>
+                  <label class="form-check">
+                    <input type="radio" name="fc" value="2b"> <span class="score-badge">2</span> 111 - 130
+                  </label>
+                </div>
+              </div>
+
+              <!-- 6. Nivel de Conciencia (AVPU) -->
+              <div class="parameter-group">
+                <span class="constant-label">Nivel de Conciencia (AVPU)</span>
+                <div class="range-group" style="grid-template-columns: 1fr;">
+                  <label class="form-check">
+                    <input type="radio" name="avpu" value="3"> <span class="score-badge">3</span> V, P o U (Respuesta Verbal, Dolor o No Respuesta)
+                  </label>
+                  <label class="form-check">
+                    <input type="radio" name="avpu" value="0" checked> <span class="score-badge">0</span> A (Alerta)
+                  </label>
+                </div>
+              </div>
+
+              <!-- 7. Temperatura -->
+              <div class="parameter-group">
+                <span class="constant-label">Temperatura (°C)</span>
+                <div class="range-group">
+                  <label class="form-check">
+                    <input type="radio" name="temp" value="3"> <span class="score-badge">3</span> &le; 35.0
+                  </label>
+                  <label class="form-check">
+                    <input type="radio" name="temp" value="2"> <span class="score-badge">2</span> &ge; 39.1
+                  </label>
+                  <label class="form-check">
+                    <input type="radio" name="temp" value="1"> <span class="score-badge">1</span> 38.1 - 39.0
+                  </label>
+                  <label class="form-check">
+                    <input type="radio" name="temp" value="0" checked> <span class="score-badge">0</span> 36.1 - 38.0
+                  </label>
+                  <label class="form-check">
+                    <input type="radio" name="temp" value="1b"> <span class="score-badge">1</span> 35.1 - 36.0
+                  </label>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- BOTONES -->
+          <div class="actions">
+            <a href="index.html" class="btn-secondary">Volver</a>
+            <button type="submit" class="btn-calc">Calcular NEWS2</button>
+            <button type="button" class="btn-secondary" id="btnCopy"><i class="fas fa-copy"></i> Copiar</button>
+            <button type="reset" class="btn-secondary" onclick="document.getElementById('result').innerText='Selecciona los parámetros y pulsa Calcular.'">Limpiar</button>
+          </div>
+
+          <!-- RESULTADO -->
+          <div id="result" class="result-box">Selecciona los parámetros y pulsa Calcular.</div>
+
+          <!-- DETALLES -->
+          <details>
+            <summary>Ver Interpretación y Respuesta Clínica</summary>
+            <div class="details-content">
+              <p><strong>Clasificación y Escalonamiento de Respuesta:</strong></p>
+              
+              <ul>
+                <li><strong>Score 0 (Riesgo Bajo):</strong> Monitorización mínima (4-12 horas).</li>
+                <li><strong>Score 1-4 (Riesgo Bajo/Intermedio):</strong> Monitorización estricta (cada 4-6 horas). Notificar a enfermería de turno y valoración médica.</li>
+                <li><strong>Score 5-6 (Riesgo Alto):</strong> Monitorización horaria. Notificación médica urgente al adjunto de guardia. Considerar movilización a UCI/Unidad de Agudos.</li>
+                <li><strong>Score &ge; 7 (Riesgo Crítico):</strong> Alerta Crítica/Código Sepsis. Valoración médica inmediata, monitorización continua, reevaluación urgente de vía aérea y traslado a UCI/Emergencias.</li>
+              </ul>
+              <p class="mt-2 text-muted">Cualquier punto de 3 en un solo parámetro (ej. FR &le; 8 o PAS &le; 90) se considera ALTO RIESGO y debe disparar la respuesta clínica inmediata.</p>
+            </div>
+          </details>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast">Resultado copiado al portapapeles</div>
+
+  <!-- JAVASCRIPT -->
+  <script src="../../js/main.js"></script>
+  <script>
+    (function() {
+      const $ = (id) => document.getElementById(id);
+      
+      function getRadioVal(name) {
+          const el = document.querySelector(`input[name="${name}"]:checked`);
+          if (!el) return null;
+          // El valor puede ser '3b' o '2b', por lo que solo parseamos si es un número puro.
+          return isNaN(parseInt(el.value)) ? 3 : parseInt(el.value);
+      }
+      
+      function getScoreDetails(name, value) {
+          // Función para obtener el detalle de la constante y el valor de puntos
+          const scores = {
+              'fr': {
+                  '3': '≤ 8', '2': '21 - 24', '1': '9 - 11', '0': '12 - 20', '3b': '≥ 25'
+              },
+              'sat': {
+                  '3': '≤ 91', '2': '92 - 93', '1': '94 - 95', '0': '≥ 96'
+              },
+              'o2': {
+                  '2': 'Sí', '0': 'No'
+              },
+              'pas': {
+                  '3': '≤ 90', '2': '91 - 100', '1': '141 - 219', '0': '101 - 140', '3b': '≥ 220'
+              },
+              'fc': {
+                  '3': '≤ 40', '2': '41 - 50', '1': '91 - 110', '0': '51 - 90', '3b': '≥ 131', '2b': '111 - 130'
+              },
+              'avpu': {
+                  '3': 'V, P o U', '0': 'A (Alerta)'
+              },
+              'temp': {
+                  '3': '≤ 35.0', '2': '≥ 39.1', '1': '38.1 - 39.0', '0': '36.1 - 38.0', '1b': '35.1 - 36.0'
+              }
+          };
+          
+          const labelMap = {
+              'fr': 'FR', 'sat': 'SatO₂', 'o2': 'O₂ Suplementario', 'pas': 'PAS', 'fc': 'FC', 'avpu': 'Conciencia', 'temp': 'Temperatura'
+          };
+          
+          const el = document.querySelector(`input[name="${name}"]:checked`);
+          const rawValue = el ? el.value : '';
+          
+          return {
+              label: labelMap[name],
+              range: scores[name] ? scores[name][rawValue] : rawValue,
+              score: value
+          };
+      }
+
+      $('formNEWS2').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const params = ['fr', 'sat', 'o2', 'pas', 'fc', 'avpu', 'temp'];
+        let totalScore = 0;
+        let missing = false;
+        let hasScore3 = false;
+        let breakdown = [];
+
+        params.forEach(name => {
+            const score = getRadioVal(name);
+            if (score === null) {
+                missing = true;
+            } else {
+                totalScore += score;
+                if (score >= 3) hasScore3 = true;
+                breakdown.push(getScoreDetails(name, score));
+            }
+        });
+
+        if (missing) {
+            $('result').innerHTML = "<span style='color:#d32f2f;'>Por favor, completa todas las constantes vitales.</span>";
+            return;
+        }
+
+        // Determinar nivel de riesgo y respuesta
+        let riesgo = "";
+        let manejo = "";
+        
+        if (totalScore >= 7) {
+            riesgo = "CRÍTICO";
+            manejo = "Respuesta clínica INMEDIATA y urgente (Activación de equipo de respuesta rápida/Código 7).";
+        } else if (totalScore >= 5 || hasScore3) {
+            riesgo = "ALTO";
+            manejo = "Valoración médica urgente (adjunto de guardia) en los siguientes 5 minutos. Monitorización continua.";
+        } else if (totalScore >= 1) {
+            riesgo = "BAJO - MODERADO";
+            manejo = "Monitorización estricta (cada 4-6 horas). Notificar al médico de guardia y reevaluar.";
+        } else {
+            riesgo = "BAJO";
+            manejo = "Monitorización estándar (cada 8-12 horas).";
+        }
+        
+        const breakdownText = breakdown.map(item => `• ${item.label}: ${item.range} (${item.score} ptos)`).join('\n');
+        
+        if (hasScore3 && totalScore < 5) {
+            riesgo += " (POR CRITERIO ÚNICO DE 3)";
+        }
+
+        const resultado = `NEWS2 TOTAL: ${totalScore} puntos\n` +
+                          `RIESGO: ${riesgo}\n\n` +
+                          `RESPUESTA CLÍNICA: ${manejo}\n\n` +
+                          `--- DESGLOSE ---\n` +
+                          `${breakdownText}`;
+        
+        $('result').innerText = resultado;
+      });
+
+      // Copiar
+      $('btnCopy').addEventListener('click', () => {
+          const resultText = $('result').innerText;
+          if (!resultText || resultText.includes('Selecciona los parámetros')) return;
+          if (navigator.clipboard && window.isSecureContext) {
+              navigator.clipboard.writeText(resultText).then(showToast);
+          }
+      });
+      function showToast() {
+          const toast = $('toast');
+          toast.className = "toast show";
+          setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+      }
+    })();
+  </script>
+</body>
+</html>

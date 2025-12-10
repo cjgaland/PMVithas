@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QT Corregido - Vithas</title>
+  
+  <link rel="icon" type="image/png" href="../../Favicon-Vithas.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="style.css">
+  
+  <style>
+    .toast {
+      visibility: hidden; min-width: 250px; background-color: #333; color: #fff; text-align: center;
+      border-radius: 50px; padding: 16px; position: fixed; z-index: 1000; left: 50%; bottom: 30px;
+      transform: translateX(-50%); font-size: 0.9rem; opacity: 0; transition: opacity 0.3s, bottom 0.3s;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .toast.show { visibility: visible; opacity: 1; bottom: 50px; }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+    </div>
+    <nav class="nav-links">
+      <ul>
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        
+        <li class="nav-category">Práctica Clínica</li>
+        
+        <!-- Enlace para volver al menú general -->
+        <li><a href="../Cardiovascular/Index.html"><i class="fas fa-arrow-left"></i> Volver a Calculadoras</a></li>
+        
+        <!-- BLOQUE ACTUAL: Cardiovascular (ABIERTO) -->
+        <li class="has-submenu open">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-heartbeat"></i> Cardiovascular
+            </div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="index.html">Menú Cardiovascular</a></li>
+            <li><a href="cha2ds2-vasc.html"><i class="fas fa-heart"></i> CHA₂DS₂-VASc</a></li>
+            <li><a href="has-bled.html"><i class="fas fa-tint"></i> HAS-BLED</a></li>
+            <li><a href="grace.html"><i class="fas fa-chart-line"></i> Escala GRACE</a></li>
+            <li><a href="timi-risk-index.html"><i class="fas fa-notes-medical"></i> TIMI Risk Index</a></li>
+            <!-- Elemento Activo -->
+            <li><a href="qtc.html" class="submenu-main-link active"><i class="fas fa-wave-square"></i> QT Corregido</a></li>
+            <li><a href="wells-tep.html"><i class="fas fa-lungs"></i> Wells TEP</a></li>
+            <li><a href="wells-tvp.html"><i class="fas fa-walking"></i> Wells TVP</a></li>
+          </ul>
+        </li>
+
+        <!-- BLOQUE HERMANO: Antropometría -->
+        <li class="has-submenu">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;"><i class="fas fa-ruler-combined"></i> Antropometría</div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="../Antropometricos/index.html">Menú Antropometría</a></li>
+            <li><a href="../Antropometricos/imc.html"><i class="fas fa-weight"></i> IMC</a></li>
+            <li><a href="../Antropometricos/bsa-adultos.html"><i class="fas fa-male"></i> BSA Adultos</a></li>
+            <li><a href="../Antropometricos/bsa-ninos.html"><i class="fas fa-child"></i> BSA Niños</a></li>
+            <li><a href="../Antropometricos/agua-corporal.html"><i class="fas fa-tint"></i> Agua Corporal</a></li>
+            <li><a href="../Antropometricos/ceb-basal.html"><i class="fas fa-fire"></i> Gasto Basal (BMR)</a></li>
+            <li><a href="../Antropometricos/requerimientos-caloricos.html"><i class="fas fa-utensils"></i> Requerimientos</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- CONTENIDO -->
+  <div class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <h2><i class="fas fa-heartbeat" style="margin-right: 10px;"></i>Calculadoras Cardiovasculares</h2>
+      </div>
+      <div class="header-right">
+        <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+      </div>
+    </header>
+
+    <div class="calc-container">
+      <div class="calc-card">
+        <h1 class="calc-title">QT Corregido (QTc)</h1>
+        <p class="calc-subtitle">Corrección del intervalo QT según la frecuencia cardiaca para evaluar riesgo de arritmias.</p>
+
+        <form id="formQTc">
+          
+          <div class="form-section">
+            <span class="section-label">Datos de Entrada</span>
+            
+            <div class="input-group">
+              <label for="qt">QT Medido</label>
+              <div class="input-wrapper">
+                <input id="qt" class="form-control" type="number" min="1" step="1" placeholder="Ej. 420" required>
+                <span class="input-suffix">ms</span>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label for="modo">Modo de Frecuencia</label>
+              <select id="modo" class="form-control">
+                <option value="hr">Frecuencia Cardiaca (lpm)</option>
+                <option value="rr">Intervalo RR (segundos)</option>
+              </select>
+            </div>
+
+            <div class="input-group" id="filaHR">
+              <label for="hr">Frecuencia Cardiaca</label>
+              <div class="input-wrapper">
+                <input id="hr" class="form-control" type="number" min="1" step="1" placeholder="Ej. 75">
+                <span class="input-suffix">lpm</span>
+              </div>
+            </div>
+
+            <div class="input-group" id="filaRR" style="display:none;">
+              <label for="rr">Intervalo RR</label>
+              <div class="input-wrapper">
+                <input id="rr" class="form-control" type="number" min="0.2" step="0.01" placeholder="Ej. 0.8">
+                <span class="input-suffix">s</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- BOTONES DE ACCIÓN -->
+          <div class="actions">
+            <!-- Botón Volver al índice del bloque -->
+            <a href="../Cardiovascular/Index.html" class="btn-secondary" style="text-decoration: none;">Volver</a>
+            <button type="submit" class="btn-calc">Calcular</button>
+            <button type="button" class="btn-secondary" id="btnCopy"><i class="fas fa-copy"></i> Copiar</button>
+            <button type="reset" class="btn-secondary" onclick="document.getElementById('result').innerText='Introduce valores y pulsa Calcular.'">Limpiar</button>
+          </div>
+
+          <!-- CAJA DE RESULTADOS -->
+          <div id="result" class="result-box">Introduce valores y pulsa Calcular.</div>
+
+          <!-- DETALLES ADICIONALES -->
+          <details>
+            <summary>Ver fórmulas e interpretación</summary>
+            <div class="details-content">
+              <p><strong>Fórmulas de corrección:</strong></p>
+              <ul>
+                <li><strong>Bazett:</strong> QT / √RR (Estándar clínico, sobrestima en taquicardia).</li>
+                <li><strong>Fridericia:</strong> QT / ∛RR (Mejor para frecuencias altas).</li>
+                <li><strong>Framingham:</strong> QT + 0.154 × (1000 - RR).</li>
+                <li><strong>Hodges:</strong> QT + 1.75 × (FC - 60).</li>
+              </ul>
+              <p><strong>Valores de referencia (Adultos):</strong></p>
+              <ul>
+                <li><strong>Normal:</strong> &lt; 450 ms (Hombres) / &lt; 470 ms (Mujeres)</li>
+                <li><strong>Límite:</strong> 450-470 ms (Hombres) / 470-480 ms (Mujeres)</li>
+                <li><strong>Prolongado:</strong> &gt; 470 ms (Hombres) / &gt; 480 ms (Mujeres)</li>
+                <li><strong>Alto Riesgo:</strong> &gt; 500 ms (Riesgo de Torsades de Pointes)</li>
+              </ul>
+            </div>
+          </details>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast">Resultado copiado al portapapeles</div>
+
+  <script src="../../js/main.js"></script>
+  <script>
+    (function() {
+        const $ = (id) => document.getElementById(id);
+        const roundVal = (val) => Math.round(val);
+
+        // Alternar inputs HR / RR
+        $('modo').addEventListener('change', function(){
+            const modo = this.value;
+            if(modo === 'hr'){
+                $('filaHR').style.display = 'block';
+                $('filaRR').style.display = 'none';
+                $('hr').required = true;
+                $('rr').required = false;
+                $('rr').value = '';
+            } else {
+                $('filaHR').style.display = 'none';
+                $('filaRR').style.display = 'block';
+                $('hr').required = false;
+                $('hr').value = '';
+                $('rr').required = true;
+            }
+        });
+
+        // Lógica de cálculo
+        $('formQTc').addEventListener('submit', (e) => {
+          e.preventDefault();
+          
+          const qt = parseFloat($('qt').value);
+          let rr = 0;
+          let fc = 0;
+
+          if ($('modo').value === 'hr') {
+              fc = parseFloat($('hr').value);
+              if (!qt || !fc || fc <= 0) {
+                  $('result').textContent = 'Por favor, introduce valores válidos.';
+                  return;
+              }
+              rr = 60 / fc;
+          } else {
+              rr = parseFloat($('rr').value);
+              if (!qt || !rr || rr <= 0) {
+                  $('result').textContent = 'Por favor, introduce valores válidos.';
+                  return;
+              }
+              fc = 60 / rr;
+          }
+
+          // Fórmulas
+          // RR en segundos para las fórmulas estándar (Bazett/Fridericia usan segundos)
+          // Framingham usa RR en milisegundos en algunas versiones, pero la fórmula QT + 154*(1-RR_sec) es común. 
+          // Vamos a usar unidades consistentes: QT en ms, RR en segundos.
+          
+          const qtcBazett = qt / Math.sqrt(rr);
+          const qtcFridericia = qt / Math.pow(rr, 1/3);
+          const qtcFramingham = qt + 154 * (1 - rr);
+          const qtcHodges = qt + 1.75 * (fc - 60);
+
+          // Interpretación General (Bazett como referencia)
+          let interpretacion = "";
+          if (qtcBazett > 500) interpretacion = " (Alto Riesgo)";
+          else if (qtcBazett > 450) interpretacion = " (Prolongado/Límite)";
+          else interpretacion = " (Normal)";
+
+          $('result').textContent = `QTc (Bazett): ${roundVal(qtcBazett)} ms ${interpretacion}\n` +
+                                    `QTc (Fridericia): ${roundVal(qtcFridericia)} ms\n` +
+                                    `QTc (Framingham): ${roundVal(qtcFramingham)} ms\n` +
+                                    `QTc (Hodges): ${roundVal(qtcHodges)} ms\n\n` +
+                                    `Datos: QT ${qt}ms, FC ${roundVal(fc)} lpm`;
+        });
+
+        // Copiar
+        $('btnCopy').addEventListener('click', () => {
+            const resultText = $('result').innerText;
+            if (!resultText || resultText.includes('Introduce valores')) return;
+            
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(resultText).then(showToast);
+            } else {
+                const textArea = document.createElement("textarea");
+                textArea.value = resultText;
+                textArea.style.position = "fixed";
+                document.body.appendChild(textArea);
+                textArea.select();
+                try { document.execCommand('copy'); showToast(); } catch (err) {}
+                document.body.removeChild(textArea);
+            }
+        });
+
+        function showToast() {
+            const toast = $('toast');
+            toast.className = "toast show";
+            setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+    })();
+  </script>
+</body>
+</html>
