@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ajuste Renal - Antibióticos</title>
+  
+  <link rel="icon" type="image/png" href="../../assets/Images/Logos/Favicon-Vithas.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Carga estilos Globales (../../css/style.css) y luego Locales (style.css de Antibióticos) -->
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="style.css" />
+  
+  <style>
+    /* Mantenemos solo estilos estructurales mínimos, el resto está en style.css */
+    .dosis-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        font-size: 0.95rem;
+    }
+    .crcl-result {
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+    </div>
+    <nav class="nav-links">
+      <ul>
+        <!-- Nivel Superior -->
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        
+        <li class="nav-category">Utilidades</li>
+        
+        <!-- Botón de Retorno -->
+        <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Volver a Utilidades</a></li>
+        
+        <!-- BLOQUE HERMANO 1: Analíticas -->
+        <li class="has-submenu">
+          <a href="../Analisis_Clinicos/index.html" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-microscope"></i> Analíticas
+            </div>
+          </a>
+        </li>
+
+        <!-- BLOQUE HERMANO 2: EPOC -->
+        <li class="has-submenu">
+          <a href="../Gold_EPOC/index.html" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-lungs"></i> Guía EPOC
+            </div>
+          </a>
+        </li>
+
+        <!-- BLOQUE ACTUAL: Infecciosas (ABIERTO) -->
+        <li class="has-submenu open">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-virus"></i> Infecciosas y Antibióticos
+            </div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="index.html"><i class="fas fa-th-large"></i> Menú Principal</a></li>
+            <li><a href="guia-focos.html"><i class="fas fa-book-medical"></i> Guía por Foco</a></li>
+            <li><a href="guia-antibioticos.html"><i class="fas fa-capsules"></i> Guía Antibióticos</a></li>
+            <li><a href="guia-microorganismos.html"><i class="fas fa-microscope"></i> Microorganismos</a></li>
+            <!-- Elemento Activo -->
+            <li><a href="ajuste-renal.html" class="submenu-main-link active"><i class="fas fa-calculator"></i> Ajuste Renal</a></li>
+            <li><a href="antibiograma-analizador.html"><i class="fas fa-vial"></i> Antibiograma</a></li>
+          </ul>
+        </li>
+
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- CONTENIDO -->
+  <div class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <i class="fas fa-bars menu-toggle" id="menuToggle"></i>
+        <h2><i class="fas fa-virus" style="margin-right: 10px;"></i>Procesos Infecciosos</h2>
+      </div>
+      <div class="header-right">
+        <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+      </div>
+    </header>
+
+    <div class="calc-container">
+      <div class="calc-card">
+        <h1 class="calc-title">Ajuste Renal de Dosis Antibiótica</h1>
+        <p class="calc-subtitle">Cálculo de Aclaramiento de Creatinina (Cockcroft-Gault) y ajuste de dosis de antibióticos.</p>
+
+        <form id="formAjusteRenal">
+          
+          <div class="form-section">
+            <span class="section-label">Datos del Paciente</span>
+            
+            <div class="input-row">
+              <div class="input-col">
+                <label for="age">Edad</label>
+                <div class="input-wrapper">
+                  <input id="age" class="form-control" type="number" min="18" step="1" placeholder="Ej. 65" required>
+                  <span class="input-suffix">años</span>
+                </div>
+              </div>
+              <div class="input-col">
+                <label for="weight">Peso (Actual o Ideal)</label>
+                <div class="input-wrapper">
+                  <input id="weight" class="form-control" type="number" step="0.1" min="0" placeholder="Ej. 70" required>
+                  <span class="input-suffix">kg</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="input-row mt-3">
+              <div class="input-col">
+                <label for="scr">Creatinina Sérica</label>
+                <div class="input-wrapper">
+                  <input id="scr" class="form-control" type="number" step="0.01" min="0" placeholder="Ej. 1.2" required>
+                  <span class="input-suffix">mg/dL</span>
+                </div>
+              </div>
+              <div class="input-col">
+                <label>Sexo</label>
+                <div class="check-group" style="flex-direction: row; gap: 10px; margin-top: 4px;">
+                  <label class="form-check" style="justify-content: center;">
+                    <input type="radio" name="sex" value="M" checked> Varón
+                  </label>
+                  <label class="form-check" style="justify-content: center;">
+                    <input type="radio" name="sex" value="F"> Mujer
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- BOTONES -->
+          <div class="actions">
+            <a href="index.html" class="btn-secondary">Volver</a>
+            <button type="submit" class="btn-calc">Calcular Ajuste</button>
+            <button type="button" class="btn-secondary" id="btnCopy"><i class="fas fa-copy"></i> Copiar</button>
+            <button type="reset" class="btn-secondary" onclick="document.getElementById('result-main').innerText='Introduce los datos y pulsa Calcular Ajuste.'">Limpiar</button>
+          </div>
+
+          <!-- RESULTADO PRINCIPAL (CrCl y Clasificación) -->
+          <!-- Ahora solo muestra el CrCl y la interpretación, hereda el degradado del .result-box del style.css -->
+          <div id="result-main" class="result-box">Introduce los datos y pulsa Calcular Ajuste.</div>
+
+          <!-- RESULTADO DETALLADO (Tabla) -->
+          <!-- Contenedor separado para la tabla para romper el flujo del result-box -->
+          <div id="result-table-container">
+             <!-- Aquí se inyectará la tabla de dosis o el mensaje de error -->
+          </div>
+
+          <!-- DETALLES -->
+          <details>
+            <summary>Ver Notas de Dosis y Fórmula</summary>
+            <div class="details-content">
+              <p><strong>Fórmula Cockcroft-Gault (CrCl):</strong></p>
+              <p>CrCl (mL/min) = [ (140 - Edad) &times; Peso (kg) ] / [ 72 &times; Creatinina (mg/dL) ]</p>
+              <p>(Multiplicar por 0.85 si es mujer)</p>
+              <p class="mt-2 text-muted"><strong>Notas:</strong> Usar el peso actual, excepto en obesidad extrema (IMC &gt; 30) donde se recomienda el peso ajustado. Si la creatinina es &lt; 0.8 mg/dL, se debe redondear a 0.8 para evitar sobrestimación.</p>
+            </div>
+          </details>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast">Resultado copiado al portapapeles</div>
+
+  <!-- JAVASCRIPT -->
+  <script src="../../js/main.js"></script>
+  <script>
+    const ANTIBIOTICS = [
+        { name: "Amoxi/Clavulánico (1g)", unit: "g / h",
+          doses: { '>50': "1g / 8h", '30-50': "1g / 12h", '<30': "1g / 24h", 'HD': "1g post-HD" }},
+        { name: "Meropenem (1g)", unit: "g / h",
+          doses: { '>50': "1g / 8h", '30-50': "1g / 12h", '<30': "0.5g / 24h", 'HD': "0.5g post-HD" }},
+        { name: "Ceftazidima (1g)", unit: "g / h",
+          doses: { '>50': "1-2g / 8h", '30-50': "1g / 12h", '<30': "1g / 24h", 'HD': "1g post-HD" }},
+        { name: "Piperac./Tazob. (4/0.5g)", unit: "g / h",
+          doses: { '>50': "4.5g / 6h", '30-50': "4.5g / 8h", '<30': "2.25g / 12h", 'HD': "2.25g post-HD" }},
+        { name: "Vancomicina", unit: "mg",
+          doses: { '>50': "Carga + Troughs/Día", '30-50': "Carga + Troughs 2-4 días", '<30': "Carga + Troughs 4-7 días", 'HD': "1g post-HD + Troughs" }},
+        { name: "Gentamicina", unit: "mg",
+          doses: { '>50': "Dosis única/día", '30-50': "Intervalo prolongado (36h)", '<30': "Intervalo prolongado (48h)", 'HD': "0.5 mg/kg post-HD" }},
+    ];
+
+    const $ = (id) => document.getElementById(id);
+    const roundToDecimals = (value, decimals = 1) => Math.round((value + Number.EPSILON) * (10 ** decimals)) / (10 ** decimals);
+
+    function calculateCrCl(sex, age, weight, scr) {
+      // Regla: si Creatinina < 0.8, usar 0.8 (para evitar sobrestimación en pacientes frágiles)
+      const adjustedScr = Math.max(scr, 0.8);
+      
+      let crcl = ((140 - age) * weight) / (72 * adjustedScr);
+      if (sex === 'F') crcl *= 0.85;
+      return crcl;
+    }
+
+    function getDoseCategory(crcl) {
+        if (crcl >= 50) return '>50';
+        if (crcl >= 30) return '30-50';
+        if (crcl >= 10) return '<30'; // Usamos 10 como corte práctico para IRC avanzada
+        return 'HD'; // Asumimos < 10 o diálisis
+    }
+
+    function generateTable(crcl) {
+        const crclR = roundToDecimals(crcl); // Necesario para la nota final de la tabla
+        const category = getDoseCategory(crcl);
+        let tableHtml = `
+            <div class="table-doses-container">
+            <h3 class="section-label" style="border-bottom: 1px dashed #d1c4e9;">Dosis Sugeridas (${category === 'HD' ? 'Insuficiencia Renal Grave/Diálisis' : 'CrCl: ' + category})</h3>
+            <table class="dosis-table">
+                <thead>
+                    <tr>
+                        <th>Antibiótico</th>
+                        <th>Dosis Estándar (>50)</th>
+                        <th>Dosis Ajustada</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+        
+        ANTIBIOTICS.forEach(ab => {
+            const adjustedDose = ab.doses[category] || ab.doses['>50'];
+            // Usamos clases CSS para pintar las celdas
+            const adjustedClass = category === '>50' ? 'dose-normal' : 'dose-adjusted';
+
+            tableHtml += `
+                <tr>
+                    <td>${ab.name}</td>
+                    <td class="dose-normal">${ab.doses['>50']}</td>
+                    <td class="${adjustedClass}">
+                        ${adjustedDose}
+                    </td>
+                </tr>
+            `;
+        });
+        
+        tableHtml += `</tbody></table>
+                      <div class="result-notes">
+                        <i class="fas fa-info-circle"></i> La columna "Dosis Ajustada" refleja la pauta para un aclaramiento de ${crclR} mL/min.
+                        <p class="mt-1"><i class="fas fa-triangle-exclamation"></i> Las dosis son orientativas. CONSULTAR protocolo específico del hospital y niveles plasmáticos (ej. Vancomicina).</p>
+                      </div>
+                      </div>`;
+        return tableHtml;
+    }
+
+    $('formAjusteRenal').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const age = parseFloat($('age').value);
+      const weight = parseFloat($('weight').value);
+      const scr = parseFloat($('scr').value);
+      const sex = document.querySelector('input[name="sex"]:checked').value;
+      
+      if (isNaN(age) || isNaN(weight) || isNaN(scr) || scr <= 0) {
+        $('result-main').innerText = 'Por favor, introduce valores válidos para Edad, Peso y Creatinina.';
+        $('result-table-container').innerHTML = '';
+        return;
+      }
+      
+      const crcl = calculateCrCl(sex, age, weight, scr);
+      const crclR = roundToDecimals(crcl);
+      
+      let interpretacionCrCl = '';
+      if (crclR >= 90) interpretacionCrCl = 'Normal';
+      else if (crclR >= 60) interpretacionCrCl = 'Levemente Disminuida (G2)';
+      else if (crclR >= 30) interpretacionCrCl = 'Moderadamente Disminuida (G3)';
+      else if (crclR >= 15) interpretacionCrCl = 'Gravemente Disminuida (G4)';
+      else interpretacionCrCl = 'Fallo Renal / Diálisis (G5)';
+
+
+      const resultadoHTML = `
+        <div class="crcl-result">CrCl: ${crclR} mL/min</div>
+        <p>Función Renal: <strong>${interpretacionCrCl}</strong></p>
+        <p class="text-muted small mt-1">Estimado por Cockcroft-Gault (Creatinina utilizada: ${roundToDecimals(Math.max(scr, 0.8), 2)} mg/dL)</p>
+      `;
+      
+      // 1. Mostrar resultado principal (púrpura degradado)
+      $('result-main').innerHTML = resultadoHTML; 
+      
+      // 2. Generar e inyectar la tabla de dosis
+      const table = generateTable(crcl);
+      $('result-table-container').innerHTML = table;
+      
+    });
+
+    // Copiar
+    $('btnCopy').addEventListener('click', () => {
+        const crclR = $('result-main').querySelector('.crcl-result') ? $('result-main').querySelector('.crcl-result').textContent.replace('CrCl: ', '') : null;
+        
+        if (!crclR) return;
+
+        const tableText = ANTIBIOTICS.map(ab => {
+            const category = getDoseCategory(parseFloat(crclR));
+            return `• ${ab.name}: Ajustada: ${ab.doses[category]}`;
+        }).join('\n');
+        
+        const resultText = `--- AJUSTE RENAL ---\n` +
+                           `CrCl (C-G): ${crclR}\n\n` +
+                           `DOSIS SUGERIDAS:\n${tableText}`;
+        
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(resultText).then(showToast);
+        }
+    });
+
+    function showToast() {
+        const toast = $('toast');
+        toast.className = "toast show";
+        setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+    }
+
+    // Solución al problema del Toast en carga: aseguramos que esté oculto al inicio
+    const toastElement = $('toast');
+    if (toastElement) {
+        toastElement.classList.remove('show');
+    }
+  </script>
+</body>
+</html>

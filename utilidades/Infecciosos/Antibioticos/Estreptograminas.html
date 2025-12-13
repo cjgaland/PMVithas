@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estreptograminas - Protocolo Antibióticos</title>
+    
+    <!-- Dependencias Externas -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="../../../css/style.css" />
+    <link rel="stylesheet" href="../Antibioticos/antibioticos-style.css" />
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="../../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+        </div>
+        <nav class="nav-links">
+            <ul>
+                <li><a href="../../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+                <li class="nav-category">Práctica Clínica</li>
+                <!-- Enlace de retorno directo a la Guía Principal -->
+                <li><a href="../guia-antibioticos.html"><i class="fas fa-arrow-left"></i> Volver a Guía Antibióticos</a></li>
+                
+                <!-- BLOQUE ACTUAL: Antibióticos (ABIERTO) -->
+                <li class="has-submenu open">
+                    <a href="#" class="submenu-toggle">
+                        <div style="display:flex; align-items:center;">
+                            <i class="fas fa-capsules"></i> Antibióticos
+                        </div>
+                    </a>
+                    <!-- Lista de familias (Hermanos) con ICONOS -->
+                    <ul class="submenu">
+                        <li><a href="Penicilinas.html"><i class="fas fa-shield-virus"></i> Penicilinas</a></li>
+                        <li><a href="Cefalosporinas.html"><i class="fas fa-capsules"></i> Cefalosporinas</a></li>
+                        <li><a href="Carbapenems.html"><i class="fas fa-syringe"></i> Carbapenems</a></li>
+                        <li><a href="Fluorquinolonas.html"><i class="fas fa-dna"></i> Fluorquinolonas</a></li>
+                        <li><a href="Macrolidos.html"><i class="fas fa-bacterium"></i> Macrólidos</a></li>
+                        <li><a href="Aminoglucosidos.html"><i class="fas fa-prescription-bottle-alt"></i> Aminoglucósidos</a></li>
+                        <li><a href="Tetraciclinas.html"><i class="fas fa-tablets"></i> Tetraciclinas</a></li>
+                        <li><a href="Glicopeptidos.html"><i class="fas fa-shield-alt"></i> Glicopéptidos</a></li>
+                        <li><a href="Lincosamidas.html"><i class="fas fa-biohazard"></i> Lincosamidas</a></li>
+                        <li><a href="Oxazolidinonas.html"><i class="fas fa-dot-circle"></i> Oxazolidinonas</a></li>
+                        <!-- Elemento Activo -->
+                        <li><a href="Estreptograminas.html" class="submenu-main-link active"><i class="fas fa-vial"></i> Estreptograminas</a></li>
+                        <li><a href="Fenicoles.html"><i class="fas fa-flask"></i> Fenicoles</a></li>
+                        <li><a href="Polimixinas.html"><i class="fas fa-spray-can"></i> Polimixinas</a></li>
+                        <li><a href="Otros.html"><i class="fas fa-plus-circle"></i> Otros</a></li>
+                    </ul>
+                </li>
+
+                <!-- Accesos directos a otras Utilidades (Nivel superior) -->
+                <li class="nav-category">Otras Herramientas</li>
+                
+                <li class="has-submenu">
+                    <a href="../../Analisis_Clinicos/index.html" class="submenu-toggle">
+                        <div style="display:flex; align-items:center;">
+                            <i class="fas fa-microscope"></i> Analíticas
+                        </div>
+                    </a>
+                </li>
+
+                <li class="has-submenu">
+                    <a href="../../Gold_EPOC/index.html" class="submenu-toggle">
+                        <div style="display:flex; align-items:center;">
+                            <i class="fas fa-lungs"></i> Guía EPOC
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="sidebar-footer">
+            <p>Medicina Interna</p>
+            <small>Vithas Xanit Internacional</small>
+        </div>
+    </aside>
+
+    <div class="main-content">
+        <!-- CABECERO GLOBAL -->
+        <header class="top-header">
+            <div class="header-left">
+                <i class="fas fa-bars menu-toggle" id="menuToggle"></i>
+                <h2><i class="fas fa-capsules" style="margin-right: 10px;"></i>Guía de Antibióticos</h2>
+            </div>
+            <div class="header-right">
+                <img src="../../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+            </div>
+        </header>
+
+        <div class="content-wrapper abx-container">
+            
+            <!-- Selector de Antibiótico dentro de la familia -->
+            <section class="abx-card">
+                <!-- CABECERA INTEGRADA (Título + Instrucción en la misma línea visual) -->
+                <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 20px; margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #f0f0f0;">
+                    
+                    <!-- Parte Izquierda: Icono y Nombre del Grupo -->
+                    <div style="display: flex; align-items: center; gap: 15px; flex-grow: 1;">
+                        <div style="background:#e0f2fe; color:#003A70; width:55px; height:55px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.75rem; flex-shrink:0;">
+                            <i class="fas fa-vial"></i>
+                        </div>
+                        <div>
+                            <h1 style="color: #003A70; font-size: 1.75rem; margin: 0; font-weight: 700; line-height: 1.1;">Estreptograminas</h1>
+                        </div>
+                    </div>
+                    
+                    <!-- Parte Derecha: Instrucción -->
+                    <div style="color: #888; font-weight: 500; font-size: 0.95rem; display: flex; align-items: center;">
+                        <span style="background: #f8fafc; padding: 5px 12px; border-radius: 20px; border: 1px solid #e2e8f0;">
+                            <i class="fas fa-hand-point-up" style="margin-right: 6px; color: #009FE3;"></i> Seleccione fármaco:
+                        </span>
+                    </div>
+                </div>
+
+                <div class="grid-antibioticos" id="antibiotic-list">
+                    <!-- Se rellena por JS -->
+                </div>
+            </section>
+
+            <!-- Área de Detalles (oculta inicialmente) -->
+            <section id="detail-area" class="abx-card hidden">
+                <div id="content-area">
+                    <!-- Detalles inyectados aquí -->
+                </div>
+            </section>
+
+        </div>
+        
+        <footer class="footer">
+            <p>&copy; 2025 Servicio de Medicina Interna - Hospital Vithas Xanit Internacional.</p>
+        </footer>
+    </div>
+
+    <script>
+        const antibioticsData = {
+            "Quinupristina/Dalfopristina": {
+                "cobertura": "Activo contra Gram-positivos multirresistentes: MRSA, VRE (solo E. faecium), Streptococcus pneumoniae resistente. No activo contra E. faecalis.",
+                "posologia": "Adultos: 7.5 mg/kg cada 8-12h IV.",
+                "eventos_adversos": "Mialgia, artralgia, flebitis en el sitio de infusión, elevación de bilirrubina, náuseas, diarrea.",
+                "biodisponibilidad": "No oral (uso parenteral).",
+                "precauciones": "Insuficiencia hepática (ajustar dosis). Uso concomitante con estatinas (riesgo de miopatía).",
+                "ajuste_renal_hepatica": "IR: No requiere ajuste significativo. IH: Ajustar dosis rigurosamente.",
+                "interacciones": "Inhibidor de CYP3A4 (estatinas, ciclosporina, tacrolimus, etc.).",
+                "alertas": ["Mialgia/Artralgia", "Flebitis", "Elevación de bilirrubina", "Interacciones CYP3A4"],
+                "coverage_profile": { "Staphylococcus aureus (SASM)": "Excelente", "Staphylococcus aureus (SARM)": "Excelente", "Streptococcus pyogenes": "Excelente", "Streptococcus pneumoniae (S)": "Excelente", "Streptococcus pneumoniae (I)": "Excelente", "Streptococcus pneumoniae (R)": "Excelente", "Enterococcus faecalis": "Nula", "Enterococcus faecium (VRE)": "Excelente", "Haemophilus influenzae": "Nula", "Moraxella catarrhalis": "Nula", "Escherichia coli": "Nula", "Klebsiella spp.": "Nula", "Otras Enterobacteriaceae (BLEE)": "Nula", "Pseudomonas aeruginosa": "Nula", "Acinetobacter baumannii": "Nula", "Stenotrophomonas maltophilia": "Nula", "Bacteroides fragilis": "Nula", "Clostridium difficile": "Nula", "Mycoplasma pneumoniae": "Nula", "Chlamydia pneumoniae": "Nula", "Legionella pneumophila": "Nula" }
+            }
+        };
+
+        const contentArea = document.getElementById('content-area');
+        const detailArea = document.getElementById('detail-area');
+        const antibioticList = document.getElementById('antibiotic-list');
+        const coverageColors = { "Excelente": "#dcfce7", "Buena": "#e0f2fe", "Moderada": "#fef3c7", "Limitada": "#fee2e2", "Nula": "#f3f4f6", "Variable": "#eef2ff" };
+
+        function init() {
+            for (const abx in antibioticsData) {
+                const btn = document.createElement('button');
+                btn.className = 'btn-antibiotico';
+                btn.textContent = abx;
+                btn.onclick = () => showDetails(abx, btn);
+                antibioticList.appendChild(btn);
+            }
+        }
+
+        function showDetails(name, btnElement) {
+            document.querySelectorAll('.btn-antibiotico').forEach(b => b.classList.remove('active'));
+            btnElement.classList.add('active');
+            const data = antibioticsData[name];
+            detailArea.classList.remove('hidden');
+            
+            let html = `<h2 class="section-title text-2xl mb-4">${name}</h2>`;
+            if (data.alertas && data.alertas.length > 0) {
+                html += `<div class="alert-box"><strong><i class="fas fa-exclamation-triangle"></i> Advertencias Clave:</strong>`;
+                data.alertas.forEach(a => html += `<span>• ${a}</span>`);
+                html += `</div>`;
+            }
+            
+            const fields = [
+                { label: 'Cobertura', val: data.cobertura },
+                { label: 'Posología', val: data.posologia },
+                { label: 'Eventos Adversos', val: data.eventos_adversos },
+                { label: 'Biodisponibilidad', val: data.biodisponibilidad },
+                { label: 'Precauciones', val: data.precauciones },
+                { label: 'Ajuste Renal/Hepático', val: data.ajuste_renal_hepatica },
+                { label: 'Interacciones', val: data.interacciones }
+            ];
+            fields.forEach(f => { html += `<div class="antibiotic-detail-item bg-slate-50"><strong>${f.label}:</strong> ${f.val}</div>`; });
+
+            if (data.coverage_profile) {
+                html += `<h4 class="subsection-title"><i class="fas fa-chart-bar"></i> Espectro de Cobertura</h4>`;
+                html += `<div id="d3-container" class="coverage-svg-container"></div>`;
+                html += renderLegend();
+            }
+            contentArea.innerHTML = html;
+            if (data.coverage_profile) { renderD3Chart(data.coverage_profile); }
+            detailArea.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function renderLegend() {
+            let html = '<div class="coverage-legend">';
+            for (const [level, color] of Object.entries(coverageColors)) {
+                html += `<span class="coverage-tag" style="background:${color}; color:#333; border:1px solid #ccc">${level}</span>`;
+            }
+            html += '</div>';
+            return html;
+        }
+
+        function renderD3Chart(profile) {
+            const container = d3.select("#d3-container");
+            container.html('');
+            const micros = Object.keys(profile);
+            const cellHeight = 30;
+            const width = 600;
+            const height = micros.length * cellHeight + 40;
+            const svg = container.append("svg").attr("width", "100%").attr("height", height).attr("viewBox", `0 0 ${width} ${height}`);
+            let y = 10;
+            micros.forEach(micro => {
+                const level = profile[micro];
+                const color = coverageColors[level] || "#fff";
+                svg.append("rect").attr("x", 0).attr("y", y).attr("width", 250).attr("height", cellHeight - 5).attr("fill", "#f1f5f9").attr("rx", 4);
+                svg.append("text").attr("x", 10).attr("y", y + 18).text(micro).attr("font-size", "12px").attr("font-family", "Roboto").attr("fill", "#333");
+                svg.append("rect").attr("x", 260).attr("y", y).attr("width", 150).attr("height", cellHeight - 5).attr("fill", color).attr("rx", 4).attr("stroke", "#cbd5e1");
+                svg.append("text").attr("x", 335).attr("y", y + 18).attr("text-anchor", "middle").text(level).attr("font-size", "11px").attr("font-weight", "bold").attr("fill", "#333");
+                y += cellHeight;
+            });
+        }
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

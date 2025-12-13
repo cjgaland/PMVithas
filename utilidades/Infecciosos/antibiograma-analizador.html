@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Analizador de Antibiogramas</title>
+  
+  <link rel="icon" type="image/png" href="../../assets/Images/Logos/Favicon-Vithas.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Estilos Globales y Específicos (Púrpura/Granate) -->
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="style.css" />
+  
+  <style>
+    /* Estilos específicos para la entrada de texto */
+    #input {
+        width: 100%;
+        height: 200px;
+        border: 1px solid #c5cae9; 
+        border-radius: 8px;
+        padding: 10px;
+        font-family: 'Roboto', sans-serif;
+        resize: vertical;
+        box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+        transition: border-color 0.2s;
+        outline: none;
+    }
+    #input:focus {
+        border-color: #673ab7;
+        box-shadow: 0 0 0 2px rgba(103, 58, 183, 0.15);
+    }
+
+    /* Estilo del contenedor de la botonera */
+    .buttons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-top: 15px;
+    }
+
+    /* Estilo para los resultados (reutilizando clases AB y rec- de style.css) */
+    .recommendation-box { 
+        margin-top: 25px; 
+        padding: 15px; 
+        border-radius: 8px; 
+    }
+    
+    .ab-header {
+        font-weight: 700;
+        color: #673ab7;
+        margin-bottom: 10px;
+        border-bottom: 1px dashed #d1c4e9;
+        padding-bottom: 5px;
+        text-align: left;
+        font-size: 1rem;
+    }
+    
+    .tooltip-trigger {
+      font-weight: 600;
+      cursor: help;
+      text-decoration: underline dotted #512da8; /* Púrpura punteado */
+      color: #333;
+    }
+    .tooltiptext {
+      visibility: hidden; min-width: 200px; max-width: 80vw; background: rgba(38,50,56,0.95); color: #fff; text-align: left;
+      border-radius: 0.5rem; padding: 0.75rem; position: absolute; z-index: 1000;
+      bottom: 125%; left: 50%; transform: translateX(-50%) scale(0);
+      opacity: 0; transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+      font-size: 0.85rem; line-height: 1.4;
+    }
+    
+    /* Spinner */
+    .spinner { border: 4px solid #f3f3f3; border-top: 4px solid #673ab7; border-radius: 50%; width: 20px; height: 20px; animation: spin 1s linear infinite; display: inline-block; vertical-align: middle; margin-left: 5px; }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+    </div>
+    <nav class="nav-links">
+      <ul>
+        <!-- Nivel Superior -->
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        
+        <li class="nav-category">Utilidades</li>
+        
+        <!-- Botón de Retorno -->
+        <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Volver a Utilidades</a></li>
+        
+        <!-- BLOQUE HERMANO 1: Analíticas -->
+        <li class="has-submenu">
+          <a href="../Analisis_Clinicos/index.html" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-microscope"></i> Analíticas
+            </div>
+          </a>
+        </li>
+
+        <!-- BLOQUE HERMANO 2: EPOC -->
+        <li class="has-submenu">
+          <a href="../Gold_EPOC/index.html" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-lungs"></i> Guía EPOC
+            </div>
+          </a>
+        </li>
+
+        <!-- BLOQUE ACTUAL: Infecciosas (ABIERTO) -->
+        <li class="has-submenu open">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-virus"></i> Infecciosas y Antibióticos
+            </div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="index.html"><i class="fas fa-th-large"></i> Menú Principal</a></li>
+            <li><a href="guia-focos.html"><i class="fas fa-book-medical"></i> Guía por Foco</a></li>
+            <li><a href="guia-antibioticos.html"><i class="fas fa-capsules"></i> Guía Antibióticos</a></li>
+            <li><a href="guia-microorganismos.html"><i class="fas fa-microscope"></i> Microorganismos</a></li>
+            <li><a href="ajuste-renal.html"><i class="fas fa-calculator"></i> Ajuste Renal</a></li>
+            <!-- Elemento Activo -->
+            <li><a href="antibiograma-analizador.html" class="submenu-main-link active"><i class="fas fa-vial"></i> Antibiograma</a></li>
+          </ul>
+        </li>
+
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- CONTENIDO -->
+  <div class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <i class="fas fa-bars menu-toggle" id="menuToggle"></i>
+        <h2><i class="fas fa-virus" style="margin-right: 10px;"></i>Procesos Infecciosos</h2>
+      </div>
+      <div class="header-right">
+        <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+      </div>
+    </header>
+
+    <div class="calc-container">
+      <div class="calc-card">
+        <h1 class="calc-title">Analizador de Antibiogramas</h1>
+        <p class="calc-subtitle">Pega el texto de tu antibiograma (un parámetro por línea) para identificar perfiles de resistencia clave (MRSA, BLEE, Carbapenemasas, VRE).</p>
+
+        <h2 class="section-label">Entrada de Datos</h2>
+        <textarea id="input" placeholder="Ejemplo:\nKlebsiella pneumoniae\nOxacilina 0.5 R\nCeftazidima 1 I\nImipenem 4 S\n\n(Un parámetro por línea)"></textarea>
+        
+        <div class="buttons">
+          <button id="analyzeBtn" class="btn btn-calc" aria-busy="false"><i class="fas fa-search"></i> Analizar</button>
+          <button id="clearBtn" class="btn btn-secondary"><i class="fas fa-eraser"></i> Limpiar</button>
+        </div>
+
+        <div id="result" class="hidden">
+          <!-- Aquí se inyectan los resultados -->
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast">Resultado copiado al portapapeles</div>
+
+  <!-- JAVASCRIPT GLOBAL Y LOCAL -->
+  <script src="../../js/main.js"></script>
+  <script>
+    // LÓGICA COPIADA DE Antibiograma.html (Se mantiene la funcionalidad de análisis)
+    const antibioticInfo = {
+        'Ampicilina/clavulánico': 'Mecanismo: β-lactámico + inhibidor; Espectro: Gram+/- productores de betalactamasas; Vía: IV/VO; Dosis: 2.25–3g c/6-8h',
+        'Piperacilina/tazobactam': 'Mecanismo: penicilina antipseudomónica + inhibidor; Espectro: Gram+/- inclu. Pseudomonas; Vía: IV; Dosis: 4.5g c/6-8h',
+        'Cefotaxima': 'Mecanismo: cefalosporina 3ª gen; Espectro: Enterobacterales, neumococo; Vía: IV; Dosis: 1–2g c/6-8h',
+        'Ceftazidima': 'Mecanismo: cefalosporina 3ª gen; Espectro: antipseudomónica; Vía: IV; Dosis: 1–2g c/8h',
+        'Cefepima': 'Mecanismo: cefalosporina 4ª gen; Espectro: amplio Gram- incluyendo Pseudomonas; Vía: IV; Dosis: 1–2g c/8-12h',
+        'Ceftriaxona': 'Mecanismo: cefalosporina 3ª gen; Espectro: Gram+/-; Vía: IV/IM; Dosis: 1–2g c/24h',
+        'Aztreonam': 'Mecanismo: monobactámico; Espectro: Gram- aerobios; Vía: IV/IM; Dosis: 1–2g c/6-8h',
+        'Imipenem': 'Mecanismo: carbapenem; Espectro: amplio Gram+/-; Vía: IV; Dosis: 0.5–1g c/6-8h',
+        'Meropenem': 'Mecanismo: carbapenem; Espectro: amplio, buen SNC; Vía: IV; Dosis: 1g c/8h',
+        'Ertapenem': 'Mecanismo: carbapenem; Espectro: Gram+/- sin Pseudomonas; Vía: IV/IM; Dosis: 1g c/24h',
+        'Gentamicina': 'Mecanismo: aminoglucósido; Espectro: Gram-; Vía: IV/IM; Dosis: 5–7mg/kg/día',
+        'Amikacina': 'Mecanismo: aminoglucósido; Espectro: amplio Gram-; Vía: IV/IM; Dosis: 15–20mg/kg/día',
+        'Ciprofloxacino': 'Mecanismo: fluoroquinolona; Espectro: Gram- y algunos Gram+; Vía: VO/IV; Dosis: 500–750mg c/12h',
+        'Levofloxacino': 'Mecanismo: fluoroquinolona; Espectro: amplio Gram+/-; Vía: VO/IV; Dosis: 500–750mg c/24h',
+        'Trimetoprim/sulfametoxazol': 'Mecanismo: inhibidores de folato; Espectro: amplio; Vía: VO/IV; Dosis: 160/800mg c/12h',
+        'Nitrofurantoína': 'Mecanismo: daña ADN bacteriano; Espectro: ITU; Vía: VO; Dosis: 100mg c/6h',
+        'Fosfomicina': 'Mecanismo: inhibición de MurA; Espectro: Gram+/-; Vía: VO/IV; Dosis: 3g c/24h',
+        'Colistina': 'Mecanismo: polimixina; Espectro: Gram- multirresistente; Vía: IV; Dosis: 2.5–5mg/kg/día',
+        'Cloranfenicol': 'Mecanismo: inhibe 50S; Espectro: amplio Gram+/-; Vía: IV/VO; Dosis: 25–50mg/kg/día',
+        'Ácido fusídico': 'Mecanismo: inhibe EF-G; Espectro: Gram+; Vía: VO/Tópica; Dosis: 500mg c/6h',
+        'Clindamicina': 'Mecanismo: lincosamida; Espectro: Gram+ y anaerobios; Vía: VO/IV; Dosis: 600mg c/8h',
+        'Daptomicina': 'Mecanismo: lipopeptídico; Espectro: Gram+ resistentes; Vía: IV; Dosis: 4–6mg/kg/día',
+        'Linezolid': 'Mecanismo: oxazolidinona; Espectro: Gram+ resistentes; Vía: VO/IV; Dosis: 600mg c/12h',
+        'Mupirocina': 'Mecanismo: inhibe tRNA sintetasa; Espectro: Gram+; Vía: tópica; Dosis: según indicación',
+        'Rifampicina': 'Mecanismo: inhibe ARN polimerasa; Espectro: Gram+ y Mycobacterias; Vía: VO/IV; Dosis: 600mg/día',
+        'Teicoplanina': 'Mecanismo: glicopéptido; Espectro: Gram+ resistentes; Vía: IV/IM; Dosis: 6–12mg/kg/día',
+        'Tetraciclina': 'Mecanismo: inhibe 30S; Espectro: amplio; Vía: VO; Dosis: 500mg c/12h',
+        'Penicilina': 'Mecanismo: β-lactámico; Espectro: Gram+; Vía: IV/IM; Dosis: 2-4MU c/6h',
+        'Oxacilina': 'Mecanismo: penicilina resistente a penicilinasa; Espectro: Gram+; Vía: IV; Dosis: 2g c/4h',
+        'Vancomicina': 'Mecanismo: glicopéptido; Espectro: Gram+ resistentes; Vía: IV/VO; Dosis: 15-20mg/kg c/8-12h',
+        'Tigeciclina': 'Mecanismo: glicilciclina; Espectro: MRSA, VRE, Gram-; Vía: IV; Dosis: 100mg carga, 50mg c/12h',
+        'Eritromicina': 'Mecanismo: macrólido; Espectro: Gram+ y algunos Gram-; Vía: VO/IV; Dosis: 500mg c/6h'
+      };
+
+      const microInfo = {
+        'staphylococcus aureus': `<strong>Información General:</strong><br>
+<strong>Descripción:</strong> Coco Gram-positivo en racimos; comensal de piel y mucosas.<br>
+<strong>Epidemiología:</strong> Infecciones de piel, neumonías, bacteriemias y endocarditis; prevalencia de MRSA en hospitales y comunidad.<br>
+<strong>Patogenicidad:</strong> Proteína A, coagulasa, biofilm y toxinas (TSST-1, enterotoxinas).`,
+        'enterococcus faecalis': `<strong>Información General:</strong><br>
+<strong>Descripción:</strong> Coco Gram-positivo en cadenas; tolerante a sales y pH altos.<br>
+<strong>Epidemiología:</strong> ITU, bacteriemias, endocarditis; emergente VRE.<br>
+<strong>Patogenicidad:</strong> Pili, adhesinas y resistencia a aminoglucósidos de alto nivel.`,
+        'enterococcus faecium': `<strong>Información General:</strong><br>
+<strong>Descripción:</strong> Coco Gram-positivo en cadenas; resistente a entornos adversos.<br>
+<strong>Epidemiología:</strong> Infecciones nosocomiales; alta incidencia de VRE.<br>
+<strong>Patogenicidad:</strong> Genes vanA/vanB, adhesinas y biofilm.`,
+        'escherichia coli': `<strong>Información General:</strong><br>
+<strong>Descripción:</strong> Bacilo Gram-negativo, móvil, fermentador de lactosa.<br>
+<strong>Epidemiología:</strong> ITU y bacteriemias; cepas diarreogénicas.<br>
+<strong>Patogenicidad:</strong> Fimbrias, endotoxina LPS, toxinas Shiga.`,
+        'klebsiella pneumoniae': `<strong>Información General:</strong><br>
+        <strong>Descripción:</strong> Bacilo Gram-negativo, no móvil, fermentador de lactosa con cápsula.<br>
+        <strong>Epidemiología:</strong> Infecciones nosocomiales y comunitarias.<br>
+        <strong>Patogenicidad:</strong> Cápsula antifagocítica, LPS, fimbrias y carbapenemasas (KPC).`
+      };
+
+      function parseInput(text) {
+        const lines = text.split(/\r?\n/).map(l=>l.trim()).filter(l=>l && !/^µg\/?ml$/i.test(l));
+        const micro = lines[0];
+        const key = micro.toLowerCase().replace(/\./g,'').replace(/ *\(.*\) */,'').trim()
+          .replace(/^s aureus$/, 'staphylococcus aureus')
+          .replace(/^e faecalis$/, 'enterococcus faecalis')
+          .replace(/^e faecium$/, 'enterococcus faecium')
+          .replace(/^e coli$/, 'escherichia coli')
+          .replace(/^k pneumoniae$/, 'klebsiella pneumoniae');
+        const data = lines.slice(1).filter(l=>/\d/.test(l)).map(l=>{
+          // Intenta separar el nombre del antibiótico de los valores y la interpretación
+          const parts = l.split(/\s+/);
+          // La interpretación (S, I, R) y el valor MIC (ej: <0.5) están al final.
+          const interpretation = parts[parts.length-1].toUpperCase();
+          const value = parts[parts.length-2];
+          const name = parts.slice(0, -2).join(' '); // El resto es el nombre del antibiótico
+          
+          return { name: name.trim(), value: value.trim(), interpretation: interpretation.trim() };
+        });
+        return { micro, key, data };
+      }
+
+      function detectProfiles(key, data) {
+        const Rnames = data.filter(a=>a.interpretation==='R').map(a=>a.name.toLowerCase());
+        const profiles = [];
+        
+        // 1. MRSA
+        if (key==='staphylococcus aureus' && Rnames.includes('oxacilina')) profiles.push('MRSA (SARM)');
+        
+        // 2. BLEE y Carbapenemasas (E. coli, K. pneumoniae)
+        if (/escherichia coli|klebsiella pneumoniae/.test(key)) {
+          // BLEE: Resistencia a cefalosporinas de 3ª/4ª generación
+          if (['cefotaxima','ceftazidima','cefepima','ceftriaxona'].some(n=>Rnames.includes(n))) {
+             // Solo añadir si no hay ya un perfil de Carbapenemasa más grave
+             if (!profiles.includes('Carbapenemasa')) profiles.push('BLEE');
+          }
+          
+          // Carbapenemasa: Resistencia a Ertapenem, Imipenem o Meropenem
+          const hasE=Rnames.includes('ertapenem'), hasI=Rnames.includes('imipenem'), hasM=Rnames.includes('meropenem');
+          if (hasE||hasI||hasM) { 
+              profiles.push('Carbapenemasa'); 
+          }
+          
+          // OXA-48-like (Patrón de resistencia a Ertapenem pero sensibilidad a Meropenem/Imipenem)
+          if (hasE && !hasI && !hasM) {
+              // Esto es una simplificación, ya que el test de disco es más complejo, pero alerta de un perfil OXA.
+               profiles.push('OXA-48-like (Sospecha)');
+          }
+        }
+        
+        // 3. VRE
+        if (/enterococcus faecalis|enterococcus faecium/.test(key)) {
+          if (Rnames.includes('vancomicina')) profiles.push('VRE');
+          if (Rnames.includes('gentamicina (alto nivel)')) profiles.push('Resistencia a Aminoglucósidos de Alto Nivel');
+        }
+        return profiles;
+      }
+
+      const $ = (id) => document.getElementById(id);
+      const analyzeBtn = document.getElementById('analyzeBtn');
+      const clearBtn = document.getElementById('clearBtn');
+      const inputEl = document.getElementById('input');
+      const resultEl = document.getElementById('result');
+
+      // --- INICIALIZACIÓN DE LISTENERS (CORRECCIÓN) ---
+      document.addEventListener('DOMContentLoaded', () => {
+          // Asegurar que el toast está oculto al inicio
+          const toastElement = $('toast');
+          if (toastElement) {
+              toastElement.classList.remove('show');
+          }
+          
+          // Listener del botón ANALIZAR
+          analyzeBtn.addEventListener('click', async () => {
+            const text = inputEl.value.trim();
+            if (!text) { alert('Por favor, pega un antibiograma.'); return; }
+            
+            // Bloquear botón y mostrar spinner (simulado)
+            analyzeBtn.disabled = true;
+            analyzeBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Analizando';
+
+            await new Promise(r=>setTimeout(r,500)); // Delay para visualización del spinner
+
+            const { micro, key, data } = parseInput(text);
+            const profiles = detectProfiles(key,data);
+
+            let html = `<h3 class="ab-header">Microorganismo: ${micro}</h3>`;
+            
+            // Perfiles de Resistencia
+            if(profiles.length) {
+                html+=`<div class="recommendation-box rec-red"><i class="fas fa-exclamation-triangle"></i> Detectado: ${profiles.join(', ')}<br><div style="color:#4527a0; margin-top:0.5rem; font-weight:500;">Valorar interconsulta PROA/Infecciosas</div></div>`;
+            }
+            else {
+                html+=`<div class="recommendation-box rec-green"><i class="fas fa-check-circle"></i> No perfiles de alta resistencia detectados.</div>`;
+            }
+            
+            // Info General
+            if(microInfo[key]) html+=`<div class="recommendation-box rec-blue" style="text-align:left;">${microInfo[key]}</div>`;
+
+            // Antibiograma Detallado
+            html+=`<div class="recommendation-box rec-neutral"><h3 class="ab-header">Resultados por Antibiótico</h3>`;
+            data.forEach(a=>{
+              // Limpia el nombre para buscar información (ej: Quita (Alto Nivel))
+              const cleanName = a.name.split('(')[0].trim();
+              const tip = antibioticInfo[cleanName] || 'Mecanismo y posología no disponible en la base de datos.';
+
+              // Solo envolver con tooltip si hay info o si es sensible (para ver posología)
+              const nameHtml = (a.interpretation==='S' || a.interpretation==='I' || antibioticInfo[cleanName])
+                ? `<span class="tooltip"><button class="tooltip-trigger" aria-describedby="tip-${a.name.replace(/\s/g, '-')}" title="Click para ver info">${a.name}</button><div id="tip-${a.name.replace(/\s/g, '-')}" role="tooltip" class="tooltiptext">${tip}</div></span>`
+                : a.name;
+
+              html+=`<div class="AB ${a.interpretation}"><span>${nameHtml}</span><span>${a.value} ${a.interpretation}</span></div>`;
+            });
+            html+=`</div>`;
+
+            // Link a EUCAST y referencias
+            html+=`<div class="result-notes mt-4" style="text-align:left;">
+              <h4 class="font-bold mb-1" style="color:#673ab7;">Referencias de Laboratorio:</h4>
+              <p><a href="https://eucast.org/clinical_breakpoints/" target="_blank">Consulta breakpoints EUCAST</a></p>
+              <ul class="list-disc pl-6" style="font-size:0.85rem;">
+                <li><a href="https://eucast.org/clinical_breakpoints/" target="_blank">EUCAST Clinical Breakpoints v.12.0 (2023)</a></li>
+                <li><a href="https://clsi.org/standards/products/microbiology/m100/" target="_blank">CLSI M100 Ed.33 (2023)</a></li>
+              </ul>
+            </div>`;
+            resultEl.innerHTML = html;
+            resultEl.classList.remove('hidden');
+
+            // Restaurar botón
+            analyzeBtn.disabled = false;
+            analyzeBtn.innerHTML = '<i class="fas fa-search"></i> Analizar';
+          });
+          
+          // Listener del botón LIMPIAR
+          clearBtn.addEventListener('click', () => {
+            inputEl.value = '';
+            resultEl.innerHTML = '';
+            resultEl.classList.add('hidden');
+          });
+      });
+      // --- FIN INICIALIZACIÓN DE LISTENERS (CORRECCIÓN) ---
+
+      // Funciones auxiliares (parseInput, detectProfiles, antibioticInfo, microInfo)
+      // Nota: showToast está definido en el Canvas para el botón Copiar
+      function showToast() {
+          const toast = $('toast');
+          toast.className = "toast show";
+          setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+      }
+    
+  </script>
+</body>
+</html>

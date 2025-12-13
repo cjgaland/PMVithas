@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cefalosporinas - Protocolo Antibióticos</title>
+    
+    <!-- Dependencias Externas (Tailwind y D3) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <!-- Estilos Globales -->
+    <link rel="stylesheet" href="../../../css/style.css" />
+    <!-- Estilos Locales del Módulo Antibióticos -->
+    <link rel="stylesheet" href="../Antibioticos/antibioticos-style.css" />
+
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="../../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+        </div>
+        <nav class="nav-links">
+            <ul>
+                <li><a href="../../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+                <li class="nav-category">Práctica Clínica</li>
+                <!-- Enlace de retorno directo a la Guía Principal -->
+                <li><a href="../guia-antibioticos.html"><i class="fas fa-arrow-left"></i> Volver a Guía Antibióticos</a></li>
+                
+                <!-- BLOQUE ACTUAL: Antibióticos (ABIERTO) -->
+                <li class="has-submenu open">
+                    <a href="#" class="submenu-toggle">
+                        <div style="display:flex; align-items:center;">
+                            <i class="fas fa-capsules"></i> Antibióticos
+                        </div>
+                    </a>
+                    <!-- Lista de familias (Hermanos) con ICONOS -->
+                    <ul class="submenu">
+                        <li><a href="Penicilinas.html"><i class="fas fa-shield-virus"></i> Penicilinas</a></li>
+                        <!-- Elemento Activo -->
+                        <li><a href="Cefalosporinas.html" class="submenu-main-link active"><i class="fas fa-capsules"></i> Cefalosporinas</a></li>
+                        <li><a href="Carbapenems.html"><i class="fas fa-syringe"></i> Carbapenems</a></li>
+                        <li><a href="Fluorquinolonas.html"><i class="fas fa-dna"></i> Fluorquinolonas</a></li>
+                        <li><a href="Macrolidos.html"><i class="fas fa-bacterium"></i> Macrólidos</a></li>
+                        <li><a href="Aminoglucosidos.html"><i class="fas fa-prescription-bottle-alt"></i> Aminoglucósidos</a></li>
+                        <li><a href="Tetraciclinas.html"><i class="fas fa-tablets"></i> Tetraciclinas</a></li>
+                        <li><a href="Glicopeptidos.html"><i class="fas fa-shield-alt"></i> Glicopéptidos</a></li>
+                        <li><a href="Lincosamidas.html"><i class="fas fa-biohazard"></i> Lincosamidas</a></li>
+                        <li><a href="Oxazolidinonas.html"><i class="fas fa-dot-circle"></i> Oxazolidinonas</a></li>
+                        <li><a href="Estreptograminas.html"><i class="fas fa-vial"></i> Estreptograminas</a></li>
+                        <li><a href="Fenicoles.html"><i class="fas fa-flask"></i> Fenicoles</a></li>
+                        <li><a href="Polimixinas.html"><i class="fas fa-spray-can"></i> Polimixinas</a></li>
+                        <li><a href="Otros.html"><i class="fas fa-plus-circle"></i> Otros</a></li>
+                    </ul>
+                </li>
+
+                <!-- Accesos directos a otras Utilidades (Nivel superior) -->
+                <li class="nav-category">Otras Herramientas</li>
+                
+                <li class="has-submenu">
+                    <a href="../../Analisis_Clinicos/index.html" class="submenu-toggle">
+                        <div style="display:flex; align-items:center;">
+                            <i class="fas fa-microscope"></i> Analíticas
+                        </div>
+                    </a>
+                </li>
+
+                <li class="has-submenu">
+                    <a href="../../Gold_EPOC/index.html" class="submenu-toggle">
+                        <div style="display:flex; align-items:center;">
+                            <i class="fas fa-lungs"></i> Guía EPOC
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="sidebar-footer">
+            <p>Medicina Interna</p>
+            <small>Vithas Xanit Internacional</small>
+        </div>
+    </aside>
+
+    <div class="main-content">
+        <!-- CABECERO GLOBAL -->
+        <header class="top-header">
+            <div class="header-left">
+                <i class="fas fa-bars menu-toggle" id="menuToggle"></i>
+                <h2><i class="fas fa-capsules" style="margin-right: 10px;"></i>Guía de Antibióticos</h2>
+            </div>
+            <div class="header-right">
+                <img src="../../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+            </div>
+        </header>
+
+        <div class="content-wrapper abx-container">
+            
+            <!-- Selector de Antibiótico dentro de la familia -->
+            <section class="abx-card">
+                <!-- CABECERA INTEGRADA (Título + Instrucción en la misma línea visual) -->
+                <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 20px; margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #f0f0f0;">
+                    
+                    <!-- Parte Izquierda: Icono y Nombre del Grupo -->
+                    <div style="display: flex; align-items: center; gap: 15px; flex-grow: 1;">
+                        <div style="background:#e0f2fe; color:#003A70; width:55px; height:55px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.75rem; flex-shrink:0;">
+                            <i class="fas fa-capsules"></i>
+                        </div>
+                        <div>
+                            <h1 style="color: #003A70; font-size: 1.75rem; margin: 0; font-weight: 700; line-height: 1.1;">Cefalosporinas</h1>
+                        </div>
+                    </div>
+                    
+                    <!-- Parte Derecha: Instrucción -->
+                    <div style="color: #888; font-weight: 500; font-size: 0.95rem; display: flex; align-items: center;">
+                        <span style="background: #f8fafc; padding: 5px 12px; border-radius: 20px; border: 1px solid #e2e8f0;">
+                            <i class="fas fa-hand-point-up" style="margin-right: 6px; color: #009FE3;"></i> Seleccione fármaco:
+                        </span>
+                    </div>
+                </div>
+
+                <div class="grid-antibioticos" id="antibiotic-list">
+                    <!-- Se rellena por JS -->
+                </div>
+            </section>
+
+            <!-- Área de Detalles (oculta inicialmente) -->
+            <section id="detail-area" class="abx-card hidden">
+                <div id="content-area">
+                    <!-- Detalles inyectados aquí -->
+                </div>
+            </section>
+
+        </div>
+        
+        <footer class="footer">
+            <p>&copy; 2025 Servicio de Medicina Interna - Hospital Vithas Xanit Internacional.</p>
+        </footer>
+    </div>
+
+    <script>
+        // === DATOS COMPLETOS DE LA FAMILIA CEFALOSPORINAS (16 ELEMENTOS) ===
+        const antibioticsData = {
+            "Cefazolina": {
+                "cobertura": "Primera generación. Principalmente cocos Gram-positivos (Staphylococcus aureus MSSA, Streptococcus). Algunos Gram-negativos (E. coli, Klebsiella, Proteus).",
+                "posologia": "Adultos: 500 mg - 2 g cada 8h IV/IM.",
+                "eventos_adversos": "Náuseas, vómitos, diarrea, rash. Reacciones de hipersensibilidad.",
+                "biodisponibilidad": "No oral (uso parenteral).",
+                "precauciones": "Alergia a cefalosporinas o penicilinas (reacción cruzada). Ajustar en IR.",
+                "ajuste_renal_hepatica": "IR: Ajustar dosis o prolongar intervalo. IH: No requiere ajuste significativo.",
+                "interacciones": "Probenecid (aumenta niveles de cefazolina).",
+                "alertas": ["Reacciones de hipersensibilidad"],
+                "coverage_profile": { "Staphylococcus aureus (SASM)": "Excelente", "Staphylococcus aureus (SARM)": "Nula", "Streptococcus pyogenes": "Excelente", "Streptococcus pneumoniae (S)": "Excelente", "Streptococcus pneumoniae (I)": "Moderada", "Streptococcus pneumoniae (R)": "Limitada", "Enterococcus faecalis": "Nula", "Enterococcus faecium (VRE)": "Nula", "Haemophilus influenzae": "Limitada", "Moraxella catarrhalis": "Limitada", "Escherichia coli": "Buena", "Klebsiella spp.": "Buena", "Otras Enterobacteriaceae (BLEE)": "Moderada", "Pseudomonas aeruginosa": "Nula", "Acinetobacter baumannii": "Nula", "Stenotrophomonas maltophilia": "Nula", "Bacteroides fragilis": "Nula", "Clostridium difficile": "Nula", "Mycoplasma pneumoniae": "Nula", "Chlamydia pneumoniae": "Nula", "Legionella pneumophila": "Nula" }
+            },
+            "Cefalexina": {
+                "cobertura": "Primera generación. Principalmente cocos Gram-positivos (Staphylococcus, Streptococcus). Algunos Gram-negativos (E. coli, Klebsiella, Proteus).",
+                "posologia": "Adultos: 250-500 mg cada 6h. Niños: 25-50 mg/kg/día en 2-4 tomas.",
+                "eventos_adversos": "Diarrea, náuseas, vómitos, rash. Reacciones de hipersensibilidad.",
+                "biodisponibilidad": "90%",
+                "precauciones": "Alergia a cefalosporinas o penicilinas (reacción cruzada). Ajustar en IR.",
+                "ajuste_renal_hepatica": "IR: Ajustar dosis o prolongar intervalo. IH: No requiere ajuste significativo.",
+                "interacciones": "Probenecid (aumenta niveles de cefalexina), metformina (aumenta niveles de metformina).",
+                "alertas": ["Reacciones de hipersensibilidad"],
+                "coverage_profile": { "Staphylococcus aureus (SASM)": "Excelente", "Staphylococcus aureus (SARM)": "Nula", "Streptococcus pyogenes": "Excelente", "Streptococcus pneumoniae (S)": "Excelente", "Streptococcus pneumoniae (I)": "Moderada", "Streptococcus pneumoniae (R)": "Limitada", "Enterococcus faecalis": "Nula", "Enterococcus faecium (VRE)": "Nula", "Haemophilus influenzae": "Limitada", "Moraxella catarrhalis": "Limitada", "Escherichia coli": "Buena", "Klebsiella spp.": "Buena", "Otras Enterobacteriaceae (BLEE)": "Moderada", "Pseudomonas aeruginosa": "Nula", "Acinetobacter baumannii": "Nula", "Stenotrophomonas maltophilia": "Nula", "Bacteroides fragilis": "Nula", "Clostridium difficile": "Nula", "Mycoplasma pneumoniae": "Nula", "Chlamydia pneumoniae": "Nula", "Legionella pneumophila": "Nula" }
+            },
+            "Cefadroxilo": {
+                "cobertura": "Primera generación (oral). Similar a cefalexina, pero con posología cada 12-24h. Principalmente Gram-positivos (Streptococcus, MSSA).",
+                "posologia": "Adultos: 500 mg - 1 g cada 12-24h oral. Niños: 30 mg/kg/día en 1-2 tomas.",
+                "eventos_adversos": "Náuseas, diarrea, rash.",
+                "biodisponibilidad": "Alta (oral).",
+                "precauciones": "Alergia a cefalosporinas o penicilinas. Ajustar en IR.",
+                "ajuste_renal_hepatica": "IR: Ajustar dosis. IH: No requiere ajuste significativo.",
+                "interacciones": "Probenecid.",
+                "alertas": ["Alergia a cefalosporinas"],
+                "coverage_profile": { "Staphylococcus aureus (SASM)": "Excelente", "Staphylococcus aureus (SARM)": "Nula", "Streptococcus pyogenes": "Excelente", "Streptococcus pneumoniae (S)": "Excelente", "Streptococcus pneumoniae (I)": "Moderada", "Streptococcus pneumoniae (R)": "Limitada", "Enterococcus faecalis": "Nula", "Enterococcus faecium (VRE)": "Nula", "Haemophilus influenzae": "Limitada", "Moraxella catarrhalis": "Limitada", "Escherichia coli": "Buena", "Klebsiella spp.": "Buena", "Otras Enterobacteriaceae (BLEE)": "Moderada", "Pseudomonas aeruginosa": "Nula", "Acinetobacter baumannii": "Nula", "Stenotrophomonas maltophilia": "Nula", "Bacteroides fragilis": "Nula", "Clostridium difficile": "Nula", "Mycoplasma pneumoniae": "Nula", "Chlamydia pneumoniae": "Nula", "Legionella pneumophila": "Nula" }
+            },
+            "Cefaclor": {
+                "cobertura": "Segunda generación (oral). Actividad contra H. influenzae, M. catarrhalis. También cubre Gram-positivos (Streptococcus, MSSA).",
+                "posologia": "Adultos: 250-500 mg cada 8h oral. Niños: 20-40 mg/kg/día en 3 tomas.",
+                "eventos_adversos": "Diarrea, náuseas, rash (enfermedad del suero).",
+                "biodisponibilidad": "60-80%",
+                "precauciones": "Alergia a cefalosporinas o penicilinas. Ajustar en IR.",
+                "ajuste_renal_hepatica": "IR: Ajustar dosis. IH: No requiere ajuste significativo.",
+                "interacciones": "Anticoagulantes orales (aumenta efecto).",
+                "alertas": ["Alergia a cefalosporinas"],
+                "coverage_profile": { "Staphylococcus aureus (SASM)": "Buena", "Staphylococcus aureus (SARM)": "Nula", "Streptococcus pyogenes": "Buena", "Streptococcus pneumoniae (S)": "Buena", "Streptococcus pneumoniae (I)": "Moderada", "Streptococcus pneumoniae (R)": "Limitada", "Enterococcus faecalis": "Nula", "Enterococcus faecium (VRE)": "Nula", "Haemophilus influenzae": "Buena", "Moraxella catarrhalis": "Buena", "Escherichia coli": "Moderada", "Klebsiella spp.": "Moderada", "Otras Enterobacteriaceae (BLEE)": "Limitada", "Pseudomonas aeruginosa": "Nula", "Acinetobacter baumannii": "Nula", "Stenotrophomonas maltophilia": "Nula", "Bacteroides fragilis": "Nula", "Clostridium difficile": "Nula", "Mycoplasma pneumoniae": "Nula", "Chlamydia pneumoniae": "Nula", "Legionella pneumophila": "Nula" }
+            },
+            "Cefaclor/Clavulánico": {
+                "cobertura": "Similar a cefaclor, con actividad ampliada contra beta-lactamasas productoras de H. influenzae, M. catarrhalis, S. aureus (MSSA).",
+                "posologia": "Adultos: 250-500 mg cada 8h oral. Niños: 20-40 mg/kg/día en 3 tomas.",
+                "eventos_adversos": "Diarrea, náuseas, rash.",
+                "biodisponibilidad": "60-80%",
+                "precauciones": "Alergia a cefalosporinas o penicilinas. Ajustar en IR.",
+                "ajuste_renal_hepatica": "IR: Ajustar dosis. IH: No requiere ajuste significativo.",
+                "interacciones": "Anticoagulantes orales.",
+                "alertas": ["Alergia a cefalosporinas"],
+                "coverage_profile": { "Staphylococcus aureus (SASM)": "Excelente", "Staphylococcus aureus (SARM)": "Nula", "Streptococcus pyogenes": "Buena", "Streptococcus pneumoniae (S)": "Buena", "Streptococcus pneumoniae (I)": "Moderada", "Streptococcus pneumoniae (R)": "Limitada", "Enterococcus faecalis": "Nula", "Enterococcus faecium (VRE)": "Nula", "Haemophilus influenzae": "Excelente", "Moraxella catarrhalis": "Excelente", "Escherichia coli": "Moderada", "Klebsiella spp.": "Moderada", "Otras Enterobacteriaceae (BLEE)": "Buena", "Pseudomonas aeruginosa": "Nula", "Acinetobacter baumannii": "Nula", "Stenotrophomonas maltophilia": "Nula", "Bacteroides fragilis": "Nula", "Clostridium difficile": "Nula", "Mycoplasma pneumoniae": "Nula", "Chlamydia pneumoniae": "Nula", "Legionella pneumophila": "Nula" }
+            },
+            "Cefoxitina": {
+                "cobertura": "Segunda generación (cefamicina). Actividad contra anaerobios (Bacteroides fragilis) y Gram-negativos (Enterobacteriaceae). Menos activa contra Gram-positivos que cefalosporinas de primera generación.",
+                "posologia": "Adultos: 1-2 g cada 6-8h IV.",
+                "eventos_adversos": "Náuseas, vómitos, diarrea, rash. Reacciones de hipersensibilidad. Tromboflebitis.",
+                "biodisponibilidad": "No oral (uso parenteral).",
+                "precauciones": "Alergia a cefalosporinas o penicilinas. Ajustar en IR.",
+                "ajuste_renal_hepatica": "IR: Ajustar dosis o prolongar intervalo. IH: No requiere ajuste significativo.",
+                "interacciones": "Aminoglucósidos (aumenta riesgo de nefrotoxicidad).",
+                "alertas": ["Reacciones de hipersensibilidad"],
+                "coverage_profile": { "Staphylococcus aureus (SASM)": "Moderada", "Staphylococcus aureus (SARM)": "Nula", "Streptococcus pyogenes": "Buena", "Streptococcus pneumoniae (S)": "Buena", "Streptococcus pneumoniae (I)": "Moderada", "Streptococcus pneumoniae (R)": "Limitada", "Enterococcus faecalis": "Nula", "Enterococcus faecium (VRE)": "Nula", "Haemophilus influenzae": "Buena", "Moraxella catarrhalis": "Buena", "Escherichia coli": "Buena", "Klebsiella spp.": "Buena", "Otras Enterobacteriaceae (BLEE)": "Buena", "Pseudomonas aeruginosa": "Nula", "Acinetobacter baumannii": "Nula", "Stenotrophomonas maltophilia": "Nula", "Bacteroides fragilis": "Excelente", "Clostridium difficile": "Nula", "Mycoplasma pneumoniae": "Nula", "Chlamydia pneumoniae": "Nula", "Legionella pneumophila": "Nula" }
+            },
+            "Cefuroxima": {
+                "cobertura": "Segunda generación. Mayor actividad contra Gram-negativos (H. influenzae, M. catarrhalis) que primera generación. S. aureus (MSSA), Streptococcus.",
+                "posologia": "Adultos: 250-500 mg cada 12h. Niños: 20-30 mg/kg/día en 2 tomas.",
+                "eventos_adversos": "Diarrea, náuseas, vómitos, rash. Reacciones de hipersensibilidad.",
+                "biodisponibilidad": "37-52% (oral)",
+                "precauciones": "Alergia a cefalosporinas o penicilinas. Ajustar en IR.",
+                "ajuste_renal_hepatica": "IR: Ajustar dosis o prolongar intervalo. IH: No requiere ajuste significativo.",
+                "interacciones": "Antiácidos (disminuyen absorción), probenecid.",
+                "alertas": ["Reacciones de hipersensibilidad"],
+                "coverage_profile": { "Staphylococcus aureus (SASM)": "Buena", "Staphylococcus aureus (SARM)": "Nula", "Streptococcus pyogenes": "Excelente", "Streptococcus pneumoniae (S)": "Excelente", "Streptococcus pneumoniae (I)": "Buena", "Streptococcus pneumoniae (R)": "Moderada", "Enterococcus faecalis": "Nula", "Enterococcus faecium (VRE)": "Nula", "Haemophilus influenzae": "Buena", "Moraxella catarrhalis": "Buena", "Escherichia coli": "Moderada", "Klebsiella spp.": "Moderada", "Otras Enterobacteriaceae (BLEE)": "Limitada", "Pseudomonas aeruginosa": "Nula", "Acinetobacter baumannii": "Nula", "Stenotrophomonas maltophilia": "Nula", "Bacteroides fragilis": "Limitada", "Clostridium difficile": "Nula", "Mycoplasma pneumoniae": "Nula", "Chlamydia pneumoniae": "Nula", "Legionella pneumophila": "Nula" }
+            },
+            "Cefotaxima": {
+                "cobertura": "Tercera generación. Amplio espectro contra Gram-negativos (Enterobacteriaceae, H. influenzae, Neisseria). Actividad contra Streptococcus. Menor actividad contra S. aureus y Pseudomonas que cefepima.",
+                "posologia": "Adultos: 1-2 g cada 8-12h IV. Niños: 50-180 mg/kg/día IV en dosis divididas.",
+                "eventos_adversos": "Diarrea, náuseas, vómitos, rash. Reacciones de hipersensibilidad.",
+                "biodisponibilidad": "No oral (uso parenteral).",
+                "precauciones": "Alergia a cefalosporinas o penicilinas. Ajustar en IR.",
+                "ajuste_renal_hepatica": "IR: Ajustar dosis o prolongar intervalo. IH: No requiere ajuste significativo.",
+                "interacciones": "Aminoglucósidos (aumenta riesgo de nefrotoxicidad).",
+                "alertas": ["Reacciones de hipersensibilidad"],
+                "coverage_profile": { "Staphylococcus aureus (SASM)": "Moderada", "Staphylococcus aureus (SARM)": "Nula", "Streptococcus pyogenes": "Excelente", "Streptococcus pneumoniae (S)": "Excelente", "Streptococcus pneumoniae (I)": "Buena", "Streptococcus pneumoniae (R)": "Moderada", "Enterococcus faecalis": "Nula", "Enterococcus faecium (VRE)": "Nula", "Haemophilus influenzae": "Excelente", "Moraxella catarrhalis": "Excelente", "Escherichia coli": "Buena", "Klebsiella spp.": "Buena", "Otras Enterobacteriaceae (BLEE)": "Buena", "Pseudomonas aeruginosa": "Limitada", "Acinetobacter baumannii": "Nula", "Stenotrophomonas maltophilia": "Nula", "Bacteroides fragilis": "Nula", "Clostridium difficile": "Nula", "Mycoplasma pneumoniae": "Nula", "Chlamydia pneumoniae": "Nula", "Legionella pneumophila": "Nula" }
+            },
+            "Ceftriaxona": {
+                "cobertura": "Tercera generación. Amplio espectro contra Gram-negativos (Enterobacteriaceae, H. influenzae, Neisseria). Muy activa contra Streptococcus pneumoniae. Larga vida media.",
+                "posologia": "Adultos: 1-2 g cada 24h IV/IM. Niños: 50-75 mg/kg/día en 1-2 tomas.",
+                "eventos_adversos": "Diarrea, dolor en el sitio de inyección, rash, elevación de enzimas hepáticas, barro biliar. Reacciones de hipersensibilidad.",
+                "biodisponibilidad": "No oral (uso parenteral).",
+                "precauciones": "Alergia a cefalosporinas o penicilinas. Recién nacidos (riesgo de kernícterus).",
+                "ajuste_renal_hepatica": "IR: No requiere ajuste significativo. IH: Usar con precaución en IH grave.",
+                "interacciones": "Calcio (precipitación en IV), anticoagulantes orales.",
+                "alertas": ["Reacciones de hipersensibilidad", "Riesgo en recién nacidos (kernícterus)"],
+                "coverage_profile": { "Staphylococcus aureus (SASM)": "Moderada", "Staphylococcus aureus (SARM)": "Nula", "Streptococcus pyogenes": "Excelente", "Streptococcus pneumoniae (S)": "Excelente", "Streptococcus pneumoniae (I)": "Excelente", "Streptococcus pneumoniae (R)": "Buena", "Enterococcus faecalis": "Nula", "Enterococcus faecium (VRE)": "Nula", "Haemophilus influenzae": "Excelente", "Moraxella catarrhalis": "Excelente", "Escherichia coli": "Excelente", "Klebsiella spp.": "Excelente", "Otras Enterobacteriaceae (BLEE)": "Moderada", "Pseudomonas aeruginosa": "Limitada", "Acinetobacter baumannii": "Nula", "Stenotrophomonas maltophilia": "Nula", "Bacteroides fragilis": "Nula", "Clostridium difficile": "Nula", "Mycoplasma pneumoniae": "Nula", "Chlamydia pneumoniae": "Nula", "Legionella pneumophila": "Nula" }
+            },
+            "Ceftazidima": {
+                "cobertura": "Tercera generación, con excelente actividad antipseudomona. Menos activa contra Gram-positivos que otras cefalosporinas de tercera generación.",
+                "posologia": "Adultos: 1-2 g cada 8-12h IV. Niños: 100-150 mg/kg/día IV en dosis divididas.",
+                "eventos_adversos": "Náuseas, vómitos, diarrea, rash. Reacciones de hipersensibilidad. C. difficile colitis.",
+                "biodisponibilidad": "No oral (uso parenteral).",
+                "precauciones": "Alergia a cefalosporinas o penicilinas. Ajustar en IR.",
+                "ajuste_renal_hepatica": "IR: Ajustar dosis. IH: No requiere ajuste significativo.",
+                "interacciones": "Aminoglucósidos (aumenta riesgo de nefrotoxicidad).",
+                "alertas": ["Reacciones de hipersensibilidad"],
+                "coverage_profile": { "Staphylococcus aureus (SASM)": "Limitada", "Staphylococcus aureus (SARM)": "Nula", "Streptococcus pyogenes": "Moderada", "Streptococcus pneumoniae (S)": "Moderada", "Streptococcus pneumoniae (I)": "Limitada", "Streptococcus pneumoniae (R)": "Limitada", "Enterococcus faecalis": "Nula", "Enterococcus faecium (VRE)": "Nula", "Haemophilus influenzae": "Buena", "Moraxella catarrhalis": "Buena", "Escherichia coli": "Buena", "Klebsiella spp.": "Buena", "Otras Enterobacteriaceae (BLEE)": "Moderada", "Pseudomonas aeruginosa": "Excelente", "Acinetobacter baumannii": "Moderada", "Stenotrophomonas maltophilia": "Nula", "Bacteroides fragilis": "Nula", "Clostridium difficile": "Nula", "Mycoplasma pneumoniae": "Nula", "Chlamydia pneumoniae": "Nula", "Legionella pneumophila": "Nula" }
+            },
+            "Cefoperazona/Sulbactam": {
+                "cobertura": "Amplio espectro. Cefalosporina de tercera generación con actividad antipseudomona. Sulbactam añade cobertura contra S. aureus (MSSA), Acinetobacter spp., y anaerobios.",
+                "posologia": "Adultos: 2-4 g cada 12h IV.",
+                "eventos_adversos": "Diarrea, náuseas, rash, hipoprotrombinemia (por cefoperazona).",
+                "biodisponibilidad": "No oral (uso parenteral).",
+                "precauciones": "Alergia a cefalosporinas. Ajustar en IR/IH. Riesgo de sangrado.",
+                "ajuste_renal_hepatica": "IR: Ajustar dosis según ClCr. IH: Ajustar dosis en IH grave.",
+                "interacciones": "Anticoagulantes orales, alcohol (efecto disulfiram).",
+                "alertas": ["Riesgo de sangrado"],
+                "coverage_profile": { "Staphylococcus aureus (SASM)": "Excelente", "Staphylococcus aureus (SARM)": "Nula", "Streptococcus pyogenes": "Buena", "Streptococcus pneumoniae (S)": "Buena", "Streptococcus pneumoniae (I)": "Moderada", "Streptococcus pneumoniae (R)": "Limitada", "Enterococcus faecalis": "Nula", "Enterococcus faecium (VRE)": "Nula", "Haemophilus influenzae": "Excelente", "Moraxella catarrhalis": "Excelente", "Escherichia coli": "Excelente", "Klebsiella spp.": "Excelente", "Otras Enterobacteriaceae (BLEE)": "Buena", "Pseudomonas aeruginosa": "Excelente", "Acinetobacter baumannii": "Buena", "Stenotrophomonas maltophilia": "Nula", "Bacteroides fragilis": "Excelente", "Clostridium difficile": "Nula", "Mycoplasma pneumoniae": "Nula", "Chlamydia pneumoniae": "Nula", "Legionella pneumophila": "Nula" }
+            },
+            "Cefepima": {
+                "cobertura": "Cuarta generación. Amplio espectro: Gram-negativos (incluyendo Pseudomonas aeruginosa, Enterobacteriaceae productoras de BLEE), Gram-positivos (Staphylococcus aureus MSSA, Streptococcus).",
+                "posologia": "Adultos: 1-2 g cada 8-12h IV. Niños: 50 mg/kg cada 8-12h IV.",
+                "eventos_adversos": "Encefalopatía, convulsiones (especialmente en IR no ajustada), diarrea, rash. Reacciones de hipersensibilidad.",
+                "biodisponibilidad": "No oral (uso parenteral).",
+                "precauciones": "Alergia a cefalosporinas o penicilinas. Ajustar en IR (riesgo de neurotoxicidad).",
+                "ajuste_renal_hepatica": "IR: Ajustar dosis según ClCr. IH: No requiere ajuste significativo.",
+                "interacciones": "Aminoglucósidos.",
+                "alertas": ["Neurotoxicidad (ajustar en IR)", "Reacciones de hipersensibilidad"],
+                "coverage_profile": { "Staphylococcus aureus (SASM)": "Buena", "Staphylococcus aureus (SARM)": "Nula", "Streptococcus pyogenes": "Excelente", "Streptococcus pneumoniae (S)": "Excelente", "Streptococcus pneumoniae (I)": "Buena", "Streptococcus pneumoniae (R)": "Moderada", "Enterococcus faecalis": "Nula", "Enterococcus faecium (VRE)": "Nula", "Haemophilus influenzae": "Excelente", "Moraxella catarrhalis": "Excelente", "Escherichia coli": "Excelente", "Klebsiella spp.": "Excelente", "Otras Enterobacteriaceae (BLEE)": "Excelente", "Pseudomonas aeruginosa": "Excelente", "Acinetobacter baumannii": "Buena", "Stenotrophomonas maltophilia": "Nula", "Bacteroides fragilis": "Nula", "Clostridium difficile": "Nula", "Mycoplasma pneumoniae": "Nula", "Chlamydia pneumoniae": "Nula", "Legionella pneumophila": "Nula" }
+            },
+            "Cefepima/Tazobactam": {
+                "cobertura": "Cefalosporina de cuarta generación con inhibidor de beta-lactamasas. Amplio espectro, incluyendo Pseudomonas aeruginosa, Enterobacteriaceae productoras de BLEE y KPC, y Gram-positivos (MSSA, Streptococcus).",
+                "posologia": "Adultos: 2.5 g cada 8h IV.",
+                "eventos_adversos": "Diarrea, náuseas, rash, convulsiones (raro).",
+                "biodisponibilidad": "No oral (uso parenteral).",
+                "precauciones": "Alergia a cefalosporinas. Ajustar en IR.",
+                "ajuste_renal_hepatica": "IR: Ajustar dosis según ClCr. IH: No requiere ajuste significativo.",
+                "interacciones": "Aminoglucósidos.",
+                "alertas": ["Alergia a cefalosporinas"],
+                "coverage_profile": { "Staphylococcus aureus (SASM)": "Excelente", "Staphylococcus aureus (SARM)": "Nula", "Streptococcus pyogenes": "Excelente", "Streptococcus pneumoniae (S)": "Excelente", "Streptococcus pneumoniae (I)": "Buena", "Streptococcus pneumoniae (R)": "Moderada", "Enterococcus faecalis": "Nula", "Enterococcus faecium (VRE)": "Nula", "Haemophilus influenzae": "Excelente", "Moraxella catarrhalis": "Excelente", "Escherichia coli": "Excelente", "Klebsiella spp.": "Excelente", "Otras Enterobacteriaceae (BLEE)": "Excelente", "Pseudomonas aeruginosa": "Excelente", "Acinetobacter baumannii": "Excelente", "Stenotrophomonas maltophilia": "Nula", "Bacteroides fragilis": "Nula", "Clostridium difficile": "Nula", "Mycoplasma pneumoniae": "Nula", "Chlamydia pneumoniae": "Nula", "Legionella pneumophila": "Nula" }
+            },
+            "Ceftarolina": {
+                "cobertura": "Quinta generación. Única cefalosporina con actividad contra Staphylococcus aureus resistente a meticilina (MRSA) y Streptococcus pneumoniae resistente. También activa contra Gram-negativos comunes.",
+                "posologia": "Adultos: 600 mg cada 12h IV.",
+                "eventos_adversos": "Diarrea, náuseas, cefalea, rash. Anemia hemolítica (rara).",
+                "biodisponibilidad": "No oral (uso parenteral).",
+                "precauciones": "Alergia a cefalosporinas o penicilinas. Ajustar en IR. Reacciones de hipersensibilidad.",
+                "ajuste_renal_hepatica": "IR: Ajustar dosis según ClCr. IH: No requiere ajuste significativo.",
+                "interacciones": "No significativas reportadas.",
+                "alertas": ["Reacciones de hipersensibilidad"],
+                "coverage_profile": { "Staphylococcus aureus (SASM)": "Excelente", "Staphylococcus aureus (SARM)": "Excelente", "Streptococcus pyogenes": "Excelente", "Streptococcus pneumoniae (S)": "Excelente", "Streptococcus pneumoniae (I)": "Excelente", "Streptococcus pneumoniae (R)": "Excelente", "Enterococcus faecalis": "Nula", "Enterococcus faecium (VRE)": "Nula", "Haemophilus influenzae": "Buena", "Moraxella catarrhalis": "Buena", "Escherichia coli": "Buena", "Klebsiella spp.": "Buena", "Otras Enterobacteriaceae (BLEE)": "Moderada", "Pseudomonas aeruginosa": "Nula", "Acinetobacter baumannii": "Nula", "Stenotrophomonas maltophilia": "Nula", "Bacteroides fragilis": "Nula", "Clostridium difficile": "Nula", "Mycoplasma pneumoniae": "Nula", "Chlamydia pneumoniae": "Nula", "Legionella pneumophila": "Nula" }
+            },
+            "Ceftolozano/Tazobactam": {
+                "cobertura": "Cefalosporina de nueva generación con inhibidor de beta-lactamasas. Excelente actividad contra Pseudomonas aeruginosa multirresistente y Enterobacteriaceae productoras de BLEE.",
+                "posologia": "Adultos: 1.5 g cada 8h IV.",
+                "eventos_adversos": "Náuseas, diarrea, cefalea, insomnio.",
+                "biodisponibilidad": "No oral (uso parenteral).",
+                "precauciones": "Alergia a cefalosporinas. Ajustar en IR.",
+                "ajuste_renal_hepatica": "IR: Ajustar dosis según ClCr. IH: No requiere ajuste significativo.",
+                "interacciones": "No significativas reportadas.",
+                "alertas": ["Alergia a cefalosporinas"],
+                "coverage_profile": { "Staphylococcus aureus (SASM)": "Limitada", "Staphylococcus aureus (SARM)": "Nula", "Streptococcus pyogenes": "Buena", "Streptococcus pneumoniae (S)": "Buena", "Streptococcus pneumoniae (I)": "Moderada", "Streptococcus pneumoniae (R)": "Limitada", "Enterococcus faecalis": "Nula", "Enterococcus faecium (VRE)": "Nula", "Haemophilus influenzae": "Excelente", "Moraxella catarrhalis": "Excelente", "Escherichia coli": "Excelente", "Klebsiella spp.": "Excelente", "Otras Enterobacteriaceae (BLEE)": "Excelente", "Pseudomonas aeruginosa": "Excelente", "Acinetobacter baumannii": "Moderada", "Stenotrophomonas maltophilia": "Nula", "Bacteroides fragilis": "Nula", "Clostridium difficile": "Nula", "Mycoplasma pneumoniae": "Nula", "Chlamydia pneumoniae": "Nula", "Legionella pneumophila": "Nula" }
+            },
+            "Ceftazidima/Avibactam": {
+                "cobertura": "Cefalosporina de tercera generación con inhibidor de beta-lactamasas de amplio espectro. Activo contra Enterobacteriaceae productoras de KPC, OXA-48 y algunas AmpC, y Pseudomonas aeruginosa.",
+                "posologia": "Adultos: 2.5 g cada 8h IV.",
+                "eventos_adversos": "Náuseas, diarrea, cefalea, vómitos.",
+                "biodisponibilidad": "No oral (uso parenteral).",
+                "precauciones": "Alergia a cefalosporinas. Ajustar en IR.",
+                "ajuste_renal_hepatica": "IR: Ajustar dosis según ClCr. IH: No requiere ajuste significativo.",
+                "interacciones": "No significativas reportadas.",
+                "alertas": ["Alergia a cefalosporinas"],
+                "coverage_profile": { "Staphylococcus aureus (SASM)": "Limitada", "Staphylococcus aureus (SARM)": "Nula", "Streptococcus pyogenes": "Moderada", "Streptococcus pneumoniae (S)": "Moderada", "Streptococcus pneumoniae (I)": "Limitada", "Streptococcus pneumoniae (R)": "Limitada", "Enterococcus faecalis": "Nula", "Enterococcus faecium (VRE)": "Nula", "Haemophilus influenzae": "Buena", "Moraxella catarrhalis": "Buena", "Escherichia coli": "Excelente", "Klebsiella spp.": "Excelente", "Otras Enterobacteriaceae (BLEE)": "Excelente", "Pseudomonas aeruginosa": "Excelente", "Acinetobacter baumannii": "Moderada", "Stenotrophomonas maltophilia": "Nula", "Bacteroides fragilis": "Nula", "Clostridium difficile": "Nula", "Mycoplasma pneumoniae": "Nula", "Chlamydia pneumoniae": "Nula", "Legionella pneumophila": "Nula" }
+            }
+        };
+
+        // === LÓGICA DE VISUALIZACIÓN ===
+        const contentArea = document.getElementById('content-area');
+        const detailArea = document.getElementById('detail-area');
+        const antibioticList = document.getElementById('antibiotic-list');
+
+        // Mapeo de colores cobertura (Igual que en tu script original)
+        const coverageColors = {
+            "Excelente": "#dcfce7", "Buena": "#e0f2fe", "Moderada": "#fef3c7",
+            "Limitada": "#fee2e2", "Nula": "#f3f4f6", "Variable": "#eef2ff"
+        };
+
+        function init() {
+            // Generar botones
+            for (const abx in antibioticsData) {
+                const btn = document.createElement('button');
+                btn.className = 'btn-antibiotico';
+                btn.textContent = abx;
+                btn.onclick = () => showDetails(abx, btn);
+                antibioticList.appendChild(btn);
+            }
+        }
+
+        function showDetails(name, btnElement) {
+            // Activar clase visual
+            document.querySelectorAll('.btn-antibiotico').forEach(b => b.classList.remove('active'));
+            btnElement.classList.add('active');
+
+            const data = antibioticsData[name];
+            detailArea.classList.remove('hidden');
+            
+            // Construir HTML de detalles (Colores pastel rotativos css bg-blue-50 etc se pueden usar si tienes tailwind cargado)
+            let html = `<h2 class="section-title text-2xl mb-4">${name}</h2>`;
+
+            if (data.alertas && data.alertas.length > 0) {
+                html += `<div class="alert-box"><strong><i class="fas fa-exclamation-triangle"></i> Advertencias Clave:</strong>`;
+                data.alertas.forEach(a => html += `<span>• ${a}</span>`);
+                html += `</div>`;
+            }
+
+            const fields = [
+                { label: 'Cobertura', val: data.cobertura },
+                { label: 'Posología', val: data.posologia },
+                { label: 'Eventos Adversos', val: data.eventos_adversos },
+                { label: 'Biodisponibilidad', val: data.biodisponibilidad },
+                { label: 'Precauciones', val: data.precauciones },
+                { label: 'Ajuste Renal/Hepático', val: data.ajuste_renal_hepatica },
+                { label: 'Interacciones', val: data.interacciones }
+            ];
+
+            fields.forEach(f => {
+                html += `<div class="antibiotic-detail-item bg-slate-50"><strong>${f.label}:</strong> ${f.val}</div>`;
+            });
+
+            // Contenedor para D3
+            if (data.coverage_profile) {
+                html += `<h4 class="subsection-title"><i class="fas fa-chart-bar"></i> Espectro de Cobertura</h4>`;
+                html += `<div id="d3-container" class="coverage-svg-container"></div>`;
+                html += renderLegend();
+            }
+
+            contentArea.innerHTML = html;
+
+            if (data.coverage_profile) {
+                renderD3Chart(data.coverage_profile);
+            }
+            
+            // Scroll suave hacia detalles
+            detailArea.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function renderLegend() {
+            let html = '<div class="coverage-legend">';
+            for (const [level, color] of Object.entries(coverageColors)) {
+                // Mapeo simple de clases css a estilos inline para el ejemplo
+                let borderColor = color; // Simplificación
+                html += `<span class="coverage-tag" style="background:${color}; color:#333; border:1px solid #ccc">${level}</span>`;
+            }
+            html += '</div>';
+            return html;
+        }
+
+        // Lógica D3 Simplificada para un solo antibiótico
+        function renderD3Chart(profile) {
+            const container = d3.select("#d3-container");
+            container.html('');
+
+            const micros = Object.keys(profile);
+            const cellHeight = 30;
+            const width = 600; // Ancho fijo o dinámico
+            const height = micros.length * cellHeight + 40;
+
+            const svg = container.append("svg")
+                .attr("width", "100%")
+                .attr("height", height)
+                .attr("viewBox", `0 0 ${width} ${height}`);
+
+            let y = 10;
+            micros.forEach(micro => {
+                const level = profile[micro];
+                const color = coverageColors[level] || "#fff";
+
+                // Fila fondo
+                svg.append("rect")
+                    .attr("x", 0).attr("y", y)
+                    .attr("width", 250).attr("height", cellHeight - 5)
+                    .attr("fill", "#f1f5f9").attr("rx", 4);
+                
+                // Texto Microorganismo
+                svg.append("text")
+                    .attr("x", 10).attr("y", y + 18)
+                    .text(micro)
+                    .attr("font-size", "12px")
+                    .attr("font-family", "Roboto")
+                    .attr("fill", "#333");
+
+                // Barra Cobertura
+                svg.append("rect")
+                    .attr("x", 260).attr("y", y)
+                    .attr("width", 150).attr("height", cellHeight - 5)
+                    .attr("fill", color).attr("rx", 4)
+                    .attr("stroke", "#cbd5e1");
+
+                // Texto Nivel
+                svg.append("text")
+                    .attr("x", 335).attr("y", y + 18)
+                    .attr("text-anchor", "middle")
+                    .text(level)
+                    .attr("font-size", "11px")
+                    .attr("font-weight", "bold")
+                    .attr("fill", "#333");
+
+                y += cellHeight;
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

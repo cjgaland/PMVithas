@@ -1,0 +1,343 @@
+/* =========================================
+   ESTILOS ESPECÍFICOS - BLOQUE ANTIBIÓTICOS
+   Color Temático: Púrpura/Granate (#673ab7)
+   Fondo Pastel: #EDE7F6 / #D1C4E9
+   ========================================= */
+
+/* Colores generales del bloque (sobrescribe global) */
+.section-label,
+details summary {
+  color: #673ab7;
+}
+
+/* Fondo del Card y Degradado de Resultados */
+.calc-card {
+  background: #fff; /* Fondo blanco */
+}
+
+.result-box {
+  margin-top: 25px;
+  border-left: 5px solid #512da8; /* Borde oscuro púrpura */
+  background: linear-gradient(135deg, #ede7f6 0%, #d1c4e9 100%); /* Degradado Pastel */
+  padding: 20px;
+  border-radius: 8px;
+  color: #4527a0; /* Texto púrpura oscuro */
+  font-weight: 500;
+  white-space: pre-line;
+  line-height: 1.6;
+}
+
+/* Inputs, Radios y Switches */
+.form-check:hover {
+  background-color: #ede7f6;
+  border-color: #d1c4e9;
+}
+
+.form-check input[type="radio"],
+.form-check input[type="checkbox"] {
+  accent-color: #673ab7;
+}
+
+.form-control:focus {
+  border-color: #673ab7;
+  box-shadow: 0 0 0 3px rgba(103, 58, 183, 0.1);
+}
+
+/* Estilos específicos de la tabla de dosis (para ajuste-renal) */
+.dosis-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      font-size: 0.9rem;
+    }
+    .dosis-table th,
+    .dosis-table td {
+      border: 1px solid #e5e7eb;
+      padding: 8px 10px;
+      text-align: left;
+    }
+    .dosis-table thead {
+      background-color: #f3f4ff;
+    }
+
+    .crcl-result {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-top: 10px;
+    }
+
+    /* CONTENEDOR Y TARJETA PRINCIPAL */
+    .calc-container {
+      padding: 30px;
+      max-width: 900px;
+      margin: 30px auto;
+    }
+
+    .calc-card {
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: var(--shadow-soft);
+      padding: 25px 30px 30px;
+    }
+
+    .calc-title {
+      font-size: 1.6rem;
+      color: var(--vithas-blue-dark);
+      margin-bottom: 6px;
+    }
+
+    .calc-subtitle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+
+    /* SECCIONES DEL FORMULARIO */
+    .form-section {
+      margin-top: 20px;
+      margin-bottom: 18px;
+      padding: 15px 18px;
+      border-radius: 10px;
+      background: #f9fafb;
+      border-left: 4px solid #c4b5fd; /* morado suave */
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+      color: #6d28d9;
+      margin-bottom: 10px;
+    }
+
+    /* FILAS Y COLUMNAS DE INPUTS */
+    .input-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .input-col {
+      flex: 1 1 160px;
+      min-width: 160px;
+    }
+
+    .input-col label {
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .input-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .form-control:focus {
+      border-color: #6366f1;
+      box-shadow: 0 0 0 2px rgba(129, 140, 248, 0.25);
+    }
+
+    .input-suffix {
+      font-size: 0.85rem;
+      color: #6b7280;
+      white-space: nowrap;
+    }
+
+    /* RADIO SEXO */
+    .radio-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    .radio-group label {
+      font-size: 0.95rem;
+      color: var(--text-main);
+    }
+
+    /* BOTONES */
+    .actions-row {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn-calc {
+      background: linear-gradient(135deg, #4c1d95, #7c3aed);
+      color: #ffffff;
+      border: none;
+      border-radius: 999px;
+      padding: 8px 18px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 10px rgba(76, 29, 149, 0.35);
+    }
+
+    .btn-calc:hover {
+      filter: brightness(1.05);
+    }
+
+    .btn-secondary {
+      background-color: #e5e7eb;
+      color: #374151;
+      border: none;
+      border-radius: 999px;
+      padding: 7px 14px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .btn-secondary i {
+      font-size: 0.85rem;
+    }
+
+    .btn-secondary:hover {
+      background-color: #d1d5db;
+    }
+
+    /* CAJA DE RESULTADO */
+    .result-box {
+      margin-top: 22px;
+      padding: 15px 18px;
+      border-radius: 12px;
+      background: linear-gradient(90deg, #ede9fe, #f5f3ff);
+      color: #4c1d95;
+      font-weight: 500;
+      box-shadow: var(--shadow-soft);
+    }
+
+    /* DETALLES (NOTAS) */
+    details {
+      margin-top: 18px;
+      background-color: #f9fafb;
+      border-radius: 10px;
+      padding: 10px 14px;
+    }
+
+    details summary {
+      font-weight: 600;
+      color: #4c1d95;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    details summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details p {
+      margin-top: 8px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .calc-container {
+        padding: 20px 15px;
+        margin: 20px auto;
+      }
+      .calc-card {
+        padding: 20px 16px 24px;
+      }
+    }
+
+/* Estilos para el analizador de antibiograma */
+.AB {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+.AB.S {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+.AB.R {
+  background: #ffebee;
+  color: #d32f2f;
+}
+.AB.I {
+  background: #fffde7;
+  color: #fbc02d;
+}
+.rec-red {
+  background: #fee2e2;
+  border: 2px solid #ef4444;
+  color: #dc2626;
+}
+.rec-green {
+  background: #e8f5e9;
+  border: 2px solid #81c784;
+  color: #43a047;
+}
+.rec-blue {
+  background: #e3f2fd;
+  border: 2px solid #90caf9;
+  color: #0d47a1;
+}
+.rec-neutral {
+  background: #fafafa;
+  border: 1px solid #ddd;
+}
+
+/* Tooltip del analizador */
+.tooltip-trigger:hover + .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
+
+/* ===========================
+   TOAST "Resultado copiado"
+   =========================== */
+.toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #333;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 9999;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guía de Microorganismos - Vithas Xanit</title>
+  
+  <link rel="icon" type="image/png" href="../../assets/Images/Logos/Favicon-Vithas.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Estilos Globales -->
+  <link rel="stylesheet" href="../../css/style.css" />
+  <!-- Estilos Locales (Microorganismos) -->
+  <link rel="stylesheet" href="Microorganismos/microorganismos-style.css" />
+
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+    </div>
+    <nav class="nav-links">
+      <ul>
+        <!-- Nivel Superior -->
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        
+        <li class="nav-category">Utilidades</li>
+        
+        <!-- Botón de Retorno -->
+        <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Volver a Utilidades</a></li>
+        
+        <!-- BLOQUE HERMANO 1: Analíticas -->
+        <li class="has-submenu">
+          <a href="../Analisis_Clinicos/index.html" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-microscope"></i> Analíticas
+            </div>
+          </a>
+        </li>
+
+        <!-- BLOQUE HERMANO 2: EPOC -->
+        <li class="has-submenu">
+          <a href="../Gold_EPOC/index.html" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-lungs"></i> Guía EPOC
+            </div>
+          </a>
+        </li>
+
+        <!-- BLOQUE ACTUAL: Infecciosas (ABIERTO) -->
+        <li class="has-submenu open">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-virus"></i> Infecciosas y Antibióticos
+            </div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="index.html"><i class="fas fa-th-large"></i> Menú Principal</a></li>
+            <li><a href="guia-focos.html"><i class="fas fa-book-medical"></i> Guía por Foco</a></li>
+            <li><a href="guia-antibioticos.html"><i class="fas fa-capsules"></i> Guía Antibióticos</a></li>
+            <!-- Elemento Activo -->
+            <li><a href="guia-microorganismos.html" class="submenu-main-link active"><i class="fas fa-microscope"></i> Microorganismos</a></li>
+            <li><a href="ajuste-renal.html"><i class="fas fa-calculator"></i> Ajuste Renal</a></li>
+            <li><a href="antibiograma-analizador.html"><i class="fas fa-vial"></i> Antibiograma</a></li>
+          </ul>
+        </li>
+
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <i class="fas fa-bars menu-toggle" id="menuToggle"></i>
+        <h2><i class="fas fa-virus" style="margin-right: 10px;"></i>Procesos Infecciosos</h2>
+      </div>
+      <div class="header-right">
+        <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+      </div>
+    </header>
+
+    <div class="content-wrapper">
+      
+      <div class="info-card">
+        <div class="info-body">
+          <h3>Manejo Específico por Patógeno</h3>
+          <p>Seleccione el microorganismo para acceder a las guías de tratamiento dirigido, perfiles de resistencia y algoritmos de decisión.</p>
+          
+          <!-- Buscador -->
+          <div style="margin-top: 15px; position: relative;">
+            <i class="fas fa-search" style="position: absolute; left: 15px; top: 12px; color: #999;"></i>
+            <input type="text" id="micro-search" placeholder="Buscar microorganismo (ej. Aureus, Pseudomonas...)" 
+                   style="width: 100%; padding: 10px 10px 10px 40px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem;">
+          </div>
+
+          <!-- LEYENDA VISUAL DE GRUPOS -->
+          <div class="group-legend">
+            <div class="legend-item"><span class="legend-dot" style="background: var(--gram-pos);"></span> Bacterias Gram (+)</div>
+            <div class="legend-item"><span class="legend-dot" style="background: var(--gram-neg);"></span> Bacterias Gram (-)</div>
+            <div class="legend-item"><span class="legend-dot" style="background: var(--anaerobe);"></span> Anaerobios / Otros</div>
+            <div class="legend-item"><span class="legend-dot" style="background: var(--fungi);"></span> Hongos</div>
+            <div class="legend-item"><span class="legend-dot" style="background: var(--atypical);"></span> Atípicos</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- GRID DE MICROORGANISMOS -->
+      <div class="focos-grid" id="micro-grid">
+
+        <!-- Gram Positivos -->
+        <a href="Microorganismos/staphylococcus-aureus.html" class="foco-card card-gram-pos" data-name="Staphylococcus aureus SARM MRSA">
+          <div class="foco-icon"><i class="fas fa-grip-horizontal"></i></div>
+          <div class="foco-title">Staphylococcus aureus</div>
+          <div class="foco-desc">Bacteriemia, Endocarditis (SARM/SASM).</div>
+        </a>
+
+        <a href="Microorganismos/staphylococcus-coagulasa-negativos.html" class="foco-card card-gram-pos" data-name="Staphylococcus coagulasa negativos SCN Epidermidis">
+          <div class="foco-icon"><i class="fas fa-circle"></i></div>
+          <div class="foco-title">S. Coagulasa Negativos</div>
+          <div class="foco-desc">Infecciones de catéteres y prótesis.</div>
+        </a>
+
+        <a href="Microorganismos/streptococcus-pneumoniae.html" class="foco-card card-gram-pos" data-name="Streptococcus pneumoniae Neumococo">
+          <div class="foco-icon"><i class="fas fa-link"></i></div>
+          <div class="foco-title">Streptococcus pneumoniae</div>
+          <div class="foco-desc">Neumonía, Meningitis.</div>
+        </a>
+
+        <a href="Microorganismos/streptococcus-viridans.html" class="foco-card card-gram-pos" data-name="Streptococcus viridans mitis">
+          <div class="foco-icon"><i class="fas fa-link"></i></div>
+          <div class="foco-title">S. grupo Viridans</div>
+          <div class="foco-desc">Endocarditis subaguda.</div>
+        </a>
+
+        <a href="Microorganismos/enterococcus.html" class="foco-card card-gram-pos" data-name="Enterococcus faecalis faecium VRE">
+          <div class="foco-icon"><i class="fas fa-link"></i></div>
+          <div class="foco-title">Enterococcus spp.</div>
+          <div class="foco-desc">E. faecalis y E. faecium (VRE).</div>
+        </a>
+        
+        <a href="Microorganismos/Listeria-monocytogenes.html" class="foco-card card-gram-pos" data-name="Listeria monocytogenes">
+          <div class="foco-icon"><i class="fas fa-grip-lines-vertical"></i></div>
+          <div class="foco-title">Listeria monocytogenes</div>
+          <div class="foco-desc">Meningitis, Sepsis neonatal.</div>
+        </a>
+
+        <a href="Microorganismos/Nocardia-spp.html" class="foco-card card-gram-pos" data-name="Nocardia spp">
+          <div class="foco-icon"><i class="fas fa-microscope"></i></div>
+          <div class="foco-title">Nocardia spp.</div>
+          <div class="foco-desc">Nocardiosis pulmonar y cerebral.</div>
+        </a>
+
+        <a href="Microorganismos/Clostridium-difficile.html" class="foco-card card-gram-pos" data-name="Clostridioides difficile Clostridium">
+          <div class="foco-icon"><i class="fas fa-bacteria"></i></div>
+          <div class="foco-title">Clostridioides difficile</div>
+          <div class="foco-desc">Colitis asociada a antibióticos.</div>
+        </a>
+
+        <!-- Gram Negativos -->
+        <a href="Microorganismos/Escherichia-coli.html" class="foco-card card-gram-neg" data-name="Escherichia coli E.coli BLEE">
+          <div class="foco-icon"><i class="fas fa-grip-lines-vertical"></i></div>
+          <div class="foco-title">Escherichia coli</div>
+          <div class="foco-desc">ITU, Bacteriemia, BLEE.</div>
+        </a>
+
+        <a href="Microorganismos/Klebsiella.html" class="foco-card card-gram-neg" data-name="Klebsiella spp KPC">
+          <div class="foco-icon"><i class="fas fa-grip-lines-vertical"></i></div>
+          <div class="foco-title">Klebsiella spp.</div>
+          <div class="foco-desc">Neumonía, Bacteriemia, KPC.</div>
+        </a>
+
+        <a href="Microorganismos/Pseudomonas-aeruginosa.html" class="foco-card card-gram-neg" data-name="Pseudomonas aeruginosa">
+          <div class="foco-icon"><i class="fas fa-grip-lines-vertical"></i></div>
+          <div class="foco-title">Pseudomonas aeruginosa</div>
+          <div class="foco-desc">Infecciones nosocomiales, Multirresistencia.</div>
+        </a>
+
+        <a href="Microorganismos/Acinetobacter-baumannii.html" class="foco-card card-gram-neg" data-name="Acinetobacter baumannii">
+          <div class="foco-icon"><i class="fas fa-bacteria"></i></div>
+          <div class="foco-title">Acinetobacter baumannii</div>
+          <div class="foco-desc">Neumonía VAP, Bacteriemia.</div>
+        </a>
+
+        <a href="Microorganismos/Enterobacter-Serratia-Citrobacter.html" class="foco-card card-gram-neg" data-name="Enterobacter Serratia Citrobacter AmpC">
+          <div class="foco-icon"><i class="fas fa-grip-lines-vertical"></i></div>
+          <div class="foco-title">Grupo ESC (AmpC)</div>
+          <div class="foco-desc">Enterobacter, Serratia, Citrobacter.</div>
+        </a>
+
+        <a href="Microorganismos/Salmonella-spp.html" class="foco-card card-gram-neg" data-name="Salmonella typhi">
+          <div class="foco-icon"><i class="fas fa-grip-lines-vertical"></i></div>
+          <div class="foco-title">Salmonella spp.</div>
+          <div class="foco-desc">Gastroenteritis, Fiebre Tifoidea.</div>
+        </a>
+        
+        <a href="Microorganismos/Haemophilus-influenzae.html" class="foco-card card-gram-neg" data-name="Haemophilus influenzae">
+          <div class="foco-icon"><i class="fas fa-grip-lines-vertical"></i></div>
+          <div class="foco-title">Haemophilus influenzae</div>
+          <div class="foco-desc">Meningitis, Neumonía, Epiglotitis.</div>
+        </a>
+
+        <a href="Microorganismos/Neisseria-meningitidis.html" class="foco-card card-gram-neg" data-name="Neisseria meningitidis Meningococo">
+          <div class="foco-icon"><i class="fas fa-brain"></i></div>
+          <div class="foco-title">Neisseria meningitidis</div>
+          <div class="foco-desc">Meningitis, Sepsis purpúrica.</div>
+        </a>
+
+        <a href="Microorganismos/Neisseria-gonorrhoeae.html" class="foco-card card-gram-neg" data-name="Neisseria gonorrhoeae Gonococo">
+          <div class="foco-icon"><i class="fas fa-venus-mars"></i></div>
+          <div class="foco-title">Neisseria gonorrhoeae</div>
+          <div class="foco-desc">Gonorrea diseminada.</div>
+        </a>
+        
+        <a href="Microorganismos/Brucella-spp.html" class="foco-card card-gram-neg" data-name="Brucella spp Brucelosis">
+          <div class="foco-icon"><i class="fas fa-bacteria"></i></div>
+          <div class="foco-title">Brucella spp.</div>
+          <div class="foco-desc">Brucelosis, Fiebre de Malta.</div>
+        </a>
+
+        <!-- Anaerobios y Otros -->
+        <a href="Microorganismos/Bacteroides-fragilis-anaerobios.html" class="foco-card card-anaerobe" data-name="Bacteroides fragilis Anaerobios">
+          <div class="foco-icon"><i class="fas fa-grip-lines-vertical"></i></div>
+          <div class="foco-title">Bacteroides / Anaerobios</div>
+          <div class="foco-desc">Abscesos intraabdominales.</div>
+        </a>
+
+        <a href="Microorganismos/Fusobacterium-spp.html" class="foco-card card-anaerobe" data-name="Fusobacterium necrophorum Lemierre">
+          <div class="foco-icon"><i class="fas fa-bacteria"></i></div>
+          <div class="foco-title">Fusobacterium</div>
+          <div class="foco-desc">Síndrome de Lemierre.</div>
+        </a>
+
+        <a href="Microorganismos/Mycobacterium-tuberculosis.html" class="foco-card card-anaerobe" data-name="Mycobacterium tuberculosis">
+          <div class="foco-icon"><i class="fas fa-lungs"></i></div>
+          <div class="foco-title">M. tuberculosis</div>
+          <div class="foco-desc">Tuberculosis pulmonar y miliar.</div>
+        </a>
+
+        <!-- Hongos -->
+        <a href="Microorganismos/Candida-spp.html" class="foco-card card-fungi" data-name="Candida albicans glabrata krusei">
+          <div class="foco-icon"><i class="fas fa-code-branch"></i></div>
+          <div class="foco-title">Candida spp.</div>
+          <div class="foco-desc">Candidemia, Endoftalmitis.</div>
+        </a>
+
+        <a href="Microorganismos/Aspergillus-spp.html" class="foco-card card-fungi" data-name="Aspergillus fumigatus">
+          <div class="foco-icon"><i class="fas fa-leaf"></i></div>
+          <div class="foco-title">Aspergillus spp.</div>
+          <div class="foco-desc">Aspergilosis invasiva.</div>
+        </a>
+
+        <a href="Microorganismos/Cryptococcus%20neoformans.html" class="foco-card card-fungi" data-name="Cryptococcus neoformans">
+          <div class="foco-icon"><i class="fas fa-brain"></i></div>
+          <div class="foco-title">Cryptococcus</div>
+          <div class="foco-desc">Meningitis criptocócica.</div>
+        </a>
+
+        <a href="Microorganismos/Pneumocystis-jirovecii.html" class="foco-card card-fungi" data-name="Pneumocystis jirovecii">
+          <div class="foco-icon"><i class="fas fa-lungs"></i></div>
+          <div class="foco-title">Pneumocystis jirovecii</div>
+          <div class="foco-desc">Neumonía en inmunodeprimidos.</div>
+        </a>
+
+      </div>
+    </div>
+    
+    <footer class="footer">
+      <p>&copy; 2025 Servicio de Medicina Interna - Hospital Vithas Xanit Internacional.</p>
+    </footer>
+  </div>
+  
+  <script src="../../js/main.js"></script>
+  <script>
+    // Script simple para el buscador
+    document.getElementById('micro-search').addEventListener('keyup', function(e) {
+      const term = e.target.value.toLowerCase();
+      const cards = document.querySelectorAll('.foco-card');
+      
+      cards.forEach(card => {
+        const name = card.getAttribute('data-name').toLowerCase();
+        if(name.includes(term)) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

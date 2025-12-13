@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guía Farmacológica de Antibióticos - Vithas Xanit</title>
+  
+  <link rel="icon" type="image/png" href="../../assets/Images/Logos/Favicon-Vithas.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Estilos Globales -->
+  <link rel="stylesheet" href="../../css/style.css" />
+  <!-- Estilos Locales (Antibióticos) -->
+  <link rel="stylesheet" href="Antibioticos/antibioticos-style.css" />
+
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+    </div>
+    <nav class="nav-links">
+      <ul>
+        <!-- Nivel Superior -->
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        
+        <li class="nav-category">Utilidades</li>
+        
+        <!-- Botón de Retorno -->
+        <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Volver a Utilidades</a></li>
+        
+        <!-- BLOQUE HERMANO 1: Analíticas -->
+        <li class="has-submenu">
+          <a href="../Analisis_Clinicos/index.html" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-microscope"></i> Analíticas
+            </div>
+          </a>
+        </li>
+
+        <!-- BLOQUE HERMANO 2: EPOC -->
+        <li class="has-submenu">
+          <a href="../Gold_EPOC/index.html" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-lungs"></i> Guía EPOC
+            </div>
+          </a>
+        </li>
+
+        <!-- BLOQUE ACTUAL: Infecciosas (ABIERTO) -->
+        <li class="has-submenu open">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-virus"></i> Infecciosas y Antibióticos
+            </div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="index.html"><i class="fas fa-th-large"></i> Menú Principal</a></li>
+            <li><a href="guia-focos.html"><i class="fas fa-book-medical"></i> Guía por Foco</a></li>
+            <!-- Elemento Activo -->
+            <li><a href="guia-antibioticos.html" class="submenu-main-link active"><i class="fas fa-capsules"></i> Guía Antibióticos</a></li>
+            <li><a href="guia-microorganismos.html"><i class="fas fa-microscope"></i> Microorganismos</a></li>
+            <li><a href="ajuste-renal.html"><i class="fas fa-calculator"></i> Ajuste Renal</a></li>
+            <li><a href="antibiograma-analizador.html"><i class="fas fa-vial"></i> Antibiograma</a></li>
+          </ul>
+        </li>
+
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <i class="fas fa-bars menu-toggle" id="menuToggle"></i>
+        <h2><i class="fas fa-virus" style="margin-right: 10px;"></i>Procesos Infecciosos</h2>
+      </div>
+      <div class="header-right">
+        <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+      </div>
+    </header>
+
+    <div class="content-wrapper">
+      
+      <div class="info-card">
+        <div class="info-body">
+          <h3>Clasificación Farmacológica</h3>
+          <p>Acceda a la información detallada, espectro de cobertura (antibiograma visual), posología y ajustes de cada familia antibiótica.</p>
+        </div>
+      </div>
+
+      <!-- GRID DE FAMILIAS ANTIBIÓTICAS -->
+      <div class="focos-grid">
+
+        <!-- 1. Penicilinas -->
+        <a href="../Infecciosos/Antibioticos/Penicilinas.html" class="foco-card card-beta">
+          <div class="foco-icon"><i class="fas fa-shield-virus"></i></div>
+          <div class="foco-title">Penicilinas</div>
+          <div class="foco-desc">Penicilina G/V, Amoxicilina, Piperacilina...</div>
+        </a>
+
+        <!-- 2. Cefalosporinas -->
+        <a href="../Infecciosos/Antibioticos/Cefalosporinas.html" class="foco-card card-beta">
+          <div class="foco-icon"><i class="fas fa-capsules"></i></div>
+          <div class="foco-title">Cefalosporinas</div>
+          <div class="foco-desc">Desde 1ª a 5ª generación (Cefazolina, Ceftriaxona...)</div>
+        </a>
+
+        <!-- 3. Carbapenems -->
+        <a href="../Infecciosos/Antibioticos/Carbapenems.html" class="foco-card card-beta">
+          <div class="foco-icon"><i class="fas fa-syringe"></i></div>
+          <div class="foco-title">Carbapenems</div>
+          <div class="foco-desc">Imipenem, Meropenem, Ertapenem...</div>
+        </a>
+
+        <!-- 4. Fluorquinolonas -->
+        <a href="../Infecciosos/Antibioticos/Fluorquinolonas.html" class="foco-card card-quin">
+          <div class="foco-icon"><i class="fas fa-dna"></i></div>
+          <div class="foco-title">Fluorquinolonas</div>
+          <div class="foco-desc">Ciprofloxacino, Levofloxacino...</div>
+        </a>
+
+        <!-- 5. Macrólidos -->
+        <a href="../Infecciosos/Antibioticos/Macrolidos.html" class="foco-card card-macro">
+          <div class="foco-icon"><i class="fas fa-bacterium"></i></div>
+          <div class="foco-title">Macrólidos</div>
+          <div class="foco-desc">Azitromicina, Claritromicina...</div>
+        </a>
+
+        <!-- 6. Aminoglucósidos -->
+        <a href="../Infecciosos/Antibioticos/Aminoglucosidos.html" class="foco-card card-amino">
+          <div class="foco-icon"><i class="fas fa-prescription-bottle-alt"></i></div>
+          <div class="foco-title">Aminoglucósidos</div>
+          <div class="foco-desc">Gentamicina, Tobramicina, Amikacina...</div>
+        </a>
+
+        <!-- 7. Tetraciclinas -->
+        <a href="../Infecciosos/Antibioticos/Tetraciclinas.html" class="foco-card card-other">
+          <div class="foco-icon"><i class="fas fa-tablets"></i></div>
+          <div class="foco-title">Tetraciclinas</div>
+          <div class="foco-desc">Doxiciclina, Tigeciclina...</div>
+        </a>
+
+        <!-- 8. Glicopéptidos -->
+        <a href="../Infecciosos/Antibioticos/Glicopeptidos.html" class="foco-card card-other">
+          <div class="foco-icon"><i class="fas fa-shield-alt"></i></div>
+          <div class="foco-title">Glicopéptidos</div>
+          <div class="foco-desc">Vancomicina, Teicoplanina...</div>
+        </a>
+
+        <!-- 9. Lincosamidas -->
+        <a href="../Infecciosos/Antibioticos/Lincosamidas.html" class="foco-card card-other">
+          <div class="foco-icon"><i class="fas fa-biohazard"></i></div>
+          <div class="foco-title">Lincosamidas</div>
+          <div class="foco-desc">Clindamicina, Lincomicina.</div>
+        </a>
+
+        <!-- 10. Oxazolidinonas -->
+        <a href="../Infecciosos/Antibioticos/Oxazolidinonas.html" class="foco-card card-other">
+          <div class="foco-icon"><i class="fas fa-dot-circle"></i></div>
+          <div class="foco-title">Oxazolidinonas</div>
+          <div class="foco-desc">Linezolid, Tedizolid.</div>
+        </a>
+
+        <!-- 11. Estreptograminas -->
+        <a href="../Infecciosos/Antibioticos/Estreptograminas.html" class="foco-card card-other">
+          <div class="foco-icon"><i class="fas fa-vial"></i></div>
+          <div class="foco-title">Estreptograminas</div>
+          <div class="foco-desc">Quinupristina/Dalfopristina.</div>
+        </a>
+
+        <!-- 12. Fenicoles -->
+        <a href="../Infecciosos/Antibioticos/Fenicoles.html" class="foco-card card-other">
+          <div class="foco-icon"><i class="fas fa-flask"></i></div>
+          <div class="foco-title">Fenicoles</div>
+          <div class="foco-desc">Cloranfenicol.</div>
+        </a>
+
+        <!-- 13. Polimixinas -->
+        <a href="../Infecciosos/Antibioticos/Polimixinas.html" class="foco-card card-other">
+          <div class="foco-icon"><i class="fas fa-spray-can"></i></div>
+          <div class="foco-title">Polimixinas</div>
+          <div class="foco-desc">Colistina, Polimixina B.</div>
+        </a>
+
+        <!-- 14. Otros -->
+        <a href="../Infecciosos/Antibioticos/Otros.html" class="foco-card card-other">
+          <div class="foco-icon"><i class="fas fa-plus-circle"></i></div>
+          <div class="foco-title">Otros Grupos</div>
+          <div class="foco-desc">Metronidazol, Fosfomicina, Cotrimoxazol...</div>
+        </a>
+
+      </div>
+    </div>
+    
+    <footer class="footer">
+      <p>&copy; 2025 Servicio de Medicina Interna - Hospital Vithas Xanit Internacional.</p>
+    </footer>
+  </div>
+  <script src="../../js/main.js"></script>
+</body>
+</html>

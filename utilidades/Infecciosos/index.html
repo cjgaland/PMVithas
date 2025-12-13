@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guía Actuación ante Procesos Infecciosos - Vithas Xanit</title>
+  
+  <link rel="icon" type="image/png" href="../../assets/Images/Logos/Favicon-Vithas.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Estilos Globales -->
+  <link rel="stylesheet" href="../../css/style.css" />
+  
+  <!-- Estilos Específicos para el Menú de Tarjetas -->
+  <style>
+    /* Grid layout para las tarjetas del menú principal */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 25px;
+      margin-top: 30px;
+    }
+
+    /* Estilo base de la tarjeta */
+    .menu-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 30px 25px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      text-decoration: none;
+      color: #333;
+      border: 1px solid #e0e0e0;
+      position: relative;
+      overflow: hidden;
+      height: 100%;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      border-color: #009cde; /* Azul Vithas */
+    }
+
+    /* Barra superior de color (diferente por categoría) */
+    .menu-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 6px;
+      background: #009cde; /* Default */
+    }
+
+    /* Icono */
+    .card-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background-color: #f0f9ff;
+      color: #009cde;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .menu-card:hover .card-icon {
+      background-color: #009cde;
+      color: #fff;
+    }
+
+    /* Textos */
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #003a70; /* Azul oscuro Vithas */
+    }
+
+    .card-desc {
+      font-size: 0.95rem;
+      color: #666;
+      margin-bottom: 20px;
+      line-height: 1.5;
+      flex-grow: 1; /* Empuja el botón hacia abajo */
+    }
+
+    /* Botón simulado */
+    .card-action {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #009cde;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .menu-card:hover .card-action {
+      color: #007bb5;
+    }
+
+    /* Colores específicos */
+    .card-focos::before { background: #009cde; } /* Azul */
+    .card-abx::before { background: #f97316; }   /* Naranja */
+    .card-micro::before { background: #8b5cf6; }  /* Violeta */
+    .card-renal::before { background: #10b981; }  /* Verde */
+    .card-resis::before { background: #ef4444; }  /* Rojo */
+
+    .card-focos .card-icon { color: #009cde; background: #e0f2fe; }
+    .card-abx .card-icon { color: #f97316; background: #ffedd5; }
+    .card-micro .card-icon { color: #8b5cf6; background: #f3e8ff; }
+    .card-renal .card-icon { color: #10b981; background: #d1fae5; }
+    .card-resis .card-icon { color: #ef4444; background: #fee2e2; }
+
+    .card-focos:hover .card-icon { background: #009cde; color: #fff; }
+    .card-abx:hover .card-icon { background: #f97316; color: #fff; }
+    .card-micro:hover .card-icon { background: #8b5cf6; color: #fff; }
+    .card-renal:hover .card-icon { background: #10b981; color: #fff; }
+    .card-resis:hover .card-icon { background: #ef4444; color: #fff; }
+
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+    </div>
+    <nav class="nav-links">
+      <ul>
+        <!-- Nivel Superior -->
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        
+        <li class="nav-category">Utilidades</li>
+        
+        <!-- Botón de Retorno -->
+        <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Volver a Utilidades</a></li>
+        
+        <!-- BLOQUE HERMANO 1: Analíticas -->
+        <li class="has-submenu">
+          <a href="../Analisis_Clinicos/index.html" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-microscope"></i> Analíticas
+            </div>
+          </a>
+        </li>
+
+        <!-- BLOQUE HERMANO 2: EPOC -->
+        <li class="has-submenu">
+          <a href="../Gold_EPOC/index.html" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-lungs"></i> Guía EPOC
+            </div>
+          </a>
+        </li>
+
+        <!-- BLOQUE ACTUAL: Infecciosas (ABIERTO) -->
+        <li class="has-submenu open">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-virus"></i> Infecciosas y Antibióticos
+            </div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <!-- Menú Principal Activo -->
+            <li><a href="index.html" class="submenu-main-link active"><i class="fas fa-th-large"></i> Menú Principal</a></li>
+            
+            <!-- Herramientas Internas -->
+            <li><a href="guia-focos.html"><i class="fas fa-book-medical"></i> Guía por Foco</a></li>
+            <li><a href="guia-antibioticos.html"><i class="fas fa-capsules"></i> Guía Antibióticos</a></li>
+            <li><a href="guia-microorganismos.html"><i class="fas fa-microscope"></i> Microorganismos</a></li>
+            <!-- Corregido nombre de archivo: ajuste-renal.html -->
+            <li><a href="ajuste-renal.html"><i class="fas fa-calculator"></i> Ajuste Renal</a></li>
+            <li><a href="antibiograma-analizador.html"><i class="fas fa-vial"></i> Antibiograma</a></li>
+          </ul>
+        </li>
+
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <i class="fas fa-bars menu-toggle" id="menuToggle"></i>
+        <h2><i class="fas fa-virus" style="margin-right: 10px;"></i>Procesos Infecciosos</h2>
+      </div>
+      <div class="header-right">
+        <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+      </div>
+    </header>
+
+    <div class="content-wrapper">
+      
+      <div class="info-card" style="border-left: 5px solid #003a70; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+        <h3 style="margin-top:0; color:#003a70;">Guía de Actuación</h3>
+        <p style="margin-bottom:0; color:#666;">Acceso rápido a protocolos empíricos, guías farmacológicas y herramientas de cálculo para el manejo de la patología infecciosa.</p>
+      </div>
+
+      <!-- GRID DE TARJETAS -->
+      <div class="menu-grid">
+
+        <!-- 1. GUÍA EMPÍRICA POR FOCO -->
+        <a href="guia-focos.html" class="menu-card card-focos">
+          <div class="card-icon"><i class="fas fa-book-medical"></i></div>
+          <div class="card-title">Guía Empírica por Foco</div>
+          <div class="card-desc">Protocolos de tratamiento antibiótico empírico clasificados por foco de infección (Respiratorio, Urinario, Abdominal, Piel, etc.).</div>
+          <span class="card-action">Acceder <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+        <!-- 2. GUÍA DE ANTIBIÓTICOS -->
+        <a href="guia-antibioticos.html" class="menu-card card-abx">
+          <div class="card-icon"><i class="fas fa-capsules"></i></div>
+          <div class="card-title">Guía de Antibióticos</div>
+          <div class="card-desc">Fichas técnicas detalladas por familia (Penicilinas, Cefalosporinas, Carbapenems...), espectro de acción y posología.</div>
+          <span class="card-action">Acceder <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+        <!-- 3. GUÍA DE MICROORGANISMOS -->
+        <a href="guia-microorganismos.html" class="menu-card card-micro">
+          <div class="card-icon"><i class="fas fa-microscope"></i></div>
+          <div class="card-title">Manejo Específico</div>
+          <div class="card-desc">Tratamiento dirigido según el patógeno aislado (S. aureus, Pseudomonas, Candida...), perfiles de resistencia y duración.</div>
+          <span class="card-action">Acceder <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+        <!-- 4. DOSIS Y AJUSTE RENAL -->
+        <a href="calculadora-renal.html" class="menu-card card-renal">
+          <div class="card-icon"><i class="fas fa-calculator"></i></div>
+          <div class="card-title">Dosis y Ajuste Renal</div>
+          <div class="card-desc">Calculadora de filtrado glomerular (CKD-EPI / Cockcroft-Gault) y tablas de ajuste de dosis de antimicrobianos.</div>
+          <span class="card-action">Abrir Calculadora <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+        <!-- 5. ANALIZADOR DE ANTIBIOGRAMA -->
+        <a href="antibiograma-analizador.html" class="menu-card card-resis">
+          <div class="card-icon"><i class="fas fa-vial"></i></div>
+          <div class="card-title">Analizador Antibiograma</div>
+          <div class="card-desc">Herramienta de ayuda para la interpretación de antibiogramas complejos y detección de mecanismos de resistencia.</div>
+          <span class="card-action">Abrir Analizador <i class="fas fa-arrow-right"></i></span>
+        </a>
+
+      </div>
+
+    </div>
+    
+    <footer class="footer">
+      <p>&copy; 2025 Servicio de Medicina Interna - Hospital Vithas Xanit Internacional.</p>
+    </footer>
+  </div>
+
+  <script src="../../js/main.js"></script>
+</body>
+</html>

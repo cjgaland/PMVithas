@@ -1,0 +1,255 @@
+/* =========================================
+   ESTILOS COMUNES - SUBMÓDULO ANTIBIÓTICOS
+   Ubicación: .../Antibioticos/antibioticos-style.css
+   ========================================= */
+
+:root {
+  --shadow-soft: 0 4px 6px rgba(0,0,0,0.05);
+  --shadow-hover: 0 10px 15px rgba(0,0,0,0.1);
+  --vithas-blue-light: #009cde;
+  --vithas-blue-dark: #003a70;
+  --text-muted: #666;
+  --abx-bg: #f0f4f8;
+}
+
+/* Ajustes Generales */
+body {
+    background-color: var(--abx-bg);
+}
+
+.abx-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Sidebar y Header con Gradientes Corporativos */
+.sidebar {
+    background: linear-gradient(0deg, #ffffff 0%, #e6f7ff 100%);
+    box-shadow: 2px 0 5px rgba(0,0,0,0.03);
+}
+
+.top-header {
+    background: linear-gradient(-90deg, #ffffff 0%, #e6f7ff 100%);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+/* =========================================
+   GRID DE NAVEGACIÓN PRINCIPAL (Guía Antibióticos)
+   ========================================= */
+
+.focos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* Tarjeta Base Estilo Focos */
+.foco-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 25px 20px;
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  color: #333;
+  border: 1px solid #eee;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+}
+
+.foco-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--vithas-blue-light);
+}
+
+/* Barra decorativa superior */
+.foco-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: var(--vithas-blue-light);
+}
+
+/* Variantes de color por familia */
+.card-beta::before { background: #3b82f6; } /* Azul */
+.card-quin::before { background: #f97316; } /* Naranja */
+.card-macro::before { background: #ec4899; } /* Rosa */
+.card-amino::before { background: #a855f7; } /* Púrpura */
+.card-other::before { background: #64748b; } /* Gris */
+
+/* Icono grande circular */
+.foco-icon {
+  font-size: 2.2rem;
+  margin-bottom: 15px;
+  color: var(--vithas-blue-dark);
+  background: #f4f7f9;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.3s, color 0.3s;
+}
+
+.foco-card:hover .foco-icon {
+  background: var(--vithas-blue-dark);
+  color: #fff;
+}
+
+.foco-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--vithas-blue-dark);
+}
+
+.foco-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* Info Card (Cabecera) */
+.info-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    margin-bottom: 25px;
+    border-left: 5px solid var(--vithas-blue-light);
+}
+.info-card h3 {
+    margin-top: 0;
+    color: var(--vithas-blue-dark);
+    margin-bottom: 10px;
+}
+.info-card p { margin-bottom: 0; color: #555; }
+
+
+/* =========================================
+   ESTILOS INTERNOS (Detalle de Antibiótico)
+   ========================================= */
+
+/* Tarjetas de Contenido */
+.abx-card {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: var(--shadow-soft);
+    padding: 25px;
+    margin-bottom: 25px;
+    border: 1px solid #e2e8f0;
+}
+
+/* Títulos */
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--vithas-blue-dark);
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--vithas-blue-light);
+    padding-bottom: 0.5rem;
+}
+
+.subsection-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--vithas-blue-dark);
+    margin-top: 1.5rem;
+    margin-bottom: 10px;
+}
+
+/* Grid de Selección de Fármaco */
+.grid-antibioticos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+}
+
+.btn-antibiotico {
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.2s;
+    text-align: center;
+    background-color: #f8fafc;
+    color: #334155;
+    border: 1px solid #e2e8f0;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.btn-antibiotico:hover, .btn-antibiotico.active {
+    background-color: var(--vithas-blue-light);
+    color: white;
+    border-color: var(--vithas-blue-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Detalles del Fármaco */
+.antibiotic-detail-item {
+    border: 1px solid #e2e8f0;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9; /* Fondo suave */
+}
+
+.antibiotic-detail-item strong {
+    color: var(--vithas-blue-dark);
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.95rem;
+}
+
+/* Alertas */
+.alert-box {
+    background-color: #fef2f2;
+    color: #b91c1c;
+    border: 1px solid #fca5a5;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* Gráficos D3 y Leyenda */
+.coverage-svg-container {
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    overflow-x: auto;
+    background-color: #fff;
+    padding: 10px;
+    margin-top: 15px;
+}
+
+.coverage-legend {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #f1f5f9;
+    border-radius: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 0.85rem;
+}
+
+.coverage-tag {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    border: 1px solid rgba(0,0,0,0.1);
+}

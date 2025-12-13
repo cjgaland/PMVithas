@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guía Empírica por Foco - Vithas Xanit</title>
+  
+  <link rel="icon" type="image/png" href="../../assets/Images/Logos/Favicon-Vithas.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Estilos Globales -->
+  <link rel="stylesheet" href="../../css/style.css" />
+  <!-- Estilos Locales (Infecciosas) -->
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* Estilos específicos para este Grid de Focos */
+    .focos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .foco-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 25px 20px;
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      text-decoration: none;
+      color: var(--text-main);
+      border: 1px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .foco-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--vithas-blue-light);
+    }
+
+    /* Barra decorativa superior en cada tarjeta */
+    .foco-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 6px;
+      background: var(--vithas-blue-light); /* Default */
+    }
+
+    /* Icono grande */
+    .foco-icon {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      color: var(--vithas-blue-dark);
+      background: #f4f7f9;
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .foco-card:hover .foco-icon {
+      background: var(--vithas-blue-dark);
+      color: #fff;
+    }
+
+    .foco-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--vithas-blue-dark);
+    }
+
+    .foco-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Variaciones de color por grupo (opcional, para dar variedad visual) */
+    .card-resp::before { background: #00bcd4; } /* Cian */
+    .card-piel::before { background: #e91e63; } /* Rosa */
+    .card-uro::before { background: #ff9800; }  /* Naranja */
+    .card-osteo::before { background: #9c27b0; } /* Violeta */
+    .card-ets::before { background: #f44336; }   /* Rojo */
+
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+    </div>
+    <nav class="nav-links">
+      <ul>
+        <!-- Nivel Superior -->
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        
+        <li class="nav-category">Utilidades</li>
+        
+        <!-- Botón de Retorno -->
+        <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Volver a Utilidades</a></li>
+        
+        <!-- BLOQUE HERMANO 1: Analíticas -->
+        <li class="has-submenu">
+          <a href="../Analisis_Clinicos/index.html" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-microscope"></i> Analíticas
+            </div>
+          </a>
+        </li>
+
+        <!-- BLOQUE HERMANO 2: EPOC -->
+        <li class="has-submenu">
+          <a href="../Gold_EPOC/index.html" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-lungs"></i> Guía EPOC
+            </div>
+          </a>
+        </li>
+
+        <!-- BLOQUE ACTUAL: Infecciosas (ABIERTO) -->
+        <li class="has-submenu open">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-virus"></i> Infecciosas y Antibióticos
+            </div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <li><a href="index.html"><i class="fas fa-th-large"></i> Menú Principal</a></li>
+            <!-- Elemento Activo -->
+            <li><a href="guia-focos.html" class="submenu-main-link active"><i class="fas fa-book-medical"></i> Guía por Foco</a></li>
+            <li><a href="guia-antibioticos.html"><i class="fas fa-capsules"></i> Guía Antibióticos</a></li>
+            <li><a href="guia-microorganismos.html"><i class="fas fa-microscope"></i> Microorganismos</a></li>
+            <li><a href="ajuste-renal.html"><i class="fas fa-calculator"></i> Ajuste Renal</a></li>
+            <li><a href="antibiograma-analizador.html"><i class="fas fa-vial"></i> Antibiograma</a></li>
+          </ul>
+        </li>
+
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <i class="fas fa-bars menu-toggle" id="menuToggle"></i>
+        <h2><i class="fas fa-virus" style="margin-right: 10px;"></i>Procesos Infecciosos</h2>
+      </div>
+      <div class="header-right">
+        <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+      </div>
+    </header>
+
+    <div class="content-wrapper">
+      
+      <!-- Introducción / Cabecera de Sección -->
+      <div class="info-card" style="margin-bottom: 20px;">
+        <div class="info-body">
+          <h3>Seleccione el foco de infección</h3>
+          <p>Protocolos de decisión clínica basados en las guías PRIOAM y la resistencia local. Seleccione un sistema para acceder al árbol de decisión terapéutica.</p>
+        </div>
+      </div>
+
+      <!-- GRID DE FOCOS -->
+      <div class="focos-grid">
+
+        <!-- 1. Respiratorio Superior -->
+        <a href="Foco_Infeccioso/infec-resp-sup.html" class="foco-card card-resp">
+          <div class="foco-icon"><i class="fas fa-head-side-cough"></i></div>
+          <div class="foco-title">Vías Respiratorias Superiores</div>
+          <div class="foco-desc">Faringoamigdalitis, Otitis, Sinusitis.</div>
+        </a>
+
+        <!-- 2. NAC -->
+        <a href="Foco_Infeccioso/nac.html" class="foco-card card-resp">
+          <div class="foco-icon"><i class="fas fa-lungs"></i></div>
+          <div class="foco-title">Neumonía Comunidad (NAC)</div>
+          <div class="foco-desc">Criterios de ingreso, escalas CURB-65/PSI y tratamiento.</div>
+        </a>
+
+        <!-- 3. Neumonía Nosocomial -->
+        <a href="Foco_Infeccioso/neumonia-nosocomial.html" class="foco-card card-resp">
+          <div class="foco-icon"><i class="fas fa-hospital-user"></i></div>
+          <div class="foco-title">Neumonía Nosocomial</div>
+          <div class="foco-desc">Precoz vs Tardía. Riesgo de MDR (SARM, Pseudomonas).</div>
+        </a>
+
+        <!-- 4. ITUs -->
+        <a href="Foco_Infeccioso/itu.html" class="foco-card card-uro">
+          <div class="foco-icon"><i class="fas fa-toilet"></i></div>
+          <div class="foco-title">Infecciones Urinarias</div>
+          <div class="foco-desc">Cistitis, Pielonefritis, Prostatitis y Sepsis urológica.</div>
+        </a>
+
+        <!-- 5. Piel y Partes Blandas -->
+        <a href="Foco_Infeccioso/piel-partes-blandas.html" class="foco-card card-piel">
+          <div class="foco-icon"><i class="fas fa-hand-dots"></i></div>
+          <div class="foco-title">Piel y Partes Blandas</div>
+          <div class="foco-desc">Celulitis, Erisipela, Pie Diabético, Fascitis.</div>
+        </a>
+
+        <!-- 6. Osteoarticular -->
+        <a href="Foco_Infeccioso/osteoarticular.html" class="foco-card card-osteo">
+          <div class="foco-icon"><i class="fas fa-bone"></i></div>
+          <div class="foco-title">Osteoarticular</div>
+          <div class="foco-desc">Artritis séptica, Osteomielitis, Infección de prótesis.</div>
+        </a>
+
+        <!-- 7. Odontógenas -->
+        <a href="Foco_Infeccioso/odontogenas.html" class="foco-card card-osteo">
+          <div class="foco-icon"><i class="fas fa-tooth"></i></div>
+          <div class="foco-title">Odontógenas</div>
+          <div class="foco-desc">Abscesos, flemones y profilaxis dental.</div>
+        </a>
+
+        <!-- 8. ETS -->
+        <a href="Foco_Infeccioso/ets.html" class="foco-card card-ets">
+          <div class="foco-icon"><i class="fas fa-venus-mars"></i></div>
+          <div class="foco-title">Transmisión Sexual (ETS)</div>
+          <div class="foco-desc">Uretritis, Sífilis, Gonococia, Chlamydia.</div>
+        </a>
+
+      </div>
+    </div>
+    
+    <footer class="footer">
+      <p>&copy; 2025 Servicio de Medicina Interna - Hospital Vithas Xanit Internacional.</p>
+    </footer>
+  </div>
+  <script src="../../js/main.js"></script>
+</body>
+</html>
