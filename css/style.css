@@ -163,11 +163,13 @@ ul { list-style: none; }
   object-fit: contain;
 }
 
+/* CORRECCIÓN: Botón Menú (Hamburguesa) */
 .menu-toggle {
-  display: none;
+  display: none; /* Importante: Oculto en PC */
   font-size: 1.5rem;
   color: var(--vithas-blue-dark);
   cursor: pointer;
+  margin-right: 15px; /* Separación con el texto */
 }
 
 /* =========================================
@@ -558,7 +560,10 @@ ul { list-style: none; }
   .sidebar { transform: translateX(-100%); }
   .sidebar.active { transform: translateX(0); }
   .main-content { margin-left: 0; width: 100%; }
+  
+  /* Aquí hacemos visible el menú hamburguesa en móviles */
   .menu-toggle { display: block; }
+  
   .top-header h2 { display: none; }
   .hero-content h1 { font-size: 1.8rem; }
   
