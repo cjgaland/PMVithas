@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Utilidades - Vithas Xanit Internacional</title>
   
-  <!-- Rutas corregidas: ../ para subir un nivel a la raíz -->
-  <link rel="icon" type="image/png" href="../Favicon-Vithas.png">
+  <!-- Rutas corregidas: ../ para subir un nivel a la raíz, asegurando Images -->
+  <link rel="icon" type="image/png" href="../assets/Images/Logos/Favicon-Vithas.png">
 
   <!-- Fuentes e Iconos -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
@@ -14,14 +14,20 @@
 
   <!-- Estilos Globales (Ruta corregida) -->
   <link rel="stylesheet" href="../css/style.css" />
+  
+  <style>
+    /* Estilos del bloque Utilidades (Marrón/Gris) */
+    .section-title { color: #5d4037; }
+    .card-link { color: #5d4037; }
+  </style>
 </head>
 <body>
 
   <!-- SIDEBAR -->
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
-      <!-- Ruta corregida a assets -->
-      <img src="../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+      <!-- Ruta corregida a Images -->
+      <img src="../assets/Images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
     </div>
     <nav class="nav-links">
       <ul>
@@ -29,7 +35,8 @@
         <li><a href="../index.html"><i class="fas fa-home"></i> Inicio</a></li>
         
         <li class="nav-category">Práctica Clínica</li>
-        <!-- Menú Calculadoras-->
+        
+        <!-- Menú Calculadoras (COMPLETO) -->
         <li class="has-submenu">
           <a href="#" class="submenu-toggle">
             <div style="display:flex; align-items:center;">
@@ -45,12 +52,12 @@
             <li><a href="../calculadoras/Nefrologia/index.html"><i class="fas fa-filter"></i> Nefrología</a></li>
             <li><a href="../calculadoras/Neurologia/index.html"><i class="fas fa-brain"></i> Neurología</a></li>
             <li><a href="../calculadoras/Respiratorio/index.html"><i class="fas fa-lungs"></i> Respiratorio</a></li>
-            <li><a href="../calculadoras/Urgencias/index.html"><i class="fas fa-ambulance"></i> Urgencias/UCI</a></li>
+            <li><a href="../calculadoras/UCI/index.html"><i class="fas fa-ambulance"></i> Urgencias/UCI</a></li>
           </ul>
         </li>
         
-        <!-- Utilidades con Desplegable-->
-        <li class="has-submenu">
+        <!-- Utilidades con Desplegable (ACTIVO) -->
+        <li class="has-submenu open">
           <a href="#" class="submenu-toggle">
             <div style="display:flex; align-items:center;">
               <i class="fas fa-toolbox"></i> Utilidades y Herramientas
@@ -59,17 +66,10 @@
           </a>
           <!-- Submenú -->
           <ul class="submenu">
-            
-            <li>
-                <a href="Gold_EPOC/index.html">
-                    <i class="fas fa-lungs"></i> Guía EPOC
-                </a>
-            </li>
-            <li>
-                <a href="Analisis_Clinicos/index.html">
-                    <i class="fas fa-microscope"></i> Analíticas
-                </a>
-            </li>
+            <li><a href="index.html" class="submenu-main-link active"><i class="fas fa-th-large"></i> <strong>Menú Herramientas</strong></a></li>
+            <li><a href="Infecciosos/index.html"><i class="fas fa-virus"></i> Infecciosas y Antibióticos</a></li>
+            <li><a href="Gold_EPOC/index.html"><i class="fas fa-lungs"></i> Guía EPOC</a></li>
+            <li><a href="Analisis_Clinicos/index.html"><i class="fas fa-microscope"></i> Analíticas</a></li>
           </ul>
         </li>
 
@@ -86,12 +86,13 @@
     
     <header class="top-header">
       <div class="header-left">
+        <i class="fas fa-bars menu-toggle" id="menuToggle"></i>
         <h2><i class="fas fa-toolbox"></i>
         Utilidades Clínicas</h2>
       </div>
       <div class="header-right">
-        <!-- Ruta corregida -->
-        <img src="../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Vithas Xanit" class="top-logo">
+        <!-- Ruta corregida a Images -->
+        <img src="../assets/Images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Vithas Xanit" class="top-logo">
       </div>
     </header>
 
@@ -106,7 +107,6 @@
       <div class="cards-grid">
         
         <!-- Tarjeta 1: Guía GOLD EPOC -->
-        <!-- La ruta es directa porque la carpeta está AQUÍ dentro -->
         <a href="Gold_EPOC/index.html" class="card">
           <div class="card-icon" style="background:#e0f2fe; color:#009FE3;">
             <i class="fas fa-lungs"></i>
@@ -123,6 +123,16 @@
           </div>
           <h3>Procesador de Analíticas</h3>
           <p>Interpretación rápida de hemogramas, bioquímica y orina. Detección de valores alterados.</p>
+          <span class="card-link">Abrir Herramienta <i class="fas fa-arrow-right"></i></span>
+        </a>
+        
+        <!-- Tarjeta 3: Antibióticos (NUEVO) -->
+        <a href="Infecciosos/index.html" class="card">
+          <div class="card-icon" style="background:#ffccbc; color:#d84315;">
+            <i class="fas fa-virus"></i>
+          </div>
+          <h3>Infecciosas y Antibióticos</h3>
+          <p>Dosis, ajuste renal y protocolos de tratamiento empírico por patología infecciosa.</p>
           <span class="card-link">Abrir Herramienta <i class="fas fa-arrow-right"></i></span>
         </a>
 

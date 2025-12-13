@@ -24,14 +24,51 @@
 
   <!-- SIDEBAR -->
   <aside class="sidebar" id="sidebar">
-    <div class="sidebar-header" style="justify-content:center; display:flex; padding:20px;">
-       <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" style="max-width:140px;">
+    <div class="sidebar-header">
+       <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
     </div>
     <nav class="nav-links">
-      <ul style="padding-left:0;">
-        <li><a href="../../index.html" style="text-decoration:none;"><i class="fas fa-home"></i> Inicio</a></li>
-        <li style="padding:20px 25px 10px; font-size:0.75rem; color:#9ca3af; font-weight:700; text-transform:uppercase;">Navegación</li>
-        <li><a href="../index.html" style="text-decoration:none;"><i class="fas fa-arrow-left"></i> Volver a Utilidades</a></li>
+      <ul>
+        <!-- Nivel Superior -->
+        <li><a href="../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+        
+        <li class="nav-category">Utilidades</li>
+        
+        <!-- Botón de Retorno -->
+        <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Volver a Utilidades</a></li>
+        
+        <!-- BLOQUE HERMANO 1: Analíticas -->
+        <li class="has-submenu">
+          <a href="../Analisis_Clinicos/index.html" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-microscope"></i> Analíticas
+            </div>
+          </a>
+        </li>
+
+        <!-- BLOQUE ACTUAL: Guía EPOC (ABIERTO) -->
+        <li class="has-submenu open">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-lungs"></i> Guía EPOC
+            </div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <!-- Herramienta Activa -->
+            <li><a href="index.html" class="submenu-main-link active"><i class="fas fa-file-medical"></i> Guía GOLD 2025</a></li>
+          </ul>
+        </li>
+
+        <!-- BLOQUE HERMANO 2: Infecciosas -->
+        <li class="has-submenu">
+          <a href="../Infecciosos/index.html" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-virus"></i> Infecciosas
+            </div>
+          </a>
+        </li>
+
       </ul>
     </nav>
   </aside>
@@ -42,10 +79,10 @@
     <header class="top-header">
       <div class="header-left">
         <i class="fas fa-bars menu-toggle" id="menuToggle"></i>
-        <h2>Clasificación EPOC</h2>
+        <h2><i class="fas fa-lungs" style="margin-right: 10px;"></i>Clasificación EPOC</h2>
       </div>
       <div class="header-right">
-        <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Vithas Xanit" style="height:45px;">
+        <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Vithas Xanit" class="top-logo">
       </div>
     </header>
 

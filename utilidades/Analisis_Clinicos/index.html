@@ -21,13 +21,52 @@
   <!-- SIDEBAR -->
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
+       <!-- Ajuste de ruta para el logo -->
        <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
     </div>
     <nav class="nav-links">
       <ul>
+        <!-- Nivel Superior -->
         <li><a href="../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
-        <li class="nav-category">Navegación</li>
+        
+        <li class="nav-category">Utilidades</li>
+        
+        <!-- Botón de Retorno -->
         <li><a href="../index.html"><i class="fas fa-arrow-left"></i> Volver a Utilidades</a></li>
+        
+        <!-- BLOQUE ACTUAL: Analíticas (ABIERTO) -->
+        <li class="has-submenu open">
+          <a href="#" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-microscope"></i> Analíticas
+            </div>
+            <i class="fas fa-chevron-right chevron"></i>
+          </a>
+          <ul class="submenu">
+            <!-- Herramienta Activa -->
+            <li><a href="index.html" class="submenu-main-link active"><i class="fas fa-file-medical-alt"></i> Procesador</a></li>
+          </ul>
+        </li>
+
+        <!-- BLOQUE HERMANO 1: Infecciosas -->
+        <li class="has-submenu">
+          <a href="../Infecciosos/index.html" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-virus"></i> Infecciosas
+            </div>
+            <!-- Sin chevron porque funciona como enlace directo al índice del hermano -->
+          </a>
+        </li>
+
+        <!-- BLOQUE HERMANO 2: EPOC -->
+        <li class="has-submenu">
+          <a href="../Gold_EPOC/index.html" class="submenu-toggle">
+            <div style="display:flex; align-items:center;">
+              <i class="fas fa-lungs"></i> Guía EPOC
+            </div>
+          </a>
+        </li>
+
       </ul>
     </nav>
   </aside>
@@ -38,9 +77,10 @@
     <header class="top-header">
       <div class="header-left">
         <i class="fas fa-bars menu-toggle" id="menuToggle"></i>
-        <h2>Procesador de Análisis Avanzado</h2>
+        <h2><i class="fas fa-microscope" style="margin-right: 10px;"></i>Procesador de Análisis Avanzado</h2>
       </div>
       <div class="header-right">
+         <!-- Ajuste de ruta por si acaso, aunque ya estaba bien -->
          <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
       </div>
     </header>
