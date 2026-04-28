@@ -10,7 +10,18 @@
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-
+    
+    <!-- Favicon -->
+    <link rel="icon" href="../../../assets/images/Favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/images/Favicon/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../assets/images/Favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="../../../assets/images/Favicon/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="../../../assets/images/Favicon/favicon-64x64.png">
+    <link rel="icon" type="image/png" sizes="128x128" href="../../../assets/images/Favicon/favicon-128x128.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../assets/images/Favicon/favicon-180x180.png">
+    <link rel="android-touch-icon" type="image/png" sizes="192x192" href="../../../assets/images/Favicon/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="256x256" href="../../../assets/images/Favicon/favicon-256x256.png"> 
+    
     <!-- Estilos -->
     <link rel="stylesheet" href="../../../css/style.css" />
     <link rel="stylesheet" href="microorganismos-style.css" />
@@ -305,8 +316,13 @@
                                 otherMeasures: ["Control de foco (ej. drenaje de abscesos, retirada de catéteres)."]
                             },
                             guidelines: ["Infectious Diseases Society of America (IDSA). Clinical Practice Guidelines for the Management of Antimicrobial-Resistant Gram-Negative Infections. Clin Infect Dis. 2022;74(11):1859-1886."],
-                            algorithm: `graph TD; A[Hemocultivo E. coli] --> B{¿Sensible?}; B -- Sí --> C[Ceftriaxona]; B -- No (BLEE) --> D[Meropenem];`
-                        },
+                            algorithm: `graph TD
+                                    A[Inicio] --> B["Hemocultivos positivos para E. coli"];
+                                    B --> C{"¿Sensible (no BLEE)?"};
+                                    C -- Sí --> D["Ceftriaxona o Cefotaxima"];
+                                    D --> E["Control de foco"];
+                                    E --> F["Duración según foco y evolución"];
+                                    F --> G[Fin];`                        },
                         "blee": {
                             profile: "Productor de BLEE",
                             ideal: ["Meropenem", "Imipenem"],
@@ -318,8 +334,13 @@
                                 otherMeasures: ["Control de foco (ej. drenaje de abscesos, retirada de catéteres)."]
                             },
                             guidelines: ["IDSA Gram-Neg 2022.", "ESCMID MDRGNB 2017."],
-                            algorithm: `graph TD; A[Hemocultivo BLEE] --> B[Meropenem];`
-                        }
+                            algorithm: `graph TD
+                                    A[Inicio] --> B["Hemocultivos positivos para E. coli"];
+                                    B --> C{"¿Productor de BLEE?"};
+                                    C -- Sí --> D["Meropenem o Imipenem"];
+                                    D --> E["Control de foco"];
+                                    E --> F["Duración según foco y evolución"];
+                                    F --> G[Fin];`                        }
                     }
                 },
                 "itu": {
@@ -337,8 +358,14 @@
                                 otherMeasures: ["Asegurar buena hidratación.", "Considerar retirada de catéteres urinarios."]
                             },
                             guidelines: ["IDSA Asymptomatic Bacteriuria 2019.", "EAU Urological Infections 2023."],
-                            algorithm: `graph TD; A[ITU E. coli] --> B[Urocultivo]; B --> C[Cipro o Ceftriaxona];`
-                        },
+                            algorithm: `graph TD
+                                    A[Inicio] --> B["Sospecha de ITU por E. coli"];
+                                    B --> C["Urocultivo y antibiograma"];
+                                    C --> D{"¿Sensible (no BLEE)?"};
+                                    D -- Sí --> E["Ciprofloxacino, Levofloxacino o Ceftriaxona"];
+                                    E --> F["Asegurar hidratación, considerar retirada de catéter"];
+                                    F --> G["Duración: 7-14 días (pielonefritis), 3-7 días (cistitis)"];
+                                    G --> H[Fin];`                        },
                         "blee": {
                             profile: "Productor de BLEE",
                             ideal: ["Meropenem", "Cefiderocol"],
@@ -350,8 +377,14 @@
                                 otherMeasures: ["Asegurar buena hidratación.", "Considerar retirada de catéteres urinarios."]
                             },
                             guidelines: ["IDSA Gram-Neg 2022.", "EAU Urological Infections 2023."],
-                            algorithm: `graph TD; A[ITU BLEE] --> B[Meropenem];`
-                        }
+                            algorithm: `graph TD
+                                    A[Inicio] --> B["Sospecha de ITU por E. coli"];
+                                    B --> C["Urocultivo y antibiograma"];
+                                    C --> D{"¿Productor de BLEE?"};
+                                    D -- Sí --> E["Meropenem o Cefiderocol"];
+                                    E --> F["Asegurar hidratación, considerar retirada de catéter"];
+                                    F --> G["Duración: 10-14 días (pielonefritis), 5-7 días (cistitis)"];
+                                    G --> H[Fin];`                        }
                     }
                 }
             }
