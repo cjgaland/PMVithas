@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fenotipos FP - Vithas Xanit</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="../../assets/images/Favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/images/Favicon/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/Favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="../../assets/images/Favicon/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="../../assets/images/Favicon/favicon-64x64.png">
+    <link rel="icon" type="image/png" sizes="128x128" href="../../assets/images/Favicon/favicon-128x128.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../assets/images/Favicon/favicon-180x180.png">
+    <link rel="android-touch-icon" type="image/png" sizes="192x192" href="../../assets/images/Favicon/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="256x256" href="../../assets/images/Favicon/favicon-256x256.png">
+   
+     <!-- Rutas ajustadas para estar en utilidades/Apoyo_Clinico/ -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    
+    <!-- Estilos Globales (Ruta ajustada: 3 niveles arriba) -->
+    <link rel="stylesheet" href="../../css/style.css" />
+    
+    <style>
+        /* Estilos específicos para esta utilidad */
+        :root {
+            --fp-accent: #673ab7; /* Morado para fibrosis */
+            --fp-soft: #ede7f6; 
+            --cluster-0-color: #059669; /* Verde */
+            --cluster-1-color: #dc2626; /* Rojo */
+            --cluster-2-color: #d97706; /* Ámbar */
+        }
+
+        .util-card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 10px;
+            border: 1px solid #f0f0f0;
+            border-radius: 8px;
+        }
+        .input-group label {
+            flex-basis: 60%;
+            font-weight: 500;
+            color: var(--vithas-blue-dark);
+        }
+        .input-group input {
+            flex-basis: 40%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            text-align: right;
+            font-weight: 600;
+        }
+        .btn-fp-calculate {
+            background: var(--fp-accent);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+        .btn-fp-calculate:hover { background: #5e35b1; }
+
+        /* Estilos de los Clusters */
+        .cluster-result {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 5px solid;
+            animation: fadeIn 0.5s;
+        }
+        .cluster-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--fp-accent);
+        }
+        .cluster-description {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 15px;
+        }
+        .cluster-details ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .cluster-details li {
+            background: #f9f9f9;
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            border: 1px solid #eee;
+        }
+        .cluster-details strong { color: var(--vithas-blue-dark); }
+        .cluster-tag {
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 10px;
+            font-size: 0.85rem;
+        }
+        .cluster-0 { border-color: var(--cluster-0-color); background: #e8f5f9; color: var(--cluster-0-color); }
+        .cluster-1 { border-color: var(--cluster-1-color); background: #ffebee; color: var(--cluster-1-color); }
+        .cluster-2 { border-color: var(--cluster-2-color); background: #fff3e0; color: var(--cluster-2-color); }
+        .footer-note { font-size: 0.8rem; color: #777; margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px; }
+
+        .simulation-alert {
+            background-color: #fef2f2;
+            border: 1px solid #fecaca;
+            border-left: 5px solid #ef4444;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            color: #b91c1c;
+            font-weight: 500;
+        }
+        .kpi-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px dashed #eee;
+            font-size: 0.95rem;
+        }
+        .kpi-row:last-child { border-bottom: none; }
+        .kpi-label { font-weight: 600; color: var(--vithas-blue-dark); }
+        .kpi-value { font-style: italic; color: #555; }
+        .kpi-title { 
+            font-size: 1.15rem; 
+            color: var(--vithas-blue-dark); 
+            margin-top: 15px; 
+            margin-bottom: 10px; 
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        .corr-bar-wrapper {
+            width: 100%;
+            background: #f3f4f6;
+            border-radius: 999px;
+            overflow: hidden;
+            height: 10px;
+            margin-top: 4px;
+        }
+        .corr-bar {
+            height: 100%;
+            border-radius: 999px;
+            background: var(--vithas-blue-light);
+        }
+        .corr-label {
+            font-size: 0.9rem;
+            color: var(--vithas-blue-dark);
+            font-weight: 600;
+        }
+        .corr-value {
+            font-size: 0.8rem;
+            color: #777;
+            margin-left: 4px;
+        }
+
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+        </div>
+        <nav class="nav-links">
+            <ul>
+                <li><a href="../../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+                <li class="nav-category">Utilidades</li>
+                
+                <li><a href="../../index.html"><i class="fas fa-arrow-left"></i> Volver a Utilidades</a></li>
+                
+                <!-- BLOQUE ACTUAL: Utilidades (ABIERTO) -->
+                <li class="has-submenu open">
+                    <a href="#" class="submenu-toggle">
+                        <div style="display:flex; align-items:center;">
+                            <i class="fas fa-toolbox"></i> Utilidades y Herramientas
+                        </div>
+                        <i class="fas fa-chevron-right chevron"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="../../index.html"><i class="fas fa-th-large"></i> Menú Herramientas</a></li>
+                        <!-- Elemento Activo (Ruta y nombre ajustados) -->
+                        <li><a href="FP_Cohorte.html" class="submenu-main-link active"><i class="fas fa-lungs-virus"></i> Cohorte Fibrosis Pulmonar</a></li>
+                    </ul>
+                </li>
+            
+                <li class="nav-category">Otras Herramientas</li>
+                
+                <!-- Rutas ajustadas para los hermanos -->
+                <li class="has-submenu">
+                    <a href="../Analisis_Clinicos/index.html" class="submenu-toggle">
+                        <div style="display:flex; align-items:center;">
+                            <i class="fas fa-microscope"></i> Analíticas
+                        </div>
+                    </a>
+                </li>
+                <li class="has-submenu">
+                    <a href="../Gold_EPOC/index.html" class="submenu-toggle">
+                        <div style="display:flex; align-items:center;">
+                            <i class="fas fa-lungs"></i> Guía EPOC
+                        </div>
+                    </a>
+                </li>
+                <li class="has-submenu">
+                    <a href="../Infecciosos/index.html" class="submenu-toggle">
+                        <div style="display:flex; align-items:center;">
+                            <i class="fas fa-virus"></i> Infecciosas
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="sidebar-footer">
+            <p>Medicina Interna</p>
+            <small>Vithas Xanit Internacional</small>
+        </div>
+    </aside>
+
+    <div class="main-content">
+        <!-- CABECERO GLOBAL -->
+        <header class="top-header">
+            <div class="header-left">
+                <i class="fas fa-bars menu-toggle" id="menuToggle" onclick="document.getElementById('sidebar').classList.toggle('active')"></i>
+                <!-- Título ajustado -->
+                <h2><i class="fas fa-lungs-virus" style="margin-right: 10px;"></i>Clasificador Fenotípico FP</h2>
+            </div>
+            <div class="header-right">
+                <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+            </div>
+        </header>
+
+        <div class="content-wrapper">
+            
+            <!-- ALERTA DE SIMULACIÓN -->
+            <div class="simulation-alert">
+                <i class="fas fa-exclamation-triangle mr-2"></i> 
+                <strong>SIMULACIÓN CLÍNICA:</strong> Los datos introducidos se comparan con los patrones de una cohorte de FPI *sintética* (generada por IA). Esto es una herramienta de apoyo analítico, no un diagnóstico. Los **datos sintéticos** se crean para replicar las correlaciones y estructuras de los datos reales, permitiendo análisis sin comprometer la privacidad.
+            </div>
+
+            <section class="util-card">
+                <h3 class="section-title">Clasificador Fenotípico de Riesgo (Basado en Cohorte Sintética n=700)</h3>
+                <p class="mb-4 text-gray-600">Introduzca los parámetros basales del paciente para clasificarlo en uno de los tres fenotipos de pronóstico identificados en la cohorte.</p>
+
+                <!-- FORMULARIO DE INPUT -->
+                <div id="input-form">
+                    <div class="input-group">
+                        <label for="fvc">Capacidad Vital Forzada (FVC % pred):</label>
+                        <input type="number" id="fvc" value="70" min="20" max="120">
+                    </div>
+                    <div class="input-group">
+                        <label for="dlco">Capacidad de Difusión (DLCO % pred):</label>
+                        <input type="number" id="dlco" value="50" min="10" max="100">
+                    </div>
+                    <div class="input-group">
+                        <label for="mmrc">Disnea mMRC (0 - 4):</label>
+                        <input type="number" id="mmrc" value="2" min="0" max="4">
+                    </div>
+                    <div class="input-group">
+                        <label for="mwtd">Distancia 6MWT (metros):</label>
+                        <input type="number" id="mwtd" value="450" min="50" max="650">
+                    </div>
+                    <button id="calculate-btn" class="btn-fp-calculate w-full mt-3"><i class="fas fa-flask"></i> Clasificar Fenotipo</button>
+                </div>
+
+                <!-- ÁREA DE RESULTADOS -->
+                <div id="results-area" class="hidden">
+                    <div class="cluster-result" id="cluster-output">
+                        <!-- Output dinámico aquí -->
+                    </div>
+                    <div class="footer-note">
+                        <p><strong>Nota:</strong> Esta clasificación es una simulación basada en el *clustering* de la cohorte sintética (k-means) y sirve como herramienta de apoyo a la decisión para identificar patrones de riesgo.</p>
+                    </div>
+                    <button onclick="document.getElementById('results-area').classList.add('hidden'); document.getElementById('input-form').classList.remove('hidden');" class="btn-secondary w-full mt-5"><i class="fas fa-redo"></i> Nueva Clasificación</button>
+                </div>
+            </section>
+            
+            <!-- INFORMACIÓN DE REFERENCIA ORIGINAL -->
+            <section class="util-card">
+                <h3 class="section-title">Información de Referencia de la Cohorte. <strong>¡¡ Recuerda que son datos sintéticos!!</strong></h3>
+                <p class="text-gray-600">Detalles clave del análisis descriptivo que sustentan la clasificación fenotípica.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                    <!-- Columna 1: Perfil Global de la Cohorte (KPIs descriptivos) -->
+                    <div>
+                        <div class="kpi-title"><i class="fas fa-chart-area mr-2"></i> Perfil Global de la Cohorte</div>
+                        <div class="kpi-row">
+                            <span class="kpi-label">Edad media / Varones</span>
+                            <span class="kpi-value">65,6 años / 55%</span>
+                        </div>
+                        <div class="kpi-row">
+                            <span class="kpi-label">Patrón UIP / UIP-like</span>
+                            <span class="kpi-value">≈ 74%</span>
+                        </div>
+                        <div class="kpi-row">
+                            <span class="kpi-label">ILDA autoinmune</span>
+                            <span class="kpi-value">≈ 27%</span>
+                        </div>
+                        <div class="kpi-row">
+                            <span class="kpi-label">FVC basal (mediana)</span>
+                            <span class="kpi-value">74,8% pred</span>
+                        </div>
+                        <div class="kpi-row">
+                            <span class="kpi-label">DLCO basal (mediana)</span>
+                            <span class="kpi-value">55,6% pred</span>
+                        </div>
+                        <div class="kpi-row">
+                            <span class="kpi-label">Cambio FVC anual (ΔFVC)</span>
+                            <span class="kpi-value">–5,0% (IQR –7,9 a –1,9)</span>
+                        </div>
+                        <div class="kpi-row">
+                            <span class="kpi-label">Muerte en el estudio (Tasa)</span>
+                            <span class="kpi-value">≈ 11,4%</span>
+                        </div>
+                    </div>
+
+                    <!-- Columna 2: Ejes Fisiológicos Clave (Correlaciones) -->
+                    <div>
+                        <div class="kpi-title"><i class="fas fa-link mr-2"></i> Ejes Fisiológicos Clave</div>
+                        <p class="text-sm text-gray-600 mb-3">La cohorte confirma las correlaciones biológicas típicas de la FPI (ej. peor función se relaciona con peor ejercicio):</p>
+                        
+                        <div class="kpi-row flex-col items-start">
+                            <div class="corr-label">FVC ↔ 6MWT (r ≈ 0,88)</div>
+                            <div class="corr-bar-wrapper">
+                                <div class="corr-bar" style="width:88%;"></div>
+                            </div>
+                            <span class="corr-value">Fuerte relación: Cuanto mayor función, mayor distancia caminada.</span>
+                        </div>
+
+                        <div class="kpi-row flex-col items-start">
+                            <div class="corr-label">DLCO ↔ Sat mínima 6MWT (r ≈ 0,83)</div>
+                            <div class="corr-bar-wrapper">
+                                <div class="corr-bar" style="width:83%;"></div>
+                            </div>
+                            <span class="corr-value">Relación difusión-oxigenación: Peor difusión, peor saturación al esfuerzo.</span>
+                        </div>
+
+                        <div class="kpi-row flex-col items-start">
+                            <div class="corr-label">mMRC ↔ 6MWT (r ≈ –0,85)</div>
+                            <div class="corr-bar-wrapper">
+                                <div class="corr-bar" style="width:85%;"></div>
+                            </div>
+                            <span class="corr-value">Relación inversa fuerte: Más disnea (mMRC), menos distancia caminada.</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- BLOQUE DE FENOTIPOS (Clusters) -->
+            <section class="util-card">
+                <h3 class="section-title">Análisis de Fenotipos (Clusters de Riesgo)</h3>
+                <p class="text-gray-600">Definición de los tres grupos de riesgo identificados por el modelo de clustering.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+                    <!-- CLUSTER 0 -->
+                    <div class="p-4 rounded-lg cluster-0">
+                        <div class="cluster-tag" style="background:#e8f5f9; color:var(--cluster-0-color);">Cluster 0 (n ≈ 263)</div>
+                        <h4 class="font-bold text-lg mb-2" style="color:var(--cluster-0-color);">Buen Pronóstico</h4>
+                        <ul class="text-sm space-y-1 text-gray-700">
+                            <li>FVC media: <strong>~ 87%</strong> pred.</li>
+                            <li>DLCO media: <strong>~ 71%</strong> pred.</li>
+                            <li>Poca disnea (mMRC ~ 0,3).</li>
+                            <li>Poca progresión: (ΔFVC ~ –1,6% anual).</li>
+                        </ul>
+                    </div>
+
+                    <!-- CLUSTER 2 -->
+                    <div class="p-4 rounded-lg cluster-2">
+                        <div class="cluster-tag" style="background:#fff3e0; color:var(--cluster-2-color);">Cluster 2 (n ≈ 289)</div>
+                        <h4 class="font-bold text-lg mb-2" style="color:var(--cluster-2-color);">Intermedio / Riesgo Moderado</h4>
+                        <ul class="text-sm space-y-1 text-gray-700">
+                            <li>FVC media: <strong>~ 73%</strong> pred.</li>
+                            <li>DLCO media: <strong>~ 52%</strong> pred.</li>
+                            <li>Disnea moderada (mMRC ~ 1,4).</li>
+                            <li>Pérdida funcional significativa: (ΔFVC ~ –6,3% anual).</li>
+                        </ul>
+                    </div>
+
+                    <!-- CLUSTER 1 -->
+                    <div class="p-4 rounded-lg cluster-1">
+                        <div class="cluster-tag" style="background:#ffebee; color:var(--cluster-1-color);">Cluster 1 (n ≈ 148)</div>
+                        <h4 class="font-bold text-lg mb-2" style="color:var(--cluster-1-color);">Progresor Grave / Alto Riesgo</h4>
+                        <ul class="text-sm space-y-1 text-gray-700">
+                            <li>FVC media: <strong>~ 59%</strong> pred.</li>
+                            <li>DLCO media: <strong>~ 35%</strong> pred. (Severa).</li>
+                            <li>Disnea severa (mMRC ~ 2,6).</li>
+                            <li>Alta progresión: (ΔFVC ~ –8,6% anual).</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- BLOQUE DE PARÁMETROS ADICIONALES (Logística y NLP) -->
+            <section class="util-card">
+                <h3 class="section-title">Análisis de Valor y Texto Libre (NLP)</h3>
+                <p class="text-gray-600">Herramientas de Inteligencia Artificial que extraen información crítica más allá de las métricas numéricas.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Columna 1: Análisis Predictivo (Logística) -->
+                    <div>
+                        <div class="kpi-title"><i class="fas fa-hospital-user mr-2"></i> Predicción de Mortalidad (Modelo Simple)</div>
+                        <p class="text-sm text-gray-600 mb-3">La regresión logística indica la relación de variables basales con el riesgo de mortalidad:</p>
+                        <div class="kpi-row">
+                            <span class="kpi-label">Edad (&ge; 65 años)</span>
+                            <span class="kpi-value">Coeficiente positivo (Más riesgo)</span>
+                        </div>
+                        <div class="kpi-row">
+                            <span class="kpi-label">FVC % pred</span>
+                            <span class="kpi-value">Coeficiente negativo (Menos riesgo)</span>
+                        </div>
+                        <div class="kpi-row">
+                            <span class="kpi-label">DLCO % pred</span>
+                            <span class="kpi-value">Coeficiente negativo (Menos riesgo)</span>
+                        </div>
+                        <div class="kpi-row">
+                            <span class="kpi-label">6MWT (Distancia)</span>
+                            <span class="kpi-value">Coeficiente negativo (Menos riesgo)</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Columna 2: Valor del Texto Libre (NLP) -->
+                    <div>
+                        <div class="kpi-title"><i class="fas fa-file-medical mr-2"></i> Potencial del Texto Libre (NLP)</div>
+                        <p class="text-sm text-gray-600 mb-3">El análisis del texto libre en las notas médicas ofrece una visión cualitativa, siendo clave para:</p>
+                        <ul class="list-disc pl-5 text-sm space-y-2">
+                            <li>**Extracción de Síntomas:** Permite cuantificar y extraer quejas no estructuradas (ej. "fatiga marcada", "tos seca persistente").</li>
+                            <li>**Cuantificación de Calidad de Vida:** Analiza menciones de limitación en actividades diarias y estado emocional, dando una dimensión del *valor* al paciente.</li>
+                            <li>**Detección de Progresión Sutil:** Identifica el lenguaje de estabilidad o empeoramiento antes de que se refleje en los números.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <footer class="footer">
+            <p>&copy; 2025 Servicio de Medicina Interna - Hospital Vithas Xanit Internacional.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById('calculate-btn').addEventListener('click', classifyPatient);
+
+        // Datos medios de los clusters para la lógica simple de clasificación
+        const clusterMeans = {
+            '0': { fvc: 87, dlco: 71, mmrc: 0.3, mwtd: 500, prognosis: "Buen Pronóstico", color: 'var(--cluster-0-color)' },
+            '1': { fvc: 59, dlco: 35, mmrc: 2.6, mwtd: 332, prognosis: "Progresor Grave / Alto Riesgo", color: 'var(--cluster-1-color)' },
+            '2': { fvc: 73, dlco: 52, mmrc: 1.4, mwtd: 450, prognosis: "Intermedio / Moderado Riesgo", color: 'var(--cluster-2-color)' }
+        };
+
+        function classifyPatient() {
+            const fvc = parseFloat(document.getElementById('fvc').value);
+            const dlco = parseFloat(document.getElementById('dlco').value);
+            const mmrc = parseFloat(document.getElementById('mmrc').value);
+            const mwtd = parseFloat(document.getElementById('mwtd').value);
+
+            if (isNaN(fvc) || isNaN(dlco) || isNaN(mmrc) || isNaN(mwtd)) {
+                alert("Por favor, introduzca valores numéricos válidos en todos los campos.");
+                return;
+            }
+            
+            // Validación de rangos
+            if (fvc < 20 || dlco < 10 || mmrc < 0 || mmrc > 4 || mwtd < 50) {
+                 alert("Asegúrese de que los valores introducidos están dentro de un rango clínico razonable (FVC > 20, DLCO > 10, mMRC 0-4, 6MWT > 50).");
+                 return;
+            }
+
+            // --- LÓGICA DE CLASIFICACIÓN SIMPLE (Basada en distancias relativas) ---
+            let minDistance = Infinity;
+            let assignedCluster = '2'; 
+
+            for (const key in clusterMeans) {
+                const mean = clusterMeans[key];
+                
+                // Penalizaciones por distancia al centro del cluster (pesos ajustados)
+                const distance = 
+                    Math.pow(fvc - mean.fvc, 2) * 1.5 +    
+                    Math.pow(dlco - mean.dlco, 2) * 1.5 +  
+                    Math.pow(mwtd - mean.mwtd, 2) * 0.05 + 
+                    Math.pow(mmrc - mean.mmrc, 2) * 40;    
+                
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    assignedCluster = key;
+                }
+            }
+
+            // --- RENDERIZADO DE RESULTADO ---
+            const resultData = clusterMeans[assignedCluster];
+            const clusterOutput = document.getElementById('cluster-output');
+            
+            const clusterClass = `cluster-${assignedCluster}`;
+            let color;
+            if (assignedCluster === '0') color = 'var(--cluster-0-color)';
+            else if (assignedCluster === '1') color = 'var(--cluster-1-color)';
+            else color = 'var(--cluster-2-color)';
+
+            clusterOutput.className = `cluster-result ${clusterClass}`;
+            clusterOutput.style.borderColor = color;
+
+            clusterOutput.innerHTML = `
+                <div class="cluster-tag" style="background:${color}; color:white; border:none;">
+                   FENOTIPO ${assignedCluster}
+                </div>
+                <h4 class="cluster-title" style="color:${color}">${resultData.prognosis}</h4>
+                <p class="cluster-description">Este paciente presenta un patrón clínico más similar al grupo de <strong>${resultData.prognosis}</strong> dentro de la cohorte analizada. </p>
+                
+                <div class="cluster-details">
+                    <h5 style="color:var(--vithas-blue-light); font-weight:700;">Implicaciones Clínicas:</h5>
+                    <ul class="text-sm">
+                        <li><i class="fas fa-chart-line" style="color:${color};"></i> <strong>Riesgo de Progresión:</strong> ${assignedCluster === '1' ? 'Muy Alto (Pérdida funcional media del 8,6% FVC anual).' : assignedCluster === '2' ? 'Moderado/Alto (Pérdida media del 6,3% FVC anual).' : 'Bajo (Pérdida media del 1,6% FVC anual).'}</li>
+                        <li><i class="fas fa-hospital"></i> <strong>Manejo Sugerido:</strong> ${assignedCluster === '1' ? 'Manejo en Unidad de Referencia, monitorización intensiva y tratamiento antifibrótico de alta prioridad.' : assignedCluster === '2' ? 'Monitorización trimestral activa y optimización rápida del antifibrótico.' : 'Monitorización semestral, buen pronóstico inicial.'}</li>
+                        <li><i class="fas fa-heartbeat"></i> <strong>Función:</strong> FVC ≈ ${fvc}% / DLCO ≈ ${dlco}%.</li>
+                    </ul>
+                </div>
+            `;
+
+            document.getElementById('input-form').classList.add('hidden');
+            document.getElementById('results-area').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

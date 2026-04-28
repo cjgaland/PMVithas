@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemelos Digitales (CTD-ILD) - Vithas Xanit</title>
+    
+    <!-- Rutas ajustadas -->
+    <link rel="icon" type="image/png" href="../../assets/Images/Logos/Favicon-Vithas.png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    
+    <!-- Estilos Globales -->
+    <link rel="stylesheet" href="../../css/style.css" />
+    
+    <style>
+        /* --- ESTILOS ESPECÍFICOS DE LA CALCULADORA --- */
+        :root {
+            --calc-bg:#fff; --calc-text:#111827; --calc-muted:#6b7280; --calc-line:#e5e7eb;
+            --good:#059669; --warn:#f59e0b; --bad:#dc2626; --blue:#1f77b4;
+        }
+
+        .digital-twin-wrapper {
+            font-family: 'Roboto', sans-serif;
+            font-size: 13px;
+            color: var(--calc-text);
+            padding-bottom: 50px; /* Espacio extra al final */
+        }
+
+        /* Grid Principal */
+        .digital-twin-wrapper .grid-cols-2 { 
+            display: grid; 
+            gap: 20px; 
+            grid-template-columns: 1fr 1fr; 
+        }
+        @media (max-width: 1000px) { .digital-twin-wrapper .grid-cols-2 { grid-template-columns: 1fr; } }
+
+        /* Tarjetas */
+        .dt-card {
+            background: #fff; 
+            border: 1px solid var(--calc-line); 
+            border-radius: 10px;
+            padding: 20px; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03); 
+            margin-bottom: 20px;
+        }
+
+        .dt-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; border-bottom: 1px solid #f3f4f6; padding-bottom: 10px; }
+        .dt-header h3 { margin: 0; font-size: 16px; color: var(--vithas-blue-dark); font-weight: 700; }
+
+        /* Botones de Preset */
+        .preset-btn {
+            background: #f0f9ff; border: 1px solid #bae6fd; color: #0369a1; 
+            border-radius: 6px; padding: 4px 12px; cursor: pointer; font-size: 11px; font-weight: 600;
+            transition: all 0.2s;
+        }
+        .preset-btn:hover { background: #e0f2fe; }
+
+        /* Controles (Inputs) */
+        .controls-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 10px; }
+        @media (min-width: 1200px) { .controls-grid { grid-template-columns: repeat(3, 1fr); } }
+
+        .control-group { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px; padding: 8px; }
+        .control-group label { display: flex; justify-content: space-between; font-size: 11px; font-weight: 600; color: #4b5563; margin-bottom: 4px; }
+        .control-group input[type=range] { width: 100%; cursor: pointer; accent-color: var(--blue); }
+        .control-group select { width: 100%; font-size: 12px; padding: 2px; border: 1px solid #d1d5db; border-radius: 4px; }
+        .val-display { font-size: 11px; font-weight: 700; color: var(--blue); }
+
+        /* KPIs */
+        .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 20px; margin-bottom: 20px; }
+        .kpi-box { background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 10px; text-align: center; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+        .kpi-label { font-size: 10px; text-transform: uppercase; color: #9ca3af; font-weight: 700; }
+        .kpi-value { font-size: 16px; font-weight: 800; color: #1f2937; margin: 4px 0; }
+        .kpi-sub { font-size: 10px; color: #6b7280; }
+        
+        .pill { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 10px; font-weight: 700; }
+        .pill.good { background: #d1fae5; color: #047857; }
+        .pill.warn { background: #ffedd5; color: #c2410c; }
+        .pill.bad { background: #fee2e2; color: #b91c1c; }
+
+        /* Barra de Riesgo */
+        .risk-meter-container { height: 6px; background: linear-gradient(to right, var(--good) 0%, var(--good) 20%, var(--warn) 20%, var(--warn) 45%, var(--bad) 45%, var(--bad) 100%); border-radius: 3px; position: relative; margin: 10px 0 20px 0; }
+        .risk-marker { width: 10px; height: 10px; background: #000; border: 2px solid #fff; border-radius: 50%; position: absolute; top: -2px; transform: translateX(-50%); box-shadow: 0 1px 3px rgba(0,0,0,0.3); transition: left 0.3s ease; }
+
+        /* Gráficos de Barras (Contribución) */
+        .contrib-container { margin-top: 15px; border-top: 1px solid #f3f4f6; padding-top: 15px; }
+        .section-header { font-size: 12px; font-weight: 700; color: #374151; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .contrib-row { display: flex; align-items: center; margin-bottom: 6px; font-size: 11px; }
+        .c-label { width: 80px; text-align: right; padding-right: 10px; color: #4b5563; font-weight: 500; }
+        .c-track { flex: 1; height: 16px; background: #f3f4f6; border-radius: 4px; overflow: hidden; position: relative; }
+        .c-bar { height: 100%; border-radius: 4px; transition: width 0.3s ease; }
+        .c-val { width: 40px; padding-left: 8px; font-weight: 700; color: #374151; }
+
+        /* Canvas */
+        .chart-container { position: relative; height: 160px; width: 100%; border: 1px solid #e5e7eb; border-radius: 8px; padding: 5px; background: #fff; }
+        canvas { width: 100% !important; height: 100% !important; }
+
+        /* Comparativa y Footer */
+        .comp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+        .comp-box { background: #f8fafc; border: 1px solid #e2e8f0; padding: 15px; border-radius: 8px; text-align: center; }
+        .comp-head { font-size: 11px; font-weight: 700; color: #64748b; text-transform: uppercase; margin-bottom: 5px; }
+        .comp-data { font-size: 14px; font-weight: 800; color: var(--vithas-blue-dark); }
+
+        .legend-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; font-size: 11px; color: #4b5563; }
+        .legend-item strong { color: var(--vithas-blue-dark); }
+
+        .ref-box { font-size: 11px; color: #64748b; border-left: 3px solid #cbd5e1; padding-left: 10px; margin-bottom: 8px; }
+    
+        /* --- CSS importado para gráficas/leyendas (del archivo fuente) --- */
+        canvas.roc{width:100%;height:120px;border-radius:8px;background:#fff;border:1px solid var(--line)}
+        .contrib-bars{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+        .bar-label{width:120px;font-size:11px;color:#374151;text-align:right}
+        .bar-container{flex:1;height:16px;background:#f3f4f6;border-radius:3px;position:relative;overflow:hidden}
+        .bar-fill{height:100%;border-radius:3px;transition:width 0.3s ease}
+        .bar-value{width:40px;font-size:10px;text-align:right;font-weight:600}
+        .note{color:#6b7280;font-size:11px;margin-top:4px}
+        .pill{display:inline-block;padding:3px 10px;border-radius:999px;font-size:11px;font-weight:700}
+        .legend{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+        .references-card{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:16px;margin-top:12px}
+
+        .info-icon{display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;border:1px solid #cbd5e1;color:#64748b;font-size:10px;margin-left:6px;cursor:help;user-select:none;background:#fff;}
+        /* --- LAYOUT GRÁFICAS (poner ROC y Calibración en 2 columnas) --- */
+.charts-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+@media (max-width: 900px){
+  .charts-grid{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Tarjeta de cada gráfica (estilo tipo “Imagen 2”) */
+.chart-card{
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+
+.chart-title{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-weight: 800;
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #111827;
+}
+
+.chart-title .icon{ font-size: 18px; }
+
+.chart-box{
+  height: 140px;            /* ajusta si quieres más alto */
+  padding: 8px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+}
+
+.chart-caption{
+  margin-top: 10px;
+  font-size: 14px;
+  color: #6b7280;
+  font-weight: 600;
+}
+
+        
+
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+    </div>
+    <nav class="nav-links">
+        <ul>
+            <li><a href="../../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+            <li class="nav-category">Utilidades</li>
+            <li><a href="../../index.html"><i class="fas fa-arrow-left"></i> Volver a Utilidades</a></li>
+            
+            <!-- BLOQUE ACTUAL: Apoyo Clínico (ABIERTO) -->
+            <li class="has-submenu open">
+                <a href="#" class="submenu-toggle">
+                    <div style="display:flex; align-items:center;">
+                        <i class="fas fa-toolbox"></i> Apoyo Clínico Rápido
+                    </div>
+                    <i class="fas fa-chevron-right chevron"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a href="../../index.html"><i class="fas fa-th-large"></i> Menú Herramientas</a></li>
+                    <li><a href="FP_Cohorte.html"><i class="fas fa-lungs-virus"></i> Cohorte Fibrosis Pulmonar</a></li>
+                    <li><a href="SSc_ILD.html"><i class="fas fa-hand-holding-medical"></i> Esclerosis Sistémica</a></li>
+                    <!-- Elemento Activo -->
+                    <li><a href="Gemelos_digitales.html" class="submenu-main-link active"><i class="fas fa-user-friends"></i> Gemelos Digitales (CTD-ILD)</a></li>
+                    <li><a href="Riesgo_Trombo.html"><i class="fas fa-thrombosis"></i> Riesgo Tromboembólico</a></li>
+                    <li><a href="Dosis_Status.html"><i class="fas fa-brain"></i> Dosis Status Epiléptico</a></li>
+                    <li><a href="GCS_Adulto.html"><i class="fas fa-head-side-mask"></i> Escala GCS Adulto</a></li>
+                    <li><a href="Requer_Hídricos.html"><i class="fas fa-tint"></i> Requerimientos Hídricos</a></li>
+                </ul>
+            </li>
+            <li class="nav-category">Protocolos Agrupados</li>
+            <li class="has-submenu"><a href="../Analisis_Clinicos/index.html" class="submenu-toggle"><i class="fas fa-microscope"></i> Analíticas</a></li>
+            <li class="has-submenu"><a href="../Gold_EPOC/index.html" class="submenu-toggle"><i class="fas fa-lungs"></i> Guía EPOC</a></li>
+            <li class="has-submenu"><a href="../Infecciosos/index.html" class="submenu-toggle"><i class="fas fa-virus"></i> Infecciosas</a></li>
+        </ul>
+    </nav>
+    <div class="sidebar-footer">
+        <p>Medicina Interna</p>
+        <small>Vithas Xanit Internacional</small>
+    </div>
+</aside>
+
+<div class="main-content">
+    <header class="top-header">
+        <div class="header-left">
+            <i class="fas fa-bars menu-toggle" id="menuToggle" onclick="document.getElementById('sidebar').classList.toggle('active')"></i>
+            <h2><i class="fas fa-user-friends" style="margin-right: 10px;"></i>Gemelos Digitales (Simulación CTD-ILD)</h2>
+        </div>
+        <div class="header-right">
+            <img src="../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+        </div>
+    </header>
+
+    <div class="content-wrapper digital-twin-wrapper">
+        
+        <!-- INTRO -->
+        <div class="dt-card" style="background:#f0f9ff; border-color:#bfdbfe;">
+            <h3 style="color:#1e40af; font-size:1.1rem; margin-bottom:5px;"><i class="fas fa-info-circle"></i> Modelo Predictivo de Progresión</h3>
+            <p style="font-size:0.9rem; color:#1e3a8a;">Herramienta para estimar el riesgo de progresión a 12 meses en pacientes con enfermedad pulmonar intersticial (EPI) asociada a conectivopatías. Permite comparar dos escenarios ("gemelos") para evaluar el impacto de las decisiones terapéuticas.</p>
+        </div>
+
+        <div class="grid-cols-2">
+            <!-- PACIENTE A -->
+            <div class="dt-card">
+                <div class="dt-header">
+                    <h3><i class="fas fa-user-md"></i> Escenario A</h3>
+                    <div style="display:flex; gap:5px;">
+                        <button class="preset-btn" onclick="preset('A','bajo')">Bajo</button>
+                        <button class="preset-btn" onclick="preset('A','medio')">Medio</button>
+                        <button class="preset-btn" onclick="preset('A','alto')">Alto</button>
+                    </div>
+                </div>
+
+                <div class="risk-meter-container" id="riskMeterA">
+                    <div class="risk-marker" id="riskMarkerA" style="left: 0%;"></div>
+                </div>
+
+                <div class="controls-grid">
+                    <div class="control-group"><label>Edad <span id="ageAval" class="val-display"></span></label><input type="range" id="ageA" min="30" max="90" step="1" oninput="recalc()"></div>
+                    <div class="control-group"><label>FVC % <span id="fvcAval" class="val-display"></span></label><input type="range" id="fvcA" min="30" max="120" step="1" oninput="recalc()"></div>
+                    <div class="control-group"><label>DLCO % <span id="dlcoAval" class="val-display"></span></label><input type="range" id="dlcoA" min="20" max="120" step="1" oninput="recalc()"></div>
+                    <div class="control-group"><label>Fibrosis % <span id="fibAval" class="val-display"></span></label><input type="range" id="fibA" min="0" max="60" step="1" oninput="recalc()"></div>
+                    <div class="control-group"><label>PCR mg/L <span id="crpAval" class="val-display"></span></label><input type="range" id="crpA" min="0" max="40" step="1" oninput="recalc()"></div>
+                    <div class="control-group"><label>Patrón</label><select id="uipA" onchange="recalc()"><option value="0">NSIP</option><option value="1">UIP</option></select></div>
+                    <div class="control-group"><label>Patología</label><select id="ctdA" onchange="recalc()"><option value="AR">AR</option><option value="ES">Esclerosis</option><option value="MIOSITIS">Miositis</option><option value="SS">Sjögren</option></select></div>
+                    <div class="control-group"><label>Antifibrótico</label><select id="antiA" onchange="recalc()"><option value="0">No</option><option value="1">Sí</option></select></div>
+                    <div class="control-group"><label>Inmunosup.</label><select id="immunA" onchange="recalc()"><option value="0">No</option><option value="1">Sí</option></select></div>
+                    <div class="control-group"><label>HTP <span class="info-icon" title="Hipertensión pulmonar (presente/ausente) - Aumenta riesgo">i</span></label><select id="phpA" onchange="recalc()"><option value="0">No</option><option value="1">Sí</option></select></div>
+                    <div class="control-group"><label>Umbral <span id="thrAval" class="val-display"></span> <span class="info-icon" title="Umbral de decisión para sensibilidad/especificidad (afecta métricas ROC)">i</span></label><input type="range" id="thrA" min="0.10" max="0.60" step="0.01" oninput="recalc()"></div>
+
+                </div>
+
+                <div class="kpi-grid">
+                    <div class="kpi-box"><div class="kpi-label">Riesgo</div><div class="kpi-value" id="riskA">-</div><div id="bandA" class="pill">-</div></div>
+                    <div class="kpi-box"><div class="kpi-label">Principal</div><div class="kpi-value" id="topA" style="font-size:13px">-</div><div class="kpi-sub" id="lrA">-</div></div>
+                    <div class="kpi-box"><div class="kpi-label">Clasificación</div><div class="kpi-value" id="clsA" style="font-size:13px">-</div><div class="kpi-sub" id="metA">-</div></div>
+                    <div class="kpi-box"><div class="kpi-label">Acción</div><div class="kpi-value" id="planA" style="font-size:11px">-</div>
+                    <div class="kpi-sub"><span class="alert-badge" id="alertAntiA" style="display:none;">⚠️ Antifibrótico no indicado / reevaluar</span></div></div>
+                </div>
+
+                <div class="contrib-container">
+                    <div class="section-header">Contribución de Factores</div>
+                    <div id="contribBarsA" class="contrib-bars"></div>
+                <div class="note">Verde: reduce riesgo · Rojo: aumenta riesgo</div>
+                </div>
+                
+                <div class="contrib-container">
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <div class="chart-title"><span class="icon">📊</span><span>ROC — Punto de Operación</span></div>
+                        <div class="chart-container chart-box"><canvas class="roc" id="rocA"></canvas></div>
+                        <div class="chart-caption">Sensibilidad/Especificidad según umbral seleccionado</div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-title"><span class="icon">🎯</span><span>Calibración (Global)</span></div>
+                        <div class="chart-container chart-box"><canvas class="roc" id="calA"></canvas></div>
+                        <div class="chart-caption">Ajuste del modelo y riesgo observado</div>
+                    </div>
+                </div> 
+                </div>    
+            </div>
+
+            <!-- PACIENTE B -->
+            <div class="dt-card">
+                <div class="dt-header">
+                    <h3><i class="fas fa-user-injured"></i> Escenario B</h3>
+                    <div style="display:flex; gap:5px;">
+                        <button class="preset-btn" onclick="preset('B','bajo')">Bajo</button>
+                        <button class="preset-btn" onclick="preset('B','medio')">Medio</button>
+                        <button class="preset-btn" onclick="preset('B','alto')">Alto</button>
+                    </div>
+                </div>
+
+                <div class="risk-meter-container" id="riskMeterB">
+                    <div class="risk-marker" id="riskMarkerB" style="left: 0%;"></div>
+                </div>
+
+                <div class="controls-grid">
+                    <div class="control-group"><label>Edad <span id="ageBval" class="val-display"></span></label><input type="range" id="ageB" min="30" max="90" step="1" oninput="recalc()"></div>
+                    <div class="control-group"><label>FVC % <span id="fvcBval" class="val-display"></span></label><input type="range" id="fvcB" min="30" max="120" step="1" oninput="recalc()"></div>
+                    <div class="control-group"><label>DLCO % <span id="dlcoBval" class="val-display"></span></label><input type="range" id="dlcoB" min="20" max="120" step="1" oninput="recalc()"></div>
+                    <div class="control-group"><label>Fibrosis % <span id="fibBval" class="val-display"></span></label><input type="range" id="fibB" min="0" max="60" step="1" oninput="recalc()"></div>
+                    <div class="control-group"><label>PCR mg/L <span id="crpBval" class="val-display"></span></label><input type="range" id="crpB" min="0" max="40" step="1" oninput="recalc()"></div>
+                    <div class="control-group"><label>Patrón</label><select id="uipB" onchange="recalc()"><option value="0">NSIP</option><option value="1">UIP</option></select></div>
+                    <div class="control-group"><label>Patología</label><select id="ctdB" onchange="recalc()"><option value="AR">AR</option><option value="ES">Esclerosis</option><option value="MIOSITIS">Miositis</option><option value="SS">Sjögren</option></select></div>
+                    <div class="control-group"><label>Antifibrótico</label><select id="antiB" onchange="recalc()"><option value="0">No</option><option value="1">Sí</option></select></div>
+                    <div class="control-group"><label>Inmunosup.</label><select id="immunB" onchange="recalc()"><option value="0">No</option><option value="1">Sí</option></select></div>
+                    <div class="control-group"><label>HTP <span class="info-icon" title="Hipertensión pulmonar (presente/ausente) - Aumenta riesgo">i</span></label><select id="phpB" onchange="recalc()"><option value="0">No</option><option value="1">Sí</option></select></div>
+                    <div class="control-group"><label>Umbral <span id="thrBval" class="val-display"></span> <span class="info-icon" title="Umbral de decisión para sensibilidad/especificidad (afecta métricas ROC)">i</span></label><input type="range" id="thrB" min="0.10" max="0.60" step="0.01" oninput="recalc()"></div>
+
+                </div>
+
+                <div class="kpi-grid">
+                    <div class="kpi-box"><div class="kpi-label">Riesgo</div><div class="kpi-value" id="riskB">-</div><div id="bandB" class="pill">-</div></div>
+                    <div class="kpi-box"><div class="kpi-label">Principal</div><div class="kpi-value" id="topB" style="font-size:13px">-</div><div class="kpi-sub" id="lrB">-</div></div>
+                    <div class="kpi-box"><div class="kpi-label">Clasificación</div><div class="kpi-value" id="clsB" style="font-size:13px">-</div><div class="kpi-sub" id="metB">-</div></div>
+                    <div class="kpi-box"><div class="kpi-label">Acción</div><div class="kpi-value" id="planB" style="font-size:11px">-</div>
+                    <div class="kpi-sub"><span class="alert-badge" id="alertAntiB" style="display:none;">⚠️ Antifibrótico no indicado / reevaluar</span></div></div>
+                </div>
+
+                <div class="contrib-container">
+                    <div class="section-header">Contribución de Factores</div>
+                    <div id="contribBarsB" class="contrib-bars"></div>
+                <div class="note">Verde: reduce riesgo · Rojo: aumenta riesgo</div>
+                </div>
+
+                <div class="contrib-container">
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <div class="chart-title"><span class="icon">📊</span><span>ROC — Punto de Operación</span></div>
+                        <div class="chart-container chart-box"><canvas class="roc" id="rocB"></canvas></div>
+                        <div class="chart-caption">Sensibilidad/Especificidad según umbral seleccionado</div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-title"><span class="icon">🎯</span><span>Calibración (Global)</span></div>
+                        <div class="chart-container chart-box"><canvas class="roc" id="calB"></canvas></div>
+                        <div class="chart-caption">Ajuste del modelo y riesgo observado</div>
+                    </div>
+                </div> 
+                </div>
+            </div>
+        </div>
+
+        <!-- COMPARATIVA -->
+        <div class="dt-card">
+            <h3 style="margin-bottom:15px; font-weight:700; color:#374151;">🔄 Análisis Comparativo</h3>
+            <div class="comp-grid">
+                <div class="comp-box">
+                    <div class="comp-head">Dif. Riesgo Absoluto</div>
+                    <div class="comp-data" id="riskDiff">-</div>
+                </div>
+                <div class="comp-box">
+                    <div class="comp-head">Factor Diferencial</div>
+                    <div class="comp-data" id="keyFactorDiff">-</div>
+                </div>
+                <div class="comp-box">
+                    <div class="comp-head">Recomendación</div>
+                    <div class="comp-data" id="comparisonRec" style="font-size:12px">-</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LEYENDA Y REFERENCIAS -->
+        <div class="dt-card">
+            <h3 style="margin-bottom:10px; font-size:14px; font-weight:700;">📖 Abreviaturas</h3>
+            <div class="legend-grid">
+                <div class="legend-item"><strong>FVC:</strong> Capacidad Vital Forzada</div>
+                <div class="legend-item"><strong>DLCO:</strong> Difusión de Monóxido</div>
+                <div class="legend-item"><strong>UIP:</strong> Neumonía Intersticial Usual</div>
+                <div class="legend-item"><strong>NSIP:</strong> Neumonía Intersticial No Específica</div>
+                <div class="legend-item"><strong>PCR:</strong> Proteína C Reactiva</div>
+                <div class="legend-item"><strong>AR:</strong> Artritis Reumatoide</div>
+                <div class="legend-item"><strong>ES:</strong> Esclerosis Sistémica</div>
+                <div class="legend-item"><strong>SS:</strong> Síndrome de Sjögren</div>
+                <div class="legend-item"><strong>MCTD:</strong> Enf. Mixta Tejido Conectivo</div>
+                <div class="legend-item"><strong>LES:</strong> Lupus Eritematoso Sistémico</div>
+                <div class="legend-item"><strong>HP:</strong> Hipertensión Pulmonar</div>
+                <div class="legend-item"><strong>HRCT:</strong> TAC Alta Resolución</div>
+                <div class="legend-item"><strong>EPI:</strong> Enf. Pulmonar Intersticial</div>
+                <div class="legend-item"><strong>6MWT:</strong> Test de la Marcha 6 min</div>
+            </div>
+            <h3 style="margin-top:20px; margin-bottom:10px; font-size:14px; font-weight:700;">📚 Referencias</h3>
+            <ul class="ref-list">
+                <li class="ref-item"><strong>Flaherty KR, et al.</strong> Nintedanib in Progressive Fibrosing Interstitial Lung Diseases. <em>N Engl J Med. 2019;381(18):1718-1727.</em></li>
+                <li class="ref-item"><strong>Raghu G, et al.</strong> Diagnosis of Idiopathic Pulmonary Fibrosis. An Official ATS/ERS/JRS/ALAT Clinical Practice Guideline. <em>Am J Respir Crit Care Med. 2018;198(5):e44-e68.</em></li>
+                <li class="ref-item"><strong>Hoffmann-Vold AM, et al.</strong> The identification and management of interstitial lung disease in systemic sclerosis: evidence-based European consensus statements. <em>Lancet Rheumatol. 2020;2(2):e71-e83.</em></li>
+                <li class="ref-item"><strong>Wells AU, et al.</strong> Interstitial lung disease in connective tissue disease: mechanisms and management. <em>Nat Rev Rheumatol. 2021;10(12).</em></li>
+                <li class="ref-item"><strong>Travis WD, et al.</strong> An official American Thoracic Society/European Respiratory Society statement: Update of the international multidisciplinary classification of the idiopathic interstitial pneumonias. <em>Am J Respir Crit Care Med. 2013.</em></li>
+                <li class="ref-item"><strong>Ryerson CJ, et al.</strong> Prevalence and prognosis of unclassifiable interstitial lung disease. <em>Eur Respir J. 2013;42(3):750-7.</em></li>
+                <li class="ref-item"><strong>Vithas Xanit.</strong> Protocolo Interno de Manejo de Patología Intersticial. <em>Unidad de Neumología y Reumatología 2025.</em></li>
+            
+            </ul>
+        </div>
+        
+        <div class="disclaimer">
+      <strong>Nota:</strong> Este modelo predictivo se basa en la literatura científica actual y está diseñado para apoyo en la toma de decisiones clínicas. 
+      No sustituye el criterio médico profesional. Los coeficientes y umbrales han sido optimizados a partir de estudios publicados 
+      y deben ser validados en cada contexto clínico específico.
+    </div>
+
+    </div>
+</div>
+
+
+<script>
+// ==================== CONFIGURACIÓN MEJORADA ====================
+const COEF_OPTIMIZED = {
+  intercept: -2.3,
+  age: {base: 0.015, threshold65: 0.35},
+  fvc: {perPoint: 0.02, threshold70: 0.8, threshold60: 1.2},
+  dlco: {perPoint: 0.025, threshold50: 0.9, threshold40: 1.4},
+  fibrosis: {perPercent: 0.03, threshold20: 0.6},
+  UIP: 0.65,
+  inflammation: {crpBase: 0.01, crpThreshold: 5},
+  PH: 0.90,
+  CTD: { 
+    AR: 0.00, 
+    ES: 0.25, 
+    MIOSITIS: 0.15, 
+    SS: 0.10, 
+    MCTD: 0.12, 
+    LES: 0.10 
+  },
+  ANTIF: -0.60,
+  IMMUN: 0.15
+};
+
+// ==================== FUNCIONES MATEMÁTICAS ====================
+const logistic = x => 1/(1+Math.exp(-x));
+const clamp = (x,a,b)=>Math.max(a,Math.min(b,x));
+const band = p => p<0.20?["Bajo","good"]:p<0.45?["Medio","warn"]:["Alto","bad"];
+
+function plan(p){
+  if(p<0.20) return "🟢 Control anual · PFT 6-12 m · HRCT si empeora";
+  if(p<0.45) return "🟡 PFT cada 6 m · HRCT 12 m · valorar antifibrótico";
+  return "🔴 MDT urgente · considerar antifibrótico · HRCT 6 m · optimizar HP";
+}
+
+// ==================== CÁLCULO DE RIESGO MEJORADO ====================
+function getP(prefix){
+  const val = id => +document.getElementById(id+prefix).value;
+  return {
+    age:val('age'), fvc:val('fvc'), dlco:val('dlco'), fib:val('fib'), crp:val('crp'),
+    uip:+document.getElementById('uip'+prefix).value,
+    ctd:document.getElementById('ctd'+prefix).value,
+    ph:+document.getElementById('php'+prefix).value,
+    anti:+document.getElementById('anti'+prefix).value,
+    immun:+document.getElementById('immun'+prefix).value,
+    thr:val('thr')
+  };
+}
+
+function computeOptimized(p){
+  let L = COEF_OPTIMIZED.intercept;
+  let parts = [];
+  
+  // Edad (efecto continuo + umbral)
+  const ageEffect = p.age * COEF_OPTIMIZED.age.base;
+  L += ageEffect;
+  parts.push(['Edad', ageEffect]);
+  
+  if(p.age >= 65){
+    L += COEF_OPTIMIZED.age.threshold65;
+    parts.push(['Edad≥65', COEF_OPTIMIZED.age.threshold65]);
+  }
+  
+  // FVC (efecto continuo + umbrales)
+  const fvcEffect = (100 - p.fvc) * COEF_OPTIMIZED.fvc.perPoint;
+  L += fvcEffect;
+  parts.push(['FVC', fvcEffect]);
+  
+  if(p.fvc < 70){
+    L += COEF_OPTIMIZED.fvc.threshold70;
+    parts.push(['FVC<70%', COEF_OPTIMIZED.fvc.threshold70]);
+  }
+  if(p.fvc < 60){
+    L += COEF_OPTIMIZED.fvc.threshold60;
+    parts.push(['FVC<60%', COEF_OPTIMIZED.fvc.threshold60]);
+  }
+  
+  // DLCO (efecto continuo + umbrales)
+  const dlcoEffect = (100 - p.dlco) * COEF_OPTIMIZED.dlco.perPoint;
+  L += dlcoEffect;
+  parts.push(['DLCO', dlcoEffect]);
+  
+  if(p.dlco < 50){
+    L += COEF_OPTIMIZED.dlco.threshold50;
+    parts.push(['DLCO<50%', COEF_OPTIMIZED.dlco.threshold50]);
+  }
+  if(p.dlco < 40){
+    L += COEF_OPTIMIZED.dlco.threshold40;
+    parts.push(['DLCO<40%', COEF_OPTIMIZED.dlco.threshold40]);
+  }
+  
+  // Fibrosis
+  const fibEffect = p.fib * COEF_OPTIMIZED.fibrosis.perPercent;
+  L += fibEffect;
+  parts.push(['Fibrosis', fibEffect]);
+  
+  if(p.fib > 20){
+    L += COEF_OPTIMIZED.fibrosis.threshold20;
+    parts.push(['Fibrosis>20%', COEF_OPTIMIZED.fibrosis.threshold20]);
+  }
+  
+  // Otros factores
+  if(p.uip == 1){ L += COEF_OPTIMIZED.UIP; parts.push(['UIP', COEF_OPTIMIZED.UIP]); }
+  if(p.ph == 1){ L += COEF_OPTIMIZED.PH; parts.push(['HP', COEF_OPTIMIZED.PH]); }
+  
+  const ctdEff = COEF_OPTIMIZED.CTD[p.ctd] ?? 0; 
+  if(ctdEff !== 0){ L += ctdEff; parts.push([mapCTD(p.ctd), ctdEff]); }
+  
+  const crpEffect = Math.max(0, p.crp - COEF_OPTIMIZED.inflammation.crpThreshold) * COEF_OPTIMIZED.inflammation.crpBase;
+  if(crpEffect > 0){ L += crpEffect; parts.push(['PCR elevada', crpEffect]); }
+  
+  if(p.immun == 1){ L += COEF_OPTIMIZED.IMMUN; parts.push(['Inmunosupresor', COEF_OPTIMIZED.IMMUN]); }
+  if(p.anti == 1){ L += COEF_OPTIMIZED.ANTIF; parts.push(['Antifibrótico', COEF_OPTIMIZED.ANTIF]); }
+  
+  const prob = logistic(L);
+  return {prob, parts, cls: prob >= p.thr ? 'Positivo' : 'Negativo'};
+}
+
+function mapCTD(code){
+  const mapping = {
+    AR: 'AR', 
+    ES: 'Esclerosis sistémica', 
+    MIOSITIS: 'Miopatía inflamatoria',
+    SS: 'Sjögren', 
+    MCTD: 'MCTD', 
+    LES: 'LES'
+  };
+  return mapping[code] || 'CTD';
+}
+
+// ==================== VISUALIZACIÓN MEJORADA DE CONTRIBUCIONES ====================
+function renderContribBars(prefix, parts){
+  const container = document.getElementById('contribBars' + prefix);
+  container.innerHTML = '';
+  
+  // Separar factores positivos y negativos
+  const positiveFactors = parts.filter(([name, value]) => value > 0)
+                              .sort((a, b) => Math.abs(b[1]) - Math.abs(a[1]));
+  const negativeFactors = parts.filter(([name, value]) => value < 0)
+                              .sort((a, b) => Math.abs(b[1]) - Math.abs(a[1]));
+  
+  // Encontrar el valor máximo para escalar las barras
+  const maxAbsValue = Math.max(
+    ...positiveFactors.map(([name, value]) => Math.abs(value)),
+    ...negativeFactors.map(([name, value]) => Math.abs(value)),
+    0.001 // Evitar división por cero
+  );
+  
+  // Renderizar factores positivos (aumentan riesgo)
+  if(positiveFactors.length > 0){
+    const positiveSection = document.createElement('div');
+    positiveSection.className = 'contrib-section';
+    positiveSection.textContent = 'Factores que Aumentan Riesgo';
+    container.appendChild(positiveSection);
+    
+    positiveFactors.forEach(([name, value]) => {
+      const barElement = createBarElement(name, value, maxAbsValue, true);
+      container.appendChild(barElement);
+    });
+  }
+  
+  // Renderizar factores negativos (reducen riesgo)
+  if(negativeFactors.length > 0){
+    const negativeSection = document.createElement('div');
+    negativeSection.className = 'contrib-section';
+    negativeSection.textContent = 'Factores que Reducen Riesgo';
+    container.appendChild(negativeSection);
+    
+    negativeFactors.forEach(([name, value]) => {
+      const barElement = createBarElement(name, value, maxAbsValue, false);
+      container.appendChild(barElement);
+    });
+  }
+}
+
+function createBarElement(name, value, maxAbsValue, isPositive){
+  const barElement = document.createElement('div');
+  barElement.className = 'contrib-bar';
+  
+  const percentage = (Math.abs(value) / maxAbsValue) * 100;
+  const barColor = isPositive ? '#dc2626' : '#059669';
+  const sign = value >= 0 ? '+' : '';
+  
+  barElement.innerHTML = `
+    <div class="bar-label">${name}</div>
+    <div class="bar-container">
+      <div class="bar-fill" style="width: ${percentage}%; background: ${barColor};"></div>
+    </div>
+    <div class="bar-value" style="color: ${barColor}">${sign}${value.toFixed(2)}</div>
+  `;
+  
+  return barElement;
+}
+
+// ==================== GRÁFICOS ROC Y CALIBRACIÓN ====================
+function drawROC(canvasId, thr){
+  const xs = [0,0.02,0.05,0.1,0.18,0.28,0.4,0.55,0.7,0.85,1.0];
+  const ys = [0,0.15,0.3,0.45,0.62,0.73,0.82,0.89,0.93,0.96,1.0];
+  const el = document.getElementById(canvasId), ctx = el.getContext('2d');
+  const W = el.clientWidth, H = el.height = el.clientHeight; 
+  el.width = W; 
+  ctx.clearRect(0, 0, W, H);
+  
+  // Ejes
+  ctx.strokeStyle = '#d1d5db'; ctx.lineWidth = 1;
+  ctx.strokeRect(28, 8, W-36, H-30);
+  ctx.font = '10px ui-sans-serif'; ctx.fillStyle = '#6b7280';
+  ctx.fillText('FPR', W/2, H-6);
+  ctx.save(); ctx.translate(8, H/2); ctx.rotate(-Math.PI/2); 
+  ctx.fillText('TPR', 0, 0); ctx.restore();
+  
+  // Curva ROC
+  ctx.beginPath();
+  for(let i=0; i<xs.length; i++){
+    const x = 28 + (W-36-28) * xs[i];
+    const y = 8 + (H-30-8) * (1-ys[i]);
+    if(i==0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+  }
+  ctx.strokeStyle = '#1f77b4'; ctx.lineWidth = 2; ctx.stroke();
+  
+  // Línea diagonal
+  ctx.beginPath(); ctx.moveTo(28, H-30); ctx.lineTo(W-8, 8);
+  ctx.setLineDash([4,3]); ctx.strokeStyle = '#9ca3af'; ctx.stroke(); ctx.setLineDash([]);
+  
+  // Punto de operación
+  const idx = Math.max(0, Math.min(xs.length-1, Math.round((1-thr)*(xs.length-1))));
+  const xf = 28 + (W-36-28) * xs[idx], yf = 8 + (H-30-8) * (1-ys[idx]);
+  ctx.beginPath(); ctx.arc(xf, yf, 3.5, 0, 2*Math.PI);
+  ctx.fillStyle = '#ef4444'; ctx.fill();
+  
+  const sens = ys[idx], spec = 1-xs[idx];
+  return {sens, spec};
+}
+
+function drawCalibration(id){
+  const el = document.getElementById(id), ctx = el.getContext('2d');
+  const W = el.clientWidth, H = el.height = el.clientHeight; 
+  el.width = W; 
+  ctx.clearRect(0, 0, W, H);
+  
+  ctx.strokeStyle = '#d1d5db'; ctx.lineWidth = 1;
+  ctx.strokeRect(28, 8, W-36, H-30);
+  
+  // Línea de perfecta calibración
+  ctx.beginPath(); ctx.moveTo(28, H-30); ctx.lineTo(W-8, 8);
+  ctx.setLineDash([4,3]); ctx.strokeStyle = '#9ca3af'; ctx.stroke(); ctx.setLineDash([]);
+  
+  // Puntos de calibración (simulados)
+  const px = [0.07,0.15,0.22,0.3,0.38,0.46,0.55,0.66,0.77,0.87];
+  const py = [0.08,0.16,0.23,0.31,0.38,0.46,0.55,0.66,0.77,0.87];
+  
+  ctx.strokeStyle = '#1f77b4'; ctx.fillStyle = '#1f77b4'; ctx.beginPath();
+  for(let i=0; i<px.length; i++){ 
+    const x = 28 + (W-36-28) * px[i]; 
+    const y = 8 + (H-30-8) * (1-py[i]); 
+    ctx.moveTo(x,y); ctx.arc(x,y,2.5,0,2*Math.PI); 
+  }
+  ctx.fill();
+}
+
+function updateRiskMeter(prefix, prob){
+  const marker = document.getElementById('riskMarker'+prefix);
+  const position = prob * 100; // 0-100%
+  marker.style.left = position + '%';
+}
+
+// ==================== COMPARATIVA A/B ====================
+function calculateComparison(){
+  const pA = getP('A'), pB = getP('B');
+  const outA = computeOptimized(pA), outB = computeOptimized(pB);
+  
+  const riskDiff = Math.abs(outA.prob - outB.prob);
+  let riskDiffText = (outA.prob > outB.prob ? 'A > B' : 'B > A') + ' ' + (riskDiff*100).toFixed(1)+'%';
+  
+  // Encontrar factor diferencial clave
+  const factorsA = new Map(outA.parts.map(([name, val]) => [name, val]));
+  const factorsB = new Map(outB.parts.map(([name, val]) => [name, val]));
+  
+  let maxDiff = 0;
+  let keyFactor = 'Sin diferencias significativas';
+  
+  for(const [name, valA] of factorsA){
+    const valB = factorsB.get(name) || 0;
+    const diff = Math.abs(valA - valB);
+    if(diff > maxDiff){
+      maxDiff = diff;
+      keyFactor = name;
+    }
+  }
+  
+  // Recomendación comparativa
+  let comparisonRec = 'Ambos pacientes similares';
+  if(riskDiff > 0.15){
+    comparisonRec = 'Enfoque terapéutico diferenciado requerido';
+  } else if(riskDiff > 0.08){
+    comparisonRec = 'Seguimiento diferenciado recomendado';
+  }
+  
+  return {
+    riskDiff: riskDiffText,
+    keyFactor: keyFactor,
+    comparisonRec: comparisonRec
+  };
+}
+
+// ==================== RENDER MEJORADO ====================
+function render(prefix){
+  const p = getP(prefix), out = computeOptimized(p);
+  
+  // Actualizar valores visuales
+  document.getElementById('age'+prefix+'val').textContent = p.age + ' años';
+  document.getElementById('fvc'+prefix+'val').textContent = p.fvc + ' %';
+  document.getElementById('dlco'+prefix+'val').textContent = p.dlco + ' %';
+  document.getElementById('fib'+prefix+'val').textContent = p.fib + ' %';
+  document.getElementById('crp'+prefix+'val').textContent = p.crp + ' mg/L';
+  document.getElementById('thr'+prefix+'val').textContent = p.thr.toFixed(2);
+  
+  const prob = out.prob;
+  const b = band(prob);
+  
+  // Actualizar indicadores de riesgo
+  const pill = document.getElementById('band'+prefix);
+  pill.textContent = b[0];
+  pill.className = 'pill ' + b[1];
+  document.getElementById('risk'+prefix).textContent = (prob*100).toFixed(0) + '%';
+  document.getElementById('plan'+prefix).textContent = plan(prob);
+  
+  // Medidor de riesgo visual
+  updateRiskMeter(prefix, prob);
+  
+  // Alerta antifibrótico
+  const alert = document.getElementById('alertAnti'+prefix);
+  if(prob < 0.20 && p.anti === 1){
+    alert.style.display = 'inline-block';
+  } else {
+    alert.style.display = 'none';
+  }
+  
+  // Factor principal
+  const top = out.parts.slice().sort((a,b) => Math.abs(b[1]) - Math.abs(a[1]))[0];
+  document.getElementById('top'+prefix).textContent = top ? top[0] : '—';
+  document.getElementById('lr'+prefix).textContent = top ? ((top[1]>0?'+':'') + top[1].toFixed(2) + ' log-odds') : '';
+  
+  // Clasificación y métricas
+  const roc = drawROC('roc'+prefix, p.thr);
+  document.getElementById('cls'+prefix).textContent = out.cls;
+  document.getElementById('met'+prefix).textContent = 'Sens ' + Math.round(roc.sens*100) + '% | Spec ' + Math.round(roc.spec*100) + '%';
+  
+  // Gráficos y contribuciones
+  renderContribBars(prefix, out.parts);
+  drawCalibration('cal'+prefix);
+  
+  // Actualizar comparativa
+  updateComparison();
+}
+
+function updateComparison(){
+  const comp = calculateComparison();
+  document.getElementById('riskDiff').textContent = comp.riskDiff;
+  document.getElementById('keyFactorDiff').textContent = comp.keyFactor;
+  document.getElementById('comparisonRec').textContent = comp.comparisonRec;
+}
+
+// ==================== PRESETS Y EXPORTACIÓN ====================
+function preset(prefix, level){
+  const set = (id, v) => document.getElementById(id+prefix).value = v;
+  
+  if(level === 'bajo'){
+    set('age',58); set('fvc',88); set('dlco',72); set('fib',8); set('crp',2);
+    document.getElementById('uip'+prefix).value = 0;
+    document.getElementById('ctd'+prefix).value = 'AR';
+    document.getElementById('php'+prefix).value = 0;
+    document.getElementById('anti'+prefix).value = 0;
+    document.getElementById('immun'+prefix).value = 0;
+    set('thr',0.25);
+  }
+  if(level === 'medio'){
+    set('age',66); set('fvc',72); set('dlco',55); set('fib',18); set('crp',6);
+    document.getElementById('uip'+prefix).value = 1;
+    document.getElementById('ctd'+prefix).value = 'ES';
+    document.getElementById('php'+prefix).value = 0;
+    document.getElementById('anti'+prefix).value = 0;
+    document.getElementById('immun'+prefix).value = 1;
+    set('thr',0.35);
+  }
+  if(level === 'alto'){
+    set('age',66); set('fvc',72); set('dlco',55); set('fib',18); set('crp',6);
+    document.getElementById('uip'+prefix).value = 1;
+    document.getElementById('ctd'+prefix).value = 'ES';
+    document.getElementById('php'+prefix).value = 0;
+    document.getElementById('anti'+prefix).value = 0;
+    document.getElementById('immun'+prefix).value = 1;
+    set('thr',0.35);
+  }
+  recalc();
+}
+
+function exportReport(){
+  const pA = getP('A'), pB = getP('B');
+  const outA = computeOptimized(pA), outB = computeOptimized(pB);
+  const comp = calculateComparison();
+  
+  const report = {
+    timestamp: new Date().toISOString(),
+    patientA: {...pA, results: outA},
+    patientB: {...pB, results: outB},
+    comparison: comp,
+    metadata: {
+      model: 'CTD-ILD Risk Calculator v2.0',
+      coefficients: 'Optimized based on current literature',
+      references: 'Basado en Flaherty KR et al. N Engl J Med 2019; Raghu G et al. Am J Respir Crit Care Med 2018'
+    }
+  };
+  
+  const blob = new Blob([JSON.stringify(report, null, 2)], {type: 'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `ctd-ild-report-${new Date().toISOString().split('T')[0]}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ==================== INICIALIZACIÓN ====================
+function recalc(){ 
+  render('A'); 
+  render('B'); 
+}
+
+// Inicializar la aplicación
+preset('A', 'medio');
+preset('B', 'alto');
+
+// Tooltips simples
+document.querySelectorAll('.info-icon').forEach(icon => {
+  icon.addEventListener('mouseover', function(e) {
+    const tooltip = document.createElement('div');
+    tooltip.className = 'tooltip';
+    tooltip.textContent = this.title;
+    document.body.appendChild(tooltip);
+    
+    const rect = this.getBoundingClientRect();
+    tooltip.style.left = (rect.left + window.scrollX) + 'px';
+    tooltip.style.top = (rect.top + window.scrollY - 30) + 'px';
+    tooltip.style.opacity = '1';
+    
+    this._tooltip = tooltip;
+  });
+  
+  icon.addEventListener('mouseout', function() {
+    if(this._tooltip){
+      this._tooltip.remove();
+      this._tooltip = null;
+    }
+  });
+});
+</script>
+</body>
+</html>

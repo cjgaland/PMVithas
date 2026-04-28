@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esclerosis Sistémica (SSc-ILD) - Vithas Xanit</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="../../assets/images/Favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/images/Favicon/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/Favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="../../assets/images/Favicon/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="../../assets/images/Favicon/favicon-64x64.png">
+    <link rel="icon" type="image/png" sizes="128x128" href="../../assets/images/Favicon/favicon-128x128.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../assets/images/Favicon/favicon-180x180.png">
+    <link rel="android-touch-icon" type="image/png" sizes="192x192" href="../../assets/images/Favicon/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="256x256" href="../../assets/images/Favicon/favicon-256x256.png">
+   
+     <!-- Rutas ajustadas para estar en utilidades/Apoyo_Clinico/ -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    
+    <!-- Estilos Globales (Ruta ajustada: 3 niveles arriba) -->
+    <link rel="stylesheet" href="../../css/style.css" />
+    
+    <style>
+        /* --- COLORES Y VARIABLES ESPECÍFICAS DE ENFERMEDAD AUTOINMUNE --- */
+        :root {
+            --primary: #673ab7;     /* Morado para SSc */
+            --primary-dark: #4527a0;
+            --bg-canvas: #f8fafc;
+            --border: #e2e8f0;
+            
+            /* Semáforo Evidencia */
+            --ev-strong: #15803d;   /* Verde - FUERTE */
+            --ev-cond: #d97706;     /* Ámbar - CONDICIONAL */
+            --ev-alert: #dc2626;    /* Rojo - ALERTA */
+        }
+        
+        /* --- TOOLTIPS (ABREVIATURAS) --- */
+        abbr {
+            text-decoration: none; border-bottom: 1px dotted #94a3b8; cursor: help; color: var(--primary-dark); font-weight: 500; position: relative;
+        }
+        
+        /* --- TÍTULOS Y PANELES --- */
+        .panel { max-width: 1200px; margin: 0 auto; animation: fadeUp 0.4s ease-out; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .panel-header { margin-bottom: 30px; border-bottom: 2px solid var(--border); padding-bottom: 20px; }
+        .ph-title { font-size: 2rem; font-weight: 300; color: #0f172a; }
+        .ph-title strong { font-weight: 800; color: var(--primary); }
+        .ph-desc { color: #64748b; margin-top: 5px; font-size: 1rem; }
+
+        /* --- CARD SECTIONS (INPUTS) --- */
+        .card-section { 
+            margin-bottom: 20px; 
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 1px solid #e0e0e0;
+        }
+        .cs-title { font-size: 1.1rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        
+        .grid-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+
+        .option-card {
+            background: #fcfcfc; border: 1px solid var(--border); border-radius: 8px; padding: 16px;
+            cursor: pointer; position: relative; transition: all 0.2s; display: flex; flex-direction: column;
+        }
+        .option-card:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        .option-card.active { background: #f3e5f5; border-color: var(--primary); box-shadow: 0 0 0 1px var(--primary) inset; }
+        .option-card.active::after {
+            content: "\f00c"; font-family: "Font Awesome 6 Free"; font-weight: 900;
+            position: absolute; top: 15px; right: 15px; color: var(--primary); font-size: 1.2rem;
+        }
+        .opt-title { font-weight: 700; font-size: 0.95rem; color: #1e293b; margin-bottom: 4px; padding-right: 20px; }
+        .opt-desc { font-size: 0.85rem; color: #64748b; line-height: 1.4; }
+
+        /* BUTTONS */
+        .btn-calc {
+            width: 100%; background: var(--primary); color: white; border: none; padding: 18px; border-radius: 8px;
+            font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 10px; transition: transform 0.1s;
+            box-shadow: 0 4px 6px rgba(103, 58, 183, 0.3);
+        }
+        .btn-calc:hover { background: var(--primary-dark); transform: translateY(-2px); }
+
+        /* --- DASHBOARD RESULTADOS --- */
+        .dashboard { display: none; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px; animation: slideIn 0.5s ease; }
+        .dashboard.visible { display: grid; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .result-col { background: white; border-radius: 12px; border: 1px solid var(--border); overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .col-header {
+            padding: 15px 20px; font-size: 0.95rem; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px;
+            border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between;
+        }
+        .ch-dx { background: #f0f9ff; color: #0369a1; border-bottom-color: #bae6fd; }
+        .ch-rx { background: #f0fdf4; color: var(--ev-strong); border-bottom-color: #bbf7d0; }
+        .col-body { padding: 20px; flex: 1; }
+
+        /* --- TARJETAS DE RESULTADO (REC CARDS) --- */
+        .rec-card { 
+            margin-bottom: 15px; 
+            padding: 15px; 
+            border: 1px solid #e2e8f0; 
+            border-radius: 8px;
+            background: #fff;
+            position: relative;
+            transition: transform 0.2s;
+        }
+        .rec-card:hover { transform: translateX(5px); border-color: #cbd5e1; }
+        
+        /* Badges de Evidencia */
+        .rec-badge { 
+            display: inline-block; 
+            padding: 4px 8px; 
+            border-radius: 4px; 
+            font-size: 0.7rem; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            margin-bottom: 8px;
+            color: white;
+        }
+        .rb-strong { background-color: var(--ev-strong); }
+        .rb-cond { background-color: var(--ev-cond); }
+        .rb-alert { background-color: var(--ev-alert); }
+
+        .rec-title { font-size: 1.05rem; font-weight: 700; color: #1e293b; margin-bottom: 6px; }
+        .rec-text { font-size: 0.9rem; color: #475569; line-height: 1.5; }
+        
+        .rec-meta { 
+            margin-top: 10px; 
+            font-size: 0.75rem; 
+            color: #64748b; 
+            background: #f1f5f9; 
+            padding: 4px 8px; 
+            border-radius: 4px; 
+            display: inline-block; 
+            font-weight: 600;
+        }
+
+        /* RESPONSIVE AJUSTE */
+        @media (max-width: 768px) {
+            .dashboard { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <img src="../../assets/images/Logos/Vithas-Logo.jpg" alt="Vithas" class="sidebar-logo">
+    </div>
+    <nav class="nav-links">
+        <ul>
+            <li><a href="../../../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+            <li class="nav-category">Utilidades</li>
+            
+            <li><a href="../../index.html"><i class="fas fa-arrow-left"></i> Volver a Utilidades</a></li>
+            
+            <!-- BLOQUE ACTUAL: Apoyo Clínico (ABIERTO) -->
+            <li class="has-submenu open">
+                <a href="#" class="submenu-toggle">
+                    <div style="display:flex; align-items:center;">
+                        <i class="fas fa-toolbox"></i> Apoyo Clínico Rápido
+                    </div>
+                    <i class="fas fa-chevron-right chevron"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a href="../../index.html"><i class="fas fa-th-large"></i> Menú Herramientas</a></li>
+                    
+                    <li><a href="FP_Cohorte.html"><i class="fas fa-lungs-virus"></i> Cohorte Fibrosis Pulmonar</a></li>
+                    <!-- Elemento Activo (SSc-ILD) -->
+                    <li><a href="SSc_ILD.html" class="submenu-main-link active"><i class="fas fa-hand-holding-medical"></i> Esclerosis Sistémica</a></li>
+                    <li><a href="Riesgo_Trombo.html"><i class="fas fa-thrombosis"></i> Riesgo Tromboembólico</a></li>
+                    <li><a href="Dosis_Status.html"><i class="fas fa-brain"></i> Dosis Status Epiléptico</a></li>
+                    <li><a href="GCS_Adulto.html"><i class="fas fa-head-side-mask"></i> Escala GCS Adulto</a></li>
+                    <li><a href="Requer_Hídricos.html"><i class="fas fa-tint"></i> Requerimientos Hídricos</a></li>
+                </ul>
+            </li>
+
+            <li class="nav-category">Protocolos Agrupados</li>
+            <li class="has-submenu"><a href="../Analisis_Clinicos/index.html" class="submenu-toggle"><i class="fas fa-microscope"></i> Analíticas</a></li>
+            <li class="has-submenu"><a href="../Gold_EPOC/index.html" class="submenu-toggle"><i class="fas fa-lungs"></i> Guía EPOC</a></li>
+            <li class="has-submenu"><a href="../Infecciosos/index.html" class="submenu-toggle"><i class="fas fa-virus"></i> Infecciosas</a></li>
+        </ul>
+    </nav>
+    <div class="sidebar-footer">
+        <p>Medicina Interna</p>
+        <small>Vithas Xanit Internacional</small>
+    </div>
+</aside>
+
+<div class="main-content">
+    <!-- CABECERO GLOBAL -->
+    <header class="top-header">
+        <div class="header-left">
+            <i class="fas fa-bars menu-toggle" id="menuToggle" onclick="document.getElementById('sidebar').classList.toggle('active')"></i>
+            <h2><i class="fas fa-toolbox" style="margin-right: 10px;"></i>Apoyo Clínico Rápido</h2>
+        </div>
+        <div class="header-right">
+            <img src="../../../assets/images/Logos/Logo-Vithas-Xanit-Internacional.png" alt="Logo" class="top-logo">
+        </div>
+    </header>
+
+    <div class="content-wrapper">
+        <section id="ssc-panel" class="panel active">
+            <div class="panel-header">
+                <h1 class="ph-title">Esclerosis Sistémica <strong>(SSc-ILD)</strong></h1>
+                <p class="ph-desc">Guía de decisión clínica basada en <strong>EULAR/ERS 2025</strong> para el manejo de la Enfermedad Pulmonar Intersticial asociada.</p>
+            </div>
+
+            <!-- 1. Fenotipo Clínico -->
+            <div class="card-section">
+                <div class="cs-title"><i class="fas fa-notes-medical"></i> 1. Fenotipo Clínico (Determinante de Tratamiento)</div>
+                <div class="grid-options" id="ssc-phenotype">
+                    <div class="option-card" onclick="selectRadio(this, 'ssc-ph')">
+                        <input type="radio" name="ssc-ph" value="early" hidden>
+                        <span class="opt-title">SSc Difusa Temprana + Inflamación</span>
+                        <span class="opt-desc">Enfermedad &lt; 5 años + marcadores inflamatorios elevados (PCR, VSG) o alveolitis activa.</span>
+                    </div>
+                    <div class="option-card active" onclick="selectRadio(this, 'ssc-ph')">
+                        <input type="radio" name="ssc-ph" value="standard" checked hidden>
+                        <span class="opt-title">SSc Estándar / Limitada</span>
+                        <span class="opt-desc">Enfermedad establecida, cutánea limitada o sin datos de inflamación sistémica aguda.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Factores de Riesgo -->
+            <div class="card-section">
+                <div class="cs-title"><i class="fas fa-filter"></i> 2. Factores de Riesgo de Progresión Rápida</div>
+                <div class="grid-options" id="ssc-risks">
+                    <div class="option-card" onclick="toggle(this)">
+                        <input type="checkbox" value="scl70" hidden>
+                        <span class="opt-title">Anti-Scl-70 Positivo</span>
+                        <span class="opt-desc">Antitopoisomerasa I: Asociado a EPI severa y mayor mortalidad.</span>
+                    </div>
+                    <div class="option-card" onclick="toggle(this)">
+                        <input type="checkbox" value="male-black" hidden>
+                        <span class="opt-title">Sexo Masculino / Raza Afroamericana</span>
+                        <span class="opt-desc">Factores demográficos independientes de mal pronóstico.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Modificadores -->
+            <div class="card-section">
+                <div class="cs-title"><i class="fas fa-chart-line"></i> 3. Progresión de la Enfermedad</div>
+                <div class="grid-options" id="ssc-mods">
+                    <div class="option-card" onclick="toggle(this)">
+                        <input type="checkbox" value="ppf" hidden>
+                        <span class="opt-title"><abbr title="Fibrosis Pulmonar Progresiva">PPF</abbr> (Fibrosis Progresiva)</span>
+                        <span class="opt-desc">Declive de FVC ≥5% o DLCO ≥10% en un año, empeoramiento de síntomas o progresión en TACAR.</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn-calc" onclick="calculateSSc()"><i class="fas fa-calculator"></i> Generar Recomendación Clínica</button>
+            
+            <div id="ssc-dash" class="dashboard"></div>
+        </section>
+    </div>
+    
+    <footer class="footer">
+        <p>&copy; 2025 Servicio de Medicina Interna - Hospital Vithas Xanit Internacional.</p>
+    </footer>
+</div>
+
+<script>
+    /* UI LOGIC */
+    function toggle(el) { 
+        const c=el.querySelector('input'); 
+        if(c)c.checked=!c.checked; 
+        el.classList.toggle('active'); 
+    }
+    
+    function selectRadio(el, grp) {
+        el.closest('.grid-options').querySelectorAll('.option-card').forEach(c=>{ 
+            const input = c.querySelector(`input[name="${grp}"]`);
+            if(input) {
+                c.classList.remove('active'); 
+                input.checked = false;
+            } 
+        });
+        el.classList.add('active'); 
+        const input = el.querySelector('input');
+        if (input) input.checked = true;
+    }
+
+    function getVals(id) { 
+        return Array.from(document.querySelectorAll(`#${id} input:checked`)).map(i=>i.value); 
+    }
+
+    function genCard(badge, title, text, meta) {
+        // Mapeo de colores según tipo de recomendación
+        let bClass = 'rb-cond'; // Default ámbar
+        if (badge.includes('FUERTE') || badge.includes('1ª') || badge.includes('Inducción')) bClass = 'rb-strong'; // Verde
+        if (badge.includes('ALERTA') || badge.includes('Rescate')) bClass = 'rb-alert'; // Rojo
+
+        return `
+        <div class="rec-card">
+            <span class="rec-badge ${bClass}">${badge}</span>
+            <div class="rec-title">${title}</div>
+            <div class="rec-text">${text}</div>
+            ${meta ? `<div class="rec-meta">${meta}</div>` : ''}
+        </div>`;
+    }
+
+    /* CORE LOGIC FOR SSc */
+    function calculateSSc() {
+        let dx = '';
+        let rx = '';
+        
+        // Obtener valores
+        const phenotype = getVals('ssc-phenotype')[0]; // 'early' o 'standard'
+        const risks = getVals('ssc-risks'); // ['scl70', 'male-black']
+        const hasPPF = getVals('ssc-mods').includes('ppf');
+        
+        const isEarly = (phenotype === 'early');
+        const hasRiskFactors = (risks.length > 0);
+
+        // --- COLUMNA 1: DIAGNÓSTICO Y SEGUIMIENTO ---
+        
+        // Cribado Universal
+        dx += genCard("Rec. FUERTE", "Cribado Universal con HRCT", "Todo paciente con diagnóstico de SSc debe realizarse un TACAR basal y PFTs, independientemente de los síntomas.", "NQ 1");
+
+        // Monitorización
+        if (isEarly || hasRiskFactors) {
+            dx += genCard("Monitorización: ALTO RIESGO", "Intervalo: 3 - 6 meses", "Pacientes con SSc difusa temprana (< 5 años), marcadores inflamatorios, Anti-Scl-70+ o varones/raza negra tienen mayor riesgo de progresión rápida.", "Fig 3a");
+        } else {
+            dx += genCard("Monitorización: ESTÁNDAR", "Intervalo: 6 - 12 meses", "En pacientes con enfermedad limitada y sin factores de riesgo adicionales, la monitorización puede espaciarse.", "Fig 3a");
+        }
+
+        if (hasPPF) {
+            dx += genCard("ALERTA CLÍNICA", "Criterios de Progresión (PPF)", "El paciente cumple criterios de Fibrosis Pulmonar Progresiva. Se requiere intensificación terapéutica inmediata.", "PICO 19/23");
+        }
+
+        // --- COLUMNA 2: PLAN TERAPÉUTICO ---
+
+        // Tratamiento de Inducción / Primera Línea
+        if (isEarly) {
+            rx += genCard("1ª Línea: TOCILIZUMAB", "SSc Difusa Temprana + Inflamación", "Anti-IL6. Primera opción para preservar la FVC en fases tempranas con reactantes elevados.", "PICO 13");
+            rx += genCard("Alternativa: MICOFENOLATO", "Si Tocilizumab no disponible", "Dosis objetivo: 2-3 g/día. Estándar de cuidado habitual.", "PICO 12");
+            rx += genCard("Rescate Avanzado: HSCT", "Trasplante Células Hematopoyéticas", "Considerar en enfermedad difusa rápidamente progresiva refractaria en centros expertos.", "PICO 15");
+        } else {
+            rx += genCard("Inducción: MICOFENOLATO (MMF)", "Tratamiento Estándar", "Fármaco de elección para enfermedad establecida (SSc-ILD) por mejor perfil de seguridad que ciclofosfamida.", "PICO 12");
+            rx += genCard("Alternativa: CICLOFOSFAMIDA", "Si toxicidad/fallo a MMF", "Considerar pulsos IV en lugar de oral para reducir toxicidad vesical.", "PICO 12");
+        }
+
+        // Rescate Común
+        rx += genCard("Rescate: RITUXIMAB", "Fallo a 1ª Línea / Intolerancia", "Opción recomendada tras fallo a MMF o Tocilizumab.", "PICO 14");
+
+        // Antifibrótico (Si PPF)
+        if (hasPPF) {
+            rx += genCard("Añadir: NINTEDANIB", "Terapia Antifibrótica", "Indicado por presencia de Fibrosis Pulmonar Progresiva. Se añade al tratamiento inmunosupresor de base (add-on).", "PICO 19/23");
+        }
+
+        // Advertencia Corticoides
+        rx += genCard("ALERTA SEGURIDAD", "Corticoides < 10 mg/día", "Evitar dosis medias/altas de prednisona por riesgo elevado de Crisis Renal Esclerodérmica.", "Práctica Clínica");
+
+        // Renderizar
+        const dash = document.getElementById('ssc-dash');
+        dash.innerHTML = `
+            <div class="result-col">
+                <div class="col-header ch-dx"><span>Diagnóstico & Seguimiento</span></div>
+                <div class="col-body">${dx}</div>
+            </div>
+            <div class="result-col">
+                <div class="col-header ch-rx"><span>Plan Terapéutico</span></div>
+                <div class="col-body">${rx}</div>
+            </div>
+        `;
+        dash.classList.add('visible');
+        
+        // Scroll suave hacia resultados
+        setTimeout(() => {
+            dash.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+    }
+</script>
+</body>
+</html>
